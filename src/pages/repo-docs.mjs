@@ -1,11 +1,13 @@
-// Pages rendered from Markdown that lives in the repository: docs/user/*.md and ROADMAP.md.
-// The repo files stay the single source; the site only rewrites their links.
+// Pages rendered from Markdown that lives in the product repository (colliedesk/colliedesk):
+// docs/user/*.md and ROADMAP.md. Those files stay the single source; the site only rewrites
+// their links. PRODUCT_DIR points at a checkout of that repo (default ./product).
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { REPO } from '../site.mjs';
 import { techArticle } from '../schema.mjs';
 
-const repoRoot = fileURLToPath(new URL('../../../', import.meta.url));
+const defaultRoot = fileURLToPath(new URL('../../product/', import.meta.url));
+const repoRoot = process.env.PRODUCT_DIR ? `${process.env.PRODUCT_DIR.replace(/\/$/, '')}/` : defaultRoot;
 const readRepo = (rel) => readFileSync(`${repoRoot}${rel}`, 'utf8');
 
 // Order and slugs follow the links in docs/user/README.md, so a new guide only needs a line there.
