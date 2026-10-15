@@ -1,4 +1,4 @@
-import { BARS } from '../../data/pages/home-sections';
+import { BARS, BORING, BORING_LEDE } from '../../data/pages/home-sections';
 import { PRICES_READ } from '../../lib/site';
 import { Badge } from '../Badge';
 
@@ -80,6 +80,23 @@ function Bill() {
   );
 }
 
+function BoringParts() {
+  return (
+    <section className="section section-alt" aria-labelledby="boring">
+      <div className="wrap">
+        <p className="eyebrow">The boring parts</p>
+        <h2 id="boring">A helpdesk is more than an inbox. These parts already work.</h2>
+        <p className="section-lede">{BORING_LEDE}</p>
+        <ul className="check-list check-list-wide">
+          {BORING.map(([k, v]) => (
+            <li key={k}><strong>{`${k}.`}</strong>{` ${v}`}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 // The sections between the home hero and the status table.
 export function SellingSections() {
   return (
@@ -87,6 +104,7 @@ export function SellingSections() {
       <Selling />
       <Pillars />
       <Bill />
+      <BoringParts />
     </>
   );
 }
