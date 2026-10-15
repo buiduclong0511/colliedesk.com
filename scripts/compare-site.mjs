@@ -7,9 +7,12 @@
 //   * whitespace-only text between tags is dropped, other whitespace runs become one space
 //     (except inside <pre>, which is compared exactly);
 //   * character references are decoded, so &#x27; and ' compare equal;
-//   * tag names are lower-cased, attributes are sorted, a self-closing "/" is ignored, a
+//   * tag names are lower-cased, attributes are sorted, a self-closing "/" closes a non-void
+//     element (SVG <path/> equals <path></path>) and is ignored on a void one, a
 //     boolean attribute equals the same attribute with an empty value, and data-astro-* is dropped;
+//   * a class attribute is compared as its list of class names (extra spaces ignored);
 //   * JSON-LD is compared as parsed JSON.
+//   The visible text flow is compared as well, so a dropped space between inline elements still fails.
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 
@@ -43,6 +46,7 @@ const decode = (s) =>
     return ENTITIES[ref.toLowerCase()] ?? m;
   });
 
+const VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
 const TAG = /<!--[\s\S]*?-->|<(?:[^>"']|"[^"]*"|'[^']*')*>/g;
 const ATTR = /([^\s=/]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g;
 
@@ -52,6 +56,7 @@ function normTag(raw) {
   const [, name = '', rest = ''] = inner.match(/^(\S+)([\s\S]*)$/) || [];
   const attrs = [...rest.matchAll(ATTR)]
     .map(([, k, a, b, c]) => [k.toLowerCase(), decode(a ?? b ?? c ?? '')])
+    .map(([k, v]) => [k, k === 'class' ? v.trim().split(/\s+/).join(' ') : v])
     .filter(([k]) => !k.startsWith('data-astro-'))
     .sort(([x], [y]) => (x < y ? -1 : x > y ? 1 : 0))
     .map(([k, v]) => ` ${k}="${v}"`);
@@ -96,22 +101,37 @@ export function normalizeHtml(html) {
     if (tag.startsWith('<script')) script = tag;
     if (tag === '</script>') script = null;
     out.push(tag);
+    // <path/> in SVG closes the element; a "/" on an HTML void element (<input/>) changes nothing.
+    const name = tag.slice(1).split(/[ >]/)[0];
+    if (raw.endsWith('/>') && !VOID.has(name)) out.push(`</${name}>`);
   }
   pushText(html.slice(last));
   return out;
 }
 
-function firstDiffs(a, b, max = 3) {
-  const diffs = [];
+function firstDiff(a, b) {
   const n = Math.max(a.length, b.length);
-  for (let i = 0; i < n && diffs.length < max; i++) {
-    if (a[i] !== b[i]) {
-      diffs.push({ at: i, base: a.slice(Math.max(0, i - 2), i + 3), cand: b.slice(Math.max(0, i - 2), i + 3) });
-      break; // after the first shift every later token differs; one is enough to act on
-    }
+  for (let i = 0; i < n; i++) {
+    // After the first difference every later token may shift; one is enough to act on.
+    if (a[i] !== b[i]) return { at: i, base: a.slice(Math.max(0, i - 2), i + 3), cand: b.slice(Math.max(0, i - 2), i + 3) };
   }
-  return diffs;
+  return null;
 }
+
+// Dropping whitespace-only text could hide a visible space between two inline elements
+// ("<b>x</b> <a>y</a>"). This second view keeps it: inline tags are removed, every other tag
+// becomes a "|" boundary, and the text in between must match segment by segment.
+const INLINE = new Set(['a', 'abbr', 'b', 'button', 'code', 'em', 'g', 'i', 'img', 'input', 'kbd', 'label', 'path', 'rect', 'small', 'span', 'strong', 'svg', 'title']);
+const textFlow = (html) =>
+  decode(
+    html
+      .replace(/<script[\s\S]*?<\/script>|<!--[\s\S]*?-->|<!doctype[^>]*>/gi, '')
+      .replace(/<\/?([a-z0-9]+)(?:[^>"']|"[^"]*"|'[^']*')*>/gi, (_, name) => (INLINE.has(name.toLowerCase()) ? '' : '|')),
+  )
+    .replace(/\s+/g, ' ')
+    .replace(/ ?\| ?/g, '|')
+    .replace(/\|+/g, '|')
+    .split('|');
 
 const problems = [];
 for (const dir of [baseDir, candDir]) if (!existsSync(join(dir, 'fonts'))) problems.push(`${dir}: fonts/ missing`);
@@ -136,9 +156,8 @@ for (const f of base.filter((x) => candSet.has(x))) {
   html++;
   const na = normalizeHtml(a.toString('utf8'));
   const nb = normalizeHtml(b.toString('utf8'));
-  for (const d of firstDiffs(na, nb)) {
-    problems.push(`html differs: ${f} at token ${d.at}\n    baseline:  ${JSON.stringify(d.base)}\n    candidate: ${JSON.stringify(d.cand)}`);
-  }
+  const d = firstDiff(na, nb) ?? firstDiff(textFlow(a.toString('utf8')), textFlow(b.toString('utf8')));
+  if (d) problems.push(`html differs: ${f} at token ${d.at}\n    baseline:  ${JSON.stringify(d.base)}\n    candidate: ${JSON.stringify(d.cand)}`);
 }
 
 if (problems.length) {
