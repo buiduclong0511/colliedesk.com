@@ -2,7 +2,9 @@
 
 Static marketing and docs site, built with [Astro](https://astro.build), React and TypeScript.
 React renders at build time only: the browser gets HTML, CSS and two small vanilla scripts
-(`public/theme.js`, `public/updates.js`), no framework runtime.
+(`public/theme.js`, `public/updates.js`) plus cookieless PostHog web analytics
+(`public/analytics.js`: no cookies or browser storage, no person profiles, IP discarded;
+`pnpm check` fails if that changes), no framework runtime.
 
 ```sh
 git clone --depth 1 https://github.com/colliedesk/colliedesk product   # docs source, gitignored
@@ -34,7 +36,7 @@ to use another checkout. `typecheck` works without it.
   `_headers` is written after the build by `src/integrations/cloudflare-headers.ts`.
 - `public/`: files served as they are (fonts, icons, images, CSS, the two scripts).
 - `src/integrations/no-bundled-client-js.ts` fails the build if any script other than
-  `theme.js`, `updates.js` and JSON-LD would ship (a bundled or inlined `<script>`). A `client:*`
+  `theme.js`, `updates.js`, `analytics.js` and JSON-LD would ship (a bundled or inlined `<script>`). A `client:*`
   directive on a React component fails earlier: without a React renderer Astro cannot hydrate it.
 
 ## Content

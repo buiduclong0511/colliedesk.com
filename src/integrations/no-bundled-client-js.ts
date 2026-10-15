@@ -1,10 +1,10 @@
-// Fails the build when any JavaScript other than public/theme.js and public/updates.js would ship:
+// Fails the build when any JavaScript other than public/theme.js, public/updates.js and public/analytics.js would ship:
 // a bundle in _astro/ (a client:* directive, a processed <script>) or a script Astro inlined into a
 // page. JSON-LD blocks are data, not code, and stay allowed.
 import { readFile, readdir } from 'node:fs/promises';
 import type { AstroIntegration } from 'astro';
 
-const ALLOWED_SCRIPT = /^\s+(src="\/(theme|updates)\.js"( defer)?|type="application\/ld\+json")\s*$/;
+const ALLOWED_SCRIPT = /^\s+(src="\/(theme|updates|analytics)\.js"( defer)?|type="application\/ld\+json")\s*$/;
 
 async function filesIn(dir: URL): Promise<string[]> {
   try {
