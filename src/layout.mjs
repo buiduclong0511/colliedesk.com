@@ -1,13 +1,14 @@
+import { readFileSync } from 'node:fs';
 import { FOOTER, FOUNDING_HREF, NAME, NAV, ORIGIN, REPO, UPDATED } from './site.mjs';
 import { escapeHtml as e, renderMarkdown } from './markdown.mjs';
 
 export const mdUrlOf = (path) => (path === '/' ? '/index.md' : `${path}.md`);
 
-export const LOGO = `<svg class="logo-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false">
-<rect width="32" height="32" rx="8" fill="#15171a"/>
-<circle cx="7.5" cy="8.5" r="2.4" fill="#fff"/><circle cx="12" cy="12.5" r="2.2" fill="#fff"/><circle cx="15.5" cy="17" r="2" fill="#fff"/>
-<path d="M19.5 13.5v10h7v-10" fill="none" stroke="#f08a50" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>`;
+// Brand wordmark (mascot + outlined text, no font needed). Dark surfaces only; inlined so it costs no request.
+const WORDMARK = readFileSync(new URL('./static/logo-wordmark.svg', import.meta.url), 'utf8')
+  .replace('<svg xmlns="http://www.w3.org/2000/svg"', '<svg class="wordmark" height="30"')
+  .replace(/<!--[\s\S]*?-->\s*/g, '')
+  .replace(/\s*\n\s*/g, '');
 
 const link = ({ href, label }, current) => {
   const ext = href.startsWith('http') ? ' rel="noopener"' : '';
@@ -16,16 +17,16 @@ const link = ({ href, label }, current) => {
 };
 
 export const ctaButtons = (size = '') => `<div class="cta-row">
-  <a class="btn btn-primary ${size}" href="${FOUNDING_HREF}">Get founding access</a>
+  <a class="btn btn-primary ${size}" href="${FOUNDING_HREF}">Start free</a>
   <a class="btn btn-ghost ${size}" href="${REPO}" rel="noopener">Self-host free <span aria-hidden="true">↗</span></a>
 </div>`;
 
 function header(path) {
   const items = NAV.map((n) => `<li>${link(n, path)}</li>`).join('');
   return `<header class="site-header"><div class="wrap header-inner">
-  <a class="brand" href="/">${LOGO}<span>${NAME}</span></a>
+  <a class="brand" href="/" aria-label="${NAME} home">${WORDMARK}</a>
   <nav aria-label="Main" class="nav-desktop"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li></ul></nav>
-  <a class="btn btn-primary btn-sm header-cta" href="${FOUNDING_HREF}">Get founding access</a>
+  <a class="btn btn-primary btn-sm header-cta" href="${FOUNDING_HREF}">Start free</a>
   <details class="nav-mobile"><summary>Menu</summary><nav aria-label="Main (mobile)"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li></ul></nav></details>
 </div></header>`;
 }
@@ -35,7 +36,7 @@ function footer() {
     (c) => `<div><h2 class="footer-title">${c.title}</h2><ul>${c.links.map((l) => `<li>${link(l, '')}</li>`).join('')}</ul></div>`,
   ).join('');
   return `<footer class="site-footer"><div class="wrap footer-grid">
-  <div class="footer-about"><a class="brand" href="/">${LOGO}<span>${NAME}</span></a>
+  <div class="footer-about"><a class="brand" href="/" aria-label="${NAME} home">${WORDMARK}</a>
   <p>Open-source helpdesk by HC Labs. AGPL-3.0. Every page on this site has a plain Markdown version: add <code>.md</code> to the URL.</p></div>
   ${cols}
 </div><div class="wrap footer-legal"><p>© 2026 HC Labs. Pre-alpha software: things will change, and we will say so in the <a href="/changelog">changelog</a>.</p></div></footer>`;
@@ -74,8 +75,13 @@ export function document(page, main) {
 <link rel="alternate" type="text/markdown" href="${mdUrlOf(page.path)}">
 <link rel="alternate" type="application/rss+xml" title="CollieDesk changelog" href="/changelog.xml">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts.css">
+<link rel="stylesheet" href="/tokens.css">
 <link rel="stylesheet" href="/styles.css">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#0b0f15">
+<meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${NAME}">
 <meta property="og:title" content="${e(page.title)}">
