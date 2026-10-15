@@ -10,6 +10,8 @@ export const POSITIONING =
   'Leave Freshdesk with all your data. AI that actually answers tickets is included, not an add-on. Flat price, no per-agent fees.';
 
 export const FOUNDING_HREF = '/#founding';
+// Polar checkout link for the Founding product (org Colliedesk).
+export const FOUNDING_CHECKOUT = 'https://buy.polar.sh/polar_cl_1R61RlI9VkKyH4ZfFs7XviF7UAd1CaoycIasu2TiXQx';
 export const PRICE = {
   monthly: '$49',
   yearly: '$490',
