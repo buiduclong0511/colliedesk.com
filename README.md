@@ -25,7 +25,7 @@ footer comparison links).
 Brand: Blue Merle, shared with the app. `src/static/tokens.css` is a copy of the app's
 `web/src/styles/tokens.css` (change it there first; the app repo checks contrast for every pair).
 Light is the default; the footer **Dark theme** button sets `data-theme="dark"` and saves it in
-`localStorage` (`src/static/theme.js`, same key as the app). Self-hosted IBM Plex Sans and Mono,
+`localStorage` for this site only (`src/static/theme.js`; the app keeps its own setting). Self-hosted IBM Plex Sans and Mono,
 sentence case everywhere, mono only for code. The hero shows the real light inbox
 (`src/static/product-inbox.jpg`) with the reconcile report over its corner. Buttons are at least
 44 px tall on touch.

@@ -1,5 +1,5 @@
 // Static site build: HTML page + Markdown twin per page, llms.txt, llms-full.txt, sitemap,
-// robots.txt, RSS and Cloudflare Pages headers. Output: site/_site/. No client JavaScript.
+// robots.txt, RSS and Cloudflare Pages headers. Output: site/_site/. The only client JavaScript is static/theme.js.
 import { cpSync, copyFileSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';

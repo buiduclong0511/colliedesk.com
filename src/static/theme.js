@@ -1,5 +1,5 @@
 // Light is the default for every visitor. The footer button switches to dark; the choice is saved
-// in this browser under the same key the CollieDesk app uses.
+// in this browser for colliedesk.com only; the app keeps its own setting on its own origin.
 (function () {
   var key = 'colliedesk.theme';
   var root = document.documentElement;
