@@ -3,10 +3,13 @@ import { faqHtml, faqMarkdown } from '../layout.mjs';
 import { faqPage, organization, softwareApplication } from '../schema.mjs';
 import { renderMarkdown } from '../markdown.mjs';
 import { statusTable } from './collie-status.mjs';
-import { homeSections, homeSectionsMd } from './home-sections.mjs';
+import { homeSections, homeSectionsMd, SAVING_PCT } from './home-sections.mjs';
 
+// Headline pattern from mailcheap.ai: one number against the incumbents, then why the bill is lower.
+// SAVING_PCT comes from the five-agent bill below (Freshdesk Pro + Freddy AI Copilot vs Cloud Team).
+const H1 = `Run your helpdesk up to ${SAVING_PCT}% cheaper than Freshdesk, Zendesk and Help Scout.`;
 const LEDE =
-  'Move from Freshdesk to Colliedesk with your tickets, replies, private notes and attachments. A reconcile report proves the counts match, so nothing is lost on the way.';
+  'You pay for the workspace, not for every agent you add. Move from Freshdesk with your tickets, replies, private notes and attachments, and a reconcile report proves nothing was lost.';
 
 const faq = [
   {
@@ -74,13 +77,13 @@ const statusHtml = `<section class="section" aria-labelledby="today"><div class=
 const html = `<section class="home-hero"><div class="wrap">
   <div class="hero-copy">
     <p class="eyebrow hero-eyebrow">Open source · AGPL-3.0 · Pre-alpha v0.1</p>
-    <h1>Bring every ticket home.</h1>
+    <h1>${H1}</h1>
     <p class="lede">${LEDE}</p>
     <div class="cta-row">
       <a class="btn btn-primary btn-lg" href="${FOUNDING_HREF}">Start free trial <span aria-hidden="true">→</span></a>
       <a class="btn btn-lg" href="/migrate/freshdesk">Read the migration guide</a>
     </div>
-    <p class="hero-note">14-day free trial, no card. <b>Cloud Team $49</b> per workspace per month, no per-agent fees. Founding plan $100 a year. <a href="/pricing">See pricing</a></p>
+    <p class="hero-note">14-day free trial, no card. <b>Cloud Team $49</b> per workspace per month, no per-agent fees. Founding plan $100 a year. <a href="#bill">How we get to ${SAVING_PCT}%</a></p>
   </div>
   <div class="hero-stage">
     <figure class="hero-shot"><img src="/product-inbox.jpg" width="1440" height="900" alt="The Colliedesk inbox: a list of customer conversations with status and priority, an open conversation with a reply and a private note, and the conversation properties." fetchpriority="high"></figure>
@@ -93,7 +96,7 @@ ${homeSections.replace('<!--STATUS-->', statusHtml)}
 
 const md = `${TAGLINE} ${POSITIONING}
 
-${LEDE} The Freshdesk importer is coming in v0.2; reconcile report numbers shown on the site are an example.
+${H1} ${LEDE} The Freshdesk importer is coming in v0.2; reconcile report numbers shown on the site are an example.
 
 Status: pre-alpha (v0.1). Self-host free: ${REPO}. Cloud: $49 per workspace per month or $490 per year.
 
@@ -108,11 +111,11 @@ export default {
   name: 'Colliedesk overview',
   path: '/',
   section: 'Product',
-  title: 'Colliedesk: the open-source alternative to Freshdesk, Zendesk and Help Scout',
+  title: `Colliedesk: run your helpdesk up to ${SAVING_PCT}% cheaper than Freshdesk, Zendesk and Help Scout`,
   description:
-    'Colliedesk is an open-source helpdesk for small support teams. Leave Freshdesk with all your data. AI included, not an add-on. $49 per workspace, no per-agent fees.',
+    `Colliedesk is an open-source helpdesk for small support teams, up to ${SAVING_PCT}% cheaper than Freshdesk for five agents. Leave Freshdesk with all your data. $49 per workspace, no per-agent fees.`,
   summary: `What Colliedesk is, what we sell, status, founding offer; competitor prices read ${PRICES_READ}`,
-  h1: 'Bring every ticket home.',
+  h1: H1,
   lede: LEDE,
   html,
   md,
