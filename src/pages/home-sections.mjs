@@ -1,5 +1,5 @@
 // Home page sections between the hero and the status table, as HTML and as Markdown.
-import { PRICES_READ, REPO } from '../site.mjs';
+import { FOUNDING_CHECKOUT, PRICES_READ, REPO } from '../site.mjs';
 
 // 5 agents, list price per month, billed annually, USD only (Zendesk publishes EUR; shown in text).
 const BARS = [
@@ -98,9 +98,8 @@ export const homeSections = `
       <li>Colliedesk Cloud opens for founding customers with v0.2</li>
     </ul>
     <div class="founding-cta">
-      <!-- TODO(owner): replace this placeholder with the founding checkout link. -->
-      <span class="btn btn-primary btn-lg is-placeholder" aria-disabled="true">Checkout opens soon</span>
-      <p>The checkout link is being set up. Until then, <a href="${REPO}" rel="noopener">watch the repository on GitHub</a> or self-host it today.</p>
+      <a class="btn btn-primary btn-lg" href="${FOUNDING_CHECKOUT}" rel="noopener">Become a founding customer, $100/year</a>
+      <p>Secure checkout by Polar. After payment we email you within one business day to set up your workspace and plan your Freshdesk migration.</p>
     </div>
   </div>
 </div></section>`;

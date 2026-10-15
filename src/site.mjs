@@ -10,6 +10,8 @@ export const POSITIONING =
   'Leave Freshdesk with all your data. AI that actually answers tickets is included, not an add-on. Flat price, no per-agent fees.';
 
 export const FOUNDING_HREF = '/#founding';
+// Polar checkout link for the Founding product (org Colliedesk).
+export const FOUNDING_CHECKOUT = 'https://buy.polar.sh/polar_cl_1R61RlI9VkKyH4ZfFs7XviF7UAd1CaoycIasu2TiXQx';
 // Colliedesk Cloud sign-in (email code through Clerk) for agents who already have a workspace.
 export const APP_SIGN_IN = 'https://app.colliedesk.com/sign-in';
 // The updates box posts to the web form channel of HC Labs' own Colliedesk workspace: every
