@@ -1,6 +1,6 @@
 import { techArticle } from '../../lib/schema';
 import type { Page } from '../../lib/page';
-import { LEGAL_UPDATED, PRIVACY_EMAIL } from './privacy';
+import { LEGAL_UPDATED, CONTACT_EMAIL } from './privacy';
 
 const body = `## The short version
 
@@ -33,7 +33,7 @@ These terms are an agreement between you and **HC Labs Co., Ltd.** (CÔNG TY TNH
 - Prices are on the [pricing page](/pricing). Payment is handled by Polar, our merchant of record, which also charges the applicable tax.
 - Plans are paid in advance, monthly or yearly, and renew automatically until you cancel.
 - You can cancel at any time. The plan stays active until the end of the period you paid for, then the workspace locks.
-- If we change a price, we tell workspace admins by email at least 30 days before your next renewal. The Founding price stays locked for as long as you keep the subscription.
+- A price change applies from your next renewal, never to a period you already paid for, and we email workspace admins before it applies. The Founding price stays locked for as long as you keep the subscription.
 
 ## Your content
 
@@ -72,11 +72,11 @@ These terms are governed by the laws of Vietnam. If we disagree, we will first t
 
 ## Changes to these terms
 
-When we change these terms, we update the date at the top of this page and note it in the [changelog](/changelog). For changes that affect your rights, we email workspace admins at least 30 days before they apply.
+When we change these terms, we update the date at the top of this page and note it in the [changelog](/changelog). For changes that affect your rights, we email workspace admins before they apply.
 
 ## Contact
 
-**${PRIVACY_EMAIL}**. HC Labs Co., Ltd., Hanoi, Vietnam.`;
+**${CONTACT_EMAIL}**. HC Labs Co., Ltd., Hanoi, Vietnam.`;
 
 const page: Page = {
   jsonLd: [],

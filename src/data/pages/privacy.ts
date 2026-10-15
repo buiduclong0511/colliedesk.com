@@ -2,7 +2,7 @@ import { techArticle } from '../../lib/schema';
 import type { Page } from '../../lib/page';
 
 export const LEGAL_UPDATED = '2026-10-15';
-export const PRIVACY_EMAIL = 'privacy@colliedesk.com';
+export const CONTACT_EMAIL = 'support@colliedesk.com';
 
 const body = `## The short version
 
@@ -88,7 +88,7 @@ The Colliedesk app uses only the cookies and storage that sign-in needs (set by 
 - **Sign-up fingerprints:** as long as Colliedesk Cloud runs (see above).
 - **Billing records:** as long as tax and accounting law requires.
 
-You can ask us to delete your workspace or account earlier. Email ${PRIVACY_EMAIL} from an admin's address.
+You can ask us to delete your workspace or account earlier. Email ${CONTACT_EMAIL} from an admin's address.
 
 ## Your rights
 
@@ -123,7 +123,7 @@ When we change this policy, we update the date at the top of this page and note 
 
 ## Contact
 
-Questions or requests: **${PRIVACY_EMAIL}**. HC Labs Co., Ltd., Hanoi, Vietnam.
+Questions or requests: **${CONTACT_EMAIL}**. HC Labs Co., Ltd., Hanoi, Vietnam.
 
 See also our [terms of service](/terms).`;
 
