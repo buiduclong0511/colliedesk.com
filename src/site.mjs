@@ -10,6 +10,8 @@ export const POSITIONING =
   'Leave Freshdesk with all your data. AI that actually answers tickets is included, not an add-on. Flat price, no per-agent fees.';
 
 export const FOUNDING_HREF = '/#founding';
+// Colliedesk Cloud sign-in (email code through Clerk) for agents who already have a workspace.
+export const APP_SIGN_IN = 'https://app.colliedesk.com/redeem';
 // The updates box posts to the web form channel of HC Labs' own Colliedesk workspace: every
 // signup lands there as a conversation tagged web-form.
 export const UPDATES_FORM_URL = 'https://app.colliedesk.com/api/v1/public/forms/hclabs';
