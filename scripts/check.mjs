@@ -174,10 +174,12 @@ const PRICE_MAX_AGE_DAYS = 90;
   }
   if ((chart.match(/name="agents"[^>]*checked/g) ?? []).length !== 1) fail('/vs/freshdesk: price chart needs exactly one team size checked by default');
   const list = (n) => chart.match(new RegExp(`<ol[^>]*data-agents="${n}"[\\s\\S]*?</ol>`))?.[0] ?? '';
+  // A bar total renders as "$19<small>", so this cannot match $190 or $490.
+  const total = (html, amount) => html.includes(`>${amount}<small>`);
   const block = (n) => chart.match(new RegExp(`data-size="${n}"[\\s\\S]*?(?=data-size=|<p class="vs-fit-line")`))?.[0] ?? '';
-  if (!list(3).includes('$57') || !list(3).includes('$49')) fail('/vs/freshdesk: 3 agents must show Freshdesk Growth $57 and Colliedesk $49');
-  if (!list(5).includes('$420') || !block(5).includes('$4,452')) fail('/vs/freshdesk: 5 agents must show Freshdesk Pro + Copilot $420 and a $4,452 yearly saving');
-  if (!list(1).includes('$19')) fail('/vs/freshdesk: 1 agent must show Freshdesk Growth $19, cheaper than Colliedesk');
+  if (!total(list(3), '$57') || !total(list(3), '$49')) fail('/vs/freshdesk: 3 agents must show Freshdesk Growth $57 and Colliedesk $49');
+  if (!total(list(5), '$420') || !block(5).includes('$4,452 a year')) fail('/vs/freshdesk: 5 agents must show Freshdesk Pro + Copilot $420 and a $4,452 yearly saving');
+  if (!total(list(1), '$19')) fail('/vs/freshdesk: 1 agent must show Freshdesk Growth $19, cheaper than Colliedesk');
   if (!/from 3 to 10 agents/.test(chart)) fail('/vs/freshdesk: chart must say Colliedesk costs less from 3 to 10 agents');
   const readOn = chart.match(/data-read-on="(\d{4}-\d{2}-\d{2})"/)?.[1];
   if (!readOn) fail('/vs/freshdesk: price chart has no data-read-on date');

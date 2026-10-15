@@ -1,8 +1,7 @@
-import { PRICES_READ } from '../../lib/site';
 import { faqPage, techArticle } from '../../lib/schema';
 import type { Faq, Page } from '../../lib/page';
 import { PRICE } from '../../lib/site';
-import { rowsAt, usd, vsMarkdown, type VsPricing } from '../../lib/vs-pricing';
+import { readOnLabel, rowsAt, usd, vsMarkdown, type VsPricing } from '../../lib/vs-pricing';
 import { collieFacts as c, statusTable } from './collie-status';
 
 const pricing: VsPricing = {
@@ -27,6 +26,8 @@ const pricing: VsPricing = {
   ],
 };
 const fiveAgents = rowsAt(pricing, 5).at(-1);
+// One read date for the chart, the body, the FAQ and the meta description.
+const PRICES_READ = readOnLabel(pricing.readOn);
 
 const faq: Faq[] = [
   {
@@ -89,7 +90,7 @@ const page: Page = {
   section: 'Compare',
   title: `Colliedesk vs Freshdesk: ${PRICE.monthly} a month for up to 10 agents, not $19–89 per agent`,
   description:
-    'An honest comparison of Colliedesk and Freshdesk: published prices, AI add-on costs, export limits and what Colliedesk can and cannot do yet. Prices read 14 October 2026.',
+    `An honest comparison of Colliedesk and Freshdesk: published prices, AI add-on costs, export limits and what Colliedesk can and cannot do yet. Prices read ${PRICES_READ}.`,
   summary: 'Freshdesk $19–89 per agent plus $29 Copilot vs Colliedesk $49 per workspace; export limits; honest status',
   eyebrow: 'Compare · Freshdesk alternative',
   h1: 'Colliedesk vs Freshdesk',

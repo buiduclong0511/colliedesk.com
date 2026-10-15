@@ -31,6 +31,8 @@ export interface VsRow {
   ours?: boolean;
 }
 
+const perAgentTotal = (plan: VsPlan): number => plan.perAgent + (plan.aiPerAgent ?? 0);
+
 export const TEAM_SIZES = [1, 3, 5, 10] as const;
 export const DEFAULT_TEAM_SIZE = 5;
 /** Cloud Team covers up to this many agents for one flat price. */
@@ -63,7 +65,7 @@ export function rowsAt(p: VsPricing, agents: number): VsRow[] {
 /** Smallest team size at which Colliedesk costs less than every competitor plan. */
 export function cheaperFrom(p: VsPricing): number | undefined {
   for (let n = 1; n <= MAX_AGENTS; n++) {
-    if (p.plans.every((plan) => (plan.perAgent + (plan.aiPerAgent ?? 0)) * n > OURS_USD)) return n;
+    if (p.plans.every((plan) => perAgentTotal(plan) * n > OURS_USD)) return n;
   }
   return undefined;
 }
@@ -71,7 +73,7 @@ export function cheaperFrom(p: VsPricing): number | undefined {
 export const teamLabel = (n: number): string => (n === 1 ? '1 agent' : `${n} agents`);
 const belowLabel = (from: number): string => (from === 2 ? '1 agent' : `1–${from - 1} agents`);
 const cheapestPlan = (p: VsPricing): string =>
-  [...p.plans].sort((a, b) => a.perAgent - b.perAgent)[0]?.name ?? p.competitor;
+  [...p.plans].sort((a, b) => perAgentTotal(a) - perAgentTotal(b))[0]?.name ?? p.competitor;
 
 /** One line under the chart: where the flat price wins and where it does not. */
 export function fitLine(p: VsPricing): string {
@@ -104,7 +106,7 @@ export function vsMarkdown(p: VsPricing): string {
   const head = `| Team | ${p.plans.map((plan) => plan.name).join(' | ')} | Colliedesk Cloud Team |`;
   const sep = `|---|${p.plans.map(() => '---|').join('')}---|`;
   const rows = TEAM_SIZES.map((n) => {
-    const cells = p.plans.map((plan) => usd((plan.perAgent + (plan.aiPerAgent ?? 0)) * n));
+    const cells = p.plans.map((plan) => usd(perAgentTotal(plan) * n));
     return `| ${teamLabel(n)} | ${cells.join(' | ')} | ${PRICE.monthly} |`;
   });
   const list = (items: readonly string[]): string => items.map((i) => `- ${i}`).join('\n');
