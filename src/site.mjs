@@ -10,6 +10,9 @@ export const POSITIONING =
   'Leave Freshdesk with all your data. AI that actually answers tickets is included, not an add-on. Flat price, no per-agent fees.';
 
 export const FOUNDING_HREF = '/#founding';
+// The updates box posts to the web form channel of HC Labs' own Colliedesk workspace: every
+// signup lands there as a conversation tagged web-form.
+export const UPDATES_FORM_URL = 'https://app.colliedesk.com/api/v1/public/forms/hclabs';
 export const PRICE = {
   monthly: '$49',
   yearly: '$490',
