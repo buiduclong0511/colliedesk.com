@@ -7,7 +7,9 @@ import migrateFreshdeskExport from './migrate-freshdesk-export';
 import migrateZendeskExport from './migrate-zendesk-export';
 import openSource from './open-source';
 import pricing from './pricing';
+import privacy from './privacy';
 import { docsPages, roadmapPage } from './repo-docs';
+import terms from './terms';
 import vsFreshdesk from './vs-freshdesk';
 import vsFront from './vs-front';
 import vsHelpScout from './vs-help-scout';
@@ -20,7 +22,8 @@ let cache: readonly Page[] | undefined;
 export function allPages(): readonly Page[] {
   cache ??= [
     home, pricing, migrateFreshdesk, migrateFreshdeskExport, migrateZendeskExport,
-    vsFreshdesk, vsZendesk, vsHelpScout, vsFront, openSource, roadmapPage(), changelog, ...docsPages(),
+    vsFreshdesk, vsZendesk, vsHelpScout, vsFront, openSource, roadmapPage(), changelog,
+    privacy, terms, ...docsPages(),
   ];
   return cache;
 }
