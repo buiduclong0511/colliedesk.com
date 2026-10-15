@@ -1,4 +1,4 @@
-/* CollieDesk brand tokens: Blue Merle. Copied from the app (colliedesk/colliedesk web/src/styles/tokens.css);
+/* Colliedesk brand tokens: Blue Merle. Copied from the app (colliedesk/colliedesk web/src/styles/tokens.css);
    change them there first. Light is the default theme; dark is opt-in through data-theme="dark" on <html>
    (see static/theme.js). Contrast for every pair is checked in the app repo and listed in docs/internals/design.md. */
 :root {

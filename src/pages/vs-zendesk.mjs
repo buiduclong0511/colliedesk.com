@@ -5,7 +5,7 @@ import { collieFacts as c, statusTable } from './collie-status.mjs';
 const faq = [
   {
     q: 'Is there a Zendesk alternative that is not priced per agent?',
-    a: 'Yes. CollieDesk Cloud is $49 per workspace per month, for up to 10 agents, and self-hosting is free. CollieDesk is open source (AGPL-3.0) and pre-alpha today.',
+    a: 'Yes. Colliedesk Cloud is $49 per workspace per month, for up to 10 agents, and self-hosting is free. Colliedesk is open source (AGPL-3.0) and pre-alpha today.',
   },
   {
     q: 'How does Zendesk charge for AI?',
@@ -16,7 +16,7 @@ const faq = [
     a: 'Zendesk\'s native data export is off by default: the account owner must ask Zendesk Support to enable it, and it is not available on Team plans. The CSV format has no comments. The Incremental Export API returns full comments but is limited to 10 requests per minute.',
   },
   {
-    q: 'Does CollieDesk import from Zendesk?',
+    q: 'Does Colliedesk import from Zendesk?',
     a: 'Not yet. The first importer is Freshdesk (coming v0.2). Zendesk and Help Scout importers are on the roadmap for later.',
   },
 ];
@@ -24,13 +24,13 @@ const faq = [
 const body = `## The short answer
 
 - **Choose Zendesk** if you need the enterprise default: a huge app marketplace, many channels, and AI agents that are already in production.
-- **Choose CollieDesk** if you are a small team where per-agent seats and per-resolution AI fees make up most of the bill, and you want an open-source helpdesk you can self-host or rent for a flat price. CollieDesk is pre-alpha; read the status table first.
+- **Choose Colliedesk** if you are a small team where per-agent seats and per-resolution AI fees make up most of the bill, and you want an open-source helpdesk you can self-host or rent for a flat price. Colliedesk is pre-alpha; read the status table first.
 
 ## Price, side by side
 
 Zendesk prices below are from the Zendesk pricing page in euros (our request for zendesk.com/pricing was served the euro page), per agent per month, read on ${PRICES_READ}.
 
-| | Zendesk | CollieDesk |
+| | Zendesk | Colliedesk |
 |---|---|---|
 | Plans (annual / monthly billing) | Support Team €19 / €25, Suite Team €55 / €69, Suite Professional €115 / €149; Enterprise on quote | ${c.price} |
 | AI drafting | Copilot €50 per agent per month, billed annually | ${c.ai} |
@@ -42,7 +42,7 @@ Third-party sites list US prices of $19, $55 and $115 for the same three plans; 
 
 ### What five agents pay
 
-| Team | Zendesk Suite Professional + Copilot (annual) | CollieDesk Cloud |
+| Team | Zendesk Suite Professional + Copilot (annual) | Colliedesk Cloud |
 |---|---|---|
 | 5 agents | 5 × (€115 + €50) = **€825 per month**, plus AI agent resolutions beyond the included amount | $49 per month + AI usage |
 
@@ -54,7 +54,7 @@ Third-party sites list US prices of $19, $55 and $115 for the same three plans; 
 
 ${c.export} A Zendesk importer is on the [roadmap](/roadmap) for later.
 
-## What CollieDesk does today
+## What Colliedesk does today
 
 ${statusTable}
 
@@ -70,12 +70,12 @@ Read on ${PRICES_READ}. Prices change; check the vendor page before you decide.
 const page = {
   path: '/vs/zendesk',
   section: 'Compare',
-  title: 'CollieDesk vs Zendesk: a flat-priced, open-source Zendesk alternative',
+  title: 'Colliedesk vs Zendesk: a flat-priced, open-source Zendesk alternative',
   description:
-    'CollieDesk vs Zendesk for small support teams: per-agent seats and per-resolution AI fees vs one flat workspace price. Sourced prices, export limits and honest status.',
-  summary: 'Zendesk per-agent seats, €50 Copilot and per-resolution AI vs CollieDesk flat $49 per workspace; export off by default',
+    'Colliedesk vs Zendesk for small support teams: per-agent seats and per-resolution AI fees vs one flat workspace price. Sourced prices, export limits and honest status.',
+  summary: 'Zendesk per-agent seats, €50 Copilot and per-resolution AI vs Colliedesk flat $49 per workspace; export off by default',
   eyebrow: 'Compare · Zendesk alternative',
-  h1: 'CollieDesk vs Zendesk',
+  h1: 'Colliedesk vs Zendesk',
   lede: 'Zendesk is the enterprise default, and it earns that. For a team of five, the seat count and the AI meter decide the bill. Here are the numbers, with sources.',
   cta: true,
   body,

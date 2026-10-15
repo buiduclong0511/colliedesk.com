@@ -92,7 +92,7 @@ const headers = () =>
     .join('\n') + '\n';
 
 const notFound = {
-  path: '/404', title: 'Page not found · CollieDesk', h1: 'This ticket wandered off',
+  path: '/404', title: 'Page not found · Colliedesk', h1: 'This ticket wandered off',
   description: 'The page you asked for does not exist. Try the home page, the docs or the llms.txt index of every page.',
 };
 const notFoundHtml = `<section class="page-hero"><div class="wrap"><p class="eyebrow">404</p><h1>${notFound.h1}</h1><p class="lede">The page you asked for does not exist. Try <a href="/">the home page</a>, <a href="/docs">the docs</a> or <a href="/llms.txt">the index of every page</a>.</p></div></section>`;

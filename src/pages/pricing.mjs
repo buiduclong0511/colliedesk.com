@@ -3,12 +3,12 @@ import { faqPage, softwareApplication } from '../schema.mjs';
 
 const faq = [
   {
-    q: 'Does CollieDesk charge per agent?',
-    a: 'No. CollieDesk Cloud Team is $49 per workspace per month or $490 per year, for up to 10 agents. A workspace is one support team. Adding an agent does not change the price. More than 10 agents: email us.',
+    q: 'Does Colliedesk charge per agent?',
+    a: 'No. Colliedesk Cloud Team is $49 per workspace per month or $490 per year, for up to 10 agents. A workspace is one support team. Adding an agent does not change the price. More than 10 agents: email us.',
   },
   {
     q: 'What does "AI at LLM cost +30%" mean?',
-    a: 'On CollieDesk Cloud you can use our AI key. You pay what the model provider charges for the tokens your tickets used, plus 30%. Example: if the provider charges $1.00, you pay $1.30. Or bring your own key and pay your provider directly.',
+    a: 'On Colliedesk Cloud you can use our AI key. You pay what the model provider charges for the tokens your tickets used, plus 30%. Example: if the provider charges $1.00, you pay $1.30. Or bring your own key and pay your provider directly.',
   },
   {
     q: 'Is there a free trial?',
@@ -20,11 +20,11 @@ const faq = [
   },
   {
     q: 'What is the founding offer?',
-    a: 'A founding customer pays $100 per workspace per year, and that price is locked for life. We also migrate your Freshdesk data for free. It is for teams who want to leave Freshdesk and help shape CollieDesk while it is young.',
+    a: 'A founding customer pays $100 per workspace per year, and that price is locked for life. We also migrate your Freshdesk data for free. It is for teams who want to leave Freshdesk and help shape Colliedesk while it is young.',
   },
   {
-    q: 'When can I use CollieDesk Cloud?',
-    a: 'CollieDesk is pre-alpha (v0.1). Cloud opens for the first founding customers with v0.2, together with the email channel and the Freshdesk importer. See the [roadmap](/roadmap).',
+    q: 'When can I use Colliedesk Cloud?',
+    a: 'Colliedesk is pre-alpha (v0.1). Cloud opens for the first founding customers with v0.2, together with the email channel and the Freshdesk importer. See the [roadmap](/roadmap).',
   },
 ];
 
@@ -73,7 +73,7 @@ const plansMd = `| Plan | Price | What you get |
 
 const body = `## What you pay for
 
-Self-hosting is free. We sell two things: **CollieDesk Cloud** (we run it for you) and **migration** (we move your Freshdesk history and prove nothing was lost). That is the whole business. There is no "enterprise edition" with the good features held back.
+Self-hosting is free. We sell two things: **Colliedesk Cloud** (we run it for you) and **migration** (we move your Freshdesk history and prove nothing was lost). That is the whole business. There is no "enterprise edition" with the good features held back.
 
 ## AI is included, not an add-on
 
@@ -84,19 +84,19 @@ Self-hosting is free. We sell two things: **CollieDesk Cloud** (we run it for yo
 
 ## How this compares
 
-Most helpdesks charge per agent, then charge again for AI. For five agents, Freshdesk Pro with Freddy AI Copilot lists at $420 per month (billed annually). CollieDesk Cloud Team is $49 per month for the workspace, plus AI usage. Prices and sources: [vs Freshdesk](/vs/freshdesk), [vs Zendesk](/vs/zendesk), [vs Help Scout](/vs/help-scout).
+Most helpdesks charge per agent, then charge again for AI. For five agents, Freshdesk Pro with Freddy AI Copilot lists at $420 per month (billed annually). Colliedesk Cloud Team is $49 per month for the workspace, plus AI usage. Prices and sources: [vs Freshdesk](/vs/freshdesk), [vs Zendesk](/vs/zendesk), [vs Help Scout](/vs/help-scout).
 
 ## Honest status
 
-CollieDesk is **pre-alpha**. Today it has a shared inbox, private notes, tags, assignment and passwordless sign-in. It cannot receive email yet: the email channel and the Freshdesk importer arrive in v0.2. If you must switch this week, CollieDesk is not ready for you yet. If you are planning your exit before your next Freshdesk renewal, [the founding offer](${FOUNDING_HREF}) is for you.`;
+Colliedesk is **pre-alpha**. Today it has a shared inbox, private notes, tags, assignment and passwordless sign-in. It cannot receive email yet: the email channel and the Freshdesk importer arrive in v0.2. If you must switch this week, Colliedesk is not ready for you yet. If you are planning your exit before your next Freshdesk renewal, [the founding offer](${FOUNDING_HREF}) is for you.`;
 
 export default {
   name: 'Pricing',
   path: '/pricing',
   section: 'Product',
-  title: 'CollieDesk pricing: $49 per workspace, no per-agent fees, 14-day free trial',
+  title: 'Colliedesk pricing: $49 per workspace, no per-agent fees, 14-day free trial',
   description:
-    'CollieDesk Cloud starts with a 14-day free trial, no card. Team costs $49 per workspace per month ($490 per year), up to 10 agents, no per-agent fees. Self-hosting is free.',
+    'Colliedesk Cloud starts with a 14-day free trial, no card. Team costs $49 per workspace per month ($490 per year), up to 10 agents, no per-agent fees. Self-hosting is free.',
   summary: '14-day free trial, no card; Team $49 per workspace per month or $490 per year, up to 10 agents, no per-agent fees; founding offer; AI at LLM cost +30% or your own key; self-host free',
   eyebrow: 'Pricing',
   h1: 'One flat price per workspace. No per-agent fees.',

@@ -1,4 +1,4 @@
-/* CollieDesk site: Blue Merle, light by default (dark via data-theme, see theme.js). Tokens come from
+/* Colliedesk site: Blue Merle, light by default (dark via data-theme, see theme.js). Tokens come from
    tokens.css, fonts from fonts.css (both self-hosted). Sentence case everywhere; mono only for code. */
 :root {
   --wrap: 1360px;
