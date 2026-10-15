@@ -6,27 +6,27 @@ import { statusTable } from './collie-status.mjs';
 import { homeSections, homeSectionsMd } from './home-sections.mjs';
 
 const LEDE =
-  'Move from Freshdesk to CollieDesk with your tickets, replies, private notes and attachments. A reconcile report proves the counts match, so nothing is lost on the way.';
+  'Move from Freshdesk to Colliedesk with your tickets, replies, private notes and attachments. A reconcile report proves the counts match, so nothing is lost on the way.';
 
 const faq = [
   {
-    q: 'What is CollieDesk?',
-    a: 'CollieDesk is an open-source (AGPL-3.0) helpdesk for small support teams, made by HC Labs. It is the open-source alternative to Freshdesk, Zendesk and Help Scout: a shared inbox for your team, AI included at cost, one flat price per workspace.',
+    q: 'What is Colliedesk?',
+    a: 'Colliedesk is an open-source (AGPL-3.0) helpdesk for small support teams, made by HC Labs. It is the open-source alternative to Freshdesk, Zendesk and Help Scout: a shared inbox for your team, AI included at cost, one flat price per workspace.',
   },
   {
-    q: 'Is CollieDesk free?',
-    a: 'Self-hosting is free, forever, with every feature. CollieDesk Cloud costs $49 per workspace per month or $490 per year, with no per-agent fees. See [pricing](/pricing).',
+    q: 'Is Colliedesk free?',
+    a: 'Self-hosting is free, forever, with every feature. Colliedesk Cloud costs $49 per workspace per month or $490 per year, with no per-agent fees. See [pricing](/pricing).',
   },
   {
-    q: 'Is CollieDesk ready to use?',
+    q: 'Is Colliedesk ready to use?',
     a: 'It is pre-alpha (v0.1). The shared inbox, notes, tags, assignment and passwordless sign-in work today. The email channel and Freshdesk importer arrive in v0.2, AI in v0.3. See the [roadmap](/roadmap).',
   },
   {
     q: 'How does AI pricing work?',
-    a: 'AI is included, not an add-on. On CollieDesk Cloud you pay the model cost plus 30%, or bring your own key. Self-hosted installs use your own key.',
+    a: 'AI is included, not an add-on. On Colliedesk Cloud you pay the model cost plus 30%, or bring your own key. Self-hosted installs use your own key.',
   },
   {
-    q: 'Can I move my Freshdesk tickets to CollieDesk?',
+    q: 'Can I move my Freshdesk tickets to Colliedesk?',
     a: 'Yes, with the Freshdesk importer (coming v0.2): tickets, replies, notes, attachments, tags and contacts, with a reconcile report. Founding customers get the migration done for free. Read [the migration guide](/migrate/freshdesk).',
   },
 ];
@@ -47,14 +47,14 @@ const reconcileRows = RECONCILE.map(
 ).join('');
 
 const proof = `<figure class="proof" aria-labelledby="proof-title">
-  <div class="proof-head"><figcaption id="proof-title">${SHIELD}Reconcile report <span class="ex">Example</span></figcaption><span class="src">northwind.freshdesk.com → <b>CollieDesk</b></span></div>
-  <table><thead><tr><th scope="col">Item</th><th scope="col">Freshdesk</th><th scope="col">CollieDesk</th><th scope="col"><span class="visually-hidden">Result</span></th></tr></thead><tbody>${reconcileRows}</tbody></table>
+  <div class="proof-head"><figcaption id="proof-title">${SHIELD}Reconcile report <span class="ex">Example</span></figcaption><span class="src">northwind.freshdesk.com → <b>Colliedesk</b></span></div>
+  <table><thead><tr><th scope="col">Item</th><th scope="col">Freshdesk</th><th scope="col">Colliedesk</th><th scope="col"><span class="visually-hidden">Result</span></th></tr></thead><tbody>${reconcileRows}</tbody></table>
   <div class="proof-foot">${CHECK}<b>0 lost.</b><span>Every count matches.</span><a href="/migrate/freshdesk#5-check-the-reconcile-report">How the check works</a></div>
   <p class="proof-note">Sample numbers. The Freshdesk importer is <span class="badge badge-coming">Coming v0.2</span></p>
 </figure>`;
 
 const install = `<div class="self">
-  <figure class="install" aria-label="Self-host CollieDesk with one command">
+  <figure class="install" aria-label="Self-host Colliedesk with one command">
 <pre><code><span class="t-prompt">$</span> curl -fsSL https://raw.githubusercontent.com/colliedesk/colliedesk/main/install.sh \\
     | sh -s -- --name "Acme Support" --email "you@acme.com"
 <span class="t-out"># prints a one-time sign-in link, no passwords</span></code></pre>
@@ -83,7 +83,7 @@ const html = `<section class="home-hero"><div class="wrap">
     <p class="hero-note">14-day free trial, no card. <b>Cloud Team $49</b> per workspace per month, no per-agent fees. Founding plan $100 a year. <a href="/pricing">See pricing</a></p>
   </div>
   <div class="hero-stage">
-    <figure class="hero-shot"><img src="/product-inbox.jpg" width="1440" height="900" alt="The CollieDesk inbox: a list of customer conversations with status and priority, an open conversation with a reply and a private note, and the conversation properties." fetchpriority="high"></figure>
+    <figure class="hero-shot"><img src="/product-inbox.jpg" width="1440" height="900" alt="The Colliedesk inbox: a list of customer conversations with status and priority, an open conversation with a reply and a private note, and the conversation properties." fetchpriority="high"></figure>
     ${proof}
   </div>
   ${install}
@@ -105,13 +105,13 @@ ${statusTable}
 ${faqMarkdown(faq)}`;
 
 export default {
-  name: 'CollieDesk overview',
+  name: 'Colliedesk overview',
   path: '/',
   section: 'Product',
-  title: 'CollieDesk: the open-source alternative to Freshdesk, Zendesk and Help Scout',
+  title: 'Colliedesk: the open-source alternative to Freshdesk, Zendesk and Help Scout',
   description:
-    'CollieDesk is an open-source helpdesk for small support teams. Leave Freshdesk with all your data. AI included, not an add-on. $49 per workspace, no per-agent fees.',
-  summary: `What CollieDesk is, what we sell, status, founding offer; competitor prices read ${PRICES_READ}`,
+    'Colliedesk is an open-source helpdesk for small support teams. Leave Freshdesk with all your data. AI included, not an add-on. $49 per workspace, no per-agent fees.',
+  summary: `What Colliedesk is, what we sell, status, founding offer; competitor prices read ${PRICES_READ}`,
   h1: 'Bring every ticket home.',
   lede: LEDE,
   html,

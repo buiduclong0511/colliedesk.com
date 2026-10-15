@@ -1,7 +1,7 @@
 // Shared facts used on every page. Change a fact here, not in page copy.
 export const ORIGIN = 'https://colliedesk.com';
 export const REPO = 'https://github.com/colliedesk/colliedesk';
-export const NAME = 'CollieDesk';
+export const NAME = 'Colliedesk';
 export const UPDATED = '2026-10-14';
 export const PRICES_READ = '14 October 2026';
 
@@ -40,9 +40,9 @@ export const FOOTER = [
     title: 'Switch',
     links: [
       { href: '/migrate/freshdesk', label: 'Migrate from Freshdesk' },
-      { href: '/vs/freshdesk', label: 'CollieDesk vs Freshdesk' },
-      { href: '/vs/zendesk', label: 'CollieDesk vs Zendesk' },
-      { href: '/vs/help-scout', label: 'CollieDesk vs Help Scout' },
+      { href: '/vs/freshdesk', label: 'Colliedesk vs Freshdesk' },
+      { href: '/vs/zendesk', label: 'Colliedesk vs Zendesk' },
+      { href: '/vs/help-scout', label: 'Colliedesk vs Help Scout' },
     ],
   },
   {

@@ -74,6 +74,7 @@ jobs:
         with:
           node-version: '22.x'
           package-manager-cache: false
+      - run: sh scripts/brand-name-check.sh
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
       - run: sh scripts/product-docs-version.sh product > _site/product-docs-version.txt
