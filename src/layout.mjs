@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { FOOTER, FOUNDING_HREF, NAME, NAV, ORIGIN, REPO, UPDATED, UPDATES_FORM_URL } from './site.mjs';
+import { APP_SIGN_IN, FOOTER, FOUNDING_HREF, NAME, NAV, ORIGIN, REPO, UPDATED, UPDATES_FORM_URL } from './site.mjs';
 import { escapeHtml as e, renderMarkdown } from './markdown.mjs';
 
 export const mdUrlOf = (path) => (path === '/' ? '/index.md' : `${path}.md`);
@@ -29,9 +29,9 @@ function header(path) {
   const items = NAV.map((n) => `<li>${link(n, path)}</li>`).join('');
   return `<header class="site-header"><div class="wrap header-inner">
   <a class="brand" href="/" aria-label="${NAME} home">${WORDMARK}</a>
-  <nav aria-label="Main" class="nav-desktop"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li></ul></nav>
+  <nav aria-label="Main" class="nav-desktop"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li><li><a href="${APP_SIGN_IN}">Log in</a></li></ul></nav>
   <a class="btn btn-primary btn-sm header-cta" href="${FOUNDING_HREF}">Start free trial</a>
-  <details class="nav-mobile"><summary>Menu</summary><nav aria-label="Main (mobile)"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li></ul></nav></details>
+  <details class="nav-mobile"><summary>Menu</summary><nav aria-label="Main (mobile)"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li><li><a href="${APP_SIGN_IN}">Log in</a></li></ul></nav></details>
 </div></header>`;
 }
 
