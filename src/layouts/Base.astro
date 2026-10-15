@@ -1,0 +1,59 @@
+---
+// The HTML document around every page: head (meta, canonical, Markdown alternate, JSON-LD, fonts,
+// styles, the two small vanilla scripts), header, main and footer.
+import Footer from '../components/Footer.astro';
+import { Header } from '../components/Header';
+import { mdUrlOf, type PageHead } from '../lib/page';
+import { html } from '../lib/render-react';
+import { NAME, ORIGIN, UPDATED } from '../lib/site';
+
+interface Props {
+  page: PageHead;
+  /** The 404 page: noindex, and no canonical or alternate links. */
+  notFound?: boolean;
+}
+
+const { page, notFound = false } = Astro.props;
+const canonical = `${ORIGIN}${page.path}`;
+---
+<!doctype html>
+<html lang="en">
+<head>
+{notFound && <meta name="robots" content="noindex">}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{page.title}</title>
+<meta name="description" content={page.description}>
+{!notFound && <link rel="canonical" href={canonical}>}
+{!notFound && <link rel="alternate" type="text/markdown" href={mdUrlOf(page.path)}>}
+{!notFound && <link rel="alternate" type="application/rss+xml" title="Colliedesk changelog" href="/changelog.xml">}
+<link rel="icon" href="/favicon.ico?v=2" sizes="32x32">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts.css">
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/styles.css">
+<script is:inline src="/theme.js"></script>
+<script is:inline src="/updates.js" defer></script>
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content={NAME}>
+<meta property="og:title" content={page.title}>
+<meta property="og:description" content={page.description}>
+<meta property="og:url" content={canonical}>
+<meta name="twitter:card" content="summary">
+<meta name="last-modified" content={page.updated || UPDATED}>
+{page.jsonLd.map((o) => <script is:inline type="application/ld+json" set:html={JSON.stringify(o)} />)}
+</head>
+<body class={page.bodyClass || ''}>
+<a class="skip" href="#main">Skip to content</a>
+<Fragment set:html={html(Header, { path: page.path })} />
+<main id="main">
+<slot />
+</main>
+<Footer />
+</body>
+</html>
