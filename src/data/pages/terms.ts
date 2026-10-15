@@ -68,7 +68,7 @@ To the extent the law allows, our total liability for any claim about Colliedesk
 
 ## Law
 
-These terms are governed by the laws of Vietnam. If we disagree, we will first try to settle it by email in good faith.
+These terms are governed by the laws of Singapore. If we disagree, we will first try to settle it by email in good faith. If that fails, the courts of Singapore decide.
 
 ## Changes to these terms
 
