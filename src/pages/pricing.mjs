@@ -20,7 +20,7 @@ const faq = [
   },
   {
     q: 'What is the founding offer?',
-    a: 'A founding customer pays $100 per workspace per year, and that price is locked for life. We also migrate your Freshdesk data for free. It is for teams who want to leave Freshdesk and help shape Colliedesk while it is young.',
+    a: 'A founding customer pays $100 per workspace per year, and that price is locked for life. We also migrate your Freshdesk data for free. It includes up to 10 agents and 20 GB of attachments, imported files included. Above 20 GB nothing is deleted: new attachments wait until you upgrade to Cloud Team, which has no storage cap. It is for teams who want to leave Freshdesk and help shape Colliedesk while it is young.',
   },
   {
     q: 'When can I use Colliedesk Cloud?',
@@ -46,7 +46,8 @@ const plans = `<section class="wrap plans" aria-label="Plans">
     <ul>
       <li>Price locked for life</li>
       <li>Free Freshdesk migration, with a reconcile report</li>
-      <li>Your whole team in one workspace, no per-agent fees</li>
+      <li>Up to 10 agents, no per-agent fees</li>
+      <li>20 GB of attachments, imported files included</li>
       <li>AI at LLM cost +30%, or bring your own key</li>
     </ul>
     <a class="btn btn-primary" href="${FOUNDING_HREF}">Get founding access</a>
@@ -68,7 +69,7 @@ const plans = `<section class="wrap plans" aria-label="Plans">
 const plansMd = `| Plan | Price | What you get |
 |---|---|---|
 | Self-host | $0, forever | Every feature. AGPL-3.0. AI with your own model key. |
-| Founding | $100 per workspace per year, locked for life | Free Freshdesk migration with a reconcile report. Your whole team, no per-agent fees. AI at LLM cost +30% or bring your own key. |
+| Founding | $100 per workspace per year, locked for life | Free Freshdesk migration with a reconcile report. Up to 10 agents, no per-agent fees. 20 GB of attachments, imported files included. AI at LLM cost +30% or bring your own key. |
 | Cloud Team (coming v0.2) | $49 per workspace per month, or $490 per year | Hosted by HC Labs. Up to 10 agents, unlimited conversations, no per-agent fees. AI at LLM cost +30% or bring your own key. |`;
 
 const body = `## What you pay for
