@@ -1,7 +1,7 @@
 // Shared facts used on every page. Change a fact here, not in page copy.
 export const ORIGIN = 'https://colliedesk.com';
 export const REPO = 'https://github.com/colliedesk/colliedesk';
-export const NAME = 'CollieDesk';
+export const NAME = 'Colliedesk';
 export const UPDATED = '2026-10-14';
 export const PRICES_READ = '14 October 2026';
 
@@ -10,6 +10,11 @@ export const POSITIONING =
   'Leave Freshdesk with all your data. AI that actually answers tickets is included, not an add-on. Flat price, no per-agent fees.';
 
 export const FOUNDING_HREF = '/#founding';
+// Colliedesk Cloud sign-in (email code through Clerk) for agents who already have a workspace.
+export const APP_SIGN_IN = 'https://app.colliedesk.com/redeem';
+// The updates box posts to the web form channel of HC Labs' own Colliedesk workspace: every
+// signup lands there as a conversation tagged web-form.
+export const UPDATES_FORM_URL = 'https://app.colliedesk.com/api/v1/public/forms/hclabs';
 export const PRICE = {
   monthly: '$49',
   yearly: '$490',
@@ -42,10 +47,10 @@ export const FOOTER = [
       { href: '/migrate/freshdesk', label: 'Migrate from Freshdesk' },
       { href: '/migrate/freshdesk/export', label: 'Export Freshdesk tickets' },
       { href: '/migrate/zendesk/export', label: 'Export Zendesk tickets' },
-      { href: '/vs/freshdesk', label: 'CollieDesk vs Freshdesk' },
-      { href: '/vs/zendesk', label: 'CollieDesk vs Zendesk' },
-      { href: '/vs/help-scout', label: 'CollieDesk vs Help Scout' },
-      { href: '/vs/front', label: 'CollieDesk vs Front' },
+      { href: '/vs/freshdesk', label: 'Colliedesk vs Freshdesk' },
+      { href: '/vs/zendesk', label: 'Colliedesk vs Zendesk' },
+      { href: '/vs/help-scout', label: 'Colliedesk vs Help Scout' },
+      { href: '/vs/front', label: 'Colliedesk vs Front' },
     ],
   },
   {

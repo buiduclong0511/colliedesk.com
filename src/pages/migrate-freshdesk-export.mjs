@@ -68,7 +68,7 @@ The API is the only route that lets a tool count what it read and prove nothing 
 - **Conversations.** \`include=conversations\` embeds at most 10. Fetch the rest from \`/api/v2/tickets/{id}/conversations\`.
 - **Rate limits** are shared across the account, so an export slows down your agents' integrations.
 
-## Moving to CollieDesk
+## Moving to Colliedesk
 
 \`colliedesk import freshdesk\` does the API route for you: tickets with every reply and note, archived tickets, attachments with a SHA-256 checksum, tags, contacts, companies and time entries. It ends with a reconcile report. If one count does not match, the report says **FAILED** and you keep using Freshdesk. It ships with v0.2; the [import guide](/docs/import-freshdesk) has the command and flags.
 

@@ -5,7 +5,7 @@ import { collieFacts as c, statusTable } from './collie-status.mjs';
 const faq = [
   {
     q: 'What is a good Help Scout alternative with flat pricing?',
-    a: 'CollieDesk Cloud is $49 per workspace per month with no per-user fees, and the open-source code (AGPL-3.0) is free to self-host. CollieDesk is pre-alpha; email arrives in v0.2.',
+    a: 'Colliedesk Cloud is $49 per workspace per month with no per-user fees, and the open-source code (AGPL-3.0) is free to self-host. Colliedesk is pre-alpha; email arrives in v0.2.',
   },
   {
     q: 'Can I export my Help Scout conversations?',
@@ -16,7 +16,7 @@ const faq = [
     a: `On the pricing page read on ${PRICES_READ}: AI Answers costs $0.75 per resolution on paid plans. AI Assist, Drafts and Summarize are listed as included.`,
   },
   {
-    q: 'Does CollieDesk import from Help Scout?',
+    q: 'Does Colliedesk import from Help Scout?',
     a: 'Not yet. The first importer is Freshdesk (coming v0.2); a Help Scout importer is on the roadmap for later.',
   },
 ];
@@ -24,13 +24,13 @@ const faq = [
 const body = `## The short answer
 
 - **Choose Help Scout** if you want one of the most polished email-first helpdesks, with AI drafting already included. It is a good product.
-- **Choose CollieDesk** if you want a price that never depends on headcount or contacts, your data in a database you control, and code you can read and fork. CollieDesk is pre-alpha; read the status table first.
+- **Choose Colliedesk** if you want a price that never depends on headcount or contacts, your data in a database you control, and code you can read and fork. Colliedesk is pre-alpha; read the status table first.
 
 ## Price, side by side
 
 Help Scout prices are per user per month as shown on the pricing page on ${PRICES_READ}. The page has a monthly/annual toggle; we could not confirm which billing cycle the shown price uses.
 
-| | Help Scout | CollieDesk |
+| | Help Scout | Colliedesk |
 |---|---|---|
 | Plans | Free $0 (5 users, 1 inbox, 100 contacts per month), Standard $25, Plus $45, Pro $75 (minimum 10 users) | ${c.price} |
 | AI | AI Answers $0.75 per resolution; AI Assist, Drafts and Summarize included | ${c.ai} |
@@ -39,7 +39,7 @@ Help Scout prices are per user per month as shown on the pricing page on ${PRICE
 
 ### What five agents pay
 
-| Team | Help Scout Standard | Help Scout Plus | CollieDesk Cloud |
+| Team | Help Scout Standard | Help Scout Plus | Colliedesk Cloud |
 |---|---|---|---|
 | 5 agents | 5 × $25 = **$125 per month** + $0.75 per AI resolution | 5 × $45 = **$225 per month** + $0.75 per AI resolution | $49 per month + AI usage |
 
@@ -55,7 +55,7 @@ In 2025 Help Scout moved to contact-based pricing and then reversed it after cus
 
 ${c.export} A Help Scout importer is on the [roadmap](/roadmap) for later.
 
-## What CollieDesk does today
+## What Colliedesk does today
 
 ${statusTable}
 
@@ -71,13 +71,13 @@ Read on ${PRICES_READ}. Prices change; check the vendor page before you decide.
 const page = {
   path: '/vs/help-scout',
   section: 'Compare',
-  title: 'CollieDesk vs Help Scout: open-source, flat-priced Help Scout alternative',
+  title: 'Colliedesk vs Help Scout: open-source, flat-priced Help Scout alternative',
   description:
-    'CollieDesk vs Help Scout: per-user plans and $0.75 AI resolutions vs one flat workspace price, plus what Help Scout lets you export. Prices read 14 October 2026.',
-  summary: 'Help Scout $25–75 per user and $0.75 per AI resolution vs CollieDesk flat $49 per workspace; no bulk export in Help Scout',
+    'Colliedesk vs Help Scout: per-user plans and $0.75 AI resolutions vs one flat workspace price, plus what Help Scout lets you export. Prices read 14 October 2026.',
+  summary: 'Help Scout $25–75 per user and $0.75 per AI resolution vs Colliedesk flat $49 per workspace; no bulk export in Help Scout',
   eyebrow: 'Compare · Help Scout alternative',
-  h1: 'CollieDesk vs Help Scout',
-  lede: 'Help Scout has some of the best email UX in the category. CollieDesk is younger, open source and flat-priced. Here is where each one fits, with sources.',
+  h1: 'Colliedesk vs Help Scout',
+  lede: 'Help Scout has some of the best email UX in the category. Colliedesk is younger, open source and flat-priced. Here is where each one fits, with sources.',
   cta: true,
   body,
   faq,

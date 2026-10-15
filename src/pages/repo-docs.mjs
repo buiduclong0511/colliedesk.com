@@ -53,11 +53,11 @@ const titleOf = (file) => readRepo(`docs/user/${file}.md`).match(/^# (.+)$/m)[1]
 function docPage(path, file, summaryFallback) {
   const fromDir = file.slice(0, file.lastIndexOf('/') + 1);
   const { title, lede, body } = split(rewriteLinks(readRepo(file), fromDir));
-  const description = `${plain(lede || summaryFallback)} CollieDesk user guide, v0.1 (pre-alpha).`;
+  const description = `${plain(lede || summaryFallback)} Colliedesk user guide, v0.1 (pre-alpha).`;
   const page = {
     path,
     section: 'Docs',
-    title: `${title} · CollieDesk docs`,
+    title: `${title} · Colliedesk docs`,
     description,
     summary: plain(lede || summaryFallback),
     eyebrow: 'Docs',
@@ -72,10 +72,10 @@ function docPage(path, file, summaryFallback) {
 }
 
 export function docsPages() {
-  const index = docPage('/docs', 'docs/user/README.md', 'One page per CollieDesk feature: what it does, how to use it, and its limits.');
-  index.h1 = 'CollieDesk docs';
-  index.title = 'CollieDesk docs: install, sign in, invite your team, work the inbox';
-  return [index, ...DOC_FILES.map((f) => docPage(`/docs/${f}`, `docs/user/${f}.md`, `How ${titleOf(f).toLowerCase()} works in CollieDesk.`))];
+  const index = docPage('/docs', 'docs/user/README.md', 'One page per Colliedesk feature: what it does, how to use it, and its limits.');
+  index.h1 = 'Colliedesk docs';
+  index.title = 'Colliedesk docs: install, sign in, invite your team, work the inbox';
+  return [index, ...DOC_FILES.map((f) => docPage(`/docs/${f}`, `docs/user/${f}.md`, `How ${titleOf(f).toLowerCase()} works in Colliedesk.`))];
 }
 
 export function roadmapPage() {
@@ -84,10 +84,10 @@ export function roadmapPage() {
     section: 'Product',
     aside: '',
     eyebrow: 'Roadmap',
-    h1: 'CollieDesk roadmap',
-    title: 'CollieDesk roadmap: email and Freshdesk import in v0.2, AI in v0.3',
+    h1: 'Colliedesk roadmap',
+    title: 'Colliedesk roadmap: email and Freshdesk import in v0.2, AI in v0.3',
     description:
-      'What CollieDesk has shipped and what comes next: email channel and Freshdesk importer (v0.2), AI drafting and auto-answer (v0.3), automations and SLA (v0.4). Dates are targets.',
+      'What Colliedesk has shipped and what comes next: email channel and Freshdesk importer (v0.2), AI drafting and auto-answer (v0.3), automations and SLA (v0.4). Dates are targets.',
     summary: 'Shipped v0.1; next v0.2 email + Freshdesk importer + Cloud; v0.3 AI included; later automations, SLA, reports, MCP',
   });
   page.jsonLd = [techArticle(page)];

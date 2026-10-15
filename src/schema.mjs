@@ -28,15 +28,14 @@ export const softwareApplication = () => ({
   dateModified: UPDATED,
   offers: [
     { '@type': 'Offer', name: 'Self-hosted', price: '0', priceCurrency: 'USD', description: 'Free forever, every feature, AGPL-3.0.' },
-    { '@type': 'Offer', name: 'CollieDesk Cloud Free', price: '0', priceCurrency: 'USD', description: 'Up to 3 agents and 100 conversations a month, every feature.' },
     {
-      '@type': 'Offer', name: 'CollieDesk Cloud', price: '49', priceCurrency: 'USD',
+      '@type': 'Offer', name: 'Colliedesk Cloud', price: '49', priceCurrency: 'USD',
       description: 'Team plan, per workspace per month ($490 per year). Up to 10 agents, no per-agent fees.',
       priceSpecification: { '@type': 'UnitPriceSpecification', price: '49', priceCurrency: 'USD', unitText: 'workspace per month' },
     },
     {
       '@type': 'Offer', name: 'Founding customer', price: '100', priceCurrency: 'USD',
-      description: 'Per workspace per year, locked for life, with free Freshdesk migration.',
+      description: 'Per workspace per year, locked for life, with free Freshdesk migration. Up to 10 agents and 20 GB of attachments.',
       priceSpecification: { '@type': 'UnitPriceSpecification', price: '100', priceCurrency: 'USD', unitText: 'workspace per year' },
     },
   ],

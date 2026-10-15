@@ -22,9 +22,9 @@ const body = ENTRIES.map((e) => `## ${e.title}\n\n*Released ${e.date}*\n\n${e.md
 const page = {
   path: '/changelog',
   section: 'Product',
-  title: 'CollieDesk changelog: what shipped, release by release',
+  title: 'Colliedesk changelog: what shipped, release by release',
   description:
-    'Every CollieDesk release with its date and what changed. v0.1 (14 October 2026): passwordless sign-in, shared inbox, isolated workspaces. RSS feed available.',
+    'Every Colliedesk release with its date and what changed. v0.1 (14 October 2026): passwordless sign-in, shared inbox, isolated workspaces. RSS feed available.',
   summary: 'Dated release notes; v0.1 pre-alpha on 2026-10-14; RSS at /changelog.xml',
   eyebrow: 'Changelog',
   h1: 'Changelog',
