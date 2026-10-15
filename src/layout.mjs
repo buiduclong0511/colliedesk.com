@@ -79,7 +79,9 @@ export function document(page, main) {
 <link rel="canonical" href="${canonical}">
 <link rel="alternate" type="text/markdown" href="${mdUrlOf(page.path)}">
 <link rel="alternate" type="application/rss+xml" title="CollieDesk changelog" href="/changelog.xml">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico?v=2" sizes="32x32">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts.css">
