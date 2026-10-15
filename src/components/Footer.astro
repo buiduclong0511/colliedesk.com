@@ -1,0 +1,12 @@
+---
+import { html } from '../lib/render-react';
+import { FooterColumns, FooterLegal } from './FooterParts';
+import UpdatesForm from './UpdatesForm.astro';
+---
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <Fragment set:html={html(FooterColumns, {})} />
+    <UpdatesForm />
+  </div>
+  <Fragment set:html={html(FooterLegal, {})} />
+</footer>

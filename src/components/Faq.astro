@@ -1,0 +1,19 @@
+---
+// "Questions people ask": answers are Markdown, so they are injected without a wrapper element.
+import { renderMarkdown } from '../lib/markdown';
+import type { Faq } from '../lib/page';
+
+interface Props {
+  faq: readonly Faq[] | undefined;
+}
+
+const { faq = [] } = Astro.props;
+---
+{faq.length > 0 && (
+  <section class="faq" aria-labelledby="faq">
+    <h2 id="faq">Questions people ask</h2>
+    {faq.map((f) => (
+      <div class="faq-item"><h3>{f.q}</h3><Fragment set:html={renderMarkdown(f.a)} /></div>
+    ))}
+  </section>
+)}
