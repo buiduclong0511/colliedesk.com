@@ -12,7 +12,7 @@ const faq = [
   },
   {
     q: 'Is the Colliedesk Freshdesk importer available now?',
-    a: `Not yet; it is coming in v0.2. Founding customers get their migration done for them, free. See [the founding offer](${FOUNDING_HREF}).`,
+    a: `It is built and in testing, and ships with v0.2. The [import guide](/docs/import-freshdesk) has the command. Founding customers get their migration done for them, free. See [the founding offer](${FOUNDING_HREF}).`,
   },
   {
     q: 'When should I close my Freshdesk account?',
@@ -20,7 +20,7 @@ const faq = [
   },
 ];
 
-const body = `> **Status:** the Colliedesk Freshdesk importer is **coming in v0.2**. This page explains the full process so you can plan, or do it yourself with the Freshdesk API today. Founding customers get the migration done for them, free.
+const body = `> **Status:** the Colliedesk Freshdesk importer is built and in testing, and ships with **v0.2**. This page explains the full process so you can plan, or do it yourself with the Freshdesk API today. Founding customers get the migration done for them, free.
 
 ## 1. Know what you are moving
 
@@ -33,7 +33,7 @@ Write down, from your Freshdesk admin:
 
 ## 2. Do not rely on the CSV export
 
-Freshdesk's ticket export in the UI gives you **ticket fields only**, as CSV or Excel. It is useful for a spreadsheet. It is not a migration.
+Freshdesk's ticket export in the UI gives you **ticket fields only**, as CSV or Excel. It is useful for a spreadsheet. It is not a migration. Before you cancel, also take a full account export as a backup: [how to export tickets from Freshdesk](/migrate/freshdesk/export).
 
 | Data | Freshdesk UI export (CSV/Excel) | Freshdesk API | Colliedesk importer (**Coming v0.2**) |
 |---|---|---|---|
@@ -43,7 +43,7 @@ Freshdesk's ticket export in the UI gives you **ticket fields only**, as CSV or 
 | Archived tickets (closed, inactive 120 days) | Excluded | Separate endpoint | Yes |
 | Tags and contacts | Tags as a field | Yes | Yes |
 | Proof that nothing was lost | No | No | Reconcile report |
-| Time entries | No | Yes | Not in v0.2 (time tracking arrives in v0.4) |
+| Time entries | No | Yes | Yes (shown on the timeline; logging new time arrives in v0.4) |
 
 ## 3. Know the API traps
 
@@ -57,7 +57,7 @@ From Freshdesk's API documentation, read on ${PRICES_READ}:
 
 ## 4. Run the import
 
-The importer reads your Freshdesk account through its API with an API key from your Freshdesk profile. It moves tickets, replies, private notes, attachments, tags and contacts into one Colliedesk workspace. The exact command and flags will be documented here when v0.2 ships.
+The importer reads your Freshdesk account through its API with an API key from your Freshdesk profile. It moves tickets (including archived ones), replies, private notes, attachments, tags, contacts, companies and time entries into one Colliedesk workspace. The command and flags are in the [import guide](/docs/import-freshdesk).
 
 ## 5. Check the reconcile report
 
@@ -66,7 +66,7 @@ Every import ends with a reconcile report: counts for each kind of record in Fre
 ## 6. Switch over
 
 1. Point your support address at Colliedesk (the email channel arrives in v0.2).
-2. Plan a final pass for tickets that changed after the first import (documented when the importer ships).
+2. Run a final catch-up import with \`--since\` for tickets that changed after the first import.
 3. Keep Freshdesk read-only for a short overlap.
 4. Close Freshdesk only after the final reconcile report matches.
 

@@ -13,11 +13,11 @@ const faq = [
   },
   {
     q: 'Is Colliedesk ready to replace Freshdesk today?',
-    a: 'Not for most teams. Colliedesk v0.1 has a shared inbox but no email channel yet; email and the Freshdesk importer arrive in v0.2. If your renewal is months away, the founding offer locks $100 per year for life and includes the migration.',
+    a: 'Not for most teams. The released v0.1 is a shared inbox. The email channel and the Freshdesk importer are built and in testing for v0.2, and daily basics such as attachments on replies and canned replies are not built yet. If your renewal is months away, the founding offer locks $100 per year for life and includes the migration.',
   },
   {
     q: 'Can I get my tickets out of Freshdesk with the full conversation?',
-    a: 'Not with the ticket export in the Freshdesk UI: it exports ticket fields to CSV or Excel, without the conversation. The full thread needs the Freshdesk API. See [how to migrate from Freshdesk](/migrate/freshdesk).',
+    a: 'Not with the ticket export in the Freshdesk UI: it exports ticket fields to CSV or Excel, without the conversation. The full thread needs the account export or the Freshdesk API. See [how to export tickets from Freshdesk](/migrate/freshdesk/export).',
   },
 ];
 

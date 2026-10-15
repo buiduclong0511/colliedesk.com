@@ -13,7 +13,7 @@ const faq = [
   },
   {
     q: 'Can I export all my Zendesk tickets?',
-    a: 'Zendesk\'s native data export is off by default: the account owner must ask Zendesk Support to enable it, and it is not available on Team plans. The CSV format has no comments. The Incremental Export API returns full comments but is limited to 10 requests per minute.',
+    a: 'Zendesk\'s native data export is off by default: the account owner must ask Zendesk Support to enable it, and it is not available on Team plans. The CSV format has no comments. The Incremental Export API returns full comments but is limited to 10 requests per minute. Step by step: [how to export tickets from Zendesk](/migrate/zendesk/export).',
   },
   {
     q: 'Does Colliedesk import from Zendesk?',

@@ -45,9 +45,12 @@ export const FOOTER = [
     title: 'Switch',
     links: [
       { href: '/migrate/freshdesk', label: 'Migrate from Freshdesk' },
+      { href: '/migrate/freshdesk/export', label: 'Export Freshdesk tickets' },
+      { href: '/migrate/zendesk/export', label: 'Export Zendesk tickets' },
       { href: '/vs/freshdesk', label: 'Colliedesk vs Freshdesk' },
       { href: '/vs/zendesk', label: 'Colliedesk vs Zendesk' },
       { href: '/vs/help-scout', label: 'Colliedesk vs Help Scout' },
+      { href: '/vs/front', label: 'Colliedesk vs Front' },
     ],
   },
   {
