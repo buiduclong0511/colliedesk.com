@@ -20,7 +20,7 @@ const faq = [
   },
   {
     q: 'What is the founding offer?',
-    a: 'A founding customer pays $100 per workspace per year, and that price is locked for life. We also migrate your Freshdesk data for free. It includes up to 10 agents and 20 GB of attachments, imported files included. Above 20 GB nothing is deleted: new attachments wait until you upgrade to Cloud Team, which has no storage cap. It is for teams who want to leave Freshdesk and help shape Colliedesk while it is young.',
+    a: 'A founding customer pays $100 per workspace per year, and that price is locked for life. We also migrate your Freshdesk data for free. It includes up to 10 agents and 20 GB of attachments, imported files included. Above 20 GB nothing is deleted and customer email keeps arriving with its attachments; only your own uploads and new imports wait until you upgrade to Cloud Team, which has no storage cap. It is for teams who want to leave Freshdesk and help shape Colliedesk while it is young.',
   },
   {
     q: 'When can I use Colliedesk Cloud?',
