@@ -120,8 +120,12 @@ for (const file of pages) {
   if (!form) fail(`${where}: updates form missing`);
   else {
     if (!form.includes(`action="${UPDATES_FORM_URL}"`)) fail(`${where}: updates form does not post to ${UPDATES_FORM_URL}`);
-    if (!/<label for="updates-email"/.test(form) || !/<input[^>]*id="updates-email"[^>]*type="email"[^>]*required/.test(form)) fail(`${where}: updates form has no labelled required email field`);
-    if (!/<input[^>]*name="website"[^>]*tabindex="-1"/.test(form)) fail(`${where}: updates form has no honeypot`);
+    // Attribute order and the case of attribute names are not significant in HTML (React writes
+    // tabIndex and puts name last), so each input is found first and its attributes checked one by one.
+    const input = (attr) => form.match(new RegExp(`<input(?=[^>]*\\s${attr})[^>]*>`))?.[0] || '';
+    const email = input('id="updates-email"');
+    if (!/<label for="updates-email"/.test(form) || !/\stype="email"/.test(email) || !/\srequired[\s=>/]/.test(email)) fail(`${where}: updates form has no labelled required email field`);
+    if (!/\stabindex="-1"/i.test(input('name="website"'))) fail(`${where}: updates form has no honeypot`);
   }
 
   for (const m of html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)) {
