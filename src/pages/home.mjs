@@ -1,9 +1,12 @@
-import { POSITIONING, PRICES_READ, REPO, TAGLINE } from '../site.mjs';
-import { ctaButtons, faqHtml, faqMarkdown } from '../layout.mjs';
+import { FOUNDING_HREF, POSITIONING, PRICES_READ, REPO, TAGLINE } from '../site.mjs';
+import { faqHtml, faqMarkdown } from '../layout.mjs';
 import { faqPage, organization, softwareApplication } from '../schema.mjs';
 import { renderMarkdown } from '../markdown.mjs';
 import { statusTable } from './collie-status.mjs';
 import { homeSections, homeSectionsMd } from './home-sections.mjs';
+
+const LEDE =
+  'Move from Freshdesk to CollieDesk with your tickets, replies, private notes and attachments. A reconcile report proves the counts match, so nothing is lost on the way.';
 
 const faq = [
   {
@@ -12,7 +15,7 @@ const faq = [
   },
   {
     q: 'Is CollieDesk free?',
-    a: 'Self-hosting is free, forever, with every feature. CollieDesk Cloud costs $10 per workspace per month or $100 per year, with no per-agent fees. See [pricing](/pricing).',
+    a: 'Self-hosting is free, forever, with every feature. CollieDesk Cloud costs $49 per workspace per month or $490 per year, with no per-agent fees. See [pricing](/pricing).',
   },
   {
     q: 'Is CollieDesk ready to use?',
@@ -28,13 +31,36 @@ const faq = [
   },
 ];
 
-const terminal = `<figure class="terminal" aria-label="Self-host CollieDesk with one command">
-  <div class="terminal-bar"><span></span><span></span><span></span><figcaption>self-host in one command</figcaption></div>
+const CHECK = '<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>';
+const SHIELD = '<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>';
+
+// Illustrative numbers only; the figure is labelled EXAMPLE because the importer has not shipped.
+const RECONCILE = [
+  ['Tickets', '48,211'],
+  ['Replies and notes', '312,904'],
+  ['Attachments', '21,377', 'SHA-256'],
+  ['Tags', '186'],
+  ['Contacts', '9,402'],
+];
+const reconcileRows = RECONCILE.map(
+  ([k, n, x]) => `<tr><td>${k}${x ? `<small>${x}</small>` : ''}</td><td>${n}</td><td>${n}</td><td class="okc">${CHECK}<span class="visually-hidden">Match</span></td></tr>`,
+).join('');
+
+const proof = `<figure class="proof" aria-labelledby="proof-title">
+  <div class="proof-head"><figcaption id="proof-title">${SHIELD}Reconcile report <span class="ex">Example</span></figcaption><span class="src">northwind.freshdesk.com → <b>CollieDesk</b></span></div>
+  <table><thead><tr><th scope="col">Item</th><th scope="col">Freshdesk</th><th scope="col">CollieDesk</th><th scope="col"><span class="visually-hidden">Result</span></th></tr></thead><tbody>${reconcileRows}</tbody></table>
+  <div class="proof-foot">${CHECK}<b>0 lost.</b><span>Every count matches.</span><a href="/migrate/freshdesk#5-check-the-reconcile-report">How the check works</a></div>
+  <p class="proof-note">Sample numbers. The Freshdesk importer is <span class="badge badge-coming">Coming v0.2</span></p>
+</figure>`;
+
+const install = `<div class="self">
+  <figure class="install" aria-label="Self-host CollieDesk with one command">
 <pre><code><span class="t-prompt">$</span> curl -fsSL https://raw.githubusercontent.com/colliedesk/colliedesk/main/install.sh \\
     | sh -s -- --name "Acme Support" --email "you@acme.com"
-<span class="t-link">http://localhost:8080/redeem?token=…</span>
-<span class="t-out"># one-time sign-in link, no passwords</span></code></pre>
-</figure>`;
+<span class="t-out"># prints a one-time sign-in link, no passwords</span></code></pre>
+  </figure>
+  <p class="install-label">Or self-host it free with one command.</p>
+</div>`;
 
 const statusHtml = `<section class="section" aria-labelledby="today"><div class="wrap">
   <p class="eyebrow">Honest status</p>
@@ -44,21 +70,27 @@ const statusHtml = `<section class="section" aria-labelledby="today"><div class=
 </div></section>`;
 
 const html = `<section class="home-hero"><div class="wrap hero-grid">
-  <div>
-    <p class="eyebrow"><span class="dot" aria-hidden="true"></span> Open source · AGPL-3.0 · pre-alpha v0.1</p>
-    <h1>${TAGLINE.replace('alternative to', 'alternative to<br class="br-lg">')}</h1>
-    <p class="lede">${POSITIONING}</p>
-    ${ctaButtons('btn-lg')}
-    <p class="hero-note">$10 per workspace per month. Self-host for $0. <a href="/pricing">See pricing</a></p>
+  <div class="hero-copy">
+    <p class="eyebrow">Open source · AGPL-3.0 · pre-alpha v0.1</p>
+    <h1>Bring every ticket home.</h1>
+    <p class="lede">${LEDE}</p>
+    <div class="cta-row">
+      <a class="btn btn-primary btn-lg" href="${FOUNDING_HREF}">Start free <span aria-hidden="true">→</span></a>
+      <a class="btn btn-lg" href="/migrate/freshdesk">Read the migration guide</a>
+    </div>
+    <p class="hero-note">Free plan for small teams. <b>Cloud Team $49</b> per workspace per month, no per-agent fees. Founding plan $100 a year. <a href="/pricing">See pricing</a></p>
   </div>
-  ${terminal}
+  ${proof}
+  ${install}
 </div></section>
 ${homeSections.replace('<!--STATUS-->', statusHtml)}
 <section class="section section-faq"><div class="wrap"><div class="prose">${faqHtml(faq)}</div></div></section>`;
 
-const md = `${POSITIONING}
+const md = `${TAGLINE} ${POSITIONING}
 
-Status: pre-alpha (v0.1). Self-host free: ${REPO}. Cloud: $10 per workspace per month or $100 per year.
+${LEDE} The Freshdesk importer is coming in v0.2; reconcile report numbers shown on the site are an example.
+
+Status: pre-alpha (v0.1). Self-host free: ${REPO}. Cloud: $49 per workspace per month or $490 per year.
 
 ${homeSectionsMd}
 
@@ -73,10 +105,10 @@ export default {
   section: 'Product',
   title: 'CollieDesk: the open-source alternative to Freshdesk, Zendesk and Help Scout',
   description:
-    'CollieDesk is an open-source helpdesk for small support teams. Leave Freshdesk with all your data. AI included, not an add-on. $10 per workspace, no per-agent fees.',
+    'CollieDesk is an open-source helpdesk for small support teams. Leave Freshdesk with all your data. AI included, not an add-on. $49 per workspace, no per-agent fees.',
   summary: `What CollieDesk is, what we sell, status, founding offer; competitor prices read ${PRICES_READ}`,
-  h1: TAGLINE,
-  lede: POSITIONING,
+  h1: 'Bring every ticket home.',
+  lede: LEDE,
   html,
   md,
   faq: [],

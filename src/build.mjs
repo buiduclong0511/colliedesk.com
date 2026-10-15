@@ -1,10 +1,10 @@
 // Static site build: HTML page + Markdown twin per page, llms.txt, llms-full.txt, sitemap,
 // robots.txt, RSS and Cloudflare Pages headers. Output: site/_site/. No client JavaScript.
-import { copyFileSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, copyFileSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { NAME, ORIGIN, POSITIONING, PRICE, REPO, UPDATED } from './site.mjs';
-import { LOGO, document, faqHtml, faqMarkdown, hero, mdUrlOf } from './layout.mjs';
+import { document, faqHtml, faqMarkdown, hero, mdUrlOf } from './layout.mjs';
 import { absolutizeMarkdownLinks, escapeHtml, renderMarkdown, slugify } from './markdown.mjs';
 import home from './pages/home.mjs';
 import pricing from './pages/pricing.mjs';
@@ -109,6 +109,6 @@ write('sitemap.xml', sitemap());
 write('robots.txt', robots());
 write('changelog.xml', rss());
 write('_headers', headers());
-write('favicon.svg', LOGO.replace('class="logo-mark" ', 'xmlns="http://www.w3.org/2000/svg" ').replace(/ aria-hidden="true" focusable="false"/, ''));
+cpSync(`${SRC}static`, OUT, { recursive: true });
 copyFileSync(`${SRC}styles.css`, `${OUT}styles.css`);
 console.log(`built ${pages.length} pages into _site/`);
