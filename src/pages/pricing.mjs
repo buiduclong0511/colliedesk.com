@@ -12,7 +12,7 @@ const faq = [
   },
   {
     q: 'Is there a free trial?',
-    a: 'Yes. Every Cloud workspace starts with a 14-day free trial of the Team plan, every feature, no card. If you import from Freshdesk during the trial, it extends to 30 days so you can run both side by side. When the trial ends without a plan, the workspace turns read-only: you can still sign in, read and export everything, and choosing a plan opens it again at once. Self-hosting stays free forever.',
+    a: 'Yes. Every Cloud workspace starts with a 14-day free trial of the Team plan, every feature, no card. If you import from Freshdesk during the trial, it extends to 30 days so you can run both side by side. When the trial ends without a plan, the workspace is locked: you can still sign in to export all your data, and choosing a plan unlocks it at once with nothing lost. Self-hosting stays free forever.',
   },
   {
     q: 'Is self-hosting really free?',
