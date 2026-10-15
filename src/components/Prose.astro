@@ -1,0 +1,17 @@
+---
+// The Markdown body of a page, then its FAQ and, for pages rendered from the product repo, a source note.
+import { renderMarkdown } from '../lib/markdown';
+import type { Page } from '../lib/page';
+import Faq from './Faq.astro';
+
+interface Props {
+  page: Page;
+}
+
+const { page } = Astro.props;
+---
+<article class="prose">
+  <Fragment set:html={renderMarkdown(page.body ?? '')} />
+  <Faq faq={page.faq} />
+  {page.sourceUrl && <p class="edit-source">This page is rendered from <a href={page.sourceUrl} rel="noopener">the repository</a>. Spot a mistake? Open an issue or a pull request.</p>}
+</article>

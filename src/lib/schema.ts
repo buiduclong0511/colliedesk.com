@@ -1,9 +1,9 @@
-// JSON-LD builders. Only facts from site.mjs; no ratings, reviews or counts we do not have.
-import { ORIGIN, REPO, NAME, POSITIONING, UPDATED } from './site.mjs';
+// JSON-LD builders. Only facts from site.ts; no ratings, reviews or counts we do not have.
+import { plain } from './markdown';
+import type { Faq, JsonLd, Page } from './page';
+import { NAME, ORIGIN, POSITIONING, REPO, UPDATED } from './site';
 
-const plain = (md) => md.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/[*_`]/g, '');
-
-export const organization = () => ({
+export const organization = (): JsonLd => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'HC Labs',
@@ -11,7 +11,7 @@ export const organization = () => ({
   sameAs: [REPO],
 });
 
-export const softwareApplication = () => ({
+export const softwareApplication = (): JsonLd => ({
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
   name: NAME,
@@ -41,7 +41,7 @@ export const softwareApplication = () => ({
   ],
 });
 
-export const faqPage = (faq) => ({
+export const faqPage = (faq: readonly Faq[]): JsonLd => ({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: faq.map((f) => ({
@@ -51,7 +51,9 @@ export const faqPage = (faq) => ({
   })),
 });
 
-export const techArticle = (page) => ({
+type ArticleFields = Pick<Page, 'h1' | 'description' | 'path'> & Partial<Pick<Page, 'updated'>>;
+
+export const techArticle = (page: ArticleFields): JsonLd => ({
   '@context': 'https://schema.org',
   '@type': 'TechArticle',
   headline: page.h1,

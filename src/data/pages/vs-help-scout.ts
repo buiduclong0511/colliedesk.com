@@ -1,8 +1,9 @@
-import { PRICES_READ } from '../site.mjs';
-import { faqPage, techArticle } from '../schema.mjs';
-import { collieFacts as c, statusTable } from './collie-status.mjs';
+import { PRICES_READ } from '../../lib/site';
+import { faqPage, techArticle } from '../../lib/schema';
+import type { Faq, Page } from '../../lib/page';
+import { collieFacts as c, statusTable } from './collie-status';
 
-const faq = [
+const faq: Faq[] = [
   {
     q: 'What is a good Help Scout alternative with flat pricing?',
     a: 'Colliedesk Cloud is $49 per workspace per month with no per-user fees, and the open-source code (AGPL-3.0) is free to self-host. Colliedesk is pre-alpha; email arrives in v0.2.',
@@ -68,7 +69,8 @@ Read on ${PRICES_READ}. Prices change; check the vendor page before you decide.
 - Mailbox API and plan access: [docs.helpscout.com article 1140](https://docs.helpscout.com/article/1140-mailbox-api)
 - 2025 pricing change: [mjtsai.com](https://mjtsai.com/blog/2025/04/30/whither-help-scout) (third-party account)`;
 
-const page = {
+const page: Page = {
+  jsonLd: [],
   path: '/vs/help-scout',
   section: 'Compare',
   title: 'Colliedesk vs Help Scout: open-source, flat-priced Help Scout alternative',

@@ -1,7 +1,8 @@
-import { techArticle } from '../schema.mjs';
+import { techArticle } from '../../lib/schema';
+import type { ChangelogEntry, Page } from '../../lib/page';
 
 // Newest first. Each entry also feeds /changelog.xml.
-export const ENTRIES = [
+export const ENTRIES: readonly ChangelogEntry[] = [
   {
     version: 'v0.1',
     date: '2026-10-14',
@@ -19,7 +20,8 @@ Not in this release: the email channel and the Freshdesk importer (coming in v0.
 
 const body = ENTRIES.map((e) => `## ${e.title}\n\n*Released ${e.date}*\n\n${e.md}`).join('\n\n');
 
-const page = {
+const page: Page = {
+  jsonLd: [],
   path: '/changelog',
   section: 'Product',
   title: 'Colliedesk changelog: what shipped, release by release',

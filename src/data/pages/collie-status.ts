@@ -14,7 +14,7 @@ export const statusTable = `| Capability | Colliedesk |
 | CSAT and reports | **Coming v0.5** |
 | Zendesk and Help Scout importers, live chat widget, MCP server | **Coming later** |`;
 
-export const collieFacts = {
+export const collieFacts: Readonly<Record<'price' | 'ai' | 'free' | 'source' | 'export', string>> = {
   price: 'Cloud Team: $49 per workspace per month, or $490 per year, up to 10 agents. No per-agent fees. Founding customers: $100 per year, locked for life.',
   ai: 'Included (coming v0.3). LLM cost +30% on our key, or bring your own key.',
   free: 'Self-host free, every feature. Cloud: 14-day free trial, no card.',

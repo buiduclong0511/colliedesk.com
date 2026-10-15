@@ -1,7 +1,8 @@
-import { REPO, FOUNDING_HREF } from '../site.mjs';
-import { faqPage, softwareApplication } from '../schema.mjs';
+import { FOUNDING_HREF, REPO } from '../../lib/site';
+import { faqPage, softwareApplication } from '../../lib/schema';
+import type { Faq, Page } from '../../lib/page';
 
-const faq = [
+const faq: Faq[] = [
   {
     q: 'Does Colliedesk charge per agent?',
     a: 'No. Colliedesk Cloud Team is $49 per workspace per month or $490 per year, for up to 10 agents. A workspace is one support team. Adding an agent does not change the price. More than 10 agents: email us.',
@@ -28,44 +29,6 @@ const faq = [
   },
 ];
 
-const plans = `<section class="wrap plans" aria-label="Plans">
-  <article class="plan">
-    <h2 class="plan-name">Self-host</h2>
-    <p class="plan-price"><strong>$0</strong> <span>forever</span></p>
-    <ul>
-      <li>Every feature, no paywalled edition</li>
-      <li>AGPL-3.0, your server, your PostgreSQL</li>
-      <li>AI with your own model key</li>
-    </ul>
-    <a class="btn btn-ghost" href="${REPO}" rel="noopener">Self-host free <span aria-hidden="true">↗</span></a>
-  </article>
-  <article class="plan plan-featured" aria-labelledby="plan-founding">
-    <p class="plan-flag">Founding customers</p>
-    <h2 class="plan-name" id="plan-founding">Founding</h2>
-    <p class="plan-price"><strong>$100</strong> <span>per workspace / year</span></p>
-    <ul>
-      <li>Price locked for life</li>
-      <li>Free Freshdesk migration, with a reconcile report</li>
-      <li>Up to 10 agents, no per-agent fees</li>
-      <li>20 GB of attachments, imported files included</li>
-      <li>AI at LLM cost +30%, or bring your own key</li>
-    </ul>
-    <a class="btn btn-primary" href="${FOUNDING_HREF}">Get founding access</a>
-  </article>
-  <article class="plan">
-    <h2 class="plan-name">Cloud Team <span class="badge badge-coming">Coming v0.2</span></h2>
-    <p class="plan-price"><strong>$49</strong> <span>per workspace / month</span></p>
-    <p class="plan-alt">or $490 per year</p>
-    <ul>
-      <li>We run, update and back it up</li>
-      <li>14-day free trial, no card (30 days if you import from Freshdesk)</li>
-      <li>Up to 10 agents, unlimited conversations</li>
-      <li>No per-agent fees</li>
-      <li>AI at LLM cost +30%, or bring your own key</li>
-    </ul>
-  </article>
-</section>`;
-
 const plansMd = `| Plan | Price | What you get |
 |---|---|---|
 | Self-host | $0, forever | Every feature. AGPL-3.0. AI with your own model key. |
@@ -91,7 +54,7 @@ Most helpdesks charge per agent, then charge again for AI. For five agents, Fres
 
 Colliedesk is **pre-alpha**. Released today (v0.1): a shared inbox, private notes, tags, assignment and passwordless sign-in. Built and in testing for v0.2: the email channel (replies are plain text, without CC) and the Freshdesk importer with its reconcile report. Not built yet: attachments on agent replies, canned replies and new-ticket notifications. If you must switch this week, Colliedesk is not ready for you yet. If you are planning your exit before your next Freshdesk renewal, [the founding offer](${FOUNDING_HREF}) is for you.`;
 
-export default {
+const page: Page = {
   name: 'Pricing',
   path: '/pricing',
   section: 'Product',
@@ -102,9 +65,10 @@ export default {
   eyebrow: 'Pricing',
   h1: 'One flat price per workspace. No per-agent fees.',
   lede: 'Try it free for 14 days. Add your whole team, up to 10 agents, for the same $49 a month. Self-host for $0. Pay for AI at cost plus 30%, or bring your own key.',
-  preHtml: plans,
+  pre: 'pricing-plans',
   preMd: plansMd,
   body,
   faq,
   jsonLd: [softwareApplication(), faqPage(faq)],
 };
+export default page;

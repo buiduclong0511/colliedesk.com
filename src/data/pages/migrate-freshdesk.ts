@@ -1,7 +1,8 @@
-import { FOUNDING_HREF, PRICES_READ } from '../site.mjs';
-import { faqPage, techArticle } from '../schema.mjs';
+import { FOUNDING_HREF, PRICES_READ } from '../../lib/site';
+import { faqPage, techArticle } from '../../lib/schema';
+import type { Faq, Page } from '../../lib/page';
 
-const faq = [
+const faq: Faq[] = [
   {
     q: 'How do I migrate from Freshdesk without losing tickets?',
     a: 'Export through the Freshdesk API, not the CSV export: the CSV has ticket fields only. Walk the ticket list in date windows with `updated_since` to stay under the 30,000-ticket cap per filter, fetch archived tickets separately, fetch every conversation and attachment, then compare counts and checksums before you close the account. The Colliedesk importer (coming v0.2) does these steps and writes a reconcile report.',
@@ -77,7 +78,8 @@ Every import ends with a reconcile report: counts for each kind of record in Fre
 - Rate limits: [support.freshdesk.com article 225439](https://support.freshdesk.com/support/solutions/articles/225439-what-are-the-rate-limits-for-the-api-calls-to-freshdesk-)
 - Inline images after account closure (third-party report): [meticulosity.com](https://www.meticulosity.com/freshdesk-to-hubspot-migration)`;
 
-const page = {
+const page: Page = {
+  jsonLd: [],
   name: 'Migrate from Freshdesk',
   path: '/migrate/freshdesk',
   section: 'Migrate',

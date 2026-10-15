@@ -1,0 +1,21 @@
+---
+import type { GetStaticPaths } from 'astro';
+import PageMain from '../components/PageMain.astro';
+import Home from '../components/home/Home.astro';
+import { allPages } from '../data/pages';
+import Base from '../layouts/Base.astro';
+import type { Page } from '../lib/page';
+
+// One HTML file per page: "/" -> index.html, "/pricing" -> pricing.html.
+export const getStaticPaths = (() =>
+  allPages().map((page) => ({ params: { slug: page.path === '/' ? undefined : page.path.slice(1) }, props: { page } }))) satisfies GetStaticPaths;
+
+interface Props {
+  page: Page;
+}
+
+const { page } = Astro.props;
+---
+<Base page={page}>
+  {page.view === 'home' ? <Home /> : <PageMain page={page} />}
+</Base>

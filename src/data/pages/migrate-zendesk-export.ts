@@ -1,7 +1,8 @@
-import { PRICES_READ } from '../site.mjs';
-import { faqPage, techArticle } from '../schema.mjs';
+import { PRICES_READ } from '../../lib/site';
+import { faqPage, techArticle } from '../../lib/schema';
+import type { Faq, Page } from '../../lib/page';
 
-const faq = [
+const faq: Faq[] = [
   {
     q: 'How do I export all tickets from Zendesk?',
     a: 'Ask Zendesk Support to turn on data export, then run a JSON export from **Admin Center > Account > Tools > Reports > Export**. JSON includes comments, except for tickets over 1 MB, which Zendesk lists in a separate file. Fetch those through the API.',
@@ -79,7 +80,8 @@ Colliedesk imports from Freshdesk today, with a reconcile report that proves not
 - Incremental Export API: [developer.zendesk.com](https://developer.zendesk.com/api-reference/ticketing/ticket-management/incremental_exports/)
 - API rate limits: [developer.zendesk.com rate limits](https://developer.zendesk.com/api-reference/introduction/rate-limits/)`;
 
-const page = {
+const page: Page = {
+  jsonLd: [],
   name: 'Export tickets from Zendesk',
   path: '/migrate/zendesk/export',
   updated: '2026-10-15',

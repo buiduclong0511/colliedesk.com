@@ -1,9 +1,10 @@
 // Front's pricing and export pages were read a day after the other comparison pages.
 const PRICES_READ = '15 October 2026';
-import { faqPage, techArticle } from '../schema.mjs';
-import { collieFacts as c, statusTable } from './collie-status.mjs';
+import { faqPage, techArticle } from '../../lib/schema';
+import type { Faq, Page } from '../../lib/page';
+import { collieFacts as c, statusTable } from './collie-status';
 
-const faq = [
+const faq: Faq[] = [
   {
     q: 'What is a good Front alternative that is not priced per seat?',
     a: 'Colliedesk Cloud is $49 per workspace per month for up to 10 agents, and self-hosting is free. Colliedesk is an open-source (AGPL-3.0) shared inbox and helpdesk. It is pre-alpha; the email channel arrives in v0.2.',
@@ -65,7 +66,8 @@ Read on ${PRICES_READ}. Prices change; check the vendor page before you decide.
 - Front pricing: [front.com/pricing](https://front.com/pricing)
 - Account data export: [help.front.com](https://help.front.com/t/182vg7)`;
 
-const page = {
+const page: Page = {
+  jsonLd: [],
   path: '/vs/front',
   updated: '2026-10-15',
   section: 'Compare',

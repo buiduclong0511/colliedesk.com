@@ -1,8 +1,9 @@
-import { PRICES_READ } from '../site.mjs';
-import { faqPage, techArticle } from '../schema.mjs';
-import { collieFacts as c, statusTable } from './collie-status.mjs';
+import { PRICES_READ } from '../../lib/site';
+import { faqPage, techArticle } from '../../lib/schema';
+import type { Faq, Page } from '../../lib/page';
+import { collieFacts as c, statusTable } from './collie-status';
 
-const faq = [
+const faq: Faq[] = [
   {
     q: 'Is there a Zendesk alternative that is not priced per agent?',
     a: 'Yes. Colliedesk Cloud is $49 per workspace per month, for up to 10 agents, and self-hosting is free. Colliedesk is open source (AGPL-3.0) and pre-alpha today.',
@@ -67,7 +68,8 @@ Read on ${PRICES_READ}. Prices change; check the vendor page before you decide.
 - Incremental Export API: [developer.zendesk.com](https://developer.zendesk.com/api-reference/ticketing/ticket-management/incremental_exports/)
 - API rate limits: [developer.zendesk.com rate limits](https://developer.zendesk.com/api-reference/introduction/rate-limits/)`;
 
-const page = {
+const page: Page = {
+  jsonLd: [],
   path: '/vs/zendesk',
   section: 'Compare',
   title: 'Colliedesk vs Zendesk: a flat-priced, open-source Zendesk alternative',

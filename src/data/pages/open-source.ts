@@ -1,7 +1,8 @@
-import { REPO } from '../site.mjs';
-import { faqPage, techArticle } from '../schema.mjs';
+import { REPO } from '../../lib/site';
+import { faqPage, techArticle } from '../../lib/schema';
+import type { Faq, Page } from '../../lib/page';
 
-const faq = [
+const faq: Faq[] = [
   {
     q: 'Can I use AGPL-licensed Colliedesk commercially?',
     a: 'Yes. You can run Colliedesk for your own support team, including in a business, at no cost. The AGPL adds one main duty: if you modify Colliedesk and let other people use your modified version over a network, you must offer them the source code of your version. This is a summary, not legal advice; the [LICENSE](https://github.com/colliedesk/colliedesk/blob/main/LICENSE) file is what counts.',
@@ -69,7 +70,8 @@ Colliedesk is written from its own public specification. Nobody working on it ma
 
 A Go server with PostgreSQL serves a JSON API under \`/api/v1\` (described by one OpenAPI contract) and an embedded React + TypeScript web app.`;
 
-const page = {
+const page: Page = {
+  jsonLd: [],
   name: 'Open source, license and self-hosting',
   path: '/open-source',
   section: 'Product',

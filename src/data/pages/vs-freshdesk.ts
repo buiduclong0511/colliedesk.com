@@ -1,8 +1,9 @@
-import { PRICES_READ } from '../site.mjs';
-import { faqPage, techArticle } from '../schema.mjs';
-import { collieFacts as c, statusTable } from './collie-status.mjs';
+import { PRICES_READ } from '../../lib/site';
+import { faqPage, techArticle } from '../../lib/schema';
+import type { Faq, Page } from '../../lib/page';
+import { collieFacts as c, statusTable } from './collie-status';
 
-const faq = [
+const faq: Faq[] = [
   {
     q: 'What is the best open-source alternative to Freshdesk?',
     a: 'Colliedesk is an open-source (AGPL-3.0) helpdesk built for small teams leaving Freshdesk: flat $49 per workspace per month, AI included at cost, and a Freshdesk importer (coming v0.2). It is pre-alpha today, so check the status table before you switch.',
@@ -69,7 +70,8 @@ Read on ${PRICES_READ}. Prices change; check the vendor page before you decide.
 - API pagination, 30-day default, archived tickets: [developers.freshdesk.com/api](https://developers.freshdesk.com/api/)
 - API rate limits: [support.freshdesk.com article 225439](https://support.freshdesk.com/support/solutions/articles/225439-what-are-the-rate-limits-for-the-api-calls-to-freshdesk-)`;
 
-const page = {
+const page: Page = {
+  jsonLd: [],
   path: '/vs/freshdesk',
   section: 'Compare',
   title: 'Colliedesk vs Freshdesk: flat $49 per workspace vs $19–89 per agent',

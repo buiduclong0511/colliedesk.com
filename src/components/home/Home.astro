@@ -1,0 +1,13 @@
+---
+import { HOME_FAQ } from '../../data/pages/home';
+import Faq from '../Faq.astro';
+import { ClosingSections } from './ClosingSections';
+import { HomeHero } from './HomeHero';
+import { SellingSections } from './SellingSections';
+import { StatusSection } from './StatusSection';
+---
+<HomeHero />
+<SellingSections />
+<StatusSection />
+<ClosingSections />
+<section class="section section-faq"><div class="wrap"><div class="prose"><Faq faq={HOME_FAQ} /></div></div></section>

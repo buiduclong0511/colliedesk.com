@@ -1,0 +1,24 @@
+---
+// Main content of a standard page: hero, optional block (pricing plans), then the prose, with the
+// docs navigation beside it on docs pages.
+import type { Page } from '../lib/page';
+import { DocsNav } from './DocsNav';
+import { Hero } from './Hero';
+import { PricingPlans } from './PricingPlans';
+import Prose from './Prose.astro';
+
+interface Props {
+  page: Page;
+}
+
+const { page } = Astro.props;
+---
+<Hero page={page} />
+{page.pre === 'pricing-plans' && <PricingPlans />}
+<div class="wrap page-body">
+  {page.docsNav ? (
+    <div class="docs-layout"><DocsNav items={page.docsNav} current={page.path} /><Prose page={page} /></div>
+  ) : (
+    <Prose page={page} />
+  )}
+</div>

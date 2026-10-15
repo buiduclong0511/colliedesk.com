@@ -1,7 +1,8 @@
-import { PRICES_READ } from '../site.mjs';
-import { faqPage, techArticle } from '../schema.mjs';
+import { PRICES_READ } from '../../lib/site';
+import { faqPage, techArticle } from '../../lib/schema';
+import type { Faq, Page } from '../../lib/page';
 
-const faq = [
+const faq: Faq[] = [
   {
     q: 'How do I export all tickets from Freshdesk?',
     a: 'For ticket fields only, use **Export** on the All tickets view (CSV or Excel). For everything, including replies, notes and archived tickets, run an account export from **Admin > Account > Account Details > Export data**, or read the account through the Freshdesk API.',
@@ -79,7 +80,8 @@ Founding customers get the migration done for them, free. The full exit plan is 
 - Ticket export: [support.freshdesk.com article 225158](https://support.freshdesk.com/support/solutions/articles/225158)
 - API: [developers.freshdesk.com/api](https://developers.freshdesk.com/api/)`;
 
-const page = {
+const page: Page = {
+  jsonLd: [],
   name: 'Export tickets from Freshdesk',
   path: '/migrate/freshdesk/export',
   updated: '2026-10-15',

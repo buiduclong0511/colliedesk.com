@@ -1,4 +1,14 @@
 // Shared facts used on every page. Change a fact here, not in page copy.
+export interface NavLink {
+  href: string;
+  label: string;
+}
+
+export interface FooterColumn {
+  title: string;
+  links: NavLink[];
+}
+
 export const ORIGIN = 'https://colliedesk.com';
 export const REPO = 'https://github.com/colliedesk/colliedesk';
 export const NAME = 'Colliedesk';
@@ -22,10 +32,10 @@ export const PRICE = {
   yearly: '$490',
   founding: '$100 per year, locked for life, with free Freshdesk migration',
   ai: 'LLM cost +30%, or bring your own key',
-};
+} as const;
 
 // Primary navigation; order is the order shown.
-export const NAV = [
+export const NAV: readonly NavLink[] = [
   { href: '/pricing', label: 'Pricing' },
   { href: '/migrate/freshdesk', label: 'Migrate' },
   { href: '/vs/freshdesk', label: 'Compare' },
@@ -33,7 +43,7 @@ export const NAV = [
   { href: '/roadmap', label: 'Roadmap' },
 ];
 
-export const FOOTER = [
+export const FOOTER: readonly FooterColumn[] = [
   {
     title: 'Product',
     links: [
