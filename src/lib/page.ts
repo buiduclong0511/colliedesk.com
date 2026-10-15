@@ -1,3 +1,5 @@
+import type { VsPricing } from './vs-pricing';
+
 // The typed model every page module exports. One Page = one HTML file + one Markdown twin.
 export type Section = 'Product' | 'Migrate' | 'Compare' | 'Docs';
 
@@ -44,6 +46,8 @@ export interface Page {
   view?: 'home';
   /** Block rendered between the hero and the prose. */
   pre?: 'pricing-plans';
+  /** Price-by-team-size chart and fit columns between the hero and the prose (/vs pages). */
+  vs?: VsPricing;
   /** Side navigation for docs pages. */
   docsNav?: DocsNavItem[];
   /** Repository file the page is rendered from. */

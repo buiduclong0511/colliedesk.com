@@ -1,7 +1,32 @@
 import { PRICES_READ } from '../../lib/site';
 import { faqPage, techArticle } from '../../lib/schema';
 import type { Faq, Page } from '../../lib/page';
+import { PRICE } from '../../lib/site';
+import { rowsAt, usd, vsMarkdown, type VsPricing } from '../../lib/vs-pricing';
 import { collieFacts as c, statusTable } from './collie-status';
+
+const pricing: VsPricing = {
+  competitor: 'Freshdesk',
+  readOn: '2026-10-14',
+  billing: 'per agent, billed annually',
+  plans: [
+    { name: 'Freshdesk Growth', perAgent: 19 },
+    { name: 'Freshdesk Pro', perAgent: 55 },
+    { name: 'Freshdesk Pro + Freddy AI Copilot', perAgent: 55, aiPerAgent: 29 },
+  ],
+  forYou: [
+    'You pay Freshdesk per agent, then again per agent for AI, and the bill grows with every hire.',
+    'Most of your support is email. The email channel is built and in testing for v0.2.',
+    'You want your tickets in a PostgreSQL database you control, or to self-host for free.',
+    'Your Freshdesk renewal is months away, so you can plan the move around our [roadmap](/roadmap).',
+  ],
+  notForYou: [
+    'You need live chat, phone, WhatsApp or a marketplace of apps today.',
+    'You must switch this week: Colliedesk is pre-alpha, and attachments on agent replies and canned replies are not built yet.',
+    'You want the founding price and have more than 20 GB of Freshdesk attachments: founding includes 20 GB, imported files included.',
+  ],
+};
+const fiveAgents = rowsAt(pricing, 5).at(-1);
 
 const faq: Faq[] = [
   {
@@ -22,12 +47,7 @@ const faq: Faq[] = [
   },
 ];
 
-const body = `## The short answer
-
-- **Choose Freshdesk** if you need a mature, broad helpdesk today: many channels, a large marketplace and an AI agent you can switch on now.
-- **Choose Colliedesk** if per-agent pricing and paid AI add-ons are the problem, you want your support data in a database you control, and you can plan your move around our [roadmap](/roadmap). Or self-host it free and look around.
-
-## Price, side by side
+const body = `## Price, side by side
 
 Freshdesk prices are per agent per month, billed annually, as published on ${PRICES_READ}.
 
@@ -38,13 +58,6 @@ Freshdesk prices are per agent per month, billed annually, as published on ${PRI
 | AI agent | 500 sessions free once per account, then $49 per 100 sessions | Auto-answer with a human in the loop, same AI pricing (coming v0.3) |
 | Free option | No free plan on the pricing page; 14-day trial | ${c.free} |
 | Source code | Proprietary | ${c.source} |
-
-### What five agents pay
-
-| Team | Freshdesk Pro + Copilot | Colliedesk Cloud |
-|---|---|---|
-| 5 agents | 5 × ($55 + $29) = **$420 per month** | $49 per month + AI usage |
-| 10 agents | 10 × ($55 + $29) = **$840 per month** | $49 per month + AI usage |
 
 List prices before tax. AI usage on Colliedesk depends on ticket volume and the model you pick; with your own key it is billed by your provider.
 
@@ -74,14 +87,16 @@ const page: Page = {
   jsonLd: [],
   path: '/vs/freshdesk',
   section: 'Compare',
-  title: 'Colliedesk vs Freshdesk: flat $49 per workspace vs $19–89 per agent',
+  title: `Colliedesk vs Freshdesk: ${PRICE.monthly} a month for up to 10 agents, not $19–89 per agent`,
   description:
     'An honest comparison of Colliedesk and Freshdesk: published prices, AI add-on costs, export limits and what Colliedesk can and cannot do yet. Prices read 14 October 2026.',
   summary: 'Freshdesk $19–89 per agent plus $29 Copilot vs Colliedesk $49 per workspace; export limits; honest status',
   eyebrow: 'Compare · Freshdesk alternative',
   h1: 'Colliedesk vs Freshdesk',
-  lede: 'Freshdesk is a mature, broad helpdesk. Colliedesk is a young open-source one with a flat price. Here is the honest difference, with sources.',
+  lede: `Five agents on ${fiveAgents?.name ?? 'Freshdesk'} pay ${usd(fiveAgents?.usd ?? 0)} a month. Colliedesk Cloud Team is ${PRICE.monthly} for the whole workspace, up to 10 agents. Pick your team size to see where Colliedesk fits, and where it does not.`,
   cta: true,
+  vs: pricing,
+  preMd: vsMarkdown(pricing),
   body,
   faq,
 };
