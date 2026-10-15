@@ -35,7 +35,7 @@ export const softwareApplication = () => ({
     },
     {
       '@type': 'Offer', name: 'Founding customer', price: '100', priceCurrency: 'USD',
-      description: 'Per workspace per year, locked for life, with free Freshdesk migration.',
+      description: 'Per workspace per year, locked for life, with free Freshdesk migration. Up to 10 agents and 20 GB of attachments.',
       priceSpecification: { '@type': 'UnitPriceSpecification', price: '100', priceCurrency: 'USD', unitText: 'workspace per year' },
     },
   ],

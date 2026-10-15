@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { FOOTER, FOUNDING_HREF, NAME, NAV, ORIGIN, REPO, UPDATED } from './site.mjs';
+import { APP_SIGN_IN, FOOTER, FOUNDING_HREF, NAME, NAV, ORIGIN, REPO, UPDATED, UPDATES_FORM_URL } from './site.mjs';
 import { escapeHtml as e, renderMarkdown } from './markdown.mjs';
 
 export const mdUrlOf = (path) => (path === '/' ? '/index.md' : `${path}.md`);
@@ -29,11 +29,23 @@ function header(path) {
   const items = NAV.map((n) => `<li>${link(n, path)}</li>`).join('');
   return `<header class="site-header"><div class="wrap header-inner">
   <a class="brand" href="/" aria-label="${NAME} home">${WORDMARK}</a>
-  <nav aria-label="Main" class="nav-desktop"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li></ul></nav>
+  <nav aria-label="Main" class="nav-desktop"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li><li><a href="${APP_SIGN_IN}">Log in</a></li></ul></nav>
   <a class="btn btn-primary btn-sm header-cta" href="${FOUNDING_HREF}">Start free trial</a>
-  <details class="nav-mobile"><summary>Menu</summary><nav aria-label="Main (mobile)"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li></ul></nav></details>
+  <details class="nav-mobile"><summary>Menu</summary><nav aria-label="Main (mobile)"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li><li><a href="${APP_SIGN_IN}">Log in</a></li></ul></nav></details>
 </div></header>`;
 }
+
+// Works with updates.js, which sends the form as JSON and shows the result in the status line.
+const UPDATES_FORM = `<form class="updates-form" data-updates-form action="${UPDATES_FORM_URL}" method="post">
+  <label for="updates-email" class="footer-title">Release notes by email</label>
+  <p>One email when a release ships. Reply "stop" and we take you off the list.</p>
+  <div class="updates-row">
+    <input id="updates-email" name="email" type="email" autocomplete="email" required placeholder="you@company.com">
+    <button type="submit" class="btn btn-primary">Subscribe</button>
+  </div>
+  <input class="updates-trap" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <p class="updates-status" role="status" aria-live="polite"></p>
+</form>`;
 
 function footer() {
   const cols = FOOTER.map(
@@ -43,6 +55,7 @@ function footer() {
   <div class="footer-about"><a class="brand" href="/" aria-label="${NAME} home">${WORDMARK}</a>
   <p>Open-source helpdesk by HC Labs. AGPL-3.0. Every page on this site has a plain Markdown version: add <code>.md</code> to the URL.</p></div>
   ${cols}
+  ${UPDATES_FORM}
 </div><div class="wrap footer-legal"><p>© 2026 HC Labs. Pre-alpha software: things will change, and we will say so in the <a href="/changelog">changelog</a>.</p>
   <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark theme</button></div></footer>`;
 }
@@ -88,6 +101,7 @@ export function document(page, main) {
 <link rel="stylesheet" href="/tokens.css">
 <link rel="stylesheet" href="/styles.css">
 <script src="/theme.js"></script>
+<script src="/updates.js" defer></script>
 <meta name="theme-color" content="#ffffff">
 <meta name="color-scheme" content="light">
 <meta property="og:type" content="website">

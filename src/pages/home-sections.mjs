@@ -92,7 +92,8 @@ export const homeSections = `
     <ul class="check-list">
       <li>$100 per workspace per year, locked for life</li>
       <li>Free Freshdesk migration with a reconcile report</li>
-      <li>Your whole team, no per-agent fees</li>
+      <li>Up to 10 agents, no per-agent fees</li>
+      <li>20 GB of attachments, imported files included</li>
       <li>AI at model cost +30%, or bring your own key</li>
       <li>Colliedesk Cloud opens for founding customers with v0.2</li>
     </ul>
@@ -133,4 +134,4 @@ Colliedesk is AGPL-3.0. The code, your data and the export format are yours. [Ho
 
 ## Founding offer
 
-$100 per workspace per year, locked for life, with free Freshdesk migration and a reconcile report. No per-agent fees. AI at model cost +30% or your own key. Colliedesk Cloud opens for founding customers with v0.2. The checkout link is coming soon.`;
+$100 per workspace per year, locked for life, with free Freshdesk migration and a reconcile report. Up to 10 agents, no per-agent fees, 20 GB of attachments including imported files. AI at model cost +30% or your own key. Colliedesk Cloud opens for founding customers with v0.2. The checkout link is coming soon.`;

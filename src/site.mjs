@@ -12,6 +12,11 @@ export const POSITIONING =
 export const FOUNDING_HREF = '/#founding';
 // Polar checkout link for the Founding product (org Colliedesk).
 export const FOUNDING_CHECKOUT = 'https://buy.polar.sh/polar_cl_1R61RlI9VkKyH4ZfFs7XviF7UAd1CaoycIasu2TiXQx';
+// Colliedesk Cloud sign-in (email code through Clerk) for agents who already have a workspace.
+export const APP_SIGN_IN = 'https://app.colliedesk.com/redeem';
+// The updates box posts to the web form channel of HC Labs' own Colliedesk workspace: every
+// signup lands there as a conversation tagged web-form.
+export const UPDATES_FORM_URL = 'https://app.colliedesk.com/api/v1/public/forms/hclabs';
 export const PRICE = {
   monthly: '$49',
   yearly: '$490',
