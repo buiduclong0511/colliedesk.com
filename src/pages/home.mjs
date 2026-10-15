@@ -77,10 +77,10 @@ const html = `<section class="home-hero"><div class="wrap">
     <h1>Bring every ticket home.</h1>
     <p class="lede">${LEDE}</p>
     <div class="cta-row">
-      <a class="btn btn-primary btn-lg" href="${FOUNDING_HREF}">Start free <span aria-hidden="true">→</span></a>
+      <a class="btn btn-primary btn-lg" href="${FOUNDING_HREF}">Start free trial <span aria-hidden="true">→</span></a>
       <a class="btn btn-lg" href="/migrate/freshdesk">Read the migration guide</a>
     </div>
-    <p class="hero-note">Free plan for small teams. <b>Cloud Team $49</b> per workspace per month, no per-agent fees. Founding plan $100 a year. <a href="/pricing">See pricing</a></p>
+    <p class="hero-note">14-day free trial, no card. <b>Cloud Team $49</b> per workspace per month, no per-agent fees. Founding plan $100 a year. <a href="/pricing">See pricing</a></p>
   </div>
   <div class="hero-stage">
     <figure class="hero-shot"><img src="/product-inbox.jpg" width="1440" height="900" alt="The CollieDesk inbox: a list of customer conversations with status and priority, an open conversation with a reply and a private note, and the conversation properties." fetchpriority="high"></figure>

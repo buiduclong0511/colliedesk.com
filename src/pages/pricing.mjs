@@ -11,8 +11,8 @@ const faq = [
     a: 'On CollieDesk Cloud you can use our AI key. You pay what the model provider charges for the tokens your tickets used, plus 30%. Example: if the provider charges $1.00, you pay $1.30. Or bring your own key and pay your provider directly.',
   },
   {
-    q: 'Is there a free plan on Cloud?',
-    a: 'Yes. Cloud Free costs $0 for up to 3 agents and 100 conversations a month, with every feature, the Freshdesk importer and AI with your own key. When you go over 100 conversations in a month, you can still read and reply to every conversation; new ones wait until you upgrade or the next month starts.',
+    q: 'Is there a free trial?',
+    a: 'Yes. Every Cloud workspace starts with a 14-day free trial of the Team plan, every feature, no card. If you import from Freshdesk during the trial, it extends to 30 days so you can run both side by side. When the trial ends without a plan, the workspace turns read-only: you can still sign in, read and export everything, and choosing a plan opens it again at once. Self-hosting stays free forever.',
   },
   {
     q: 'Is self-hosting really free?',
@@ -39,16 +39,6 @@ const plans = `<section class="wrap plans" aria-label="Plans">
     </ul>
     <a class="btn btn-ghost" href="${REPO}" rel="noopener">Self-host free <span aria-hidden="true">↗</span></a>
   </article>
-  <article class="plan">
-    <h2 class="plan-name">Cloud Free <span class="badge badge-coming">Coming v0.2</span></h2>
-    <p class="plan-price"><strong>$0</strong> <span>per workspace</span></p>
-    <ul>
-      <li>Up to 3 agents</li>
-      <li>100 conversations a month</li>
-      <li>Every feature, including the Freshdesk importer</li>
-      <li>AI with your own model key</li>
-    </ul>
-  </article>
   <article class="plan plan-featured" aria-labelledby="plan-founding">
     <p class="plan-flag">Founding customers</p>
     <h2 class="plan-name" id="plan-founding">Founding</h2>
@@ -67,6 +57,7 @@ const plans = `<section class="wrap plans" aria-label="Plans">
     <p class="plan-alt">or $490 per year</p>
     <ul>
       <li>We run, update and back it up</li>
+      <li>14-day free trial, no card (30 days if you import from Freshdesk)</li>
       <li>Up to 10 agents, unlimited conversations</li>
       <li>No per-agent fees</li>
       <li>AI at LLM cost +30%, or bring your own key</li>
@@ -77,7 +68,6 @@ const plans = `<section class="wrap plans" aria-label="Plans">
 const plansMd = `| Plan | Price | What you get |
 |---|---|---|
 | Self-host | $0, forever | Every feature. AGPL-3.0. AI with your own model key. |
-| Cloud Free (coming v0.2) | $0 | Up to 3 agents, 100 conversations a month. Every feature. AI with your own model key. |
 | Founding | $100 per workspace per year, locked for life | Free Freshdesk migration with a reconcile report. Your whole team, no per-agent fees. AI at LLM cost +30% or bring your own key. |
 | Cloud Team (coming v0.2) | $49 per workspace per month, or $490 per year | Hosted by HC Labs. Up to 10 agents, unlimited conversations, no per-agent fees. AI at LLM cost +30% or bring your own key. |`;
 
@@ -104,13 +94,13 @@ export default {
   name: 'Pricing',
   path: '/pricing',
   section: 'Product',
-  title: 'CollieDesk pricing: free plan, $49 per workspace, no per-agent fees',
+  title: 'CollieDesk pricing: $49 per workspace, no per-agent fees, 14-day free trial',
   description:
-    'CollieDesk Cloud is free for up to 3 agents and 100 conversations a month. Team costs $49 per workspace per month ($490 per year), up to 10 agents, no per-agent fees. Self-hosting is free.',
-  summary: 'Cloud Free up to 3 agents and 100 conversations a month; Team $49 per workspace per month or $490 per year, up to 10 agents, no per-agent fees; founding offer; AI at LLM cost +30% or your own key; self-host free',
+    'CollieDesk Cloud starts with a 14-day free trial, no card. Team costs $49 per workspace per month ($490 per year), up to 10 agents, no per-agent fees. Self-hosting is free.',
+  summary: '14-day free trial, no card; Team $49 per workspace per month or $490 per year, up to 10 agents, no per-agent fees; founding offer; AI at LLM cost +30% or your own key; self-host free',
   eyebrow: 'Pricing',
   h1: 'One flat price per workspace. No per-agent fees.',
-  lede: 'Start free. Add your whole team, up to 10 agents, for the same $49 a month. Self-host for $0. Pay for AI at cost plus 30%, or bring your own key.',
+  lede: 'Try it free for 14 days. Add your whole team, up to 10 agents, for the same $49 a month. Self-host for $0. Pay for AI at cost plus 30%, or bring your own key.',
   preHtml: plans,
   preMd: plansMd,
   body,
