@@ -10,6 +10,8 @@ import home from './pages/home.mjs';
 import pricing from './pages/pricing.mjs';
 import migrateFreshdesk from './pages/migrate-freshdesk.mjs';
 import migrateFreshdeskExport from './pages/migrate-freshdesk-export.mjs';
+import migrateZendeskExport from './pages/migrate-zendesk-export.mjs';
+import vsFront from './pages/vs-front.mjs';
 import vsFreshdesk from './pages/vs-freshdesk.mjs';
 import vsZendesk from './pages/vs-zendesk.mjs';
 import vsHelpScout from './pages/vs-help-scout.mjs';
@@ -21,7 +23,7 @@ const OUT = fileURLToPath(new URL('../_site/', import.meta.url));
 const SRC = fileURLToPath(new URL('./', import.meta.url));
 const SECTIONS = ['Product', 'Migrate', 'Compare', 'Docs'];
 
-const pages = [home, pricing, migrateFreshdesk, migrateFreshdeskExport, vsFreshdesk, vsZendesk, vsHelpScout, openSource, roadmapPage(), changelog, ...docsPages()];
+const pages = [home, pricing, migrateFreshdesk, migrateFreshdeskExport, migrateZendeskExport, vsFreshdesk, vsZendesk, vsHelpScout, vsFront, openSource, roadmapPage(), changelog, ...docsPages()];
 
 function write(rel, content) {
   const file = `${OUT}${rel}`;
