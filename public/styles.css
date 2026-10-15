@@ -144,6 +144,8 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 .founding { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--space-6) var(--space-16); background: var(--surface-1); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow-2); padding: clamp(1.5rem, 4vw, 3rem); }
 .check-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .7rem; align-content: start; }
 .check-list li { padding-left: 1.9rem; position: relative; color: var(--text-2); }
+.check-list-wide { margin-top: 1.5rem; gap: 1rem 2.5rem; }
+@media (min-width: 760px) { .check-list-wide { grid-template-columns: 1fr 1fr; } }
 .check-list li::before { content: "✓"; position: absolute; left: 0; top: .25rem; width: 1.2rem; height: 1.2rem; display: grid; place-items: center; border-radius: var(--radius-full); background: var(--ok-soft); color: var(--ok); font-size: .75rem; font-weight: 700; }
 .founding-cta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4) var(--space-6); border-top: 1px solid var(--line); padding-top: var(--space-6); }
 .founding-cta p { margin: 0; max-width: 40rem; }

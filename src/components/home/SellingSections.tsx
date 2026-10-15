@@ -1,8 +1,6 @@
-import { BARS } from '../../data/pages/home-sections';
+import { BAR_MAX as MAX, BARS, BORING } from '../../data/pages/home-sections';
 import { PRICES_READ } from '../../lib/site';
 import { Badge } from '../Badge';
-
-const MAX = Math.max(...BARS.map((b) => b.usd));
 
 function Selling() {
   return (
@@ -80,6 +78,23 @@ function Bill() {
   );
 }
 
+function Boring() {
+  return (
+    <section className="section section-alt" aria-labelledby="boring">
+      <div className="wrap">
+        <p className="eyebrow">The boring parts</p>
+        <h2 id="boring">A helpdesk is more than an inbox. These parts already work.</h2>
+        <p className="section-lede">We are not rebuilding every Freshdesk feature. We build what a team of three to ten uses every day, and we label the rest below. HC Labs runs its own support on Colliedesk Cloud.</p>
+        <ul className="check-list check-list-wide">
+          {BORING.map(([k, v]) => (
+            <li key={k}><strong>{`${k}.`}</strong>{` ${v}`}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 // The sections between the home hero and the status table.
 export function SellingSections() {
   return (
@@ -87,6 +102,7 @@ export function SellingSections() {
       <Selling />
       <Pillars />
       <Bill />
+      <Boring />
     </>
   );
 }
