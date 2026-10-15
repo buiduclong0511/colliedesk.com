@@ -19,7 +19,7 @@ const faq = [
   },
   {
     q: 'Is CollieDesk ready to use?',
-    a: 'It is pre-alpha (v0.1). The shared inbox, notes, tags, assignment and passwordless sign-in work today. The email channel and Freshdesk importer arrive in v0.2, AI in v0.3. See the [roadmap](/roadmap).',
+    a: 'It is pre-alpha (v0.1). The shared inbox, notes, tags, assignment and passwordless sign-in work today. The email channel and the Freshdesk importer are built and in testing for v0.2. AI comes in v0.3. See the [roadmap](/roadmap).',
   },
   {
     q: 'How does AI pricing work?',

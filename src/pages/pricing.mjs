@@ -98,7 +98,7 @@ Most helpdesks charge per agent, then charge again for AI. For five agents, Fres
 
 ## Honest status
 
-CollieDesk is **pre-alpha**. Today it has a shared inbox, private notes, tags, assignment and passwordless sign-in. It cannot receive email yet: the email channel and the Freshdesk importer arrive in v0.2. If you must switch this week, CollieDesk is not ready for you yet. If you are planning your exit before your next Freshdesk renewal, [the founding offer](${FOUNDING_HREF}) is for you.`;
+CollieDesk is **pre-alpha**. Released today (v0.1): a shared inbox, private notes, tags, assignment and passwordless sign-in. Built and in testing for v0.2: the email channel (replies are plain text, without CC) and the Freshdesk importer with its reconcile report. Not built yet: attachments on agent replies, canned replies and new-ticket notifications. If you must switch this week, CollieDesk is not ready for you yet. If you are planning your exit before your next Freshdesk renewal, [the founding offer](${FOUNDING_HREF}) is for you.`;
 
 export default {
   name: 'Pricing',

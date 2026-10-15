@@ -3,10 +3,11 @@ export const statusTable = `| Capability | CollieDesk |
 |---|---|
 | Shared inbox: replies, private notes, status, priority, assignee, tags, search | **Shipped v0.1** |
 | Passwordless sign-in, revocable sessions, isolated workspaces | **Shipped v0.1** |
-| Email channel (inbound and outbound, threading) | **Coming v0.2** |
-| Freshdesk importer with reconcile report | **Coming v0.2** |
+| Email channel (inbound and outbound, threading) | **Coming v0.2** (built, in testing) |
+| Freshdesk importer with reconcile report | **Coming v0.2** (built, in testing) |
 | One-command install and published container image | **Shipped** |
 | CollieDesk Cloud for founding customers | **Coming v0.2** |
+| Attachments on agent replies, new-ticket notifications | Not built yet |
 | AI draft replies, triage, auto-answer with a human in the loop | **Coming v0.3** |
 | Knowledge base and public help center | **Coming v0.3** |
 | Automations, macros, SLA, business hours, time tracking | **Coming v0.4** |
