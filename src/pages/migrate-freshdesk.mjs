@@ -33,7 +33,7 @@ Write down, from your Freshdesk admin:
 
 ## 2. Do not rely on the CSV export
 
-Freshdesk's ticket export in the UI gives you **ticket fields only**, as CSV or Excel. It is useful for a spreadsheet. It is not a migration.
+Freshdesk's ticket export in the UI gives you **ticket fields only**, as CSV or Excel. It is useful for a spreadsheet. It is not a migration. Before you cancel, also take a full account export as a backup: [how to export tickets from Freshdesk](/migrate/freshdesk/export).
 
 | Data | Freshdesk UI export (CSV/Excel) | Freshdesk API | CollieDesk importer (**Coming v0.2**) |
 |---|---|---|---|

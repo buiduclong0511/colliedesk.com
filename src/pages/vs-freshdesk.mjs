@@ -17,7 +17,7 @@ const faq = [
   },
   {
     q: 'Can I get my tickets out of Freshdesk with the full conversation?',
-    a: 'Not with the ticket export in the Freshdesk UI: it exports ticket fields to CSV or Excel, without the conversation. The full thread needs the Freshdesk API. See [how to migrate from Freshdesk](/migrate/freshdesk).',
+    a: 'Not with the ticket export in the Freshdesk UI: it exports ticket fields to CSV or Excel, without the conversation. The full thread needs the account export or the Freshdesk API. See [how to export tickets from Freshdesk](/migrate/freshdesk/export).',
   },
 ];
 
