@@ -10,7 +10,7 @@ const UPDATES_FORM_URL = 'https://app.colliedesk.com/api/v1/public/forms/hclabs'
 const JS_BUDGET_BYTES = 100 * 1024;
 const REQUIRED_PAGES = [
   '/', '/pricing', '/migrate/freshdesk', '/vs/freshdesk', '/vs/zendesk', '/vs/help-scout',
-  '/open-source', '/roadmap', '/docs', '/changelog',
+  '/open-source', '/roadmap', '/docs', '/changelog', '/privacy', '/terms',
 ];
 const AI_CRAWLERS = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'PerplexityBot', 'Google-Extended'];
 

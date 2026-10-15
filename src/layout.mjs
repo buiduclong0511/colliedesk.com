@@ -56,7 +56,7 @@ function footer() {
   <p>Open-source helpdesk by HC Labs. AGPL-3.0. Every page on this site has a plain Markdown version: add <code>.md</code> to the URL.</p></div>
   ${cols}
   ${UPDATES_FORM}
-</div><div class="wrap footer-legal"><p>© 2026 HC Labs. Pre-alpha software: things will change, and we will say so in the <a href="/changelog">changelog</a>.</p>
+</div><div class="wrap footer-legal"><p>© 2026 HC Labs. Pre-alpha software: things will change, and we will say so in the <a href="/changelog">changelog</a>. <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
   <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark theme</button></div></footer>`;
 }
 
