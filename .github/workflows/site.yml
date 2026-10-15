@@ -5,27 +5,65 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
-  # User guides and the roadmap live in colliedesk/colliedesk; rebuild picks up their changes.
-  repository_dispatch:
-    types: [product-docs-changed]
+    inputs:
+      product_ref:
+        description: >-
+          Branch, tag or SHA of colliedesk/colliedesk to build the docs from. Set it to preview
+          unmerged docs: the run builds and checks, uploads the site as an artifact, and does
+          not deploy. Leave empty to build from main and deploy.
+        required: false
+        default: ''
+  # User guides and the roadmap live in colliedesk/colliedesk. Every 15 minutes, compare the
+  # docs on main with the version the live site was built from; rebuild only when they differ.
   schedule:
-    - cron: '23 */6 * * *'
+    - cron: '*/15 * * * *'
 
 permissions:
   contents: read
 
 concurrency:
   group: site-${{ github.ref }}
-  cancel-in-progress: true
+  # A scheduled run must not cancel a deploy that is already running; it queues behind it.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  LIVE_DOCS_VERSION_URL: https://colliedesk.com/product-docs-version.txt
 
 jobs:
+  freshness:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    outputs:
+      stale: ${{ steps.compare.outputs.stale }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
+        with:
+          repository: colliedesk/colliedesk
+          path: product
+          sparse-checkout: |
+            docs/user
+            ROADMAP.md
+          sparse-checkout-cone-mode: false
+      - id: compare
+        run: |
+          current=$(sh scripts/product-docs-version.sh product)
+          live=$(curl -fsS --max-time 15 "$LIVE_DOCS_VERSION_URL" || echo unknown)
+          echo "current=$current live=$live"
+          if [ "$current" = "$live" ]; then echo stale=false; else echo stale=true; fi >> "$GITHUB_OUTPUT"
+
   check:
+    needs: freshness
+    if: >-
+      !cancelled() &&
+      (github.event_name != 'schedule' || needs.freshness.outputs.stale == 'true')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - uses: actions/checkout@v5
         with:
           repository: colliedesk/colliedesk
+          ref: ${{ inputs.product_ref }}
           path: product
           sparse-checkout: |
             docs/user
@@ -38,6 +76,7 @@ jobs:
           package-manager-cache: false
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
+      - run: sh scripts/product-docs-version.sh product > _site/product-docs-version.txt
       - run: pnpm run check
       - uses: actions/upload-pages-artifact@v4
         if: github.event_name != 'pull_request'
@@ -45,7 +84,9 @@ jobs:
           path: _site
 
   deploy:
-    if: github.event_name != 'pull_request'
+    if: >-
+      !cancelled() && needs.check.result == 'success' &&
+      github.event_name != 'pull_request' && !inputs.product_ref
     needs: check
     runs-on: ubuntu-latest
     permissions:
