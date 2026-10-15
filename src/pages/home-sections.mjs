@@ -8,6 +8,22 @@ const BARS = [
   { name: 'Colliedesk Cloud', usd: 49, math: 'one workspace, + AI usage at cost +30%', href: '/pricing', ours: true },
 ];
 const MAX = Math.max(...BARS.map((b) => b.usd));
+const OURS = BARS.find((b) => b.ours).usd;
+// The hero promise: saving against the most expensive bar, rounded down so the claim never overstates.
+export const SAVING_PCT = Math.floor((1 - OURS / MAX) * 100);
+
+// Answers "you can't just build a helpdesk over a weekend": the unglamorous parts, each already on
+// main and running on Colliedesk Cloud. Only list what shipped; anything else belongs in the status table.
+const BORING = [
+  ['Mail that lands', 'Replies leave signed with DKIM and pass SPF and DMARC. Tested against real Gmail inboxes, in the customer\'s thread.'],
+  ['Mail you can trust', 'Inbound mail is checked on arrival. Spoofed senders and auto-reply loops are stopped before they become tickets.'],
+  ['Threading', 'A customer\'s reply joins its conversation, so one problem stays one ticket.'],
+  ['Nothing lost on import', 'The reconcile report counts tickets, replies, notes, tags and contacts on both sides, and checks every attachment by SHA-256.'],
+  ['Your data out, any time', 'Export the whole workspace as a ZIP, even after a trial ends or a plan lapses.'],
+  ['Workspaces kept apart', 'PostgreSQL row-level security keeps each workspace\'s rows apart. Passwordless sign-in, revocable sessions.'],
+  ['A supply chain you can check', 'Signed container images with provenance and SBOM. CodeQL and an OSV gate on every pull request, the email parser fuzzed.'],
+  ['Nothing to stitch together', 'Self-hosted, it is one server and PostgreSQL. Bring an SMTP account for outgoing mail and a forwarder, such as Cloudflare Email Routing, for incoming mail. That is the list.'],
+];
 
 const bars = BARS.map(
   (b) => `<li class="bar${b.ours ? ' bar-ours' : ''}">
@@ -51,6 +67,13 @@ export const homeSections = `
     <p class="section-lede">List prices per month, billed annually, read on ${PRICES_READ}. Zendesk publishes euros: Suite Professional with Copilot is 5 × (€115 + €50) = €825. <a href="/vs/zendesk">Details</a>.</p>
   </div>
   <ul class="bars" aria-label="Monthly cost for five agents">${bars}</ul>
+</div></section>
+
+<section class="section section-alt" aria-labelledby="boring"><div class="wrap">
+  <p class="eyebrow">The boring parts</p>
+  <h2 id="boring">A helpdesk is more than an inbox. These parts already work.</h2>
+  <p class="section-lede">We are not rebuilding every Freshdesk feature. We build what a team of three to ten uses every day, and we label the rest below. HC Labs runs its own support on Colliedesk Cloud.</p>
+  <ul class="check-list check-list-wide">${BORING.map(([k, v]) => `<li><strong>${k}.</strong> ${v}</li>`).join('')}</ul>
 </div></section>
 
 <!--STATUS-->
@@ -123,6 +146,12 @@ List prices per month, billed annually, read on ${PRICES_READ}.
 
 ${BARS.map((b) => `- ${b.name}: $${b.usd} (${b.math})`).join('\n')}
 - Zendesk Suite Professional + Copilot: 5 × (€115 + €50) = €825 ([details](/vs/zendesk))
+
+## The boring parts already work
+
+We are not rebuilding every Freshdesk feature. We build what a team of three to ten uses every day, and we label the rest. HC Labs runs its own support on Colliedesk Cloud.
+
+${BORING.map(([k, v]) => `- **${k}.** ${v}`).join('\n')}
 
 ## Why a collie?
 
