@@ -69,9 +69,11 @@ const statusHtml = `<section class="section" aria-labelledby="today"><div class=
   <div class="prose prose-wide">${renderMarkdown(statusTable)}</div>
 </div></section>`;
 
-const html = `<section class="home-hero"><div class="wrap hero-grid">
+// Hero: centred promise and two actions, then the real product with the migration proof laid over its
+// corner, so the first screen shows both the inbox and the "nothing lost" check.
+const html = `<section class="home-hero"><div class="wrap">
   <div class="hero-copy">
-    <p class="eyebrow">Open source · AGPL-3.0 · pre-alpha v0.1</p>
+    <p class="eyebrow hero-eyebrow">Open source · AGPL-3.0 · Pre-alpha v0.1</p>
     <h1>Bring every ticket home.</h1>
     <p class="lede">${LEDE}</p>
     <div class="cta-row">
@@ -80,7 +82,10 @@ const html = `<section class="home-hero"><div class="wrap hero-grid">
     </div>
     <p class="hero-note">Free plan for small teams. <b>Cloud Team $49</b> per workspace per month, no per-agent fees. Founding plan $100 a year. <a href="/pricing">See pricing</a></p>
   </div>
-  ${proof}
+  <div class="hero-stage">
+    <figure class="hero-shot"><img src="/product-inbox.jpg" width="1440" height="900" alt="The CollieDesk inbox: a list of customer conversations with status and priority, an open conversation with a reply and a private note, and the conversation properties." fetchpriority="high"></figure>
+    ${proof}
+  </div>
   ${install}
 </div></section>
 ${homeSections.replace('<!--STATUS-->', statusHtml)}

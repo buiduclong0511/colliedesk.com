@@ -4,10 +4,14 @@ import { escapeHtml as e, renderMarkdown } from './markdown.mjs';
 
 export const mdUrlOf = (path) => (path === '/' ? '/index.md' : `${path}.md`);
 
-// Brand wordmark (mascot + outlined text, no font needed). Dark surfaces only; inlined so it costs no request.
+// Brand wordmark (mascot + outlined text, no font needed), inlined so it costs no request. The mascot's
+// white ruff needs a dark ground, so it sits on its tile; the letters take the theme's text colours.
 const WORDMARK = readFileSync(new URL('./static/logo-wordmark.svg', import.meta.url), 'utf8')
   .replace('<svg xmlns="http://www.w3.org/2000/svg"', '<svg class="wordmark" height="30"')
   .replace(/<!--[\s\S]*?-->\s*/g, '')
+  .replace(/(<title>[^<]*<\/title>)([\s\S]*?)(<path d="M46)/, '$1<rect class="wm-tile" width="32" height="32" rx="7"/><g transform="translate(2.4 2.6) scale(0.85)">$2</g>$3')
+  .replace('fill="#e8edf4"', 'class="wm-collie"')
+  .replace('fill="#b4bfcf"', 'class="wm-desk"')
   .replace(/\s*\n\s*/g, '');
 
 const link = ({ href, label }, current) => {
@@ -39,7 +43,8 @@ function footer() {
   <div class="footer-about"><a class="brand" href="/" aria-label="${NAME} home">${WORDMARK}</a>
   <p>Open-source helpdesk by HC Labs. AGPL-3.0. Every page on this site has a plain Markdown version: add <code>.md</code> to the URL.</p></div>
   ${cols}
-</div><div class="wrap footer-legal"><p>© 2026 HC Labs. Pre-alpha software: things will change, and we will say so in the <a href="/changelog">changelog</a>.</p></div></footer>`;
+</div><div class="wrap footer-legal"><p>© 2026 HC Labs. Pre-alpha software: things will change, and we will say so in the <a href="/changelog">changelog</a>.</p>
+  <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark theme</button></div></footer>`;
 }
 
 export function hero(page) {
@@ -80,8 +85,9 @@ export function document(page, main) {
 <link rel="stylesheet" href="/fonts.css">
 <link rel="stylesheet" href="/tokens.css">
 <link rel="stylesheet" href="/styles.css">
-<meta name="theme-color" content="#0b0f15">
-<meta name="color-scheme" content="dark">
+<script src="/theme.js"></script>
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${NAME}">
 <meta property="og:title" content="${e(page.title)}">
