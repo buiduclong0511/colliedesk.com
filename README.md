@@ -21,18 +21,21 @@ to use another checkout. `typecheck` works without it.
 
 - `src/data/pages/*.ts`: one typed `Page` (`src/lib/page.ts`) per page: title, description, hero,
   Markdown body, FAQ, JSON-LD. `src/data/pages/index.ts` lists them in llms.txt and sitemap order.
-- `src/components/*.tsx`: React components for the header, footer, hero, pricing plans and the home
-  page sections. Markdown (bodies, FAQ answers) is rendered with `marked` in `src/lib/markdown.ts`
-  and placed by the Astro components (`Prose.astro`, `Faq.astro`).
+- `src/components/*.tsx`: React components for the header, footer parts, hero, pricing plans and the
+  home page sections. `.astro` files render them to static HTML with `html(Component, props)` from
+  `src/lib/render-react.ts` (`react-dom/server`), inside `<Fragment set:html={...} />`; there is no
+  React integration. Markdown (bodies, FAQ answers) is rendered with `marked` in
+  `src/lib/markdown.ts` and placed by the Astro components (`Prose.astro`, `Faq.astro`). The
+  release-notes form is plain HTML in `UpdatesForm.astro`, posted by `public/updates.js`.
 - `src/layouts/Base.astro`: the HTML document (head, canonical, Markdown alternate, JSON-LD, fonts).
 - `src/pages/`: Astro routes. `[...slug].astro` builds every HTML page; `[...slug].md.ts` builds its
   Markdown twin (`/pricing` and `/pricing.md`); `llms.txt`, `llms-full.txt`, `sitemap.xml`,
   `robots.txt` and `changelog.xml` are static endpoints; `404.astro` is the not-found page.
   `_headers` is written after the build by `src/integrations/cloudflare-headers.ts`.
 - `public/`: files served as they are (fonts, icons, images, CSS, the two scripts).
-- `src/integrations/react-server-only.ts` keeps the React client runtime out of the build;
-  `no-bundled-client-js.ts` fails the build if a `client:*` directive or a bundled `<script>`
-  would ship JavaScript.
+- `src/integrations/no-bundled-client-js.ts` fails the build if any script other than
+  `theme.js`, `updates.js` and JSON-LD would ship (a bundled or inlined `<script>`). A `client:*`
+  directive on a React component fails earlier: without a React renderer Astro cannot hydrate it.
 
 ## Content
 
