@@ -145,6 +145,19 @@ for (const path of ['/', '/pricing']) {
 
 for (const m of llms.matchAll(/\]\(([^)\s]+)\)/g)) checkLink(m[1], '/', 'llms.txt');
 
+// Web analytics run on every page and never store anything in the visitor's browser, so the site
+// needs no cookie banner. Switching PostHog to cookies or person profiles must fail here first.
+const analytics = join(outDir, 'analytics.js');
+if (!existsSync(analytics)) fail('analytics.js not built');
+else {
+  const source = readFileSync(analytics, 'utf8');
+  if (!/cookieless_mode:\s*'always'/.test(source)) fail("analytics.js: PostHog must run with cookieless_mode: 'always'");
+  if (!/person_profiles:\s*'never'/.test(source)) fail("analytics.js: PostHog must run with person_profiles: 'never'");
+}
+for (const file of pages) {
+  if (!readFileSync(file, 'utf8').includes('<script src="/analytics.js" defer></script>')) fail(`${urlPathOf(file)}: analytics.js not loaded`);
+}
+
 if (jsBytes > JS_BUDGET_BYTES) fail(`JavaScript budget exceeded: ${jsBytes} bytes > ${JS_BUDGET_BYTES}`);
 
 const summary = `${pages.length} pages, ${urlPaths.length} Markdown twins checked, JS ${jsBytes} bytes (budget ${JS_BUDGET_BYTES})`;

@@ -102,6 +102,7 @@ export function document(page, main) {
 <link rel="stylesheet" href="/styles.css">
 <script src="/theme.js"></script>
 <script src="/updates.js" defer></script>
+<script src="/analytics.js" defer></script>
 <meta name="theme-color" content="#ffffff">
 <meta name="color-scheme" content="light">
 <meta property="og:type" content="website">

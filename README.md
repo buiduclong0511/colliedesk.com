@@ -1,6 +1,6 @@
 # colliedesk.com
 
-Static marketing and docs site. No client JavaScript.
+Static marketing and docs site. Client JavaScript is limited to the theme toggle, the updates form and cookieless PostHog web analytics (`src/static/analytics.js`: no cookies or browser storage, no person profiles, IP discarded; `pnpm check` fails if that changes).
 
 ```sh
 git clone --depth 1 https://github.com/colliedesk/colliedesk product   # docs source, gitignored
