@@ -22,6 +22,10 @@ References: t3.codes (honest "what are you selling me", fork-it, terminal snippe
 ("X alternative" positioning, transparent pricing, vs pages), cal.com (pricing answered in the FAQ,
 footer comparison links).
 
-Tokens are at the top of `src/styles.css`: ink `#15171a`, paper `#ffffff` / `#f4f5f7`, collie sable
-`#a8481c` (links, primary buttons, 5.8:1 on white), ember `#f08a50` (accents on dark only), focus
-`#1f5fd1`. System sans and mono stacks, no web fonts. Buttons are at least 44 px tall.
+Brand: Blue Merle, shared with the app. `src/static/tokens.css` is a copy of the app's
+`web/src/styles/tokens.css` (change it there first; the app repo checks contrast for every pair).
+Light is the default; the footer **Dark theme** button sets `data-theme="dark"` and saves it in
+`localStorage` (`src/static/theme.js`, same key as the app). Self-hosted IBM Plex Sans and Mono,
+sentence case everywhere, mono only for code. The hero shows the real light inbox
+(`src/static/product-inbox.jpg`) with the reconcile report over its corner. Buttons are at least
+44 px tall on touch.
