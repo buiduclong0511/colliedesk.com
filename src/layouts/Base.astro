@@ -1,9 +1,10 @@
 ---
 // The HTML document around every page: head (meta, canonical, Markdown alternate, JSON-LD, fonts,
 // styles, the two small vanilla scripts), header, main and footer.
-import { Footer } from '../components/Footer';
+import Footer from '../components/Footer.astro';
 import { Header } from '../components/Header';
 import { mdUrlOf, type PageHead } from '../lib/page';
+import { html } from '../lib/render-react';
 import { NAME, ORIGIN, UPDATED } from '../lib/site';
 
 interface Props {
@@ -49,7 +50,7 @@ const canonical = `${ORIGIN}${page.path}`;
 </head>
 <body class={page.bodyClass || ''}>
 <a class="skip" href="#main">Skip to content</a>
-<Header path={page.path} />
+<Fragment set:html={html(Header, { path: page.path })} />
 <main id="main">
 <slot />
 </main>

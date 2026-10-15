@@ -1,13 +1,25 @@
 ---
 import { HOME_FAQ } from '../../data/pages/home';
+import { html } from '../../lib/render-react';
 import Faq from '../Faq.astro';
 import { ClosingSections } from './ClosingSections';
-import { HomeHero } from './HomeHero';
+import { HeroCopy, InstallSnippet } from './HomeHero';
+import { ReconcileProof } from './ReconcileProof';
 import { SellingSections } from './SellingSections';
 import { StatusSection } from './StatusSection';
+
+// Hero: the promise, then the real product with the migration proof laid over its corner, so the
+// first screen shows both the inbox and the "nothing lost" check.
 ---
-<HomeHero />
-<SellingSections />
-<StatusSection />
-<ClosingSections />
+<section class="home-hero"><div class="wrap">
+  <Fragment set:html={html(HeroCopy, {})} />
+  <div class="hero-stage">
+    <figure class="hero-shot"><img src="/product-inbox.jpg" width="1440" height="900" alt="The Colliedesk inbox: a list of customer conversations with status and priority, an open conversation with a reply and a private note, and the conversation properties." fetchpriority="high"></figure>
+    <Fragment set:html={html(ReconcileProof, {})} />
+  </div>
+  <Fragment set:html={html(InstallSnippet, {})} />
+</div></section>
+<Fragment set:html={html(SellingSections, {})} />
+<Fragment set:html={html(StatusSection, {})} />
+<Fragment set:html={html(ClosingSections, {})} />
 <section class="section section-faq"><div class="wrap"><div class="prose"><Faq faq={HOME_FAQ} /></div></div></section>

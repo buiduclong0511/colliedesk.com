@@ -2,6 +2,7 @@
 // Main content of a standard page: hero, optional block (pricing plans), then the prose, with the
 // docs navigation beside it on docs pages.
 import type { Page } from '../lib/page';
+import { html } from '../lib/render-react';
 import { DocsNav } from './DocsNav';
 import { Hero } from './Hero';
 import { PricingPlans } from './PricingPlans';
@@ -13,11 +14,11 @@ interface Props {
 
 const { page } = Astro.props;
 ---
-<Hero page={page} />
-{page.pre === 'pricing-plans' && <PricingPlans />}
+<Fragment set:html={html(Hero, { page })} />
+{page.pre === 'pricing-plans' && <Fragment set:html={html(PricingPlans, {})} />}
 <div class="wrap page-body">
   {page.docsNav ? (
-    <div class="docs-layout"><DocsNav items={page.docsNav} current={page.path} /><Prose page={page} /></div>
+    <div class="docs-layout"><Fragment set:html={html(DocsNav, { items: page.docsNav, current: page.path })} /><Prose page={page} /></div>
   ) : (
     <Prose page={page} />
   )}
