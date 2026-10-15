@@ -15,8 +15,8 @@ const faq = [
     a: 'Not with the built-in export: Zendesk lists it for Growth, Professional, Enterprise and Enterprise Plus (Suite), and Professional and Enterprise (Support). Team plans use the REST API instead.',
   },
   {
-    q: 'Can CollieDesk import my Zendesk export?',
-    a: 'Not yet. The first CollieDesk importer is Freshdesk. A Zendesk importer is on the [roadmap](/roadmap) for later. Export your data now anyway: you own it, and a backup taken before you cancel cannot be taken after.',
+    q: 'Can Colliedesk import my Zendesk export?',
+    a: 'Not yet. The first Colliedesk importer is Freshdesk. A Zendesk importer is on the [roadmap](/roadmap) for later. Export your data now anyway: you own it, and a backup taken before you cancel cannot be taken after.',
   },
 ];
 
@@ -69,9 +69,9 @@ The API is the route that works on every plan and lets a tool count what it read
 4. Compare the ticket count in your export with the count in Zendesk.
 5. Cancel only after the counts match.
 
-## Moving to CollieDesk
+## Moving to Colliedesk
 
-CollieDesk imports from Freshdesk today, with a reconcile report that proves nothing was lost. A Zendesk importer is on the [roadmap](/roadmap). Comparing the two products first? Read [CollieDesk vs Zendesk](/vs/zendesk).
+Colliedesk imports from Freshdesk today, with a reconcile report that proves nothing was lost. A Zendesk importer is on the [roadmap](/roadmap). Comparing the two products first? Read [Colliedesk vs Zendesk](/vs/zendesk).
 
 ## Sources
 

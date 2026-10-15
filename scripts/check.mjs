@@ -6,6 +6,7 @@ import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ORIGIN = 'https://colliedesk.com';
+const UPDATES_FORM_URL = 'https://app.colliedesk.com/api/v1/public/forms/hclabs';
 const JS_BUDGET_BYTES = 100 * 1024;
 const REQUIRED_PAGES = [
   '/', '/pricing', '/migrate/freshdesk', '/vs/freshdesk', '/vs/zendesk', '/vs/help-scout',
@@ -113,6 +114,15 @@ for (const file of pages) {
   const h1s = html.match(/<h1[\s>]/g) || [];
   if (h1s.length !== 1) fail(`${where}: expected exactly one <h1>, found ${h1s.length}`);
   if (/Be Vietnam Pro/i.test(html)) fail(`${where}: banned typeface referenced`);
+  // Every page offers the updates box: an email field with a label, posting to the web form
+  // channel of HC Labs' own Colliedesk workspace, plus the empty honeypot the endpoint expects.
+  const form = html.match(/<form[^>]*data-updates-form[^>]*>[\s\S]*?<\/form>/)?.[0] || '';
+  if (!form) fail(`${where}: updates form missing`);
+  else {
+    if (!form.includes(`action="${UPDATES_FORM_URL}"`)) fail(`${where}: updates form does not post to ${UPDATES_FORM_URL}`);
+    if (!/<label for="updates-email"/.test(form) || !/<input[^>]*id="updates-email"[^>]*type="email"[^>]*required/.test(form)) fail(`${where}: updates form has no labelled required email field`);
+    if (!/<input[^>]*name="website"[^>]*tabindex="-1"/.test(form)) fail(`${where}: updates form has no honeypot`);
+  }
 
   for (const m of html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)) {
     if (m[1].includes('application/ld+json')) {
@@ -125,6 +135,12 @@ for (const file of pages) {
 
   const md = fileFor(mdUrl) ? readFileSync(fileFor(mdUrl), 'utf8') : '';
   for (const m of md.matchAll(/\]\(([^)\s]+)\)/g)) checkLink(m[1], urlPath, `${mdUrl}`);
+}
+
+// The founding price is locked for life, so its storage cap must be stated wherever the offer is.
+for (const path of ['/', '/pricing']) {
+  const file = fileFor(path);
+  if (file && !readFileSync(file, 'utf8').includes('20 GB of attachments')) fail(`${path}: founding offer does not state the 20 GB attachment cap`);
 }
 
 for (const m of llms.matchAll(/\]\(([^)\s]+)\)/g)) checkLink(m[1], '/', 'llms.txt');

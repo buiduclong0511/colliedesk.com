@@ -1,13 +1,17 @@
 import { readFileSync } from 'node:fs';
-import { FOOTER, FOUNDING_HREF, NAME, NAV, ORIGIN, REPO, UPDATED } from './site.mjs';
+import { APP_SIGN_IN, FOOTER, FOUNDING_HREF, NAME, NAV, ORIGIN, REPO, UPDATED, UPDATES_FORM_URL } from './site.mjs';
 import { escapeHtml as e, renderMarkdown } from './markdown.mjs';
 
 export const mdUrlOf = (path) => (path === '/' ? '/index.md' : `${path}.md`);
 
-// Brand wordmark (mascot + outlined text, no font needed). Dark surfaces only; inlined so it costs no request.
+// Brand wordmark (mascot + outlined text, no font needed), inlined so it costs no request. The mascot's
+// white ruff needs a dark ground, so it sits on its tile; the letters take the theme's text colours.
 const WORDMARK = readFileSync(new URL('./static/logo-wordmark.svg', import.meta.url), 'utf8')
   .replace('<svg xmlns="http://www.w3.org/2000/svg"', '<svg class="wordmark" height="30"')
   .replace(/<!--[\s\S]*?-->\s*/g, '')
+  .replace(/(<title>[^<]*<\/title>)([\s\S]*?)(<path d="M46)/, '$1<rect class="wm-tile" width="32" height="32" rx="7"/><g transform="translate(2.4 2.6) scale(0.85)">$2</g>$3')
+  .replace('fill="#e8edf4"', 'class="wm-collie"')
+  .replace('fill="#b4bfcf"', 'class="wm-desk"')
   .replace(/\s*\n\s*/g, '');
 
 const link = ({ href, label }, current) => {
@@ -17,7 +21,7 @@ const link = ({ href, label }, current) => {
 };
 
 export const ctaButtons = (size = '') => `<div class="cta-row">
-  <a class="btn btn-primary ${size}" href="${FOUNDING_HREF}">Start free</a>
+  <a class="btn btn-primary ${size}" href="${FOUNDING_HREF}">Start free trial</a>
   <a class="btn btn-ghost ${size}" href="${REPO}" rel="noopener">Self-host free <span aria-hidden="true">↗</span></a>
 </div>`;
 
@@ -25,11 +29,23 @@ function header(path) {
   const items = NAV.map((n) => `<li>${link(n, path)}</li>`).join('');
   return `<header class="site-header"><div class="wrap header-inner">
   <a class="brand" href="/" aria-label="${NAME} home">${WORDMARK}</a>
-  <nav aria-label="Main" class="nav-desktop"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li></ul></nav>
-  <a class="btn btn-primary btn-sm header-cta" href="${FOUNDING_HREF}">Start free</a>
-  <details class="nav-mobile"><summary>Menu</summary><nav aria-label="Main (mobile)"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li></ul></nav></details>
+  <nav aria-label="Main" class="nav-desktop"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li><li><a href="${APP_SIGN_IN}">Log in</a></li></ul></nav>
+  <a class="btn btn-primary btn-sm header-cta" href="${FOUNDING_HREF}">Start free trial</a>
+  <details class="nav-mobile"><summary>Menu</summary><nav aria-label="Main (mobile)"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li><li><a href="${APP_SIGN_IN}">Log in</a></li></ul></nav></details>
 </div></header>`;
 }
+
+// Works with updates.js, which sends the form as JSON and shows the result in the status line.
+const UPDATES_FORM = `<form class="updates-form" data-updates-form action="${UPDATES_FORM_URL}" method="post">
+  <label for="updates-email" class="footer-title">Release notes by email</label>
+  <p>One email when a release ships. Reply "stop" and we take you off the list.</p>
+  <div class="updates-row">
+    <input id="updates-email" name="email" type="email" autocomplete="email" required placeholder="you@company.com">
+    <button type="submit" class="btn btn-primary">Subscribe</button>
+  </div>
+  <input class="updates-trap" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <p class="updates-status" role="status" aria-live="polite"></p>
+</form>`;
 
 function footer() {
   const cols = FOOTER.map(
@@ -39,7 +55,9 @@ function footer() {
   <div class="footer-about"><a class="brand" href="/" aria-label="${NAME} home">${WORDMARK}</a>
   <p>Open-source helpdesk by HC Labs. AGPL-3.0. Every page on this site has a plain Markdown version: add <code>.md</code> to the URL.</p></div>
   ${cols}
-</div><div class="wrap footer-legal"><p>© 2026 HC Labs. Pre-alpha software: things will change, and we will say so in the <a href="/changelog">changelog</a>.</p></div></footer>`;
+  ${UPDATES_FORM}
+</div><div class="wrap footer-legal"><p>© 2026 HC Labs. Pre-alpha software: things will change, and we will say so in the <a href="/changelog">changelog</a>.</p>
+  <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Dark theme</button></div></footer>`;
 }
 
 export function hero(page) {
@@ -73,15 +91,19 @@ export function document(page, main) {
 <meta name="description" content="${e(page.description)}">
 <link rel="canonical" href="${canonical}">
 <link rel="alternate" type="text/markdown" href="${mdUrlOf(page.path)}">
-<link rel="alternate" type="application/rss+xml" title="CollieDesk changelog" href="/changelog.xml">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="Colliedesk changelog" href="/changelog.xml">
+<link rel="icon" href="/favicon.ico?v=2" sizes="32x32">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts.css">
 <link rel="stylesheet" href="/tokens.css">
 <link rel="stylesheet" href="/styles.css">
-<meta name="theme-color" content="#0b0f15">
-<meta name="color-scheme" content="dark">
+<script src="/theme.js"></script>
+<script src="/updates.js" defer></script>
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${NAME}">
 <meta property="og:title" content="${e(page.title)}">

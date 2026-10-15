@@ -6,7 +6,7 @@ import { collieFacts as c, statusTable } from './collie-status.mjs';
 const faq = [
   {
     q: 'What is a good Front alternative that is not priced per seat?',
-    a: 'CollieDesk Cloud is $49 per workspace per month for up to 10 agents, and self-hosting is free. CollieDesk is an open-source (AGPL-3.0) shared inbox and helpdesk. It is pre-alpha; the email channel arrives in v0.2.',
+    a: 'Colliedesk Cloud is $49 per workspace per month for up to 10 agents, and self-hosting is free. Colliedesk is an open-source (AGPL-3.0) shared inbox and helpdesk. It is pre-alpha; the email channel arrives in v0.2.',
   },
   {
     q: 'How does Front charge for AI?',
@@ -17,7 +17,7 @@ const faq = [
     a: 'Not by yourself. A company admin asks Front Support for an account data export. It covers shared inboxes only, and leaves out contacts, message templates, tags and individual inboxes. Front acknowledges the request within 72 hours.',
   },
   {
-    q: 'Does CollieDesk import from Front?',
+    q: 'Does Colliedesk import from Front?',
     a: 'Not yet. The first importer is Freshdesk (coming v0.2). Tell us on GitHub if you need a Front importer; requests decide the order.',
   },
 ];
@@ -25,13 +25,13 @@ const faq = [
 const body = `## The short answer
 
 - **Choose Front** if your team lives in email across many shared and personal inboxes, wants a Gmail-like workspace with comments on every thread, and needs many channels today. It is a mature product.
-- **Choose CollieDesk** if you want a shared inbox whose price does not grow with every seat, and data you can export or self-host without asking anyone. CollieDesk is pre-alpha; read the status table first.
+- **Choose Colliedesk** if you want a shared inbox whose price does not grow with every seat, and data you can export or self-host without asking anyone. Colliedesk is pre-alpha; read the status table first.
 
 ## Price, side by side
 
 Front prices below are from the Front pricing page, per seat per month billed annually, read on ${PRICES_READ}. The page does not list monthly-billing prices.
 
-| | Front | CollieDesk |
+| | Front | Colliedesk |
 |---|---|---|
 | Plans | Starter $25 (up to 10 seats), Professional $65 (up to 50 seats), Enterprise $105 | ${c.price} |
 | AI drafting | Copilot $20 per seat per month on Starter and Professional; included on Enterprise | ${c.ai} |
@@ -41,7 +41,7 @@ Front prices below are from the Front pricing page, per seat per month billed an
 
 ### What five agents pay
 
-| Team | Front Professional + Copilot (annual) | CollieDesk Cloud |
+| Team | Front Professional + Copilot (annual) | Colliedesk Cloud |
 |---|---|---|
 | 5 agents | 5 × ($65 + $20) = **$425 per month** | $49 per month + AI usage |
 
@@ -54,7 +54,7 @@ Front prices below are from the Front pricing page, per seat per month billed an
 
 ${c.export}
 
-## What CollieDesk does today
+## What Colliedesk does today
 
 ${statusTable}
 
@@ -69,12 +69,12 @@ const page = {
   path: '/vs/front',
   updated: '2026-10-15',
   section: 'Compare',
-  title: 'CollieDesk vs Front: an open-source Front alternative with flat pricing',
+  title: 'Colliedesk vs Front: an open-source Front alternative with flat pricing',
   description:
-    'CollieDesk vs Front for small support teams: per-seat plans and a $20 Copilot add-on vs one flat workspace price. Sourced prices, export limits and honest status.',
-  summary: 'Front $25–105 per seat plus $20 Copilot vs CollieDesk flat $49 per workspace; export only through Front Support',
+    'Colliedesk vs Front for small support teams: per-seat plans and a $20 Copilot add-on vs one flat workspace price. Sourced prices, export limits and honest status.',
+  summary: 'Front $25–105 per seat plus $20 Copilot vs Colliedesk flat $49 per workspace; export only through Front Support',
   eyebrow: 'Compare · Front alternative',
-  h1: 'CollieDesk vs Front',
+  h1: 'Colliedesk vs Front',
   lede: 'Front is a polished shared inbox. For a team of five, the seat count and the AI add-on decide the bill. Here are the numbers, with sources.',
   cta: true,
   body,

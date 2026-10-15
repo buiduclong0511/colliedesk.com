@@ -5,7 +5,7 @@ import { PRICES_READ, REPO } from '../site.mjs';
 const BARS = [
   { name: 'Freshdesk Pro + Freddy AI Copilot', usd: 420, math: '5 × ($55 + $29)', href: '/vs/freshdesk' },
   { name: 'Help Scout Plus', usd: 225, math: '5 × $45, + $0.75 per AI resolution', href: '/vs/help-scout' },
-  { name: 'CollieDesk Cloud', usd: 49, math: 'one workspace, + AI usage at cost +30%', href: '/pricing', ours: true },
+  { name: 'Colliedesk Cloud', usd: 49, math: 'one workspace, + AI usage at cost +30%', href: '/pricing', ours: true },
 ];
 const MAX = Math.max(...BARS.map((b) => b.usd));
 
@@ -24,7 +24,7 @@ export const homeSections = `
     <p class="section-lede">No enterprise edition with the good parts held back. Every feature is in the open-source code.</p>
   </div>
   <ol class="sell-list">
-    <li><h3>CollieDesk Cloud</h3><p>We run it for you. One flat price per workspace, not per agent: <strong>$49 a month</strong> or $490 a year.</p></li>
+    <li><h3>Colliedesk Cloud</h3><p>We run it for you. One flat price per workspace, not per agent: <strong>$49 a month</strong> or $490 a year.</p></li>
     <li><h3>Migration</h3><p>We move your Freshdesk history (tickets, replies, attachments, tags) and give you a reconcile report that proves nothing was lost.</p></li>
   </ol>
 </div></section>
@@ -61,7 +61,7 @@ export const homeSections = `
     <h2 id="collie">A sheepdog herds every ticket home. Your team stays in charge.</h2>
   </div>
   <div class="prose-invert">
-    <p>A collie does not own the flock. It brings every sheep back to the pen and the shepherd decides what happens next. That is the job we give AI in CollieDesk (coming in v0.3): sort, draft and chase every ticket so none is lost, while a person on your team approves what goes out.</p>
+    <p>A collie does not own the flock. It brings every sheep back to the pen and the shepherd decides what happens next. That is the job we give AI in Colliedesk (coming in v0.3): sort, draft and chase every ticket so none is lost, while a person on your team approves what goes out.</p>
   </div>
 </div></section>
 
@@ -79,7 +79,7 @@ export const homeSections = `
 <section class="section section-alt" aria-labelledby="quotes"><div class="wrap">
   <h2 id="quotes">From founding customers</h2>
   <!-- SLOT: real founding-customer quotes go here, verbatim, with name and team. Never invent one. -->
-  <div class="quote-slot"><p><strong>No quotes yet.</strong> CollieDesk is pre-alpha and we will not make them up. The first founding customers' words will go here, unedited, with their names.</p></div>
+  <div class="quote-slot"><p><strong>No quotes yet.</strong> Colliedesk is pre-alpha and we will not make them up. The first founding customers' words will go here, unedited, with their names.</p></div>
 </div></section>
 
 <section class="section" id="founding" aria-labelledby="founding-title"><div class="wrap">
@@ -92,9 +92,10 @@ export const homeSections = `
     <ul class="check-list">
       <li>$100 per workspace per year, locked for life</li>
       <li>Free Freshdesk migration with a reconcile report</li>
-      <li>Your whole team, no per-agent fees</li>
+      <li>Up to 10 agents, no per-agent fees</li>
+      <li>20 GB of attachments, imported files included</li>
       <li>AI at model cost +30%, or bring your own key</li>
-      <li>CollieDesk Cloud opens for founding customers with v0.2</li>
+      <li>Colliedesk Cloud opens for founding customers with v0.2</li>
     </ul>
     <div class="founding-cta">
       <!-- TODO(owner): replace this placeholder with the founding checkout link. -->
@@ -108,7 +109,7 @@ export const homeSectionsMd = `## Wait, what are you selling me?
 
 Self-hosting is free, forever, with every feature. We sell two things:
 
-1. **CollieDesk Cloud**: we run it for you. $49 per workspace per month or $490 per year, not per agent.
+1. **Colliedesk Cloud**: we run it for you. $49 per workspace per month or $490 per year, not per agent.
 2. **Migration**: we move your Freshdesk history (tickets, replies, attachments, tags) and give you a reconcile report that proves nothing was lost.
 
 ## Why teams switch
@@ -126,12 +127,12 @@ ${BARS.map((b) => `- ${b.name}: $${b.usd} (${b.math})`).join('\n')}
 
 ## Why a collie?
 
-A collie does not own the flock. It brings every sheep back to the pen and the shepherd decides what happens next. CollieDesk's AI sorts, drafts and chases every ticket so none is lost, while a person on your team approves what goes out.
+A collie does not own the flock. It brings every sheep back to the pen and the shepherd decides what happens next. Colliedesk's AI sorts, drafts and chases every ticket so none is lost, while a person on your team approves what goes out.
 
 ## If you don't like something, fork it
 
-CollieDesk is AGPL-3.0. The code, your data and the export format are yours. [How the license and the business fit together](/open-source).
+Colliedesk is AGPL-3.0. The code, your data and the export format are yours. [How the license and the business fit together](/open-source).
 
 ## Founding offer
 
-$100 per workspace per year, locked for life, with free Freshdesk migration and a reconcile report. No per-agent fees. AI at model cost +30% or your own key. CollieDesk Cloud opens for founding customers with v0.2. The checkout link is coming soon.`;
+$100 per workspace per year, locked for life, with free Freshdesk migration and a reconcile report. Up to 10 agents, no per-agent fees, 20 GB of attachments including imported files. AI at model cost +30% or your own key. Colliedesk Cloud opens for founding customers with v0.2. The checkout link is coming soon.`;
