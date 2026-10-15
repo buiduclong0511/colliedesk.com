@@ -21,7 +21,7 @@ const link = ({ href, label }, current) => {
 };
 
 export const ctaButtons = (size = '') => `<div class="cta-row">
-  <a class="btn btn-primary ${size}" href="${FOUNDING_HREF}">Start free</a>
+  <a class="btn btn-primary ${size}" href="${FOUNDING_HREF}">Start free trial</a>
   <a class="btn btn-ghost ${size}" href="${REPO}" rel="noopener">Self-host free <span aria-hidden="true">↗</span></a>
 </div>`;
 
@@ -30,7 +30,7 @@ function header(path) {
   return `<header class="site-header"><div class="wrap header-inner">
   <a class="brand" href="/" aria-label="${NAME} home">${WORDMARK}</a>
   <nav aria-label="Main" class="nav-desktop"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li></ul></nav>
-  <a class="btn btn-primary btn-sm header-cta" href="${FOUNDING_HREF}">Start free</a>
+  <a class="btn btn-primary btn-sm header-cta" href="${FOUNDING_HREF}">Start free trial</a>
   <details class="nav-mobile"><summary>Menu</summary><nav aria-label="Main (mobile)"><ul>${items}<li>${link({ href: REPO, label: 'GitHub' }, path)}</li></ul></nav></details>
 </div></header>`;
 }

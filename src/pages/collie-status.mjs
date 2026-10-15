@@ -16,7 +16,7 @@ export const statusTable = `| Capability | CollieDesk |
 export const collieFacts = {
   price: 'Cloud Team: $49 per workspace per month, or $490 per year, up to 10 agents. No per-agent fees. Founding customers: $100 per year, locked for life.',
   ai: 'Included (coming v0.3). LLM cost +30% on our key, or bring your own key.',
-  free: 'Self-host free, every feature. Cloud Free: up to 3 agents and 100 conversations a month.',
+  free: 'Self-host free, every feature. Cloud: 14-day free trial, no card.',
   source: 'Open source, AGPL-3.0. Self-host or use Cloud.',
   export: 'Your data lives in PostgreSQL. Self-hosted, you can take a database dump at any time.',
 };
