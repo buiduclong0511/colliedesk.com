@@ -7,7 +7,7 @@ import { collieFacts as c, statusTable } from './collie-status';
 const faq: Faq[] = [
   {
     q: 'What is a good Front alternative that is not priced per seat?',
-    a: 'Colliedesk Cloud is $49 per workspace per month for up to 10 agents, and self-hosting is free. Colliedesk is an open-source (AGPL-3.0) shared inbox and helpdesk. It is pre-alpha; the email channel arrives in v0.2.',
+    a: 'Colliedesk Cloud is $49 per workspace per month for up to 10 agents, and self-hosting is free. Colliedesk is an open-source (AGPL-3.0) shared inbox and helpdesk. It is in alpha, and the email channel works today.',
   },
   {
     q: 'How does Front charge for AI?',
@@ -19,14 +19,14 @@ const faq: Faq[] = [
   },
   {
     q: 'Does Colliedesk import from Front?',
-    a: 'Not yet. The first importer is Freshdesk (coming v0.2). Tell us on GitHub if you need a Front importer; requests decide the order.',
+    a: 'Not yet. The first importer is Freshdesk (available now). Tell us on GitHub if you need a Front importer; requests decide the order.',
   },
 ];
 
 const body = `## The short answer
 
 - **Choose Front** if your team lives in email across many shared and personal inboxes, wants a Gmail-like workspace with comments on every thread, and needs many channels today. It is a mature product.
-- **Choose Colliedesk** if you want a shared inbox whose price does not grow with every seat, and data you can export or self-host without asking anyone. Colliedesk is pre-alpha; read the status table first.
+- **Choose Colliedesk** if you want a shared inbox whose price does not grow with every seat, and data you can export or self-host without asking anyone. Colliedesk is alpha; read the status table first.
 
 ## Price, side by side
 
@@ -36,7 +36,7 @@ Front prices below are from the Front pricing page, per seat per month billed an
 |---|---|---|
 | Plans | Starter $25 (up to 10 seats), Professional $65 (up to 50 seats), Enterprise $105 | ${c.price} |
 | AI drafting | Copilot $20 per seat per month on Starter and Professional; included on Enterprise | ${c.ai} |
-| AI agent | Autopilot from $0.05 per conversation | Auto-answer with a human in the loop, same AI pricing (coming v0.3) |
+| AI agent | Autopilot from $0.05 per conversation | Auto-answer with a human in the loop, same AI pricing (coming after beta) |
 | Free option | No free plan; 14-day trial | ${c.free} |
 | Source code | Proprietary | ${c.source} |
 

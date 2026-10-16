@@ -10,7 +10,7 @@ const faq: Faq[] = [
   },
   {
     q: 'Does Chatwoot import attachments from Freshdesk?',
-    a: 'No. Chatwoot\'s Freshdesk importer, on paid plans only, brings contacts and conversations as resolved history. Its guide says attachments, agents, groups, SLAs and automations are not imported, and the Freshdesk API limit of 30,000 tickets applies. The Colliedesk importer (coming v0.2) downloads and checksums every attachment.',
+    a: 'No. Chatwoot\'s Freshdesk importer, on paid plans only, brings contacts and conversations as resolved history. Its guide says attachments, agents, groups, SLAs and automations are not imported, and the Freshdesk API limit of 30,000 tickets applies. The Colliedesk importer (available now) downloads and checksums every attachment.',
   },
   {
     q: 'How much is Chatwoot Cloud for 5 agents?',
@@ -21,7 +21,7 @@ const faq: Faq[] = [
 const body = `## The short answer
 
 - **Choose Chatwoot** if most of your conversations come through chat and messaging apps and you want them in one inbox today. It is mature and widely used.
-- **Choose Colliedesk** if you run email support, you are leaving Freshdesk with years of tickets and attachments, and you want one flat price. Colliedesk is pre-alpha; read the status table first.
+- **Choose Colliedesk** if you run email support, you are leaving Freshdesk with years of tickets and attachments, and you want one flat price. Colliedesk is alpha; read the status table first.
 
 ## Price, side by side
 
@@ -45,7 +45,7 @@ Business is the Chatwoot plan with automation rules and teams.
 
 ## Moving from Freshdesk
 
-| | Chatwoot importer | Colliedesk importer (**Coming v0.2**) |
+| | Chatwoot importer | Colliedesk importer (**Available now**) |
 |---|---|---|
 | Availability | Paid plans only | Every install, free; done for you for founding customers |
 | Conversations, replies, private notes | Yes, as resolved history | Yes |
@@ -75,7 +75,7 @@ const page: Page = {
   title: 'Colliedesk vs Chatwoot: email helpdesk with flat pricing vs omnichannel inbox',
   description:
     'Colliedesk vs Chatwoot: Chatwoot $19–99 per agent with AI credits vs Colliedesk flat $49 per workspace. What each Freshdesk importer brings over, with sources.',
-  summary: 'Chatwoot $19–99 per agent, Freshdesk import without attachments on paid plans vs Colliedesk flat $49, importer with attachments and reconcile report (coming v0.2)',
+  summary: 'Chatwoot $19–99 per agent, Freshdesk import without attachments on paid plans vs Colliedesk flat $49, importer with attachments and reconcile report (available now)',
   eyebrow: 'Compare · Open source',
   h1: 'Colliedesk vs Chatwoot',
   lede: 'Chatwoot is an open-source inbox built around chat and messaging. Colliedesk is an open-source helpdesk built for teams leaving Freshdesk. Here is the difference, with sources.',

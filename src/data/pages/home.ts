@@ -22,7 +22,7 @@ export const HOME_FAQ: Faq[] = [
   },
   {
     q: 'Is Colliedesk ready to use?',
-    a: 'It is pre-alpha (v0.1). The shared inbox, notes, tags, assignment and passwordless sign-in work today. The email channel and the Freshdesk importer are built and in testing for v0.2. AI comes in v0.3. See the [roadmap](/roadmap).',
+    a: 'It is alpha (0.0.x): released and running on Colliedesk Cloud, with a 14-day free trial. The email channel (inbound and outbound, threading), the Freshdesk importer with its reconcile report, saved replies, attachments and live updates work today. Alpha means the interface or database schema may change between releases. Cc, starting a new conversation from the inbox and contact history are not there yet (beta), and neither is AI. See the [roadmap](/roadmap).',
   },
   {
     q: 'How does AI pricing work?',
@@ -30,15 +30,15 @@ export const HOME_FAQ: Faq[] = [
   },
   {
     q: 'Can I move my Freshdesk tickets to Colliedesk?',
-    a: 'Yes, with the Freshdesk importer (coming v0.2): tickets, replies, notes, attachments, tags and contacts, with a reconcile report. Founding customers get the migration done for free. Read [the migration guide](/migrate/freshdesk).',
+    a: 'Yes, with the Freshdesk importer, available now: tickets, replies, notes, attachments, tags and contacts, with a reconcile report. Founding customers get the migration done for free. Read [the migration guide](/migrate/freshdesk).',
   },
 ];
 
 const md = `${TAGLINE} ${POSITIONING}
 
-${HOME_H1} ${HOME_LEDE} The Freshdesk importer is coming in v0.2; reconcile report numbers shown on the site are an example.
+${HOME_H1} ${HOME_LEDE} The Freshdesk importer is available now; reconcile report numbers shown on the site are an example.
 
-Status: pre-alpha (v0.1). Self-host free: ${REPO}. Cloud: $49 per workspace per month or $490 per year.
+Status: alpha (0.0.x), live on Colliedesk Cloud with a 14-day free trial. Self-host free: ${REPO}. Cloud: $49 per workspace per month or $490 per year.
 
 ${homeSectionsMd}
 

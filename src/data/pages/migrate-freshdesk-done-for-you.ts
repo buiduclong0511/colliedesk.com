@@ -16,7 +16,7 @@ const faq: Faq[] = [
   },
   {
     q: 'When can you start?',
-    a: 'The Freshdesk importer is built and in testing, and ships with v0.2, together with Colliedesk Cloud for founding customers. Migrations start then. Tell us your renewal date now so we plan before it.',
+    a: 'The Freshdesk importer is available now in alpha, and Colliedesk Cloud is live. Migrations for founding customers can start now. Tell us your renewal date so we plan before it.',
   },
   {
     q: 'What if something does not arrive?',
@@ -24,7 +24,7 @@ const faq: Faq[] = [
   },
 ];
 
-const body = `> **Status:** the Freshdesk importer is built and in testing. Done-for-you migrations start with **v0.2**. Book now to plan around your renewal date.
+const body = `> **Status:** the Freshdesk importer is available now, in alpha. Done-for-you migrations start now. Book to plan around your renewal date.
 
 ## What we move
 
@@ -66,7 +66,7 @@ const page: Page = {
   title: 'Freshdesk migration done for you, with a reconcile report',
   description:
     'We move your Freshdesk tickets, replies, notes and attachments into Colliedesk and prove nothing was lost with a reconcile report. Included with the founding plan.',
-  summary: 'Done-for-you Freshdesk migration: included with the founding plan, not sold separately; reconcile report before you switch; starts with v0.2',
+  summary: 'Done-for-you Freshdesk migration: included with the founding plan, not sold separately; reconcile report before you switch; available now',
   eyebrow: 'Migrate · Done for you',
   h1: 'We move your Freshdesk data for you',
   lede: 'Hand us a Freshdesk API key. We import everything, prove it with a reconcile report, and you switch only when every number matches.',

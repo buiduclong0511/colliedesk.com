@@ -5,7 +5,7 @@ import type { Faq, Page } from '../../lib/page';
 const faq: Faq[] = [
   {
     q: 'What is the best open-source Freshdesk alternative?',
-    a: 'It depends on your channels and timing. Zammad is the most mature open-source helpdesk and its Freshdesk migrator is released today. Chatwoot fits teams whose support is mostly chat and messaging. FreeScout is a light PHP helpdesk with paid modules. Colliedesk is built for small email-support teams leaving Freshdesk, at a flat $49 per workspace, with an importer and reconcile report coming in v0.2.',
+    a: 'It depends on your channels and timing. Zammad is the most mature open-source helpdesk and its Freshdesk migrator is released today. Chatwoot fits teams whose support is mostly chat and messaging. FreeScout is a light PHP helpdesk with paid modules. Colliedesk is built for small email-support teams leaving Freshdesk, at a flat $49 per workspace, with an importer and reconcile report available now, in alpha.',
   },
   {
     q: 'Why are teams leaving Freshdesk?',
@@ -23,7 +23,7 @@ Prices for 5 agents per month, billed annually, from each vendor's page on ${PRI
 
 | Helpdesk | 5 agents | Pricing model | Open source | Freshdesk import | Comparison |
 |---|---|---|---|---|---|
-| **Colliedesk** | **$49** + AI usage | Flat per workspace, up to 10 agents | AGPL-3.0 | Built, in testing (v0.2), with reconcile report | — |
+| **Colliedesk** | **$49** + AI usage | Flat per workspace, up to 10 agents | AGPL-3.0 | Available now (alpha), with reconcile report | — |
 | Zammad | €80–90 (Professional) | Per agent (hosted, in euros) | AGPL-3.0 | Released, self-serve | [vs Zammad](/vs/zammad) |
 | Chatwoot | $195 (Business) | Per agent | MIT (core) | Paid plans; no attachments | [vs Chatwoot](/vs/chatwoot) |
 | FreeScout | Hosting + modules | Free core, paid modules, no official cloud | AGPL-3.0 | Third-party or community module | [vs FreeScout](/vs/freescout) |
@@ -47,7 +47,7 @@ Prices for 5 agents per month, billed annually, from each vendor's page on ${PRI
 
 ## Where Colliedesk fits
 
-Colliedesk is for **small support teams (3 to 10 agents) leaving Freshdesk**, mostly on email, who want a flat price, AI at model cost and their data in an open database. It is pre-alpha: the shared inbox is released, and the email channel and Freshdesk importer are built and in testing for v0.2. If you must switch this week, pick a mature option above. If your renewal is months away, [we migrate you for free](/migrate/freshdesk/done-for-you) on the founding plan.`;
+Colliedesk is for **small support teams (3 to 10 agents) leaving Freshdesk**, mostly on email, who want a flat price, AI at model cost and their data in an open database. It is alpha: released and running on Colliedesk Cloud, with the email channel and the Freshdesk importer, but Cc, new conversation from the inbox, contact history and AI are not there yet, and the interface may change. If you need those this week, pick a mature option above. If your renewal is months away, [we migrate you for free](/migrate/freshdesk/done-for-you) on the founding plan.`;
 
 const page: Page = {
   jsonLd: [],

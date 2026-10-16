@@ -1,4 +1,4 @@
-import { FOUNDING_HREF, PRICES_READ } from '../../lib/site';
+import { FOUNDING_HREF, PRICES_READ, TRIAL_HREF } from '../../lib/site';
 import { faqPage, techArticle } from '../../lib/schema';
 import type { Faq, Page } from '../../lib/page';
 import { statusTable } from './collie-status';
@@ -37,17 +37,17 @@ Freshdesk prices are per agent per month, billed annually, read on ${PRICES_READ
 | 5 | $95 | $420 | $49 |
 | 10 | $190 | $840 | $49 |
 
-Colliedesk AI (coming v0.3) is billed at model cost +30% on our key, or by your provider on your own key. Full sources: [Colliedesk vs Freshdesk](/vs/freshdesk).
+Colliedesk AI (coming after beta) is billed at model cost +30% on our key, or by your provider on your own key. Full sources: [Colliedesk vs Freshdesk](/vs/freshdesk).
 
 ## What Colliedesk does today
 
-Colliedesk is pre-alpha. The shared inbox is released; the email channel and the Freshdesk importer are built and in testing for v0.2. Read the table before you plan a move.
+Colliedesk is alpha. The shared inbox, email channel and Freshdesk importer are released and run on Colliedesk Cloud; the interface or schema may change between releases. Read the table before you plan a move.
 
 ${statusTable}
 
 ## How small teams start
 
-1. **Try it:** self-host free, or wait for the Cloud trial with v0.2.
+1. **Try it:** [start the 14-day Cloud trial](${TRIAL_HREF}), or self-host free.
 2. **Plan the move before your renewal:** the [founding offer](${FOUNDING_HREF}) is $100 per workspace per year, locked for life, and we [migrate your Freshdesk data for you](/migrate/freshdesk/done-for-you).
 3. **Switch only when the reconcile report matches.**`;
 

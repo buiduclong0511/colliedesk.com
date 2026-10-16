@@ -21,7 +21,7 @@ const faq: Faq[] = [
 const body = `## The short answer
 
 - **Choose HubSpot Service Hub** if your sales and marketing already run on HubSpot and you want tickets on the same contact records.
-- **Choose Colliedesk** if you need a helpdesk, not a CRM suite, and want one flat price with AI at cost. Colliedesk is pre-alpha; read the status table first.
+- **Choose Colliedesk** if you need a helpdesk, not a CRM suite, and want one flat price with AI at cost. Colliedesk is alpha; read the status table first.
 
 ## Price, side by side
 
