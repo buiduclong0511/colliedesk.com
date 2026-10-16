@@ -1,8 +1,9 @@
 import { techArticle } from '../../lib/schema';
 import type { Page } from '../../lib/page';
+import { CONTACT_EMAIL } from '../../lib/site';
 
 export const LEGAL_UPDATED = '2026-10-15';
-export const CONTACT_EMAIL = 'support@colliedesk.com';
+export { CONTACT_EMAIL };
 
 const body = `## The short version
 

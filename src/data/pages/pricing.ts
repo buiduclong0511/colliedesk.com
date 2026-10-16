@@ -1,11 +1,19 @@
-import { FOUNDING_HREF, REPO } from '../../lib/site';
+import { CONTACT_EMAIL, FOUNDING_HREF, REPO } from '../../lib/site';
 import { faqPage, softwareApplication } from '../../lib/schema';
 import type { Faq, Page } from '../../lib/page';
 
 const faq: Faq[] = [
   {
     q: 'Does Colliedesk charge per agent?',
-    a: 'No. Colliedesk Cloud Team is $49 per workspace per month or $490 per year, for up to 10 agents. A workspace is one support team. Adding an agent does not change the price. More than 10 agents: email us.',
+    a: 'No. Colliedesk Cloud Team is $49 per workspace per month or $490 per year, for up to 10 agents. Team 25 is $99 per workspace per month or $990 per year, for up to 25 agents. A workspace is one support team. Adding an agent does not change the price; you move to Team 25 only when you reach 11 agents.',
+  },
+  {
+    q: 'How much storage is included?',
+    a: `Team includes 100 GB of attachments and Team 25 includes 250 GB. Imported files count. We warn you at 80%. Customer email is always accepted, even over the cap, with its attachments; only your own uploads and new imports pause until you free space or move up. Need more storage? Email us at ${CONTACT_EMAIL}. We do not sell extra storage self-serve yet.`,
+  },
+  {
+    q: 'What happens above 25 agents?',
+    a: `Cloud Team 25 covers up to 25 agents. With more than 25, email us at ${CONTACT_EMAIL}. Self-hosting has no agent limit.`,
   },
   {
     q: 'What does "AI at LLM cost +30%" mean?',
@@ -21,7 +29,7 @@ const faq: Faq[] = [
   },
   {
     q: 'What is the founding offer?',
-    a: 'A founding customer pays $100 per workspace per year, and that price is locked for life. We also migrate your Freshdesk data for free. It includes up to 10 agents and 20 GB of attachments, imported files included. Above 20 GB nothing is deleted and customer email keeps arriving with its attachments; only your own uploads and new imports wait until you upgrade to Cloud Team, which has no storage cap. It is for teams who want to leave Freshdesk and help shape Colliedesk while it is young.',
+    a: 'A founding customer pays $100 per workspace per year, and that price is locked for life. We also migrate your Freshdesk data for free. It includes up to 10 agents and 20 GB of attachments, imported files included. Above 20 GB nothing is deleted and customer email keeps arriving with its attachments; only your own uploads and new imports wait until you upgrade to Cloud Team, which includes 100 GB. It is for teams who want to leave Freshdesk and help shape Colliedesk while it is young.',
   },
   {
     q: 'When can I use Colliedesk Cloud?',
@@ -33,7 +41,10 @@ const plansMd = `| Plan | Price | What you get |
 |---|---|---|
 | Self-host | $0, forever | Every feature. AGPL-3.0. AI with your own model key. |
 | Founding | $100 per workspace per year, locked for life | Free Freshdesk migration with a reconcile report. Up to 10 agents, no per-agent fees. 20 GB of attachments, imported files included. AI at LLM cost +30% or bring your own key. |
-| Cloud Team (coming v0.2) | $49 per workspace per month, or $490 per year | Hosted by HC Labs. Up to 10 agents, unlimited conversations, no per-agent fees. AI at LLM cost +30% or bring your own key. |`;
+| Cloud Team (coming v0.2) | $49 per workspace per month, or $490 per year | Hosted by HC Labs. Up to 10 agents, unlimited conversations, no per-agent fees. 100 GB of attachments, imported files included. AI at LLM cost +30% or bring your own key. |
+| Cloud Team 25 (coming v0.2) | $99 per workspace per month, or $990 per year | Everything in Team. Up to 25 agents, unlimited conversations, flat price, no per-agent fees. 250 GB of attachments, imported files included. |
+
+Need more storage? Email us at ${CONTACT_EMAIL}. Customer email is always accepted, even over the cap; only agent uploads and new imports pause. We warn you at 80%.`;
 
 const body = `## What you pay for
 
@@ -58,13 +69,13 @@ const page: Page = {
   name: 'Pricing',
   path: '/pricing',
   section: 'Product',
-  title: 'Colliedesk pricing: $49 per workspace, no per-agent fees, 14-day free trial',
+  title: 'Colliedesk pricing: $49 or $99 per workspace, no per-agent fees, 14-day free trial',
   description:
-    'Colliedesk Cloud starts with a 14-day free trial, no card. Team costs $49 per workspace per month ($490 per year), up to 10 agents, no per-agent fees. Self-hosting is free.',
-  summary: '14-day free trial, no card; Team $49 per workspace per month or $490 per year, up to 10 agents, no per-agent fees; founding offer; AI at LLM cost +30% or your own key; self-host free',
+    'Colliedesk Cloud starts with a 14-day free trial, no card. Team costs $49 per workspace per month ($490 per year) for up to 10 agents, Team 25 costs $99 ($990 per year) for up to 25. No per-agent fees. Self-hosting is free.',
+  summary: '14-day free trial, no card; Team $49 per workspace per month or $490 per year, up to 10 agents, 100 GB; Team 25 $99 or $990 per year, up to 25 agents, 250 GB; no per-agent fees; founding offer; AI at LLM cost +30% or your own key; self-host free',
   eyebrow: 'Pricing',
   h1: 'One flat price per workspace. No per-agent fees.',
-  lede: 'Try it free for 14 days. Add your whole team, up to 10 agents, for the same $49 a month. Self-host for $0. Pay for AI at cost plus 30%, or bring your own key.',
+  lede: 'Try it free for 14 days. Add your whole team, up to 10 agents, for the same $49 a month, or up to 25 agents for $99. Self-host for $0. Pay for AI at cost plus 30%, or bring your own key.',
   pre: 'pricing-plans',
   preMd: plansMd,
   body,

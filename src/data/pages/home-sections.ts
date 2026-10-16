@@ -71,4 +71,4 @@ Colliedesk is AGPL-3.0. The code, your data and the export format are yours. [Ho
 
 ## Founding offer
 
-$100 per workspace per year, locked for life, with free Freshdesk migration and a reconcile report. Up to 10 agents, no per-agent fees, 20 GB of attachments including imported files. AI at model cost +30% or your own key. Colliedesk Cloud opens for founding customers with v0.2. The checkout link is coming soon.`;
+$100 per workspace per year, locked for life, with free Freshdesk migration and a reconcile report. Up to 10 agents, no per-agent fees, 20 GB of attachments including imported files. Cloud Team is $49 a month for up to 10 agents and 100 GB; Team 25 is $99 a month for up to 25 agents and 250 GB. AI at model cost +30% or your own key. Colliedesk Cloud opens for founding customers with v0.2. The checkout link is coming soon.`;

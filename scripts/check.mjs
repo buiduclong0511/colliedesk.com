@@ -171,7 +171,7 @@ const PRICE_MAX_AGE_DAYS = 90;
   const vsMd = read('vs/freshdesk.md');
   const chart = vsHtml.match(/<figure class="vs-chart"[\s\S]*?<\/figure>/)?.[0] ?? '';
   if (!chart) fail('/vs/freshdesk: price chart (figure.vs-chart) missing');
-  for (const n of [1, 3, 5, 10]) {
+  for (const n of [1, 3, 5, 10, 25]) {
     if (!new RegExp(`<input[^>]*name="agents"[^>]*value="${n}"`).test(chart)) fail(`/vs/freshdesk: no ${n}-agent option in the price chart`);
     if (!chart.includes(`data-agents="${n}"`)) fail(`/vs/freshdesk: no price list for ${n} agents`);
   }
@@ -183,7 +183,10 @@ const PRICE_MAX_AGE_DAYS = 90;
   if (!total(list(3), '$57') || !total(list(3), '$49')) fail('/vs/freshdesk: 3 agents must show Freshdesk Growth $57 and Colliedesk $49');
   if (!total(list(5), '$420') || !block(5).includes('$4,452 a year')) fail('/vs/freshdesk: 5 agents must show Freshdesk Pro + Copilot $420 and a $4,452 yearly saving');
   if (!total(list(1), '$19')) fail('/vs/freshdesk: 1 agent must show Freshdesk Growth $19, cheaper than Colliedesk');
-  if (!/from 3 to 10 agents/.test(chart)) fail('/vs/freshdesk: chart must say Colliedesk costs less from 3 to 10 agents');
+  if (!/from 3 to 25 agents/.test(chart)) fail('/vs/freshdesk: chart must say Colliedesk costs less from 3 to 25 agents');
+  // 25 agents: Growth 25 x $19 = $475, Colliedesk Team 25 is $99 flat.
+  if (!total(list(25), '$475') || !total(list(25), '$99')) fail('/vs/freshdesk: 25 agents must show Freshdesk Growth $475 and Colliedesk Team 25 $99');
+  if (!/more than 25 agents/.test(vsHtml)) fail('/vs/freshdesk: "not for you yet" must stop at 25 agents');
   const readOn = chart.match(/data-read-on="(\d{4}-\d{2}-\d{2})"/)?.[1];
   if (!readOn) fail('/vs/freshdesk: price chart has no data-read-on date');
   else if ((Date.now() - Date.parse(readOn)) / 86_400_000 > PRICE_MAX_AGE_DAYS) {
@@ -191,6 +194,28 @@ const PRICE_MAX_AGE_DAYS = 90;
   }
   if (!/id="fit"/.test(vsHtml) || !/Not for you yet/.test(vsHtml)) fail('/vs/freshdesk: "who it fits" section missing');
   if (!vsMd.includes('## Who Colliedesk fits') || !vsMd.includes('| 3 agents |')) fail('/vs/freshdesk.md: twin lacks the price-by-team-size table or the fit section');
+}
+
+// Cloud plan limits. Team: 10 agents, 100 GB. Team 25: 25 agents, 250 GB, $99 a month or $990 a year.
+// Extra storage is not sold self-serve, so no add-on price may appear. Teams above the caps are
+// never sent to "contact us" for 10 agents: Team 25 covers up to 25.
+{
+  const supportMail = 'support@colliedesk.com';
+  for (const name of ['pricing.html', 'pricing.md']) {
+    const text = read(name);
+    for (const needle of ['Team 25', '$99', '$990', 'Up to 25 agents', '250 GB of attachments', '100 GB of attachments', '$490', 'Need more storage? Email us', supportMail]) {
+      if (!text.includes(needle)) fail(`/${name}: missing "${needle}"`);
+    }
+    if (/\+\s?100 GB|\$10 (a|per) month/.test(text)) fail(`/${name}: shows an extra-storage price; it is not sold self-serve`);
+    if (!/customer email/i.test(text)) fail(`/${name}: does not say customer email keeps arriving over the cap`);
+  }
+  if (!/"name":"Colliedesk Cloud Team 25"[^}]*"price":"99"|"price":"99"[^}]*"name":"Colliedesk Cloud Team 25"/.test(read('pricing.html'))) fail('/pricing: JSON-LD has no Team 25 offer at 99');
+  const stale = /(more than|above|over) 10 agents|Above that, email us/i;
+  for (const file of pages) {
+    const urlPath = urlPathOf(file);
+    const md = read(`${urlPath === '/' ? 'index' : urlPath.slice(1)}.md`);
+    if (stale.test(readFileSync(file, 'utf8')) || stale.test(md)) fail(`${urlPath}: still sends teams above 10 agents to "contact us"; Team 25 covers up to 25`);
+  }
 }
 
 if (jsBytes > JS_BUDGET_BYTES) fail(`JavaScript budget exceeded: ${jsBytes} bytes > ${JS_BUDGET_BYTES}`);
