@@ -13,8 +13,9 @@ on:
           not deploy. Leave empty to build from main and deploy.
         required: false
         default: ''
-  # User guides and the roadmap live in colliedesk/colliedesk. Every 15 minutes, compare the
-  # docs on main with the version the live site was built from; rebuild only when they differ.
+  # User guides and the roadmap live in colliedesk/colliedesk, and the founding places left come
+  # from Colliedesk Cloud. Every 15 minutes, compare both with what the live site was built from;
+  # rebuild only when one differs.
   schedule:
     - cron: '*/15 * * * *'
 
@@ -28,6 +29,7 @@ concurrency:
 
 env:
   LIVE_DOCS_VERSION_URL: https://colliedesk.com/product-docs-version.txt
+  LIVE_FOUNDING_STATE_URL: https://colliedesk.com/founding-state.txt
 
 jobs:
   freshness:
@@ -49,8 +51,10 @@ jobs:
         run: |
           current=$(sh scripts/product-docs-version.sh product)
           live=$(curl -fsS --max-time 15 "$LIVE_DOCS_VERSION_URL" || echo unknown)
-          echo "current=$current live=$live"
-          if [ "$current" = "$live" ]; then echo stale=false; else echo stale=true; fi >> "$GITHUB_OUTPUT"
+          founding=$(node scripts/founding-state.mjs)
+          live_founding=$(curl -fsS --max-time 15 "$LIVE_FOUNDING_STATE_URL" || echo unknown)
+          echo "current=$current live=$live founding=$founding live_founding=$live_founding"
+          if [ "$current" = "$live" ] && [ "$founding" = "$live_founding" ]; then echo stale=false; else echo stale=true; fi >> "$GITHUB_OUTPUT"
 
   check:
     needs: freshness
@@ -76,9 +80,11 @@ jobs:
           package-manager-cache: false
       - run: sh scripts/brand-name-check.sh
       - run: pnpm install --frozen-lockfile
+      - run: node scripts/founding-state.mjs > founding-state.json
       - run: pnpm run typecheck
       - run: pnpm run build
       - run: sh scripts/product-docs-version.sh product > _site/product-docs-version.txt
+      - run: cp founding-state.json _site/founding-state.txt
       - run: pnpm run check
       - uses: actions/upload-pages-artifact@v4
         if: github.event_name != 'pull_request'

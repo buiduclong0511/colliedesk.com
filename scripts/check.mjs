@@ -146,6 +146,22 @@ for (const path of ['/', '/pricing']) {
   if (file && !readFileSync(file, 'utf8').includes('20 GB of attachments')) fail(`${path}: founding offer does not state the 20 GB attachment cap`);
 }
 
+// Founding closes at ten places. A site built from a closed state must not link to the checkout,
+// and an open state with a known count must show it on the home page.
+const foundingFile = process.env.FOUNDING_STATE_FILE ?? 'founding-state.json';
+if (existsSync(foundingFile)) {
+  const founding = JSON.parse(readFileSync(foundingFile, 'utf8'));
+  const checkout = 'buy.polar.sh/polar_cl_1R61RlI9VkKyH4ZfFs7XviF7UAd1CaoycIasu2TiXQx';
+  if (founding.open === false) {
+    for (const file of files.filter((f) => /\.(html|md|txt)$/.test(f))) {
+      if (readFileSync(file, 'utf8').includes(checkout)) fail(`${file.slice(outDir.length - 1)}: founding is closed but the page links to its checkout`);
+    }
+  } else if (Number.isInteger(founding.taken)) {
+    const home = fileFor('/');
+    if (home && !readFileSync(home, 'utf8').includes('places left')) fail('/: founding is open with a known count but the home page does not show the places left');
+  }
+}
+
 for (const m of llms.matchAll(/\]\(([^)\s]+)\)/g)) checkLink(m[1], '/', 'llms.txt');
 
 // Web analytics run on every page and never store anything in the visitor's browser, so the site

@@ -1,3 +1,4 @@
+import { FOUNDING_SLOTS, foundingState, placesLeft } from '../../lib/founding';
 import { FOUNDING_CHECKOUT } from '../../lib/site';
 
 function Collie() {
@@ -45,14 +46,25 @@ function Quotes() {
 }
 
 function Founding() {
+  const state = foundingState();
+  const left = placesLeft(state);
   return (
     <section className="section" id="founding" aria-labelledby="founding-title">
       <div className="wrap">
         <div className="founding">
           <div>
-            <p className="eyebrow">Founding offer</p>
-            <h2 id="founding-title">$100 a year. Locked for life.</h2>
-            <p className="section-lede">For small teams planning to leave Freshdesk. Cloud Team lists at $490 a year. Your price never goes up, and we migrate your Freshdesk data for free.</p>
+            <p className="eyebrow">Founding offer{left !== null && state.open ? ` · ${left} of ${FOUNDING_SLOTS} places left` : ''}</p>
+            {state.open ? (
+              <>
+                <h2 id="founding-title">$100 a year. Locked for life.</h2>
+                <p className="section-lede">For small teams planning to leave Freshdesk. Only {FOUNDING_SLOTS} workspaces get it. Cloud Team lists at $490 a year. Your price never goes up, and we migrate your Freshdesk data for free.</p>
+              </>
+            ) : (
+              <>
+                <h2 id="founding-title">Founding is closed. All {FOUNDING_SLOTS} places are taken.</h2>
+                <p className="section-lede">Thank you to the first {FOUNDING_SLOTS} teams. Their price stays $100 a year for life. Everyone else can start on Cloud Team, or self-host for free.</p>
+              </>
+            )}
           </div>
           <ul className="check-list">
             <li>$100 per workspace per year, locked for life</li>
@@ -62,10 +74,16 @@ function Founding() {
             <li>AI at model cost +30%, or bring your own key</li>
             <li>Colliedesk Cloud opens for founding customers with v0.2</li>
           </ul>
-          <div className="founding-cta">
-            <a className="btn btn-primary btn-lg" href={FOUNDING_CHECKOUT} rel="noopener">Become a founding customer, $100/year</a>
-            <p>Secure checkout by Polar. After payment we email you within one business day to set up your workspace and plan your Freshdesk migration.</p>
-          </div>
+          {state.open ? (
+            <div className="founding-cta">
+              <a className="btn btn-primary btn-lg" href={FOUNDING_CHECKOUT} rel="noopener">Become a founding customer, $100/year</a>
+              <p>Secure checkout by Polar. After payment we email you within one business day to set up your workspace and plan your Freshdesk migration.</p>
+            </div>
+          ) : (
+            <div className="founding-cta">
+              <a className="btn btn-primary btn-lg" href="/pricing">See Cloud Team pricing</a>
+            </div>
+          )}
         </div>
       </div>
     </section>
