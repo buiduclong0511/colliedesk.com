@@ -1,5 +1,5 @@
 import { FOUNDING_SLOTS, foundingState, placesLeft } from '../lib/founding';
-import { FOUNDING_HREF, REPO } from '../lib/site';
+import { CONTACT_EMAIL, FOUNDING_HREF, PRICE, REPO } from '../lib/site';
 import { Badge } from './Badge';
 
 // The three plans above the pricing prose; the Markdown twin carries the same facts as a table.
@@ -39,10 +39,26 @@ export function PricingPlans() {
           <li>We run, update and back it up</li>
           <li>14-day free trial, no card (30 days if you import from Freshdesk)</li>
           <li>Up to 10 agents, unlimited conversations</li>
+          <li>100 GB of attachments, imported files included</li>
           <li>No per-agent fees</li>
           <li>AI at LLM cost +30%, or bring your own key</li>
         </ul>
       </article>
+      <article className="plan">
+        <h2 className="plan-name">Cloud Team 25 <Badge kind="coming">Coming v0.2</Badge></h2>
+        <p className="plan-price"><strong>{PRICE.team25Monthly}</strong> <span>per workspace / month</span></p>
+        <p className="plan-alt">or {PRICE.team25Yearly} per year</p>
+        <ul>
+          <li>Everything in Team</li>
+          <li>Up to 25 agents, unlimited conversations</li>
+          <li>250 GB of attachments, imported files included</li>
+          <li>Flat price, no per-agent fees</li>
+        </ul>
+      </article>
+      <p className="plans-note">
+        Need more storage? Email us at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Customer email always arrives, even over the
+        cap; only agent uploads and new imports pause, and we warn you at 80%.
+      </p>
     </section>
   );
 }

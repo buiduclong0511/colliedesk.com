@@ -12,7 +12,7 @@ function Selling() {
           <p className="section-lede">No enterprise edition with the good parts held back. Every feature is in the open-source code.</p>
         </div>
         <ol className="sell-list">
-          <li><h3>Colliedesk Cloud</h3><p>We run it for you. One flat price per workspace, not per agent: <strong>$49 a month</strong> or $490 a year.</p></li>
+          <li><h3>Colliedesk Cloud</h3><p>We run it for you. One flat price per workspace, not per agent: <strong>$49 a month</strong> or $490 a year, $99 for up to 25 agents.</p></li>
           <li><h3>Migration</h3><p>We move your Freshdesk history (tickets, replies, attachments, tags) and give you a reconcile report that proves nothing was lost.</p></li>
         </ol>
       </div>
@@ -41,7 +41,7 @@ function Pillars() {
           <article className="pillar">
             <p className="pillar-k">03 · Flat price</p>
             <h3>No per-agent fees</h3>
-            <p>Hire a fifth agent, or a tenth, and the bill stays $49 a month for the workspace. Self-host and it stays $0.</p>
+            <p>Hire a fifth agent, or a tenth, and the bill stays $49 a month for the workspace. Up to 25 agents is a flat $99. Self-host and it stays $0.</p>
             <p><Badge kind="shipped">Price published</Badge> <a href="/pricing">See pricing</a></p>
           </article>
         </div>
