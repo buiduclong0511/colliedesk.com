@@ -1,6 +1,9 @@
+import { FOUNDING_SLOTS, foundingState } from '../../lib/founding';
 import { FOUNDING_CHECKOUT } from '../../lib/site';
 import { faqPage, techArticle } from '../../lib/schema';
 import type { Faq, Page } from '../../lib/page';
+
+const foundingOpen = foundingState().open;
 
 const faq: Faq[] = [
   {
@@ -45,7 +48,7 @@ Tickets (archived ones included), replies, private notes, attachments, tags, con
 
 When founding places close, the done-for-you offer closes with them.
 
-[Become a founding customer, $100/year](${FOUNDING_CHECKOUT})
+${foundingOpen ? `[Become a founding customer, $100/year](${FOUNDING_CHECKOUT})` : `**Founding is closed: all ${FOUNDING_SLOTS} places are taken.** New teams can run the importer themselves with the [import guide](/docs/import-freshdesk).`}
 
 ## What we need from you
 
