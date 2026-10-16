@@ -153,6 +153,19 @@ for (const file of files.filter((f) => /\.(html|md|txt)$/.test(f))) {
   if (readFileSync(file, 'utf8').includes('buy.polar.sh/')) fail(`${file.slice(outDir.length - 1)}: links a static Polar checkout; send buyers to the app (${'app.colliedesk.com/settings/billing?buy=founding'})`);
 }
 
+// The Founding refund promise must sit wherever the Founding checkout is offered, and the terms
+// must define it at /terms#refunds, the anchor those pages link to.
+for (const file of files.filter((f) => /\.(html|md)$/.test(f))) {
+  const text = readFileSync(file, 'utf8');
+  if (text.includes('app.colliedesk.com/settings/billing?buy=founding') && !/30-day money-back|within 30 days/.test(text)) {
+    fail(`${file.slice(outDir.length - 1)}: offers the Founding checkout without the 30-day money-back guarantee`);
+  }
+}
+{
+  const terms = fileFor('/terms');
+  if (terms && !readFileSync(terms, 'utf8').includes('id="refunds"')) fail('/terms: no #refunds section for the Founding money-back guarantee');
+}
+
 // Founding closes at ten places. A site built from a closed state must not link to the checkout,
 // and an open state with a known count must show it on the home page.
 const foundingFile = process.env.FOUNDING_STATE_FILE ?? 'founding-state.json';

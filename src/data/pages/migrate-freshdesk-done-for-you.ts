@@ -48,7 +48,7 @@ Tickets (archived ones included), replies, private notes, attachments, tags, con
 
 When founding places close, the done-for-you offer closes with them.
 
-${foundingOpen ? `[Become a founding customer, $100/year](${FOUNDING_CHECKOUT})` : `**Founding is closed: all ${FOUNDING_SLOTS} places are taken.** New teams can run the importer themselves with the [import guide](/docs/import-freshdesk).`}
+${foundingOpen ? `[Become a founding customer, $100/year](${FOUNDING_CHECKOUT}). 30-day money-back guarantee: if it is not right for you, we refund the full $100, even after the migration ([terms](/terms#refunds)).` : `**Founding is closed: all ${FOUNDING_SLOTS} places are taken.** New teams can run the importer themselves with the [import guide](/docs/import-freshdesk).`}
 
 ## What we need from you
 

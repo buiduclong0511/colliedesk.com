@@ -1,5 +1,5 @@
 import { FOUNDING_SLOTS, foundingState } from '../lib/founding';
-import { CONTACT_EMAIL, FOUNDING_CHECKOUT, PRICE, REPO, TRIAL_HREF } from '../lib/site';
+import { CONTACT_EMAIL, FOUNDING_CHECKOUT, MONEY_BACK, PRICE, REPO, TRIAL_HREF } from '../lib/site';
 import { FoundingMeter } from './FoundingMeter';
 
 // The three plans above the pricing prose; the Markdown twin carries the same facts as a table.
@@ -32,6 +32,7 @@ export function PricingPlans() {
           <div className="plan-cta">
             <FoundingMeter state={state} />
             <a className="btn btn-primary" href={FOUNDING_CHECKOUT} rel="noopener">Join for $100/year</a>
+            <p className="plan-guarantee"><a href="/terms#refunds">{MONEY_BACK}</a>. Full refund, no questions asked.</p>
           </div>
         ) : <p>Founding is closed. Existing founding customers keep this price for life.</p>}
       </article>

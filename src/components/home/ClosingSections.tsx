@@ -1,6 +1,6 @@
 import { FOUNDING_SLOTS, foundingState } from '../../lib/founding';
 import { FoundingMeter } from '../FoundingMeter';
-import { FOUNDING_CHECKOUT } from '../../lib/site';
+import { FOUNDING_CHECKOUT, MONEY_BACK } from '../../lib/site';
 
 function Collie() {
   return (
@@ -68,6 +68,7 @@ function Founding() {
           </div>
           <ul className="check-list">
             <li>$100 per workspace per year, locked for life</li>
+            <li>{MONEY_BACK}: full refund within 30 days, no questions asked</li>
             <li>Free Freshdesk migration with a reconcile report</li>
             <li>Up to 10 agents, no per-agent fees</li>
             <li>20 GB of attachments, imported files included</li>
@@ -78,7 +79,7 @@ function Founding() {
             <div className="founding-cta">
               <FoundingMeter state={state} />
               <a className="btn btn-primary btn-lg" href={FOUNDING_CHECKOUT} rel="noopener">Become a founding customer, $100/year</a>
-              <p>Secure checkout by Polar. After payment we email you within one business day to set up your workspace and plan your Freshdesk migration.</p>
+              <p>Secure checkout by Polar. Not right for you? Email us within 30 days and we refund the full $100, <a href="/terms#refunds">no questions asked</a>. After payment we email you within one business day to set up your workspace and plan your Freshdesk migration.</p>
             </div>
           ) : (
             <div className="founding-cta">

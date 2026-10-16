@@ -32,6 +32,10 @@ const faq: Faq[] = [
     a: 'A founding customer pays $100 per workspace per year, and that price is locked for life. We also migrate your Freshdesk data for free. It includes up to 10 agents and 20 GB of attachments, imported files included. Above 20 GB nothing is deleted and customer email keeps arriving with its attachments; only your own uploads and new imports wait until you upgrade to Cloud Team, which includes 100 GB. It is for teams who want to leave Freshdesk and help shape Colliedesk while it is young.',
   },
   {
+    q: 'Can I get my money back if Founding is not right for us?',
+    a: 'Yes. Email support@colliedesk.com within 30 days of your first Founding payment and we refund the full amount, no questions asked, even if we already migrated your Freshdesk data. You can export everything before you go. Details are in the [terms](/terms#refunds).',
+  },
+  {
     q: 'When can I use Colliedesk Cloud?',
     a: `Now. Colliedesk Cloud is live in alpha, and every workspace starts with a 14-day free trial, no card. [Start the free trial](${TRIAL_HREF}). See the [roadmap](/roadmap) for what comes next.`,
   },
@@ -40,7 +44,7 @@ const faq: Faq[] = [
 const plansMd = `| Plan | Price | What you get |
 |---|---|---|
 | Self-host | $0, forever | Every feature. AGPL-3.0. AI with your own model key. |
-| Founding | $100 per workspace per year, locked for life | Free Freshdesk migration with a reconcile report. Up to 10 agents, no per-agent fees. 20 GB of attachments, imported files included. AI at LLM cost +30% or bring your own key. |
+| Founding | $100 per workspace per year, locked for life; 30-day money-back guarantee | Free Freshdesk migration with a reconcile report. Up to 10 agents, no per-agent fees. 20 GB of attachments, imported files included. AI at LLM cost +30% or bring your own key. |
 | Cloud Team | $49 per workspace per month, or $490 per year | Hosted by HC Labs. Up to 10 agents, unlimited conversations, no per-agent fees. 100 GB of attachments, imported files included. AI at LLM cost +30% or bring your own key. [Start free trial](${TRIAL_HREF}). |
 | Cloud Team 25 | $99 per workspace per month, or $990 per year | Everything in Team. Up to 25 agents, unlimited conversations, flat price, no per-agent fees. 250 GB of attachments, imported files included. [Start free trial](${TRIAL_HREF}). |
 
