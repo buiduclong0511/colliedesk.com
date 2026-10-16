@@ -6,7 +6,7 @@ import { collieFacts as c, statusTable } from './collie-status';
 const faq: Faq[] = [
   {
     q: 'What is a good Help Scout alternative with flat pricing?',
-    a: 'Colliedesk Cloud is $49 per workspace per month with no per-user fees, and the open-source code (AGPL-3.0) is free to self-host. Colliedesk is pre-alpha; email arrives in v0.2.',
+    a: 'Colliedesk Cloud is $49 per workspace per month with no per-user fees, and the open-source code (AGPL-3.0) is free to self-host. Colliedesk is in alpha, and the email channel works today.',
   },
   {
     q: 'Can I export my Help Scout conversations?',
@@ -18,14 +18,14 @@ const faq: Faq[] = [
   },
   {
     q: 'Does Colliedesk import from Help Scout?',
-    a: 'Not yet. The first importer is Freshdesk (coming v0.2); a Help Scout importer is on the roadmap for later.',
+    a: 'Not yet. The first importer is Freshdesk (available now); a Help Scout importer is on the roadmap for later.',
   },
 ];
 
 const body = `## The short answer
 
 - **Choose Help Scout** if you want one of the most polished email-first helpdesks, with AI drafting already included. It is a good product.
-- **Choose Colliedesk** if you want a price that never depends on headcount or contacts, your data in a database you control, and code you can read and fork. Colliedesk is pre-alpha; read the status table first.
+- **Choose Colliedesk** if you want a price that never depends on headcount or contacts, your data in a database you control, and code you can read and fork. Colliedesk is alpha; read the status table first.
 
 ## Price, side by side
 

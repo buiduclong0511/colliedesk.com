@@ -9,7 +9,7 @@ const body = `## The short version
 - When the trial or subscription ends, the workspace locks. You can still export everything.
 - Your data stays yours. You can export it and leave at any time.
 - Do not use Colliedesk to send spam or to break the law.
-- Colliedesk is pre-alpha software. We work hard to keep it running and backed up, but we cannot promise it never fails.
+- Colliedesk is alpha software. We work hard to keep it running and backed up, but we cannot promise it never fails.
 
 ## Who you agree with
 
@@ -58,7 +58,7 @@ Do not use Colliedesk Cloud to:
 
 ## Availability
 
-Colliedesk is pre-alpha (version 0.1). We back up every workspace daily and monitor the service around the clock, but we do not offer an uptime guarantee yet. Features change; we write each change in the [changelog](/changelog).
+Colliedesk is alpha (version 0.0.x). We back up every workspace daily and monitor the service around the clock, but we do not offer an uptime guarantee yet. Features change; we write each change in the [changelog](/changelog).
 
 ## Warranty and liability
 

@@ -5,7 +5,7 @@ import type { Faq, Page } from '../../lib/page';
 const faq: Faq[] = [
   {
     q: 'How do I migrate from Freshdesk without losing tickets?',
-    a: 'Export through the Freshdesk API, not the CSV export: the CSV has ticket fields only. Walk the ticket list in date windows with `updated_since` to stay under the 30,000-ticket cap per filter, fetch archived tickets separately, fetch every conversation and attachment, then compare counts and checksums before you close the account. The Colliedesk importer (coming v0.2) does these steps and writes a reconcile report.',
+    a: 'Export through the Freshdesk API, not the CSV export: the CSV has ticket fields only. Walk the ticket list in date windows with `updated_since` to stay under the 30,000-ticket cap per filter, fetch archived tickets separately, fetch every conversation and attachment, then compare counts and checksums before you close the account. The Colliedesk importer (available now) does these steps and writes a reconcile report.',
   },
   {
     q: 'Does the Freshdesk CSV export include the conversation?',
@@ -13,7 +13,7 @@ const faq: Faq[] = [
   },
   {
     q: 'Is the Colliedesk Freshdesk importer available now?',
-    a: `It is built and in testing, and ships with v0.2. The [import guide](/docs/import-freshdesk) has the command. Founding customers get their migration done for them, free. See [the founding offer](${FOUNDING_HREF}).`,
+    a: `It is available now, in alpha. The [import guide](/docs/import-freshdesk) has the command. Founding customers get their migration done for them, free. See [the founding offer](${FOUNDING_HREF}).`,
   },
   {
     q: 'When should I close my Freshdesk account?',
@@ -21,7 +21,7 @@ const faq: Faq[] = [
   },
 ];
 
-const body = `> **Status:** the Colliedesk Freshdesk importer is built and in testing, and ships with **v0.2**. This page explains the full process so you can plan, or do it yourself with the Freshdesk API today. Founding customers get the migration done for them, free.
+const body = `> **Status:** the Colliedesk Freshdesk importer is available now, in alpha: the interface or schema may change between releases. This page explains the full process so you can plan, or do it yourself with the Freshdesk API. Founding customers get the migration done for them, free.
 
 ## 1. Know what you are moving
 
@@ -36,7 +36,7 @@ Write down, from your Freshdesk admin:
 
 Freshdesk's ticket export in the UI gives you **ticket fields only**, as CSV or Excel. It is useful for a spreadsheet. It is not a migration. Before you cancel, also take a full account export as a backup: [how to export tickets from Freshdesk](/migrate/freshdesk/export).
 
-| Data | Freshdesk UI export (CSV/Excel) | Freshdesk API | Colliedesk importer (**Coming v0.2**) |
+| Data | Freshdesk UI export (CSV/Excel) | Freshdesk API | Colliedesk importer (**Available now**) |
 |---|---|---|---|
 | Ticket fields (subject, status, priority, dates) | Yes | Yes | Yes |
 | Full conversation: replies and private notes | No | Yes, extra calls per ticket | Yes |
@@ -44,7 +44,7 @@ Freshdesk's ticket export in the UI gives you **ticket fields only**, as CSV or 
 | Archived tickets (closed, inactive 120 days) | Excluded | Separate endpoint | Yes |
 | Tags and contacts | Tags as a field | Yes | Yes |
 | Proof that nothing was lost | No | No | Reconcile report |
-| Time entries | No | Yes | Yes (shown on the timeline; logging new time arrives in v0.4) |
+| Time entries | No | Yes | Yes (shown on the timeline; logging new time comes later) |
 
 ## 3. Know the API traps
 
@@ -66,7 +66,7 @@ Every import ends with a reconcile report: counts for each kind of record in Fre
 
 ## 6. Switch over
 
-1. Point your support address at Colliedesk (the email channel arrives in v0.2).
+1. Point your support address at Colliedesk (see [Connect email](/docs/email-channel)).
 2. Run a final catch-up import with \`--since\` for tickets that changed after the first import.
 3. Keep Freshdesk read-only for a short overlap.
 4. Close Freshdesk only after the final reconcile report matches.
@@ -86,7 +86,7 @@ const page: Page = {
   title: 'Migrate from Freshdesk without losing tickets: step-by-step guide',
   description:
     'How to leave Freshdesk with every ticket, reply, note and attachment: why the CSV export is not enough, the API limits to plan around, and the reconcile check before you close the account.',
-  summary: 'Step-by-step Freshdesk exit: CSV vs API vs Colliedesk importer (coming v0.2), API traps, reconcile report',
+  summary: 'Step-by-step Freshdesk exit: CSV vs API vs Colliedesk importer (available now), API traps, reconcile report',
   eyebrow: 'Migrate · Freshdesk',
   h1: 'Leave Freshdesk with all your data',
   lede: 'An honest, step-by-step guide: what the Freshdesk export keeps, what it loses, and how to prove nothing was left behind.',

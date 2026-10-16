@@ -7,7 +7,7 @@ import { collieFacts as c, statusTable } from './collie-status';
 const faq: Faq[] = [
   {
     q: 'Is Colliedesk or Zammad better for leaving Freshdesk today?',
-    a: 'Zammad, today. Its Freshdesk migrator is released and self-serve. The Colliedesk Freshdesk importer is built and in testing for v0.2. Choose Colliedesk if you can plan your move around v0.2 and want a flat price, AI at model cost and a reconcile report that proves every record arrived.',
+    a: 'Zammad, today. Its Freshdesk migrator is released and self-serve. The Colliedesk Freshdesk importer is available now, in alpha, so its interface may still change. Choose Colliedesk if you can accept alpha software and want a flat price, AI at model cost and a reconcile report that proves every record arrived.',
   },
   {
     q: 'How much does hosted Zammad cost?',
@@ -22,7 +22,7 @@ const faq: Faq[] = [
 const body = `## The short answer
 
 - **Choose Zammad** if you need a mature open-source helpdesk now: many channels (email, chat, Telegram, Facebook, WhatsApp, SMS, phone), SLAs, a knowledge base, and a released Freshdesk migrator.
-- **Choose Colliedesk** if your team is 3 to 10 agents and you want one flat price instead of per-agent fees, AI without a per-call fee on top, and an import that proves nothing was lost. Colliedesk is pre-alpha; read the status table first.
+- **Choose Colliedesk** if your team is 3 to 10 agents and you want one flat price instead of per-agent fees, AI without a per-call fee on top, and an import that proves nothing was lost. Colliedesk is alpha; read the status table first.
 
 ## Price, side by side
 
@@ -46,9 +46,9 @@ Zammad hosted prices are in euros, per agent per month, excluding VAT, as publis
 
 Zammad is ahead here, and we say so.
 
-| | Zammad migrator | Colliedesk importer (**Coming v0.2**) |
+| | Zammad migrator | Colliedesk importer (**Available now**) |
 |---|---|---|
-| Status | Released, self-serve wizard or console | Built and in testing |
+| Status | Released, self-serve wizard or console | Available now, alpha |
 | Imports | Groups, organizations, users, tickets | Tickets (archived ones included), replies, notes, attachments, tags, contacts, companies, time entries |
 | Into an existing instance | No: "Migrations are only possible on new instances" | Into one workspace |
 | Catch-up after the first run | No: "Differential migrations are not supported" | Yes, \`--since\` |
@@ -77,7 +77,7 @@ const page: Page = {
   title: 'Colliedesk vs Zammad: two open-source helpdesks, flat price vs per agent',
   description:
     'Colliedesk vs Zammad, both AGPL-3.0: Zammad hosted €7–27 per agent plus €0.03 per AI call vs Colliedesk flat $49 per workspace. Freshdesk migration compared honestly.',
-  summary: 'Zammad €7–27 per agent hosted, €0.03 per AI call, released Freshdesk migrator vs Colliedesk flat $49, importer coming v0.2 with reconcile report',
+  summary: 'Zammad €7–27 per agent hosted, €0.03 per AI call, released Freshdesk migrator vs Colliedesk flat $49, importer available now (alpha) with reconcile report',
   eyebrow: 'Compare · Open source',
   h1: 'Colliedesk vs Zammad',
   lede: 'Both are open source under AGPL-3.0. Zammad is mature and charges per agent; Colliedesk is young and charges per workspace. Here is where each one wins, with sources.',

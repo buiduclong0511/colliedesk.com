@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL, FOUNDING_HREF, REPO } from '../../lib/site';
+import { CONTACT_EMAIL, FOUNDING_HREF, REPO, TRIAL_HREF } from '../../lib/site';
 import { faqPage, softwareApplication } from '../../lib/schema';
 import type { Faq, Page } from '../../lib/page';
 
@@ -33,7 +33,7 @@ const faq: Faq[] = [
   },
   {
     q: 'When can I use Colliedesk Cloud?',
-    a: 'Colliedesk is pre-alpha (v0.1). Cloud opens for the first founding customers with v0.2, together with the email channel and the Freshdesk importer. See the [roadmap](/roadmap).',
+    a: `Now. Colliedesk Cloud is live in alpha, and every workspace starts with a 14-day free trial, no card. [Start the free trial](${TRIAL_HREF}). See the [roadmap](/roadmap) for what comes next.`,
   },
 ];
 
@@ -41,8 +41,8 @@ const plansMd = `| Plan | Price | What you get |
 |---|---|---|
 | Self-host | $0, forever | Every feature. AGPL-3.0. AI with your own model key. |
 | Founding | $100 per workspace per year, locked for life | Free Freshdesk migration with a reconcile report. Up to 10 agents, no per-agent fees. 20 GB of attachments, imported files included. AI at LLM cost +30% or bring your own key. |
-| Cloud Team (coming v0.2) | $49 per workspace per month, or $490 per year | Hosted by HC Labs. Up to 10 agents, unlimited conversations, no per-agent fees. 100 GB of attachments, imported files included. AI at LLM cost +30% or bring your own key. |
-| Cloud Team 25 (coming v0.2) | $99 per workspace per month, or $990 per year | Everything in Team. Up to 25 agents, unlimited conversations, flat price, no per-agent fees. 250 GB of attachments, imported files included. |
+| Cloud Team | $49 per workspace per month, or $490 per year | Hosted by HC Labs. Up to 10 agents, unlimited conversations, no per-agent fees. 100 GB of attachments, imported files included. AI at LLM cost +30% or bring your own key. [Start free trial](${TRIAL_HREF}). |
+| Cloud Team 25 | $99 per workspace per month, or $990 per year | Everything in Team. Up to 25 agents, unlimited conversations, flat price, no per-agent fees. 250 GB of attachments, imported files included. [Start free trial](${TRIAL_HREF}). |
 
 Need more storage? Email us at ${CONTACT_EMAIL}. Customer email is always accepted, even over the cap; only agent uploads and new imports pause. We warn you at 80%.`;
 
@@ -52,7 +52,7 @@ Self-hosting is free. We sell two things: **Colliedesk Cloud** (we run it for yo
 
 ## AI is included, not an add-on
 
-**Coming v0.3**. AI features: draft replies and triage from your own past replies and knowledge base, and auto-answer for repetitive tickets with a human in the loop. There is no AI seat licence and no per-resolution fee.
+**Coming after beta**. AI features: draft replies and triage from your own past replies and knowledge base, and auto-answer for repetitive tickets with a human in the loop. There is no AI seat licence and no per-resolution fee.
 
 - **Use our key on Cloud:** you pay the model provider's cost for your usage, plus 30%.
 - **Bring your own key:** on Cloud or self-hosted, you pay your provider directly.
@@ -63,7 +63,7 @@ Most helpdesks charge per agent, then charge again for AI. For five agents, Fres
 
 ## Honest status
 
-Colliedesk is **pre-alpha**. Released today (v0.1): a shared inbox, private notes, tags, assignment and passwordless sign-in. Built and in testing for v0.2: the email channel (replies are plain text, without CC) and the Freshdesk importer with its reconcile report. Not built yet: attachments on agent replies, canned replies and new-ticket notifications. If you must switch this week, Colliedesk is not ready for you yet. If you are planning your exit before your next Freshdesk renewal, [the founding offer](${FOUNDING_HREF}) is for you.`;
+Colliedesk is in **alpha** (0.0.x). It is released and runs on Colliedesk Cloud, with the email channel, the Freshdesk importer with its reconcile report, saved replies, attachments and live updates. Alpha means the interface or database schema may change between releases. Not there yet: Cc on replies, starting a new conversation from the inbox and contact history (beta), and AI (after beta). If you must have those this week, Colliedesk is not ready for you yet. If you are planning your exit before your next Freshdesk renewal, [start the free trial](${TRIAL_HREF}) or take [the founding offer](${FOUNDING_HREF}).`;
 
 const page: Page = {
   name: 'Pricing',

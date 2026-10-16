@@ -20,7 +20,7 @@ export const softwareApplication = (): JsonLd => ({
   applicationCategory: 'BusinessApplication',
   applicationSubCategory: 'Help desk software',
   operatingSystem: 'Linux, Docker; web browser',
-  softwareVersion: '0.1 (pre-alpha)',
+  softwareVersion: '0.0.1 (alpha)',
   license: 'https://www.gnu.org/licenses/agpl-3.0.html',
   codeRepository: REPO,
   isAccessibleForFree: true,

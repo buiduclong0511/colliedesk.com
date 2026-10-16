@@ -44,8 +44,8 @@ Self-hosting is free, forever, with every feature. We sell two things:
 
 ## Why teams switch
 
-- **Leave Freshdesk with all your data** (importer coming v0.2): tickets, replies, notes, checksummed attachments, tags and contacts, with a reconcile report. [Migration guide](/migrate/freshdesk).
-- **AI that answers tickets, included** (coming v0.3): drafts, triage and auto-answer with a human in the loop. Model cost +30%, or bring your own key.
+- **Leave Freshdesk with all your data** (importer available now): tickets, replies, notes, checksummed attachments, tags and contacts, with a reconcile report. [Migration guide](/migrate/freshdesk).
+- **AI that answers tickets, included** (coming after beta): drafts, triage and auto-answer with a human in the loop. Model cost +30%, or bring your own key.
 - **Flat price**: $49 per workspace per month, no per-agent fees. Self-host for $0.
 
 ## The bill for five agents
@@ -71,4 +71,4 @@ Colliedesk is AGPL-3.0. The code, your data and the export format are yours. [Ho
 
 ## Founding offer
 
-$100 per workspace per year, locked for life, with free Freshdesk migration and a reconcile report. Up to 10 agents, no per-agent fees, 20 GB of attachments including imported files. Cloud Team is $49 a month for up to 10 agents and 100 GB; Team 25 is $99 a month for up to 25 agents and 250 GB. AI at model cost +30% or your own key. Colliedesk Cloud opens for founding customers with v0.2. The checkout link is coming soon.`;
+$100 per workspace per year, locked for life, with free Freshdesk migration and a reconcile report. Up to 10 agents, no per-agent fees, 20 GB of attachments including imported files. Cloud Team is $49 a month for up to 10 agents and 100 GB; Team 25 is $99 a month for up to 25 agents and 250 GB. AI at model cost +30% or your own key. Colliedesk Cloud is live; every workspace starts with a 14-day free trial.`;

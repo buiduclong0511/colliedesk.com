@@ -1,4 +1,4 @@
-import { APP_SIGN_IN, FOUNDING_HREF, NAV, REPO } from '../lib/site';
+import { APP_SIGN_IN, TRIAL_HREF, NAV, REPO } from '../lib/site';
 import { NavLink } from './NavLink';
 import { BrandLink } from './Wordmark';
 
@@ -20,7 +20,7 @@ export function Header({ path }: { path: string }) {
       <div className="wrap header-inner">
         <BrandLink />
         <nav aria-label="Main" className="nav-desktop"><NavItems path={path} /></nav>
-        <a className="btn btn-primary btn-sm header-cta" href={FOUNDING_HREF}>Start free trial</a>
+        <a className="btn btn-primary btn-sm header-cta" href={TRIAL_HREF}>Start free trial</a>
         <details className="nav-mobile">
           <summary>Menu</summary>
           <nav aria-label="Main (mobile)"><NavItems path={path} /></nav>

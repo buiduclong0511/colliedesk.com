@@ -38,7 +38,7 @@ export function ReconcileProof() {
         </tbody>
       </table>
       <div className="proof-foot"><CheckIcon /><b>0 lost.</b><span>Every count matches.</span><a href="/migrate/freshdesk#5-check-the-reconcile-report">How the check works</a></div>
-      <p className="proof-note">Sample numbers. The Freshdesk importer is <Badge kind="coming">Coming v0.2</Badge></p>
+      <p className="proof-note">Sample numbers. The Freshdesk importer is <Badge kind="shipped">Available now</Badge></p>
     </figure>
   );
 }

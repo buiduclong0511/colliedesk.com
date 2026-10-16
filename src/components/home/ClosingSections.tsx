@@ -10,7 +10,7 @@ function Collie() {
           <h2 id="collie">A sheepdog herds every ticket home. Your team stays in charge.</h2>
         </div>
         <div className="prose-invert">
-          <p>A collie does not own the flock. It brings every sheep back to the pen and the shepherd decides what happens next. That is the job we give AI in Colliedesk (coming in v0.3): sort, draft and chase every ticket so none is lost, while a person on your team approves what goes out.</p>
+          <p>A collie does not own the flock. It brings every sheep back to the pen and the shepherd decides what happens next. That is the job we give AI in Colliedesk (coming after beta): sort, draft and chase every ticket so none is lost, while a person on your team approves what goes out.</p>
         </div>
       </div>
     </section>
@@ -39,7 +39,7 @@ function Quotes() {
       <div className="wrap">
         <h2 id="quotes">From founding customers</h2>
         {/* Real founding-customer quotes go here, verbatim, with name and team. Never invent one. */}
-        <div className="quote-slot"><p><strong>No quotes yet.</strong> Colliedesk is pre-alpha and we will not make them up. The first founding customers' words will go here, unedited, with their names.</p></div>
+        <div className="quote-slot"><p><strong>No quotes yet.</strong> Colliedesk is in alpha and we will not make them up. The first founding customers' words will go here, unedited, with their names.</p></div>
       </div>
     </section>
   );
@@ -72,7 +72,7 @@ function Founding() {
             <li>Up to 10 agents, no per-agent fees</li>
             <li>20 GB of attachments, imported files included</li>
             <li>AI at model cost +30%, or bring your own key</li>
-            <li>Colliedesk Cloud opens for founding customers with v0.2</li>
+            <li>Founding workspaces run on Colliedesk Cloud today</li>
           </ul>
           {state.open ? (
             <div className="founding-cta">

@@ -30,13 +30,13 @@ function Pillars() {
             <p className="pillar-k">01 · Your data</p>
             <h3>Leave Freshdesk with all of it</h3>
             <p>Freshdesk's ticket export has fields only, no conversation. Our importer brings tickets, replies, notes, checksummed attachments, tags and contacts, then proves the counts match.</p>
-            <p><Badge kind="coming">Coming v0.2</Badge> <a href="/migrate/freshdesk">Read the migration guide</a></p>
+            <p><Badge kind="shipped">Available now</Badge> <a href="/migrate/freshdesk">Read the migration guide</a></p>
           </article>
           <article className="pillar">
             <p className="pillar-k">02 · AI included</p>
             <h3>AI that answers tickets, not an add-on</h3>
             <p>Drafts and triage from your own past replies and knowledge base, auto-answer for repetitive tickets with a human in the loop. Pay model cost +30%, or bring your own key.</p>
-            <p><Badge kind="coming">Coming v0.3</Badge> <a href="/roadmap">See the roadmap</a></p>
+            <p><Badge kind="coming">Coming after beta</Badge> <a href="/roadmap">See the roadmap</a></p>
           </article>
           <article className="pillar">
             <p className="pillar-k">03 · Flat price</p>
