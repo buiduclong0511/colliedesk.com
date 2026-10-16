@@ -231,6 +231,7 @@ td:first-child { font-weight: 500; color: var(--text-1); }
 .plan-price s { color: var(--text-3); font-size: 1.3rem; margin-right: .2rem; text-decoration-thickness: 2px; }
 .plan-cta { margin-top: auto; display: grid; gap: var(--space-4); justify-items: start; }
 .plan-cta .btn { margin-top: 0; }
+.plan-guarantee { margin: 0; font-size: 13px; color: var(--text-3); }
 .founding-meter { display: grid; gap: var(--space-2); }
 .founding-slots { display: flex; gap: 5px; list-style: none; margin: 0; padding: 0; }
 .founding-slot { width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid var(--accent); background: var(--accent-soft); }

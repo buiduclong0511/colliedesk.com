@@ -146,6 +146,19 @@ for (const path of ['/', '/pricing']) {
   if (file && !readFileSync(file, 'utf8').includes('20 GB of attachments')) fail(`${path}: founding offer does not state the 20 GB attachment cap`);
 }
 
+// The Founding refund promise must sit wherever the Founding checkout is offered, and the terms
+// must define it at /terms#refunds, the anchor those pages link to.
+for (const file of files.filter((f) => /\.(html|md)$/.test(f))) {
+  const text = readFileSync(file, 'utf8');
+  if (text.includes('buy.polar.sh/polar_cl_1R61RlI9VkKyH4ZfFs7XviF7UAd1CaoycIasu2TiXQx') && !/30-day money-back|within 30 days/.test(text)) {
+    fail(`${file.slice(outDir.length - 1)}: offers the Founding checkout without the 30-day money-back guarantee`);
+  }
+}
+{
+  const terms = fileFor('/terms');
+  if (terms && !readFileSync(terms, 'utf8').includes('id="refunds"')) fail('/terms: no #refunds section for the Founding money-back guarantee');
+}
+
 // Founding closes at ten places. A site built from a closed state must not link to the checkout,
 // and an open state with a known count must show it on the home page.
 const foundingFile = process.env.FOUNDING_STATE_FILE ?? 'founding-state.json';

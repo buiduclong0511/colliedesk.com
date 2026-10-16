@@ -35,6 +35,13 @@ These terms are an agreement between you and **HC Labs Co., Ltd.** (CÔNG TY TNH
 - You can cancel at any time. The plan stays active until the end of the period you paid for, then the workspace locks.
 - A price change applies from your next renewal, never to a period you already paid for, and we email workspace admins before it applies. The Founding price stays locked for as long as you keep the subscription.
 
+## Refunds
+
+- **Founding 30-day money-back guarantee.** If Colliedesk is not right for you, email support@colliedesk.com within 30 days of your first Founding payment and we refund it in full. No questions asked, and a free Freshdesk migration we already did does not reduce the refund.
+- The guarantee covers the first Founding payment, not renewals.
+- We refund through Polar to the card you paid with. Your bank may take 5 to 10 business days to show it.
+- When we refund, the Founding subscription ends and the workspace locks. You can still sign in and export everything.
+
 ## Your content
 
 Everything you and your customers put into your workspace stays yours. You give us permission to store, process and display it only to run Colliedesk for you. We do not use it for anything else (see the [privacy policy](/privacy)).

@@ -20,6 +20,8 @@ export const POSITIONING =
   'Leave Freshdesk with all your data. AI that actually answers tickets is included, not an add-on. Flat price, no per-agent fees.';
 
 export const FOUNDING_HREF = '/#founding';
+// The Founding refund promise, stated next to every Founding checkout button and in the terms.
+export const MONEY_BACK = '30-day money-back guarantee';
 // Polar checkout link for the Founding product (org Colliedesk).
 export const FOUNDING_CHECKOUT = 'https://buy.polar.sh/polar_cl_1R61RlI9VkKyH4ZfFs7XviF7UAd1CaoycIasu2TiXQx';
 // Colliedesk Cloud sign-in (email code through Clerk) for agents who already have a workspace.
