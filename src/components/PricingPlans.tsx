@@ -1,10 +1,10 @@
-import { FOUNDING_SLOTS, foundingState, placesLeft } from '../lib/founding';
-import { CONTACT_EMAIL, FOUNDING_HREF, PRICE, REPO, TRIAL_HREF } from '../lib/site';
+import { FOUNDING_SLOTS, foundingState } from '../lib/founding';
+import { CONTACT_EMAIL, FOUNDING_CHECKOUT, PRICE, REPO, TRIAL_HREF } from '../lib/site';
+import { FoundingMeter } from './FoundingMeter';
 
 // The three plans above the pricing prose; the Markdown twin carries the same facts as a table.
 export function PricingPlans() {
   const state = foundingState();
-  const left = placesLeft(state);
   return (
     <section className="wrap plans" aria-label="Plans">
       <article className="plan">
@@ -18,9 +18,9 @@ export function PricingPlans() {
         <a className="btn btn-ghost" href={REPO} rel="noopener">Self-host free <span aria-hidden="true">↗</span></a>
       </article>
       <article className="plan plan-featured" aria-labelledby="plan-founding">
-        <p className="plan-flag">{state.open ? (left === null ? `First ${FOUNDING_SLOTS} workspaces` : `${left} of ${FOUNDING_SLOTS} places left`) : 'Closed: all places taken'}</p>
+        <p className="plan-flag">{state.open ? `Only ${FOUNDING_SLOTS} workspaces` : 'Closed: all places taken'}</p>
         <h2 className="plan-name" id="plan-founding">Founding</h2>
-        <p className="plan-price"><strong>$100</strong> <span>per workspace / year</span></p>
+        <p className="plan-price">{state.open && <s aria-label={`was ${PRICE.yearly}`}>{PRICE.yearly}</s>} <strong>$100</strong> <span>per workspace / year</span></p>
         <ul>
           <li>Price locked for life</li>
           <li>Free Freshdesk migration, with a reconcile report</li>
@@ -28,7 +28,12 @@ export function PricingPlans() {
           <li>20 GB of attachments, imported files included</li>
           <li>AI at LLM cost +30%, or bring your own key</li>
         </ul>
-        {state.open ? <a className="btn btn-primary" href={FOUNDING_HREF}>Get founding access</a> : <p>Founding is closed. Existing founding customers keep this price for life.</p>}
+        {state.open ? (
+          <div className="plan-cta">
+            <FoundingMeter state={state} />
+            <a className="btn btn-primary" href={FOUNDING_CHECKOUT} rel="noopener">Join for $100/year</a>
+          </div>
+        ) : <p>Founding is closed. Existing founding customers keep this price for life.</p>}
       </article>
       <article className="plan">
         <h2 className="plan-name">Cloud Team</h2>
