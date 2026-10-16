@@ -146,11 +146,18 @@ for (const path of ['/', '/pricing']) {
   if (file && !readFileSync(file, 'utf8').includes('20 GB of attachments')) fail(`${path}: founding offer does not state the 20 GB attachment cap`);
 }
 
+// A static Polar checkout link sells Founding to a buyer who has no workspace: the payment lands
+// and nothing is created. Founding is bought inside the app, after sign-up, so the checkout carries
+// the workspace.
+for (const file of files.filter((f) => /\.(html|md|txt)$/.test(f))) {
+  if (readFileSync(file, 'utf8').includes('buy.polar.sh/')) fail(`${file.slice(outDir.length - 1)}: links a static Polar checkout; send buyers to the app (${'app.colliedesk.com/settings/billing?buy=founding'})`);
+}
+
 // The Founding refund promise must sit wherever the Founding checkout is offered, and the terms
 // must define it at /terms#refunds, the anchor those pages link to.
 for (const file of files.filter((f) => /\.(html|md)$/.test(f))) {
   const text = readFileSync(file, 'utf8');
-  if (text.includes('buy.polar.sh/polar_cl_1R61RlI9VkKyH4ZfFs7XviF7UAd1CaoycIasu2TiXQx') && !/30-day money-back|within 30 days/.test(text)) {
+  if (text.includes('app.colliedesk.com/settings/billing?buy=founding') && !/30-day money-back|within 30 days/.test(text)) {
     fail(`${file.slice(outDir.length - 1)}: offers the Founding checkout without the 30-day money-back guarantee`);
   }
 }
@@ -164,7 +171,7 @@ for (const file of files.filter((f) => /\.(html|md)$/.test(f))) {
 const foundingFile = process.env.FOUNDING_STATE_FILE ?? 'founding-state.json';
 if (existsSync(foundingFile)) {
   const founding = JSON.parse(readFileSync(foundingFile, 'utf8'));
-  const checkout = 'buy.polar.sh/polar_cl_1R61RlI9VkKyH4ZfFs7XviF7UAd1CaoycIasu2TiXQx';
+  const checkout = 'app.colliedesk.com/settings/billing?buy=founding';
   if (founding.open === false) {
     for (const file of files.filter((f) => /\.(html|md|txt)$/.test(f))) {
       if (readFileSync(file, 'utf8').includes(checkout)) fail(`${file.slice(outDir.length - 1)}: founding is closed but the page links to its checkout`);

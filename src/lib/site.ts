@@ -22,8 +22,9 @@ export const POSITIONING =
 export const FOUNDING_HREF = '/#founding';
 // The Founding refund promise, stated next to every Founding checkout button and in the terms.
 export const MONEY_BACK = '30-day money-back guarantee';
-// Polar checkout link for the Founding product (org Colliedesk).
-export const FOUNDING_CHECKOUT = 'https://buy.polar.sh/polar_cl_1R61RlI9VkKyH4ZfFs7XviF7UAd1CaoycIasu2TiXQx';
+// Founding is bought inside the app: the buyer signs up first, then the app opens the Polar
+// checkout for that workspace, so the payment always lands on a workspace.
+export const FOUNDING_CHECKOUT = 'https://app.colliedesk.com/settings/billing?buy=founding';
 // Colliedesk Cloud sign-in (email code through Clerk) for agents who already have a workspace.
 export const APP_SIGN_IN = 'https://app.colliedesk.com/sign-in';
 // The same page starts the 14-day free trial: a new email gets "Create your workspace" there.
