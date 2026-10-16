@@ -1,6 +1,8 @@
 // Every page of the site, in llms.txt and sitemap order.
 import type { Page } from '../../lib/page';
 import changelog from './changelog';
+import freshdeskAlternative from './freshdesk-alternative';
+import freshdeskPricingHistory from './freshdesk-pricing-history';
 import helpdeskForSmallTeams from './helpdesk-for-small-teams';
 import home from './home';
 import migrateFreshdesk from './migrate-freshdesk';
@@ -16,10 +18,15 @@ import terms from './terms';
 import vsChatwoot from './vs-chatwoot';
 import vsFreescout from './vs-freescout';
 import vsFreshdesk from './vs-freshdesk';
+import vsGorgias from './vs-gorgias';
+import vsGroove from './vs-groove';
+import vsHappyfox from './vs-happyfox';
 import vsFront from './vs-front';
 import vsHelpScout from './vs-help-scout';
+import vsHubspotServiceHub from './vs-hubspot-service-hub';
 import vsZammad from './vs-zammad';
 import vsZendesk from './vs-zendesk';
+import vsZohoDesk from './vs-zoho-desk';
 
 let cache: readonly Page[] | undefined;
 
@@ -28,7 +35,8 @@ let cache: readonly Page[] | undefined;
 export function allPages(): readonly Page[] {
   cache ??= [
     home, pricing, migrateFreshdesk, migrateFreshdeskDoneForYou, migrateFreshdeskExport, migrateZendeskExport,
-    vsFreshdesk, vsZendesk, vsHelpScout, vsFront, vsZammad, vsChatwoot, vsFreescout, selfHostedHelpdesk, helpdeskForSmallTeams, openSource, roadmapPage(), changelog,
+    vsFreshdesk, vsZendesk, vsHelpScout, vsFront, vsZammad, vsChatwoot, vsFreescout,
+    vsZohoDesk, vsHappyfox, vsGorgias, vsHubspotServiceHub, vsGroove, freshdeskAlternative, freshdeskPricingHistory, selfHostedHelpdesk, helpdeskForSmallTeams, openSource, roadmapPage(), changelog,
     privacy, terms, ...docsPages(),
   ];
   return cache;

@@ -62,6 +62,8 @@ export const FOOTER: readonly FooterColumn[] = [
       { href: '/migrate/freshdesk/done-for-you', label: 'Freshdesk migration, done for you' },
       { href: '/migrate/freshdesk/export', label: 'Export Freshdesk tickets' },
       { href: '/migrate/zendesk/export', label: 'Export Zendesk tickets' },
+      { href: '/freshdesk-alternative', label: 'Freshdesk alternatives' },
+      { href: '/freshdesk-pricing-history', label: 'Freshdesk pricing history' },
       { href: '/vs/freshdesk', label: 'Colliedesk vs Freshdesk' },
       { href: '/vs/zendesk', label: 'Colliedesk vs Zendesk' },
       { href: '/vs/help-scout', label: 'Colliedesk vs Help Scout' },
