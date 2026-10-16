@@ -13,8 +13,8 @@ const faq: Faq[] = [
     a: 'It can be. At $19 per agent, one or two Freshdesk Growth agents cost less than $49. Colliedesk pays off from three agents, or when you want AI without a per-seat add-on.',
   },
   {
-    q: 'What happens above 10 agents?',
-    a: 'Cloud Team covers up to 10 agents. Above that, email us. Self-hosting has no agent limit.',
+    q: 'What if my team outgrows Cloud Team?',
+    a: 'Cloud Team 25 covers up to 25 agents for a flat $99 per workspace per month ($990 per year). Above 25 agents, email us. Self-hosting has no agent limit.',
   },
 ];
 

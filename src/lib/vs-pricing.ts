@@ -1,6 +1,6 @@
 // Price-by-team-size comparison for /vs pages: one competitor's per-agent plans against the flat
 // Colliedesk Cloud Team price. The HTML chart and the Markdown twin both render from this.
-import { PRICE } from './site';
+import { CONTACT_EMAIL, PRICE } from './site';
 
 export interface VsPlan {
   name: string;
@@ -33,11 +33,16 @@ export interface VsRow {
 
 const perAgentTotal = (plan: VsPlan): number => plan.perAgent + (plan.aiPerAgent ?? 0);
 
-export const TEAM_SIZES = [1, 3, 5, 10] as const;
+export const TEAM_SIZES = [1, 3, 5, 10, 25] as const;
 export const DEFAULT_TEAM_SIZE = 5;
-/** Cloud Team covers up to this many agents for one flat price. */
-export const MAX_AGENTS = 10;
-const OURS_USD = Number(PRICE.monthly.replace('$', ''));
+const price = (label: string): number => Number(label.replace('$', ''));
+/** Cloud plans in order: the first one whose limit covers the team is the one it pays for. */
+interface OursPlan { name: string; usd: number; maxAgents: number }
+const TEAM: OursPlan = { name: 'Colliedesk Cloud Team', usd: price(PRICE.monthly), maxAgents: 10 };
+const TEAM_25: OursPlan = { name: 'Colliedesk Cloud Team 25', usd: price(PRICE.team25Monthly), maxAgents: 25 };
+/** The largest team a Cloud plan covers for one flat price. */
+export const MAX_AGENTS = TEAM_25.maxAgents;
+const oursFor = (agents: number): OursPlan => (agents <= TEAM.maxAgents ? TEAM : TEAM_25);
 
 export const usd = (n: number): string =>
   `$${n.toLocaleString('en-US', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 })}`;
@@ -51,12 +56,13 @@ export function rowsAt(p: VsPricing, agents: number): VsRow[] {
       : `${agents} × ${usd(plan.perAgent)}`;
     return { name: plan.name, usd: seatUsd + aiUsd, seatUsd, aiUsd, math };
   });
+  const plan = oursFor(agents);
   const ours: VsRow = {
-    name: 'Colliedesk Cloud Team',
-    usd: OURS_USD,
-    seatUsd: OURS_USD,
+    name: plan.name,
+    usd: plan.usd,
+    seatUsd: plan.usd,
     aiUsd: 0,
-    math: `one workspace, up to ${MAX_AGENTS} agents`,
+    math: `one workspace, up to ${plan.maxAgents} agents`,
     ours: true,
   };
   return [...theirs, ours].sort((a, b) => a.usd - b.usd);
@@ -65,7 +71,7 @@ export function rowsAt(p: VsPricing, agents: number): VsRow[] {
 /** Smallest team size at which Colliedesk costs less than every competitor plan. */
 export function cheaperFrom(p: VsPricing): number | undefined {
   for (let n = 1; n <= MAX_AGENTS; n++) {
-    if (p.plans.every((plan) => perAgentTotal(plan) * n > OURS_USD)) return n;
+    if (Array.from({ length: MAX_AGENTS - n + 1 }, (_, i) => n + i).every((m) => p.plans.every((plan) => perAgentTotal(plan) * m > oursFor(m).usd))) return n;
   }
   return undefined;
 }
@@ -87,27 +93,27 @@ export function fitLine(p: VsPricing): string {
 export function savingAt(p: VsPricing, agents: number): { name: string; perMonth: number } | undefined {
   const top = rowsAt(p, agents).at(-1);
   if (!top || top.ours) return undefined;
-  return { name: top.name, perMonth: top.usd - OURS_USD };
+  return { name: top.name, perMonth: top.usd - oursFor(agents).usd };
 }
 
 export const readOnLabel = (iso: string): string =>
   new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 
 export const chartCaption = (p: VsPricing): string =>
-  `${p.competitor} list prices per month, ${p.billing}, read on ${readOnLabel(p.readOn)}. Colliedesk Cloud Team is ${PRICE.monthly} a month, or ${PRICE.yearly} a year. AI usage on Colliedesk is extra, at cost +30% or with your own key.`;
+  `${p.competitor} list prices per month, ${p.billing}, read on ${readOnLabel(p.readOn)}. Colliedesk Cloud Team is ${PRICE.monthly} a month (${PRICE.yearly} a year) for up to 10 agents, and Team 25 is ${PRICE.team25Monthly} a month (${PRICE.team25Yearly} a year) for up to 25. AI usage on Colliedesk is extra, at cost +30% or with your own key.`;
 
 export function notForYouLines(p: VsPricing): string[] {
   const from = cheaperFrom(p);
   const price = from !== undefined && from > 1 ? [`Your team has ${belowLabel(from)}: ${cheapestPlan(p)} is cheaper.`] : [];
-  return [...price, `Your team has more than ${MAX_AGENTS} agents: Cloud Team stops at ${MAX_AGENTS}; email us for a quote.`, ...p.notForYou];
+  return [...price, `Your team has more than ${MAX_AGENTS} agents: Cloud stops at ${MAX_AGENTS}; email ${CONTACT_EMAIL} for a quote, or self-host with no agent limit.`, ...p.notForYou];
 }
 
 export function vsMarkdown(p: VsPricing): string {
-  const head = `| Team | ${p.plans.map((plan) => plan.name).join(' | ')} | Colliedesk Cloud Team |`;
+  const head = `| Team | ${p.plans.map((plan) => plan.name).join(' | ')} | Colliedesk Cloud |`;
   const sep = `|---|${p.plans.map(() => '---|').join('')}---|`;
   const rows = TEAM_SIZES.map((n) => {
     const cells = p.plans.map((plan) => usd(perAgentTotal(plan) * n));
-    return `| ${teamLabel(n)} | ${cells.join(' | ')} | ${PRICE.monthly} |`;
+    return `| ${teamLabel(n)} | ${cells.join(' | ')} | ${usd(oursFor(n).usd)} |`;
   });
   const list = (items: readonly string[]): string => items.map((i) => `- ${i}`).join('\n');
   return `## Price by team size
