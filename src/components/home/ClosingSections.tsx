@@ -1,4 +1,5 @@
-import { FOUNDING_SLOTS, foundingState, placesLeft } from '../../lib/founding';
+import { FOUNDING_SLOTS, foundingState } from '../../lib/founding';
+import { FoundingMeter } from '../FoundingMeter';
 import { FOUNDING_CHECKOUT } from '../../lib/site';
 
 function Collie() {
@@ -47,13 +48,12 @@ function Quotes() {
 
 function Founding() {
   const state = foundingState();
-  const left = placesLeft(state);
   return (
     <section className="section" id="founding" aria-labelledby="founding-title">
       <div className="wrap">
         <div className="founding">
           <div>
-            <p className="eyebrow">Founding offer{left !== null && state.open ? ` · ${left} of ${FOUNDING_SLOTS} places left` : ''}</p>
+            <p className="eyebrow">Founding offer</p>
             {state.open ? (
               <>
                 <h2 id="founding-title">$100 a year. Locked for life.</h2>
@@ -76,6 +76,7 @@ function Founding() {
           </ul>
           {state.open ? (
             <div className="founding-cta">
+              <FoundingMeter state={state} />
               <a className="btn btn-primary btn-lg" href={FOUNDING_CHECKOUT} rel="noopener">Become a founding customer, $100/year</a>
               <p>Secure checkout by Polar. After payment we email you within one business day to set up your workspace and plan your Freshdesk migration.</p>
             </div>

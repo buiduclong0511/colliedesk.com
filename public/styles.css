@@ -185,6 +185,7 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 .check-list li::before { content: "✓"; position: absolute; left: 0; top: .25rem; width: 1.2rem; height: 1.2rem; display: grid; place-items: center; border-radius: var(--radius-full); background: var(--ok-soft); color: var(--ok); font-size: .75rem; font-weight: 700; }
 .founding-cta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4) var(--space-6); border-top: 1px solid var(--line); padding-top: var(--space-6); }
 .founding-cta p { margin: 0; max-width: 40rem; }
+.founding-cta > .founding-meter, .founding-cta > .founding-meter-count { flex-basis: 100%; }
 
 /* Inner page hero and prose */
 .page-hero { padding: var(--space-16) 0 var(--space-10); border-bottom: 1px solid var(--line); background: var(--surface-0); }
@@ -227,6 +228,15 @@ td:first-child { font-weight: 500; color: var(--text-1); }
 .plans-note { grid-column: 1 / -1; margin: 0; color: var(--text-2); }
 .plan-flag { font: 600 13px var(--font-sans); color: var(--accent-text); margin: 0 0 .6rem; }
 .plan-featured { border: 1px solid var(--accent); box-shadow: var(--shadow-2), inset 0 3px var(--accent); }
+.plan-price s { color: var(--text-3); font-size: 1.3rem; margin-right: .2rem; text-decoration-thickness: 2px; }
+.plan-cta { margin-top: auto; display: grid; gap: var(--space-4); justify-items: start; }
+.plan-cta .btn { margin-top: 0; }
+.founding-meter { display: grid; gap: var(--space-2); }
+.founding-slots { display: flex; gap: 5px; list-style: none; margin: 0; padding: 0; }
+.founding-slot { width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid var(--accent); background: var(--accent-soft); }
+.founding-slot-taken { border-color: var(--line-strong); background: var(--line-strong); }
+.founding-meter-count { margin: 0; font-size: 14px; color: var(--text-2); font-variant-numeric: tabular-nums; }
+.founding-meter-count strong { color: var(--accent-text); font-size: 1.15em; }
 
 /* Docs */
 .docs-layout { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: var(--space-12); }
