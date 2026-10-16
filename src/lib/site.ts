@@ -66,6 +66,9 @@ export const FOOTER: readonly FooterColumn[] = [
       { href: '/vs/zendesk', label: 'Colliedesk vs Zendesk' },
       { href: '/vs/help-scout', label: 'Colliedesk vs Help Scout' },
       { href: '/vs/front', label: 'Colliedesk vs Front' },
+      { href: '/vs/zammad', label: 'Colliedesk vs Zammad' },
+      { href: '/vs/chatwoot', label: 'Colliedesk vs Chatwoot' },
+      { href: '/vs/freescout', label: 'Colliedesk vs FreeScout' },
     ],
   },
   {

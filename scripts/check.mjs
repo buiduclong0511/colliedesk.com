@@ -12,6 +12,7 @@ const REQUIRED_PAGES = [
   '/', '/pricing', '/migrate/freshdesk', '/vs/freshdesk', '/vs/zendesk', '/vs/help-scout',
   '/open-source', '/roadmap', '/docs', '/changelog', '/privacy', '/terms',
   '/self-hosted-helpdesk', '/migrate/freshdesk/done-for-you', '/helpdesk-for-small-teams',
+  '/vs/zammad', '/vs/chatwoot', '/vs/freescout',
 ];
 const AI_CRAWLERS = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'PerplexityBot', 'Google-Extended'];
 

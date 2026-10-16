@@ -13,9 +13,12 @@ import privacy from './privacy';
 import { docsPages, roadmapPage } from './repo-docs';
 import selfHostedHelpdesk from './self-hosted-helpdesk';
 import terms from './terms';
+import vsChatwoot from './vs-chatwoot';
+import vsFreescout from './vs-freescout';
 import vsFreshdesk from './vs-freshdesk';
 import vsFront from './vs-front';
 import vsHelpScout from './vs-help-scout';
+import vsZammad from './vs-zammad';
 import vsZendesk from './vs-zendesk';
 
 let cache: readonly Page[] | undefined;
@@ -25,7 +28,7 @@ let cache: readonly Page[] | undefined;
 export function allPages(): readonly Page[] {
   cache ??= [
     home, pricing, migrateFreshdesk, migrateFreshdeskDoneForYou, migrateFreshdeskExport, migrateZendeskExport,
-    vsFreshdesk, vsZendesk, vsHelpScout, vsFront, selfHostedHelpdesk, helpdeskForSmallTeams, openSource, roadmapPage(), changelog,
+    vsFreshdesk, vsZendesk, vsHelpScout, vsFront, vsZammad, vsChatwoot, vsFreescout, selfHostedHelpdesk, helpdeskForSmallTeams, openSource, roadmapPage(), changelog,
     privacy, terms, ...docsPages(),
   ];
   return cache;
