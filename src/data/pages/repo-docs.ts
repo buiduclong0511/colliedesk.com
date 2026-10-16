@@ -65,7 +65,7 @@ function docPage(path: string, file: string, summaryFallback: string, withNav = 
     path,
     section: 'Docs',
     title: `${title} · Colliedesk docs`,
-    description: `${plain(lede || summaryFallback)} Colliedesk user guide, v0.1 (pre-alpha).`,
+    description: `${plain(lede || summaryFallback)} Colliedesk user guide (alpha).`,
     summary: plain(lede || summaryFallback),
     eyebrow: 'Docs',
     h1: title,
@@ -92,10 +92,10 @@ export function roadmapPage(): Page {
     section: 'Product',
     eyebrow: 'Roadmap',
     h1: 'Colliedesk roadmap',
-    title: 'Colliedesk roadmap: email and Freshdesk import in v0.2, AI in v0.3',
+    title: 'Colliedesk roadmap: alpha is live, beta next, AI after beta',
     description:
-      'What Colliedesk has shipped and what comes next: email channel and Freshdesk importer (v0.2), AI drafting and auto-answer (v0.3), automations and SLA (v0.4). Dates are targets.',
-    summary: 'Shipped v0.1; next v0.2 email + Freshdesk importer + Cloud; v0.3 AI included; later automations, SLA, reports, MCP',
+      'What Colliedesk has shipped and what comes next: alpha with email and the Freshdesk importer on Colliedesk Cloud, then beta (Cc, new conversation, contact history), then AI. Dates are targets.',
+    summary: 'Now alpha (email, Freshdesk importer, Cloud trial); next beta 0.1.0; then AI; later automations, SLA, reports',
   } satisfies Partial<Page>);
   page.jsonLd = [techArticle(page)];
   return page;

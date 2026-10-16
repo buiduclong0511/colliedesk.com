@@ -29,9 +29,9 @@ export function renderMarkdown(md: string): string {
   if (typeof html !== 'string') throw new Error('marked returned a promise; async rendering is not supported');
   return (
     html
-      // "**Coming v0.2**" / "**Shipped v0.1**" in Markdown become status badges in HTML.
-      .replace(/<strong>(Coming (?:v0\.\d|later))<\/strong>/g, '<span class="badge badge-coming">$1</span>')
-      .replace(/<strong>(Shipped v0\.\d)<\/strong>/g, '<span class="badge badge-shipped">$1</span>')
+      // "**Coming after beta**" / "**Available now**" in Markdown become status badges in HTML.
+      .replace(/<strong>(Beta|Coming (?:after beta|later))<\/strong>/g, '<span class="badge badge-coming">$1</span>')
+      .replace(/<strong>(Available now)<\/strong>/g, '<span class="badge badge-shipped">$1</span>')
       .replace(/<table>/g, '<div class="table-wrap" role="region" aria-label="Table" tabindex="0"><table>')
       .replace(/<\/table>/g, '</table></div>')
   );

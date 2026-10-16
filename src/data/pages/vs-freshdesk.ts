@@ -15,13 +15,13 @@ const pricing: VsPricing = {
   ],
   forYou: [
     'You pay Freshdesk per agent, then again per agent for AI, and the bill grows with every hire.',
-    'Most of your support is email. The email channel is built and in testing for v0.2.',
+    'Most of your support is email. The email channel (inbound and outbound, threading) is available now.',
     'You want your tickets in a PostgreSQL database you control, or to self-host for free.',
     'Your Freshdesk renewal is months away, so you can plan the move around our [roadmap](/roadmap).',
   ],
   notForYou: [
     'You need live chat, phone, WhatsApp or a marketplace of apps today.',
-    'You must switch this week: Colliedesk is pre-alpha, and attachments on agent replies and canned replies are not built yet.',
+    'You need Cc, a new conversation started from the inbox, contact history or AI today: they are not there yet (beta and later), and Colliedesk is alpha, so the interface may change.',
     'You want the founding price and have more than 20 GB of Freshdesk attachments: founding includes 20 GB, imported files included.',
   ],
 };
@@ -32,7 +32,7 @@ const PRICES_READ = readOnLabel(pricing.readOn);
 const faq: Faq[] = [
   {
     q: 'What is the best open-source alternative to Freshdesk?',
-    a: 'Colliedesk is an open-source (AGPL-3.0) helpdesk built for small teams leaving Freshdesk: flat $49 per workspace per month, AI included at cost, and a Freshdesk importer (coming v0.2). It is pre-alpha today, so check the status table before you switch.',
+    a: 'Colliedesk is an open-source (AGPL-3.0) helpdesk built for small teams leaving Freshdesk: flat $49 per workspace per month, AI included at cost, and a Freshdesk importer (available now). It is alpha today, so check the status table before you switch.',
   },
   {
     q: 'How much does Freshdesk cost for 5 agents with AI?',
@@ -40,7 +40,7 @@ const faq: Faq[] = [
   },
   {
     q: 'Is Colliedesk ready to replace Freshdesk today?',
-    a: 'Not for most teams. The released v0.1 is a shared inbox. The email channel and the Freshdesk importer are built and in testing for v0.2, and daily basics such as attachments on replies and canned replies are not built yet. If your renewal is months away, the founding offer locks $100 per year for life and includes the migration.',
+    a: 'Not for most teams. Colliedesk is alpha: released and running on Colliedesk Cloud, with the email channel, saved replies, attachments and the Freshdesk importer. Cc, a new conversation from the inbox, contact history and AI are not there yet, and the interface or schema may change. If your renewal is months away, the founding offer locks $100 per year for life and includes the migration.',
   },
   {
     q: 'Can I get my tickets out of Freshdesk with the full conversation?',
@@ -56,7 +56,7 @@ Freshdesk prices are per agent per month, billed annually, as published on ${PRI
 |---|---|---|
 | Plans | Growth $19, Pro $55, Enterprise $89 per agent per month | ${c.price} |
 | AI drafting | Freddy AI Copilot $29 per agent per month, add-on for Pro and Enterprise only | ${c.ai} |
-| AI agent | 500 sessions free once per account, then $49 per 100 sessions | Auto-answer with a human in the loop, same AI pricing (coming v0.3) |
+| AI agent | 500 sessions free once per account, then $49 per 100 sessions | Auto-answer with a human in the loop, same AI pricing (coming after beta) |
 | Free option | No free plan on the pricing page; 14-day trial | ${c.free} |
 | Source code | Proprietary | ${c.source} |
 

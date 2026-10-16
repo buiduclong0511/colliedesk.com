@@ -1,6 +1,6 @@
 import { HOME_H1, HOME_LEDE } from '../../data/pages/home';
 import { SAVING_PCT } from '../../data/pages/home-sections';
-import { FOUNDING_HREF } from '../../lib/site';
+import { TRIAL_HREF } from '../../lib/site';
 
 const INSTALL = `curl -fsSL https://raw.githubusercontent.com/colliedesk/colliedesk/main/install.sh \\
     | sh -s -- --name "Acme Support" --email "you@acme.com"
@@ -22,11 +22,11 @@ export function InstallSnippet() {
 export function HeroCopy() {
   return (
     <div className="hero-copy">
-      <p className="eyebrow hero-eyebrow">Open source · AGPL-3.0 · Pre-alpha v0.1</p>
+      <p className="eyebrow hero-eyebrow">Open source · AGPL-3.0 · Alpha, live on Cloud</p>
       <h1>{HOME_H1}</h1>
       <p className="lede">{HOME_LEDE}</p>
       <div className="cta-row">
-        <a className="btn btn-primary btn-lg" href={FOUNDING_HREF}>Start free trial <span aria-hidden="true">→</span></a>{' '}
+        <a className="btn btn-primary btn-lg" href={TRIAL_HREF}>Start free trial <span aria-hidden="true">→</span></a>{' '}
         <a className="btn btn-lg" href="/migrate/freshdesk">Read the migration guide</a>
       </div>
       <p className="hero-note">14-day free trial, no card. <b>Cloud Team $49</b> per workspace per month, no per-agent fees. Founding plan $100 a year. <a href="#bill">{`How we get to ${SAVING_PCT}%`}</a></p>

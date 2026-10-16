@@ -56,12 +56,12 @@ Self-hosting is free in money, not in time. You are responsible for:
 
 1. **Backups** of PostgreSQL and the attachments volume, and a tested restore.
 2. **Updates**: pull a new image tag and restart. Pin a release tag if you do not want the \`edge\` build.
-3. **Email delivery**: your support address and its DNS records (the email channel arrives in v0.2).
+3. **Email delivery**: your support address and its DNS records (see [Connect email](/docs/email-channel)).
 4. **Uptime and TLS** for the address your agents open.
 
 ## What Colliedesk does today
 
-Colliedesk is pre-alpha. Self-host it to try it; plan a production move around the roadmap.
+Colliedesk is alpha: the interface or database schema may change between releases. Self-host it to try it; read the [roadmap](/roadmap) before a production move.
 
 ${statusTable}`;
 

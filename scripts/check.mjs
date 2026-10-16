@@ -234,6 +234,30 @@ const PRICE_MAX_AGE_DAYS = 90;
   }
 }
 
+// Status honesty: the product is alpha and live on Colliedesk Cloud. No page may promise a
+// release that has already happened ("v0.2"), call the product pre-alpha or say checkout is
+// coming. The Team and Team 25 cards must start the free trial at the real signup entry, and
+// every "Start free trial" button must go to the same place.
+const TRIAL_URL = 'https://app.colliedesk.com/sign-in';
+{
+  const stale = /v0\.[2-9]|pre-alpha|checkout link is coming soon|\bin testing\b/i;
+  for (const file of files.filter((f) => /\.(html|md|txt)$/.test(f))) {
+    const m = readFileSync(file, 'utf8').match(stale);
+    if (m) fail(`${file.slice(outDir.length - 1)}: stale status claim "${m[0]}"`);
+  }
+  const pricing = read('pricing.html');
+  for (const plan of ['Cloud Team', 'Cloud Team 25']) {
+    const card = pricing.match(new RegExp(`<article class="plan">\\s*<h2 class="plan-name">${plan}\\b[\\s\\S]*?</article>`))?.[0] ?? '';
+    if (!card) fail(`/pricing: ${plan} card missing`);
+    else if (!card.includes(`href="${TRIAL_URL}"`)) fail(`/pricing: ${plan} card has no free-trial CTA to ${TRIAL_URL}`);
+  }
+  for (const file of pages) {
+    for (const m of readFileSync(file, 'utf8').matchAll(/<a[^>]*href="([^"]*)"[^>]*>\s*Start free trial/g)) {
+      if (m[1] !== TRIAL_URL) fail(`${urlPathOf(file)}: "Start free trial" links to ${m[1]}, not ${TRIAL_URL}`);
+    }
+  }
+}
+
 if (jsBytes > JS_BUDGET_BYTES) fail(`JavaScript budget exceeded: ${jsBytes} bytes > ${JS_BUDGET_BYTES}`);
 
 const summary = `${pages.length} pages, ${urlPaths.length} Markdown twins checked, JS ${jsBytes} bytes (budget ${JS_BUDGET_BYTES})`;

@@ -1,6 +1,5 @@
 import { FOUNDING_SLOTS, foundingState } from '../lib/founding';
-import { CONTACT_EMAIL, FOUNDING_CHECKOUT, PRICE, REPO } from '../lib/site';
-import { Badge } from './Badge';
+import { CONTACT_EMAIL, FOUNDING_CHECKOUT, PRICE, REPO, TRIAL_HREF } from '../lib/site';
 import { FoundingMeter } from './FoundingMeter';
 
 // The three plans above the pricing prose; the Markdown twin carries the same facts as a table.
@@ -37,7 +36,7 @@ export function PricingPlans() {
         ) : <p>Founding is closed. Existing founding customers keep this price for life.</p>}
       </article>
       <article className="plan">
-        <h2 className="plan-name">Cloud Team <Badge kind="coming">Coming v0.2</Badge></h2>
+        <h2 className="plan-name">Cloud Team</h2>
         <p className="plan-price"><strong>$49</strong> <span>per workspace / month</span></p>
         <p className="plan-alt">or $490 per year</p>
         <ul>
@@ -48,9 +47,10 @@ export function PricingPlans() {
           <li>No per-agent fees</li>
           <li>AI at LLM cost +30%, or bring your own key</li>
         </ul>
+        <a className="btn btn-primary" href={TRIAL_HREF}>Start free trial</a>
       </article>
       <article className="plan">
-        <h2 className="plan-name">Cloud Team 25 <Badge kind="coming">Coming v0.2</Badge></h2>
+        <h2 className="plan-name">Cloud Team 25</h2>
         <p className="plan-price"><strong>{PRICE.team25Monthly}</strong> <span>per workspace / month</span></p>
         <p className="plan-alt">or {PRICE.team25Yearly} per year</p>
         <ul>
@@ -59,6 +59,7 @@ export function PricingPlans() {
           <li>250 GB of attachments, imported files included</li>
           <li>Flat price, no per-agent fees</li>
         </ul>
+        <a className="btn btn-primary" href={TRIAL_HREF}>Start free trial</a>
       </article>
       <p className="plans-note">
         Need more storage? Email us at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Customer email always arrives, even over the
