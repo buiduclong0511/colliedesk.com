@@ -161,6 +161,38 @@ for (const file of pages) {
   if (!readFileSync(file, 'utf8').includes('<script src="/analytics.js" defer></script>')) fail(`${urlPathOf(file)}: analytics.js not loaded`);
 }
 
+// The Freshdesk page leads with price, so its chart must let a visitor pick a team size, say where
+// Colliedesk stops being the cheaper choice, and carry a price read date that is kept fresh.
+// Expected figures are worked by hand from Freshdesk's list prices (Growth $19, Pro $55, Copilot
+// $29 per agent) against Colliedesk Team $49 per workspace.
+const PRICE_MAX_AGE_DAYS = 90;
+{
+  const vsHtml = read('vs/freshdesk.html');
+  const vsMd = read('vs/freshdesk.md');
+  const chart = vsHtml.match(/<figure class="vs-chart"[\s\S]*?<\/figure>/)?.[0] ?? '';
+  if (!chart) fail('/vs/freshdesk: price chart (figure.vs-chart) missing');
+  for (const n of [1, 3, 5, 10]) {
+    if (!new RegExp(`<input[^>]*name="agents"[^>]*value="${n}"`).test(chart)) fail(`/vs/freshdesk: no ${n}-agent option in the price chart`);
+    if (!chart.includes(`data-agents="${n}"`)) fail(`/vs/freshdesk: no price list for ${n} agents`);
+  }
+  if ((chart.match(/name="agents"[^>]*checked/g) ?? []).length !== 1) fail('/vs/freshdesk: price chart needs exactly one team size checked by default');
+  const list = (n) => chart.match(new RegExp(`<ol[^>]*data-agents="${n}"[\\s\\S]*?</ol>`))?.[0] ?? '';
+  // A bar total renders as "$19<small>", so this cannot match $190 or $490.
+  const total = (html, amount) => html.includes(`>${amount}<small>`);
+  const block = (n) => chart.match(new RegExp(`data-size="${n}"[\\s\\S]*?(?=data-size=|<p class="vs-fit-line")`))?.[0] ?? '';
+  if (!total(list(3), '$57') || !total(list(3), '$49')) fail('/vs/freshdesk: 3 agents must show Freshdesk Growth $57 and Colliedesk $49');
+  if (!total(list(5), '$420') || !block(5).includes('$4,452 a year')) fail('/vs/freshdesk: 5 agents must show Freshdesk Pro + Copilot $420 and a $4,452 yearly saving');
+  if (!total(list(1), '$19')) fail('/vs/freshdesk: 1 agent must show Freshdesk Growth $19, cheaper than Colliedesk');
+  if (!/from 3 to 10 agents/.test(chart)) fail('/vs/freshdesk: chart must say Colliedesk costs less from 3 to 10 agents');
+  const readOn = chart.match(/data-read-on="(\d{4}-\d{2}-\d{2})"/)?.[1];
+  if (!readOn) fail('/vs/freshdesk: price chart has no data-read-on date');
+  else if ((Date.now() - Date.parse(readOn)) / 86_400_000 > PRICE_MAX_AGE_DAYS) {
+    fail(`/vs/freshdesk: competitor prices read ${readOn}, older than ${PRICE_MAX_AGE_DAYS} days; read them again`);
+  }
+  if (!/id="fit"/.test(vsHtml) || !/Not for you yet/.test(vsHtml)) fail('/vs/freshdesk: "who it fits" section missing');
+  if (!vsMd.includes('## Who Colliedesk fits') || !vsMd.includes('| 3 agents |')) fail('/vs/freshdesk.md: twin lacks the price-by-team-size table or the fit section');
+}
+
 if (jsBytes > JS_BUDGET_BYTES) fail(`JavaScript budget exceeded: ${jsBytes} bytes > ${JS_BUDGET_BYTES}`);
 
 const summary = `${pages.length} pages, ${urlPaths.length} Markdown twins checked, JS ${jsBytes} bytes (budget ${JS_BUDGET_BYTES})`;

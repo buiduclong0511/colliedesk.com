@@ -138,6 +138,42 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 .bar-ours .bar-fill { background: var(--accent); }
 .bar-ours strong { color: var(--accent-text); }
 
+/* /vs price chart: team-size radios + one bar list per size, shown with :has() */
+.vs-top { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: var(--space-6); padding-top: var(--space-10); align-items: start; }
+.vs-chart { margin: 0; background: var(--surface-1); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow-2); padding: var(--space-6); }
+.vs-chart-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-5); }
+.vs-chart-title { font-weight: 600; color: var(--text-1); }
+.vs-sizes { display: inline-flex; gap: 2px; margin: 0; padding: 3px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-0); }
+.vs-sizes label { display: inline-flex; align-items: center; min-height: 32px; padding: 0 .7rem; border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; color: var(--text-2); cursor: pointer; font-variant-numeric: tabular-nums; }
+.vs-sizes input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.vs-sizes label:has(input:checked) { background: var(--surface-1); color: var(--text-1); box-shadow: var(--shadow-1); outline: 1px solid var(--line-control); }
+.vs-sizes label:has(input:focus-visible) { box-shadow: var(--focus-ring); }
+.vs-size { display: none; }
+.vs-chart:has(input[value="1"]:checked) .vs-size[data-size="1"],
+.vs-chart:has(input[value="3"]:checked) .vs-size[data-size="3"],
+.vs-chart:has(input[value="5"]:checked) .vs-size[data-size="5"],
+.vs-chart:has(input[value="10"]:checked) .vs-size[data-size="10"] { display: block; }
+@supports not selector(:has(*)) { .vs-size[data-size="5"] { display: block; } .vs-sizes { display: none; } }
+.vs-chart .bars { gap: 1rem; }
+.vs-stack { display: flex; gap: 2px; min-width: 6px; }
+.vs-stack .bar-fill { flex-basis: 0; min-width: 2px; }
+.bar-fill-ai, .vs-legend-ai { background: repeating-linear-gradient(135deg, var(--warn) 0 4px, var(--warn-soft) 4px 7px); }
+.vs-saving { margin: var(--space-4) 0 0; color: var(--text-1); font-weight: 500; }
+.vs-fit-line { margin: var(--space-4) 0 0; padding-top: var(--space-4); border-top: 1px solid var(--line); color: var(--text-1); }
+.vs-chart-note { margin: var(--space-3) 0 0; font-size: var(--fs-small); color: var(--text-3); }
+.vs-legend { white-space: nowrap; }
+.vs-legend-ai { display: inline-block; width: 1.4rem; height: .7rem; border-radius: 2px; vertical-align: middle; margin-left: .3rem; }
+.vs-fit { display: grid; gap: var(--space-4); }
+.vs-fit-col { border: 1px solid var(--line); border-radius: 12px; padding: var(--space-5) var(--space-6); background: var(--surface-1); }
+.vs-fit-col h3 { margin: 0 0 .5rem; font-size: 1.05rem; color: var(--text-1); }
+.vs-fit-col ul { margin: 0; padding-left: 1.1rem; }
+.vs-fit-col li { margin: .35rem 0; }
+.vs-fit-yes { border-color: var(--accent); box-shadow: inset 3px 0 var(--accent); }
+.vs-fit-no { background: var(--surface-0); }
+@media (max-width: 960px) { .vs-top { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) { .vs-chart { padding: var(--space-4); } .vs-sizes label { padding: 0 .5rem; } .vs-chart .bar-math { display: none; } }
+@media (pointer: coarse) { .vs-sizes label { min-height: var(--touch); } }
+
 /* Quotes slot and founding */
 .quote-slot { border: 1px dashed var(--line-strong); border-radius: 10px; padding: var(--space-6); max-width: 44rem; color: var(--text-2); background: var(--surface-1); }
 .quote-slot p { margin: 0; }

@@ -1,12 +1,13 @@
 ---
-// Main content of a standard page: hero, optional block (pricing plans), then the prose, with the
-// docs navigation beside it on docs pages.
+// Main content of a standard page: hero, optional block (pricing plans, or the /vs price chart
+// and fit columns), then the prose, with the docs navigation beside it on docs pages.
 import type { Page } from '../lib/page';
 import { html } from '../lib/render-react';
 import { DocsNav } from './DocsNav';
 import { Hero } from './Hero';
 import { PricingPlans } from './PricingPlans';
 import Prose from './Prose.astro';
+import { VsFit, VsPriceChart } from './VsPriceChart';
 
 interface Props {
   page: Page;
@@ -16,6 +17,12 @@ const { page } = Astro.props;
 ---
 <Fragment set:html={html(Hero, { page })} />
 {page.pre === 'pricing-plans' && <Fragment set:html={html(PricingPlans, {})} />}
+{page.vs && (
+  <div class="wrap vs-top">
+    <Fragment set:html={html(VsPriceChart, { pricing: page.vs })} />
+    <Fragment set:html={html(VsFit, { pricing: page.vs })} />
+  </div>
+)}
 <div class="wrap page-body">
   {page.docsNav ? (
     <div class="docs-layout"><Fragment set:html={html(DocsNav, { items: page.docsNav, current: page.path })} /><Prose page={page} /></div>
