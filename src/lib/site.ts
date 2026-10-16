@@ -51,12 +51,14 @@ export const FOOTER: readonly FooterColumn[] = [
       { href: '/roadmap', label: 'Roadmap' },
       { href: '/changelog', label: 'Changelog' },
       { href: '/open-source', label: 'Open source' },
+      { href: '/self-hosted-helpdesk', label: 'Self-hosted helpdesk' },
     ],
   },
   {
     title: 'Switch',
     links: [
       { href: '/migrate/freshdesk', label: 'Migrate from Freshdesk' },
+      { href: '/migrate/freshdesk/done-for-you', label: 'Freshdesk migration, done for you' },
       { href: '/migrate/freshdesk/export', label: 'Export Freshdesk tickets' },
       { href: '/migrate/zendesk/export', label: 'Export Zendesk tickets' },
       { href: '/vs/freshdesk', label: 'Colliedesk vs Freshdesk' },
