@@ -1,7 +1,6 @@
 import { FOUNDING_CHECKOUT } from '../../lib/site';
 import { faqPage, techArticle } from '../../lib/schema';
 import type { Faq, Page } from '../../lib/page';
-import { CONTACT_EMAIL } from './privacy';
 
 const faq: Faq[] = [
   {
@@ -10,7 +9,7 @@ const faq: Faq[] = [
   },
   {
     q: 'What does a done-for-you Freshdesk migration cost?',
-    a: `It is free for founding customers ($100 per workspace per year). For everyone else, email ${CONTACT_EMAIL} with your ticket count, attachment storage and renewal date; we reply with a fixed price before any work starts.`,
+    a: 'Nothing extra. It is part of the founding plan ($100 per workspace per year) and is not sold separately. When founding places close, the offer closes with them; the importer stays free to run yourself.',
   },
   {
     q: 'When can you start?',
@@ -41,9 +40,10 @@ Tickets (archived ones included), replies, private notes, attachments, tags, con
 
 | You are | Migration price |
 |---|---|
-| A founding customer ($100 per workspace per year, locked for life) | **Free** |
-| Anyone else | A fixed price, quoted before we start. Email **${CONTACT_EMAIL}** with your ticket count, attachment storage and renewal date. |
+| A founding customer ($100 per workspace per year, locked for life) | **Included.** Done-for-you migration is a founding benefit and is not sold separately. |
 | Self-hosting | Free: run the same importer yourself with the [import guide](/docs/import-freshdesk) |
+
+When founding places close, the done-for-you offer closes with them.
 
 [Become a founding customer, $100/year](${FOUNDING_CHECKOUT})
 
@@ -62,8 +62,8 @@ const page: Page = {
   section: 'Migrate',
   title: 'Freshdesk migration done for you, with a reconcile report',
   description:
-    'We move your Freshdesk tickets, replies, notes and attachments into Colliedesk and prove nothing was lost with a reconcile report. Free for founding customers; fixed price quoted up front for everyone else.',
-  summary: 'Done-for-you Freshdesk migration: free for founding customers, fixed quote otherwise; reconcile report before you switch; starts with v0.2',
+    'We move your Freshdesk tickets, replies, notes and attachments into Colliedesk and prove nothing was lost with a reconcile report. Included with the founding plan.',
+  summary: 'Done-for-you Freshdesk migration: included with the founding plan, not sold separately; reconcile report before you switch; starts with v0.2',
   eyebrow: 'Migrate · Done for you',
   h1: 'We move your Freshdesk data for you',
   lede: 'Hand us a Freshdesk API key. We import everything, prove it with a reconcile report, and you switch only when every number matches.',
