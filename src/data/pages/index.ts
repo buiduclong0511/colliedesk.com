@@ -1,6 +1,7 @@
 // Every page of the site, in llms.txt and sitemap order.
 import type { Page } from '../../lib/page';
 import changelog from './changelog';
+import helpdeskForSmallTeams from './helpdesk-for-small-teams';
 import home from './home';
 import migrateFreshdesk from './migrate-freshdesk';
 import migrateFreshdeskDoneForYou from './migrate-freshdesk-done-for-you';
@@ -24,7 +25,7 @@ let cache: readonly Page[] | undefined;
 export function allPages(): readonly Page[] {
   cache ??= [
     home, pricing, migrateFreshdesk, migrateFreshdeskDoneForYou, migrateFreshdeskExport, migrateZendeskExport,
-    vsFreshdesk, vsZendesk, vsHelpScout, vsFront, selfHostedHelpdesk, openSource, roadmapPage(), changelog,
+    vsFreshdesk, vsZendesk, vsHelpScout, vsFront, selfHostedHelpdesk, helpdeskForSmallTeams, openSource, roadmapPage(), changelog,
     privacy, terms, ...docsPages(),
   ];
   return cache;

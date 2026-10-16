@@ -52,6 +52,7 @@ export const FOOTER: readonly FooterColumn[] = [
       { href: '/changelog', label: 'Changelog' },
       { href: '/open-source', label: 'Open source' },
       { href: '/self-hosted-helpdesk', label: 'Self-hosted helpdesk' },
+      { href: '/helpdesk-for-small-teams', label: 'For small teams' },
     ],
   },
   {
