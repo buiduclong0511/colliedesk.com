@@ -58,17 +58,17 @@ function Bill() {
           <p className="eyebrow">The bill for five agents</p>
           <h2 id="bill">Per-agent pricing, then per-agent AI</h2>
           <p className="section-lede">
-            {`List prices per month, billed annually, read on ${PRICES_READ}. Zendesk publishes euros: Suite Professional with Copilot is 5 × (€115 + €50) = €825. `}
+            {`List prices per year, billed annually, read on ${PRICES_READ}. Zendesk publishes euros: Suite Professional with Copilot is 5 × (€115 + €50) × 12 = €9,900. `}
             <a href="/vs/zendesk">Details</a>.
           </p>
         </div>
-        <ul className="bars" aria-label="Monthly cost for five agents">
+        <ul className="bars" aria-label="Yearly cost for five agents">
           {BARS.map((b) => (
             <li key={b.href} className={b.ours ? 'bar bar-ours' : 'bar'}>
               <div className="bar-label"><a href={b.href}>{b.name}</a><span className="bar-math">{b.math}</span></div>
               <div className="bar-track">
                 <span className="bar-fill" style={{ width: `${Math.max((b.usd / MAX) * 100, 1.5).toFixed(1)}%` }}></span>
-                <strong>{`$${b.usd}`}<small>/mo</small></strong>
+                <strong>{`$${b.usd.toLocaleString('en-US')}`}<small>/yr</small></strong>
               </div>
             </li>
           ))}
