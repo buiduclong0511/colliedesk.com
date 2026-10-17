@@ -1,14 +1,14 @@
 // Colliedesk's own capability status, from ROADMAP.md. Shared by comparison pages.
 export const statusTable = `| Capability | Colliedesk |
 |---|---|
-| Shared inbox: replies, private notes, status, priority, assignee, tags, search, bulk actions | **Available now** (alpha) |
+| Shared inbox: replies, Cc, private notes, status, priority, assignee, tags, search, bulk actions | **Available now** (alpha) |
 | Email channel (inbound and outbound, threading) | **Available now** (alpha) |
 | Freshdesk importer with reconcile report | **Available now** (alpha) |
 | Saved replies, attachments, live updates and browser notifications | **Available now** (alpha) |
 | Passwordless sign-in, revocable sessions, isolated workspaces, full export | **Available now** (alpha) |
 | One-command install and published container image | **Available now** |
 | Colliedesk Cloud with a 14-day free trial, then Team or Founding | **Available now** (alpha) |
-| Cc on replies, new conversation from the inbox, contact history | **Beta** (0.1.0) |
+| New conversation from the inbox, contact history | **Beta** (0.1.0) |
 | Upgrade guide, upgrades tested on real data | **Beta** (0.1.0) |
 | AI draft replies, triage, auto-answer with a human in the loop | **Coming after beta** |
 | Knowledge base and public help center | **Coming after beta** |

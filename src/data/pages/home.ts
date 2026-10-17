@@ -1,15 +1,17 @@
-import { POSITIONING, PRICES_READ, REPO, TAGLINE } from '../../lib/site';
+import { CONTACT_EMAIL, POSITIONING, PRICES_READ, REPO, TAGLINE, TRIAL_HREF } from '../../lib/site';
+import { PER_WORKSPACE_FAQ } from './pricing';
 import { faqPage, organization, softwareApplication } from '../../lib/schema';
 import type { Faq, Page } from '../../lib/page';
 import { faqMarkdown } from '../../lib/twin';
 import { statusTable } from './collie-status';
-import { homeSectionsMd, SAVING_PCT } from './home-sections';
+import { FRESHDESK_MONTH, FRESHDESK_YEAR, HERO_SAVINGS, homeSectionsMd, OURS_YEAR, SAVING_PCT } from './home-sections';
 
-// Headline pattern from mailcheap.ai: one number against the incumbents, then why the bill is lower.
-// SAVING_PCT comes from the five-agent bill (Freshdesk Pro + Freddy AI Copilot vs Cloud Team).
-export const HOME_H1 = `Run your helpdesk up to ${SAVING_PCT}% cheaper than Freshdesk, Zendesk and Help Scout.`;
+// Headline: one number per incumbent, from the five-agent bills in home-sections.ts. The hero shows
+// one competitor at a time; this sentence is what screen readers, the twin and the title get.
+export const HOME_H1_LEAD = 'Run your helpdesk up to';
+export const HOME_H1 = `${HOME_H1_LEAD} ${HERO_SAVINGS.map((s, i) => `${i === HERO_SAVINGS.length - 1 ? 'and ' : ''}${s.pct}% cheaper than ${s.name}`).join(', ')}.`;
 export const HOME_LEDE =
-  'You pay for the workspace, not for every agent you add. Move from Freshdesk with your tickets, replies, private notes and attachments, and a reconcile report proves nothing was lost.';
+  'Pay for the workspace, not for every agent, and bring your Freshdesk tickets with a report that proves nothing was lost.';
 
 export const HOME_FAQ: Faq[] = [
   {
@@ -22,7 +24,16 @@ export const HOME_FAQ: Faq[] = [
   },
   {
     q: 'Is Colliedesk ready to use?',
-    a: 'It is alpha (0.0.x): released and running on Colliedesk Cloud, with a 14-day free trial. The email channel (inbound and outbound, threading), the Freshdesk importer with its reconcile report, saved replies, attachments and live updates work today. Alpha means the interface or database schema may change between releases. Cc, starting a new conversation from the inbox and contact history are not there yet (beta), and neither is AI. See the [roadmap](/roadmap).',
+    a: 'It is alpha (0.0.x): released and running on Colliedesk Cloud, with a 14-day free trial. The email channel (inbound and outbound, threading), the Freshdesk importer with its reconcile report, saved replies, Cc on replies, attachments and live updates work today. Alpha means the interface or database schema may change between releases. Starting a new conversation from the inbox and contact history are not there yet (beta), and neither is AI. See the [roadmap](/roadmap).',
+  },
+  PER_WORKSPACE_FAQ,
+  {
+    q: 'What happens over the limit?',
+    a: `Agents: Cloud Team covers up to 10. At 11 you move to Team 25, $99 a month for up to 25. Above 25, email us at ${CONTACT_EMAIL}, or self-host with no agent limit. Storage: we warn you at 80%. Over the cap, customer email keeps arriving with its attachments; only your own uploads and new imports pause until you free space or move up. Nothing is deleted. See [pricing](/pricing).`,
+  },
+  {
+    q: 'Who is behind Colliedesk?',
+    a: `HC Labs Co., Ltd., a small software company in Hanoi, Vietnam. We build Colliedesk in the open under AGPL-3.0, and we run our own customer support on Colliedesk Cloud. Write to ${CONTACT_EMAIL} and the people who build it answer.`,
   },
   {
     q: 'How does AI pricing work?',
@@ -45,7 +56,10 @@ ${homeSectionsMd}
 ## What works today, and what is coming
 
 ${statusTable}
-${faqMarkdown(HOME_FAQ)}`;
+${faqMarkdown(HOME_FAQ)}
+## Bring your tickets. Keep the difference.
+
+A year of Freshdesk Pro with Freddy AI Copilot for five agents, billed annually: 12 × $${FRESHDESK_MONTH} = $${FRESHDESK_YEAR.toLocaleString('en-US')}. Colliedesk Cloud Team for the same team: $${OURS_YEAR} a year. You keep $${(FRESHDESK_YEAR - OURS_YEAR).toLocaleString('en-US')}. [Start the free trial](${TRIAL_HREF}) or [move from Freshdesk](/migrate/freshdesk).`;
 
 // The HTML is the Home view (src/components/home/*); the twin is the Markdown above.
 const page: Page = {

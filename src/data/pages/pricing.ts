@@ -2,7 +2,14 @@ import { CONTACT_EMAIL, FOUNDING_HREF, REPO, TRIAL_HREF } from '../../lib/site';
 import { faqPage, softwareApplication } from '../../lib/schema';
 import type { Faq, Page } from '../../lib/page';
 
+// Shared with the home FAQ.
+export const PER_WORKSPACE_FAQ: Faq = {
+  q: 'Why per workspace, not per agent?',
+  a: 'Because a helpdesk should not cost more each time you hire. Per-agent pricing pushes teams to share logins or keep part-time helpers out of the inbox. With one price for the workspace, everyone who answers customers gets their own login. Our costs follow storage and AI usage, not the number of people who sign in, so that is what the plans limit: agents per plan, attachment storage, and AI at model cost +30%.',
+};
+
 const faq: Faq[] = [
+  PER_WORKSPACE_FAQ,
   {
     q: 'Does Colliedesk charge per agent?',
     a: 'No. Colliedesk Cloud Team is $49 per workspace per month or $490 per year, for up to 10 agents. Team 25 is $99 per workspace per month or $990 per year, for up to 25 agents. A workspace is one support team. Adding an agent does not change the price; you move to Team 25 only when you reach 11 agents.',
@@ -54,6 +61,8 @@ const body = `## What you pay for
 
 Self-hosting is free. We sell two things: **Colliedesk Cloud** (we run it for you) and **migration** (we move your Freshdesk history and prove nothing was lost). That is the whole business. There is no "enterprise edition" with the good features held back.
 
+**Every feature on every plan.** Cloud Team, Team 25 and Founding differ only in the number of agents and the attachment storage. Self-hosting has every feature too.
+
 ## AI is included, not an add-on
 
 **Coming after beta**. AI features: draft replies and triage from your own past replies and knowledge base, and auto-answer for repetitive tickets with a human in the loop. There is no AI seat licence and no per-resolution fee.
@@ -67,7 +76,7 @@ Most helpdesks charge per agent, then charge again for AI. For five agents, Fres
 
 ## Honest status
 
-Colliedesk is in **alpha** (0.0.x). It is released and runs on Colliedesk Cloud, with the email channel, the Freshdesk importer with its reconcile report, saved replies, attachments and live updates. Alpha means the interface or database schema may change between releases. Not there yet: Cc on replies, starting a new conversation from the inbox and contact history (beta), and AI (after beta). If you must have those this week, Colliedesk is not ready for you yet. If you are planning your exit before your next Freshdesk renewal, [start the free trial](${TRIAL_HREF}) or take [the founding offer](${FOUNDING_HREF}).`;
+Colliedesk is in **alpha** (0.0.x). It is released and runs on Colliedesk Cloud, with the email channel, the Freshdesk importer with its reconcile report, saved replies, Cc on replies, attachments and live updates. Alpha means the interface or database schema may change between releases. Not there yet: starting a new conversation from the inbox and contact history (beta), and AI (after beta). If you must have those this week, Colliedesk is not ready for you yet. If you are planning your exit before your next Freshdesk renewal, [start the free trial](${TRIAL_HREF}) or take [the founding offer](${FOUNDING_HREF}).`;
 
 const page: Page = {
   name: 'Pricing',

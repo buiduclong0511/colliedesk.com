@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { BAR_MAX as MAX, BARS, BORING } from '../../data/pages/home-sections';
 import { PRICES_READ } from '../../lib/site';
 import { Badge } from '../Badge';
@@ -78,6 +79,33 @@ function Bill() {
   );
 }
 
+// Small static pictures of shipped behaviour for four of the boring parts. Decorative: the card
+// text says the same thing, so screen readers skip them.
+const MINI: Readonly<Record<string, ReactElement>> = {
+  'Mail that lands': (
+    <div className="mini mini-chips">
+      {['DKIM', 'SPF', 'DMARC'].map((k) => <span key={k} className="mini-pass">{`${k} pass`}</span>)}
+    </div>
+  ),
+  'Mail you can trust': (
+    <div className="mini">
+      <p className="mini-row"><span>billing@yourbank.example</span><span className="mini-stop">Stopped</span></p>
+      <p className="mini-sub">Sender failed DMARC. No ticket created.</p>
+    </div>
+  ),
+  'Threading': (
+    <div className="mini">
+      <p className="mini-row"><span>Re: Invoice #2291 charged twice</span></p>
+      <p className="mini-sub">Joined the open conversation</p>
+    </div>
+  ),
+  'Your data out, any time': (
+    <div className="mini">
+      <p className="mini-row"><span className="mini-file">workspace-export.zip</span><span className="mini-pass">Ready</span></p>
+    </div>
+  ),
+};
+
 function Boring() {
   return (
     <section className="section section-alt" aria-labelledby="boring">
@@ -85,9 +113,13 @@ function Boring() {
         <p className="eyebrow">The boring parts</p>
         <h2 id="boring">A helpdesk is more than an inbox. These parts already work.</h2>
         <p className="section-lede">We are not rebuilding every Freshdesk feature. We build what a team of three to ten uses every day, and we label the rest below. HC Labs runs its own support on Colliedesk Cloud.</p>
-        <ul className="check-list check-list-wide">
+        <ul className="bento">
           {BORING.map(([k, v]) => (
-            <li key={k}><strong>{`${k}.`}</strong>{` ${v}`}</li>
+            <li key={k} className={MINI[k] ? 'bento-card bento-wide' : 'bento-card'}>
+              {MINI[k] && <div aria-hidden="true">{MINI[k]}</div>}
+              <h3>{k}</h3>
+              <p>{v}</p>
+            </li>
           ))}
         </ul>
       </div>
