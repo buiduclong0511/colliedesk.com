@@ -19,6 +19,10 @@ export const TAGLINE = 'The open-source alternative to Freshdesk, Zendesk and He
 export const POSITIONING =
   'Leave Freshdesk with all your data. AI that actually answers tickets is included, not an add-on. Flat price, no per-agent fees.';
 
+// Shown at the end of every page in the Compare section, HTML and Markdown twin.
+export const TRADEMARK_NOTE =
+  'Product names on this page are trademarks of their owners. Colliedesk and HC Labs are not affiliated with or endorsed by them.';
+
 export const FOUNDING_HREF = '/#founding';
 // The Founding refund promise, stated next to every Founding checkout button and in the terms.
 export const MONEY_BACK = '30-day money-back guarantee';
@@ -46,7 +50,7 @@ export const PRICE = {
 export const NAV: readonly NavLink[] = [
   { href: '/pricing', label: 'Pricing' },
   { href: '/migrate/freshdesk', label: 'Migrate' },
-  { href: '/vs/freshdesk', label: 'Compare' },
+  { href: '/compare', label: 'Compare' },
   { href: '/docs', label: 'Docs' },
   { href: '/roadmap', label: 'Roadmap' },
 ];
@@ -70,6 +74,7 @@ export const FOOTER: readonly FooterColumn[] = [
       { href: '/migrate/freshdesk/done-for-you', label: 'Freshdesk migration, done for you' },
       { href: '/migrate/freshdesk/export', label: 'Export Freshdesk tickets' },
       { href: '/migrate/zendesk/export', label: 'Export Zendesk tickets' },
+      { href: '/compare', label: 'All comparisons' },
       { href: '/freshdesk-alternative', label: 'Freshdesk alternatives' },
       { href: '/freshdesk-pricing-history', label: 'Freshdesk pricing history' },
       { href: '/vs/freshdesk', label: 'Colliedesk vs Freshdesk' },

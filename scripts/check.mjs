@@ -13,7 +13,7 @@ const REQUIRED_PAGES = [
   '/open-source', '/roadmap', '/docs', '/changelog', '/privacy', '/terms',
   '/self-hosted-helpdesk', '/migrate/freshdesk/done-for-you', '/helpdesk-for-small-teams',
   '/vs/zammad', '/vs/chatwoot', '/vs/freescout', '/vs/zoho-desk', '/vs/happyfox', '/vs/gorgias',
-  '/vs/hubspot-service-hub', '/vs/groove', '/freshdesk-alternative', '/freshdesk-pricing-history',
+  '/vs/hubspot-service-hub', '/vs/groove', '/freshdesk-alternative', '/freshdesk-pricing-history', '/compare',
 ];
 const AI_CRAWLERS = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'PerplexityBot', 'Google-Extended'];
 
@@ -275,6 +275,65 @@ const TRIAL_URL = 'https://app.colliedesk.com/sign-in';
     for (const m of readFileSync(file, 'utf8').matchAll(/<a[^>]*href="([^"]*)"[^>]*>\s*Start free trial/g)) {
       if (m[1] !== TRIAL_URL) fail(`${urlPathOf(file)}: "Start free trial" links to ${m[1]}, not ${TRIAL_URL}`);
     }
+  }
+}
+
+// Shipped features must not be labelled as missing. Cc on replies shipped in colliedesk#75; a
+// sentence or table row that names Cc must not call it beta or "not there yet". The changelog is
+// history: the 0.0.x notes correctly say Cc was not in that release.
+{
+  const notYet = /not there yet|\(beta\)|\*\*Beta\*\*|>Beta</i;
+  for (const file of files.filter((f) => /\.(html|md)$/.test(f) && !/[\\/]changelog\.(html|md)$/.test(f))) {
+    const text = readFileSync(file, 'utf8').replace(/<\/(tr|p|li)>/g, '\n');
+    for (const part of text.split(/[.!?]\s|\n/)) {
+      if (/\bCc\b/.test(part) && notYet.test(part)) fail(`${file.slice(outDir.length - 1)}: lists Cc as not shipped: "${part.trim().slice(0, 90)}"`);
+    }
+  }
+}
+
+// /compare is the hub of every comparison page: each /vs page is linked from it, the header
+// "Compare" link opens it, and every comparison page says the names are their owners' trademarks.
+{
+  const hub = read('compare.html');
+  if (!hub) fail('/compare: hub page not built');
+  for (const urlPath of urlPaths.filter((p) => p.startsWith('/vs/'))) {
+    if (!hub.includes(`href="${urlPath}"`)) fail(`/compare: does not link ${urlPath}`);
+  }
+  const home = read('index.html');
+  const nav = home.match(/<nav[\s\S]*?<\/nav>/)?.[0] ?? '';
+  if (!/href="\/compare"[^>]*>Compare</.test(nav)) fail('header: "Compare" does not link /compare');
+  for (const urlPath of urlPaths.filter((p) => p.startsWith('/vs/') || p === '/compare')) {
+    const name = urlPath.slice(1);
+    if (!read(`${name}.html`).includes('trademarks of their owners')) fail(`${urlPath}: no trademark note`);
+    if (!read(`${name}.md`).includes('trademarks of their owners')) fail(`${urlPath}.md: no trademark note`);
+  }
+}
+
+// Home hero: one competitor at a time, each with its own saving, without client JavaScript.
+// The h1 keeps one stable sentence for screen readers; the rotating words are aria-hidden, and
+// reduced motion shows Freshdesk only. Savings worked by hand: 1 - 49/420 = 88% (Freshdesk Pro +
+// Copilot, 5 agents), 1 - 49/825 = 94% (Zendesk Suite Professional + Copilot, euros as dollars),
+// 1 - 49/225 = 78% (Help Scout Plus).
+{
+  const home = read('index.html');
+  const h1 = home.match(/<h1[\s\S]*?<\/h1>/)?.[0] ?? '';
+  const spoken = h1.match(/<span class="visually-hidden">([^<]*)<\/span>/)?.[1] ?? '';
+  for (const claim of ['88% cheaper than Freshdesk', '94% cheaper than Zendesk', '78% cheaper than Help Scout']) {
+    if (!spoken.includes(claim)) fail(`/: h1 screen-reader text lacks "${claim}"`);
+  }
+  if (!/<span[^>]*aria-hidden="true"[^>]*class="h1-rotate"|<span[^>]*class="h1-rotate"[^>]*aria-hidden="true"/.test(h1)) fail('/: rotating h1 words must be aria-hidden');
+  const css = read('styles.css');
+  if (!/@media \(prefers-reduced-motion: reduce\)\s*\{[^}]*\.h1-rotate/.test(css)) fail('styles.css: rotating h1 has no reduced-motion rule');
+  // Closing block: a year of Freshdesk bills for five agents against Colliedesk Team billed yearly.
+  // 12 x $420 = $5,040; $5,040 - $490 = $4,550.
+  if (!home.includes('Keep the difference')) fail('/: closing block "Keep the difference" missing');
+  if (!home.includes('$5,040') || !home.includes('$4,550')) fail('/: closing block must show $5,040 a year and the $4,550 difference');
+  for (const [name, needles] of [
+    ['index.html', ['Why per workspace, not per agent?', 'Who is behind Colliedesk?', 'What happens over the limit?']],
+    ['pricing.html', ['Why per workspace, not per agent?', 'Every feature on every plan']],
+    ['vs/freshdesk.html', ['Where Freshdesk does more']],
+  ]) {
+    for (const needle of needles) if (!read(name).includes(needle)) fail(`/${name}: missing "${needle}"`);
   }
 }
 

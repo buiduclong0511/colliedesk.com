@@ -1,5 +1,5 @@
 // Home page facts shared by the HTML sections (src/components/home/*) and the Markdown twin.
-import { PRICES_READ } from '../../lib/site';
+import { PRICE, PRICES_READ } from '../../lib/site';
 
 export interface PriceBar {
   name: string;
@@ -20,7 +20,26 @@ export const BAR_MAX = Math.max(...BARS.map((b) => b.usd));
 const OURS = BARS.find((b) => b.ours)?.usd;
 if (OURS === undefined) throw new Error('BARS needs one entry with ours: true');
 // The hero promise: saving against the most expensive bar, rounded down so the claim never overstates.
-export const SAVING_PCT = Math.floor((1 - OURS / BAR_MAX) * 100);
+const savingPct = (theirs: number): number => Math.floor((1 - OURS / theirs) * 100);
+export const SAVING_PCT = savingPct(BAR_MAX);
+
+// Zendesk Suite Professional + Copilot for five agents, in euros: 5 × (€115 + €50).
+export const ZENDESK_EUR = 825;
+const usdOf = (name: string): number => {
+  const bar = BARS.find((b) => b.name.startsWith(name));
+  if (!bar) throw new Error(`BARS has no ${name} entry`);
+  return bar.usd;
+};
+// The hero names one competitor at a time with its own saving. Zendesk is counted as if €1 = $1;
+// the euro trades above the dollar, so the real saving is larger than the one shown.
+export const HERO_SAVINGS: readonly { name: string; pct: number }[] = [
+  { name: 'Freshdesk', pct: SAVING_PCT },
+  { name: 'Zendesk', pct: savingPct(ZENDESK_EUR) },
+  { name: 'Help Scout', pct: savingPct(usdOf('Help Scout')) },
+];
+// A year of Freshdesk Pro + Copilot for five agents, billed annually, against Cloud Team billed yearly.
+export const FRESHDESK_YEAR = BAR_MAX * 12;
+export const OURS_YEAR = Number(PRICE.yearly.replace('$', ''));
 
 // Answers "you can't just build a helpdesk over a weekend": the unglamorous parts, each already on
 // main and running on Colliedesk Cloud. Only list what shipped; anything else belongs in the status table.

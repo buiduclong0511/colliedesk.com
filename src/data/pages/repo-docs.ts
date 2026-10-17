@@ -94,7 +94,7 @@ export function roadmapPage(): Page {
     h1: 'Colliedesk roadmap',
     title: 'Colliedesk roadmap: alpha is live, beta next, AI after beta',
     description:
-      'What Colliedesk has shipped and what comes next: alpha with email and the Freshdesk importer on Colliedesk Cloud, then beta (Cc, new conversation, contact history), then AI. Dates are targets.',
+      'What Colliedesk has shipped and what comes next: alpha with email and the Freshdesk importer on Colliedesk Cloud, then beta (new conversation, contact history), then AI. Dates are targets.',
     summary: 'Now alpha (email, Freshdesk importer, Cloud trial); next beta 0.1.0; then AI; later automations, SLA, reports',
   } satisfies Partial<Page>);
   page.jsonLd = [techArticle(page)];

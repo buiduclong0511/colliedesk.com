@@ -59,6 +59,38 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 .badge-coming { color: var(--text-2); background: var(--surface-2); border: 1px solid var(--line); }
 .badge-shipped { color: var(--ok); background: var(--ok-soft); border: 1px solid transparent; }
 
+/* Home "boring parts": a bento of cards; the four with a mini picture of the product span two columns. */
+.bento { list-style: none; margin: var(--space-8) 0 0; padding: 0; display: grid; grid-auto-flow: dense; gap: var(--space-4); }
+@media (min-width: 760px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .bento { grid-template-columns: repeat(4, 1fr); } .bento-wide { grid-column: span 2; } }
+.bento-card { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-5); background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--radius); }
+.bento-card h3 { margin: 0; font-size: 1.05rem; }
+.bento-card p { margin: 0; color: var(--text-2); }
+.mini { margin-bottom: var(--space-2); padding: var(--space-3); background: var(--surface-0); border: 1px solid var(--line); border-radius: var(--radius); font-size: 13px; }
+.mini p { margin: 0; }
+.mini-chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.mini-row { display: flex; justify-content: space-between; gap: var(--space-3); color: var(--text-1); font-weight: 500; }
+.mini-sub { margin-top: var(--space-1) !important; color: var(--text-3) !important; }
+.mini-pass, .mini-stop { padding: 0 var(--space-2); border-radius: var(--radius-full); font-weight: 600; white-space: nowrap; }
+.mini-pass { color: var(--ok); background: var(--ok-soft); }
+.mini-pass::before { content: "✓ "; }
+.mini-stop { color: var(--danger); background: var(--danger-soft); }
+.mini-file { font-family: var(--font-mono); }
+
+/* Home closing block: the copy beside twelve static Freshdesk invoices and the two yearly totals. */
+.closing { display: grid; gap: var(--space-10); align-items: center; }
+@media (min-width: 900px) { .closing { grid-template-columns: 1fr 1fr; } }
+.invoices ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-2); }
+.invoice { display: grid; gap: var(--space-1); padding: var(--space-3); background: var(--surface-1); border: 1px solid var(--line); border-top: 3px solid var(--line-strong); border-radius: var(--radius); font-size: 13px; color: var(--text-3); }
+.invoice:nth-child(odd) { transform: rotate(-1.2deg); }
+.invoice:nth-child(3n) { transform: rotate(1deg); }
+.invoice strong { font-size: 1rem; color: var(--text-1); font-variant-numeric: tabular-nums; }
+.invoice-total { display: flex; justify-content: space-between; gap: var(--space-4); margin: var(--space-4) 0 0; padding-top: var(--space-3); border-top: 1px solid var(--line); color: var(--text-2); }
+.invoice-total strong { font-size: 1.25rem; color: var(--text-1); font-variant-numeric: tabular-nums; }
+.invoice-ours { margin-top: var(--space-2); border-top: 0; padding-top: 0; }
+.invoice-ours strong { color: var(--accent-text); }
+@media (max-width: 640px) { .invoices ol { grid-template-columns: repeat(3, 1fr); } }
+
 /* Eyebrow and ledes */
 .eyebrow { font: 600 14px/1.4 var(--font-sans); color: var(--accent-text); margin: 0 0 var(--space-4); }
 .lede { font-size: 1.2rem; color: var(--text-2); max-width: 38rem; line-height: 1.55; }
@@ -71,6 +103,29 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 .hero-copy .lede { margin-inline: auto; }
 .hero-eyebrow { display: inline-block; border: 1px solid var(--line); border-radius: var(--radius-full); background: var(--surface-1); padding: .35rem .9rem; color: var(--text-2); font-weight: 500; font-size: 13px; }
 .home-hero h1 { font-size: clamp(2.75rem, 1.6rem + 4vw, 4.5rem); letter-spacing: -0.035em; margin-bottom: .35em; }
+/* Rotating h1: the three items share one grid cell; the first shows by default, so reduced motion
+   and browsers without animation keep a static headline. One pass, then it rests on the first. */
+.h1-swap { display: grid; justify-items: center; }
+.h1-item { grid-area: 1 / 1; }
+.h1-item em { font-style: normal; color: var(--accent-text); }
+.h1-item + .h1-item { visibility: hidden; opacity: 0; }
+.h1-item:nth-child(1) { animation: h1-first 9.6s ease-in-out 1 forwards; }
+.h1-item:nth-child(2) { animation: h1-pass 3.2s ease-in-out 3s 1 both; }
+.h1-item:nth-child(3) { animation: h1-pass 3.2s ease-in-out 6s 1 both; }
+.h1-rotate:hover .h1-item { animation-play-state: paused; }
+@keyframes h1-first {
+  0%, 28% { opacity: 1; visibility: visible; transform: none; }
+  31%, 97% { opacity: 0; visibility: hidden; transform: translateY(-.2em); }
+  100% { opacity: 1; visibility: visible; transform: none; }
+}
+@keyframes h1-pass {
+  0% { opacity: 0; visibility: visible; transform: translateY(.2em); }
+  10%, 90% { opacity: 1; visibility: visible; transform: none; }
+  100% { opacity: 0; visibility: hidden; transform: translateY(-.2em); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .h1-rotate .h1-item { animation: none; }
+}
 .hero-note { margin: var(--space-4) 0 0; color: var(--text-3); font-size: .9rem; }
 .hero-note b { color: var(--text-2); font-weight: 500; }
 .hero-stage { position: relative; max-width: 72rem; margin: var(--space-16) auto 0; padding-bottom: var(--space-16); }
