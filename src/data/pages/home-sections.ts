@@ -3,18 +3,19 @@ import { PRICE, PRICES_READ } from '../../lib/site';
 
 export interface PriceBar {
   name: string;
-  /** List price per month for five agents, USD. */
+  /** List price per year for five agents, billed annually, USD. */
   usd: number;
   math: string;
   href: string;
   ours?: boolean;
 }
 
-// 5 agents, list price per month, billed annually, USD only (Zendesk publishes EUR; shown in text).
+// 5 agents, list price per year, billed annually on every bar so the billing periods match.
+// USD only (Zendesk publishes EUR; shown in text).
 export const BARS: readonly PriceBar[] = [
-  { name: 'Freshdesk Pro + Freddy AI Copilot', usd: 420, math: '5 × ($55 + $29)', href: '/vs/freshdesk' },
-  { name: 'Help Scout Plus', usd: 225, math: '5 × $45, + $0.75 per AI resolution', href: '/vs/help-scout' },
-  { name: 'Colliedesk Cloud', usd: 49, math: 'one workspace, + AI usage at cost +30%', href: '/pricing', ours: true },
+  { name: 'Freshdesk Pro + Freddy AI Copilot', usd: 5040, math: '5 × ($55 + $29) × 12', href: '/vs/freshdesk' },
+  { name: 'Help Scout Plus', usd: 2700, math: '5 × $45 × 12, + $0.75 per AI resolution', href: '/vs/help-scout' },
+  { name: 'Colliedesk Cloud', usd: 490, math: 'one workspace, + AI usage at cost +30%', href: '/pricing', ours: true },
 ];
 export const BAR_MAX = Math.max(...BARS.map((b) => b.usd));
 const OURS = BARS.find((b) => b.ours)?.usd;
@@ -69,10 +70,10 @@ Self-hosting is free, forever, with every feature. We sell two things:
 
 ## The bill for five agents
 
-List prices per month, billed annually, read on ${PRICES_READ}.
+List prices per year, billed annually, read on ${PRICES_READ}.
 
-${BARS.map((b) => `- ${b.name}: $${b.usd} (${b.math})`).join('\n')}
-- Zendesk Suite Professional + Copilot: 5 × (€115 + €50) = €825 ([details](/vs/zendesk))
+${BARS.map((b) => `- ${b.name}: $${b.usd.toLocaleString('en-US')} (${b.math})`).join('\n')}
+- Zendesk Suite Professional + Copilot: 5 × (€115 + €50) × 12 = €9,900 ([details](/vs/zendesk))
 
 ## The boring parts already work
 

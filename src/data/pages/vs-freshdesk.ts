@@ -6,12 +6,13 @@ import { collieFacts as c, statusTable } from './collie-status';
 
 const pricing: VsPricing = {
   competitor: 'Freshdesk',
-  readOn: '2026-10-14',
-  billing: 'per agent, billed annually',
+  readOn: '2026-10-17',
+  // Monthly-billing prices, so they compare like for like with Colliedesk billed monthly.
+  billing: 'per agent, billed monthly',
   plans: [
-    { name: 'Freshdesk Growth', perAgent: 19 },
-    { name: 'Freshdesk Pro', perAgent: 55 },
-    { name: 'Freshdesk Pro + Freddy AI Copilot', perAgent: 55, aiPerAgent: 29 },
+    { name: 'Freshdesk Growth', perAgent: 23 },
+    { name: 'Freshdesk Pro', perAgent: 66 },
+    { name: 'Freshdesk Pro + Freddy AI Copilot', perAgent: 66, aiPerAgent: 35 },
   ],
   forYou: [
     'You pay Freshdesk per agent, then again per agent for AI, and the bill grows with every hire.',
@@ -36,7 +37,7 @@ const faq: Faq[] = [
   },
   {
     q: 'How much does Freshdesk cost for 5 agents with AI?',
-    a: `At list prices read on ${PRICES_READ}: Freshdesk Pro is $55 per agent per month billed annually, and Freddy AI Copilot is $29 per agent per month. Five agents: 5 × ($55 + $29) = $420 per month.`,
+    a: `At list prices read on ${PRICES_READ}, billed monthly: Freshdesk Pro is $66 per agent per month and Freddy AI Copilot is $35, so five agents pay 5 × ($66 + $35) = $505 a month. Billed annually it is 5 × ($55 + $29) × 12 = $5,040 a year. Colliedesk Cloud Team is ${PRICE.monthly} a month or ${PRICE.yearly} a year.`,
   },
   {
     q: 'Is Colliedesk ready to replace Freshdesk today?',
@@ -50,12 +51,12 @@ const faq: Faq[] = [
 
 const body = `## Price, side by side
 
-Freshdesk prices are per agent per month, billed annually, as published on ${PRICES_READ}.
+Freshdesk prices are per agent per month, as published on ${PRICES_READ}. The first figure is billed monthly, the second billed annually.
 
 | | Freshdesk | Colliedesk |
 |---|---|---|
-| Plans | Growth $19, Pro $55, Enterprise $89 per agent per month | ${c.price} |
-| AI drafting | Freddy AI Copilot $29 per agent per month, add-on for Pro and Enterprise only | ${c.ai} |
+| Plans | Growth $23 / $19, Pro $66 / $55, Enterprise $107 / $89 per agent per month | ${c.price} |
+| AI drafting | Freddy AI Copilot $35 / $29 per agent per month, add-on for Pro and Enterprise only | ${c.ai} |
 | AI agent | 500 sessions free once per account, then $49 per 100 sessions | Auto-answer with a human in the loop, same AI pricing (coming after beta) |
 | Free option | No free plan on the pricing page; 14-day trial | ${c.free} |
 | Source code | Proprietary | ${c.source} |
@@ -104,10 +105,10 @@ const page: Page = {
   jsonLd: [],
   path: '/vs/freshdesk',
   section: 'Compare',
-  title: `Colliedesk vs Freshdesk: ${PRICE.monthly} or ${PRICE.team25Monthly} a month for the whole team, not $19–89 per agent`,
+  title: `Colliedesk vs Freshdesk: ${PRICE.monthly} or ${PRICE.team25Monthly} a month for the whole team, not $19–107 per agent`,
   description:
     `An honest comparison of Colliedesk and Freshdesk: published prices, AI add-on costs, export limits and what Colliedesk can and cannot do yet. Prices read ${PRICES_READ}.`,
-  summary: 'Freshdesk $19–89 per agent plus $29 Copilot vs Colliedesk $49 per workspace; export limits; honest status',
+  summary: 'Freshdesk $19–107 per agent plus $29–35 Copilot vs Colliedesk $49 per workspace; export limits; honest status',
   eyebrow: 'Compare · Freshdesk alternative',
   h1: 'Colliedesk vs Freshdesk',
   lede: `Five agents on ${fiveAgents?.name ?? 'Freshdesk'} pay ${usd(fiveAgents?.usd ?? 0)} a month. Colliedesk Cloud Team is ${PRICE.monthly} for the whole workspace, up to 10 agents (${PRICE.team25Monthly} for up to 25). Pick your team size to see where Colliedesk fits, and where it does not.`,

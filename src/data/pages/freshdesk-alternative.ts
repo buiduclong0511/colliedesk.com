@@ -13,7 +13,7 @@ const faq: Faq[] = [
   },
   {
     q: 'Which Freshdesk alternative is cheapest for 5 agents?',
-    a: `Among the paid plans we compared on ${PRICES_READ}, Colliedesk Cloud at $49 per workspace is the lowest helpdesk price for 5 agents. Helply (formerly Groove) also starts at $49, but that buys AI credits. Zoho Desk Express (€7 per user, max 5) and the free plans of Zoho Desk and HubSpot are cheaper if you can live with their limits.`,
+    a: `Among the paid plans we compared on ${PRICES_READ}, Colliedesk Cloud at $490 a year per workspace ($40.83 a month, or $49 billed monthly) is the lowest helpdesk price for 5 agents. Helply (formerly Groove) starts at $49, but that buys AI credits. Zoho Desk Express (€7 per user, max 5) and the free plans of Zoho Desk and HubSpot are cheaper if you can live with their limits.`,
   },
 ];
 
@@ -23,7 +23,7 @@ Prices for 5 agents per month, billed annually, from each vendor's page on ${PRI
 
 | Helpdesk | 5 agents | Pricing model | Open source | Freshdesk import | Comparison |
 |---|---|---|---|---|---|
-| **Colliedesk** | **$49** + AI usage | Flat per workspace, up to 10 agents | AGPL-3.0 | Available now (alpha), with reconcile report | — |
+| **Colliedesk** | **$40.83** ($490 a year) + AI usage | Flat per workspace, up to 10 agents | AGPL-3.0 | Available now (alpha), with reconcile report | — |
 | Zammad | €80–90 (Professional) | Per agent (hosted, in euros) | AGPL-3.0 | Released, self-serve | [vs Zammad](/vs/zammad) |
 | Chatwoot | $195 (Business) | Per agent | MIT (core) | Paid plans; no attachments | [vs Chatwoot](/vs/chatwoot) |
 | FreeScout | Hosting + modules | Free core, paid modules, no official cloud | AGPL-3.0 | Third-party or community module | [vs FreeScout](/vs/freescout) |

@@ -199,8 +199,9 @@ for (const file of pages) {
 
 // The Freshdesk page leads with price, so its chart must let a visitor pick a team size, say where
 // Colliedesk stops being the cheaper choice, and carry a price read date that is kept fresh.
-// Expected figures are worked by hand from Freshdesk's list prices (Growth $19, Pro $55, Copilot
-// $29 per agent) against Colliedesk Team $49 per workspace.
+// Expected figures are worked by hand from Freshdesk's monthly-billing list prices (Growth $23,
+// Pro $66, Copilot $35 per agent) against Colliedesk Team $49 per workspace, also billed monthly,
+// so both sides of the chart use the same billing period.
 const PRICE_MAX_AGE_DAYS = 90;
 {
   const vsHtml = read('vs/freshdesk.html');
@@ -216,12 +217,13 @@ const PRICE_MAX_AGE_DAYS = 90;
   // A bar total renders as "$19<small>", so this cannot match $190 or $490.
   const total = (html, amount) => html.includes(`>${amount}<small>`);
   const block = (n) => chart.match(new RegExp(`data-size="${n}"[\\s\\S]*?(?=data-size=|<p class="vs-fit-line")`))?.[0] ?? '';
-  if (!total(list(3), '$57') || !total(list(3), '$49')) fail('/vs/freshdesk: 3 agents must show Freshdesk Growth $57 and Colliedesk $49');
-  if (!total(list(5), '$420') || !block(5).includes('$4,452 a year')) fail('/vs/freshdesk: 5 agents must show Freshdesk Pro + Copilot $420 and a $4,452 yearly saving');
-  if (!total(list(1), '$19')) fail('/vs/freshdesk: 1 agent must show Freshdesk Growth $19, cheaper than Colliedesk');
+  if (!total(list(3), '$69') || !total(list(3), '$49')) fail('/vs/freshdesk: 3 agents must show Freshdesk Growth $69 and Colliedesk $49');
+  if (!total(list(5), '$505') || !block(5).includes('$5,472 a year')) fail('/vs/freshdesk: 5 agents must show Freshdesk Pro + Copilot $505 and a $5,472 yearly saving');
+  if (!total(list(1), '$23')) fail('/vs/freshdesk: 1 agent must show Freshdesk Growth $23, cheaper than Colliedesk');
+  if (!/billed monthly/.test(chart)) fail('/vs/freshdesk: chart must say Freshdesk prices are billed monthly, like the Colliedesk $49');
   if (!/from 3 to 25 agents/.test(chart)) fail('/vs/freshdesk: chart must say Colliedesk costs less from 3 to 25 agents');
-  // 25 agents: Growth 25 x $19 = $475, Colliedesk Team 25 is $99 flat.
-  if (!total(list(25), '$475') || !total(list(25), '$99')) fail('/vs/freshdesk: 25 agents must show Freshdesk Growth $475 and Colliedesk Team 25 $99');
+  // 25 agents: Growth 25 x $23 = $575, Colliedesk Team 25 is $99 flat.
+  if (!total(list(25), '$575') || !total(list(25), '$99')) fail('/vs/freshdesk: 25 agents must show Freshdesk Growth $575 and Colliedesk Team 25 $99');
   if (!/more than 25 agents/.test(vsHtml)) fail('/vs/freshdesk: "not for you yet" must stop at 25 agents');
   const readOn = chart.match(/data-read-on="(\d{4}-\d{2}-\d{2})"/)?.[1];
   if (!readOn) fail('/vs/freshdesk: price chart has no data-read-on date');
@@ -230,6 +232,20 @@ const PRICE_MAX_AGE_DAYS = 90;
   }
   if (!/id="fit"/.test(vsHtml) || !/Not for you yet/.test(vsHtml)) fail('/vs/freshdesk: "who it fits" section missing');
   if (!vsMd.includes('## Who Colliedesk fits') || !vsMd.includes('| 3 agents |')) fail('/vs/freshdesk.md: twin lacks the price-by-team-size table or the fit section');
+}
+
+// Price comparisons outside /vs/freshdesk must also put both sides on one billing period. Expected
+// figures are worked by hand: five agents on Freshdesk Pro + Copilot billed annually are
+// 5 x ($55 + $29) x 12 = $5,040 a year against Colliedesk Team $490 a year, a 90% saving (floor);
+// billed monthly they are 5 x ($66 + $35) = $505 a month against $49.
+{
+  const home = read('index.html');
+  const homeMd = read('index.md');
+  if (!home.includes('90% cheaper')) fail('/: hero must say 90% cheaper ($490 a year vs Freshdesk $5,040 a year, both billed annually)');
+  if (!homeMd.includes('$5,040') || !homeMd.includes('$490') || !/per year, billed annually/.test(homeMd)) fail('/: five-agent bill must compare yearly totals billed annually ($5,040 vs $490)');
+  if (!read('pricing.md').includes('$5,040 a year') || read('pricing.md').includes('$420 per month')) fail('/pricing: five-agent comparison must be $5,040 a year billed annually or $505 a month billed monthly');
+  if (!read('helpdesk-for-small-teams.md').includes('| 5 | $115 | $505 | $49 |')) fail('/helpdesk-for-small-teams: table must use Freshdesk monthly-billing prices (5 agents: $115, $505) against $49 a month');
+  if (!read('freshdesk-alternative.md').includes('$40.83')) fail('/freshdesk-alternative: annual-billed table must show Colliedesk at $40.83 a month ($490 a year)');
 }
 
 // Cloud plan limits. Team: 10 agents, 100 GB. Team 25: 25 agents, 250 GB, $99 a month or $990 a year.

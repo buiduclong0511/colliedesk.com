@@ -1,16 +1,19 @@
-import { FOUNDING_HREF, PRICES_READ, TRIAL_HREF } from '../../lib/site';
+import { FOUNDING_HREF, TRIAL_HREF } from '../../lib/site';
 import { faqPage, techArticle } from '../../lib/schema';
 import type { Faq, Page } from '../../lib/page';
 import { statusTable } from './collie-status';
 
+// Date the Freshdesk monthly-billing prices on this page were read from freshworks.com.
+const FRESHDESK_READ = '17 October 2026';
+
 const faq: Faq[] = [
   {
     q: 'What is the cheapest helpdesk for a team of 3 to 10 agents?',
-    a: `Among the paid options we compare, Colliedesk Cloud Team is $49 per workspace per month for up to 10 agents, so the price does not grow with the team. Freshdesk Growth is $19 per agent per month billed annually (read on ${PRICES_READ}): $57 at 3 agents, $190 at 10. Self-hosting Colliedesk is free.`,
+    a: `Among the paid options we compare, Colliedesk Cloud Team is $49 per workspace per month for up to 10 agents, so the price does not grow with the team. Freshdesk Growth is $23 per agent per month billed monthly (read on ${FRESHDESK_READ}): $69 at 3 agents, $230 at 10. Self-hosting Colliedesk is free.`,
   },
   {
     q: 'Is a flat price worse for a one- or two-person team?',
-    a: 'It can be. At $19 per agent, one or two Freshdesk Growth agents cost less than $49. Colliedesk pays off from three agents, or when you want AI without a per-seat add-on.',
+    a: 'It can be. One or two Freshdesk Growth agents cost less: $46 a month billed monthly against $49, or $456 a year billed annually against $490. Colliedesk pays off from three agents, or when you want AI without a per-seat add-on.',
   },
   {
     q: 'What if my team outgrows Cloud Team?',
@@ -28,14 +31,14 @@ const body = `## What a small support team needs
 
 ## What it costs as you grow
 
-Freshdesk prices are per agent per month, billed annually, read on ${PRICES_READ}.
+Prices per month, billed monthly on both sides, read on ${FRESHDESK_READ}.
 
-| Agents | Freshdesk Growth ($19) | Freshdesk Pro + Freddy AI Copilot ($55 + $29) | Colliedesk Cloud Team |
+| Agents | Freshdesk Growth ($23) | Freshdesk Pro + Freddy AI Copilot ($66 + $35) | Colliedesk Cloud Team |
 |---|---|---|---|
-| 2 | $38 | $168 | $49 |
-| 3 | $57 | $252 | $49 |
-| 5 | $95 | $420 | $49 |
-| 10 | $190 | $840 | $49 |
+| 2 | $46 | $202 | $49 |
+| 3 | $69 | $303 | $49 |
+| 5 | $115 | $505 | $49 |
+| 10 | $230 | $1,010 | $49 |
 
 Colliedesk AI (coming after beta) is billed at model cost +30% on our key, or by your provider on your own key. Full sources: [Colliedesk vs Freshdesk](/vs/freshdesk).
 
