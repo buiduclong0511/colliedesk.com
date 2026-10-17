@@ -1,5 +1,5 @@
 // Home page facts shared by the HTML sections (src/components/home/*) and the Markdown twin.
-import { PRICE, PRICES_READ } from '../../lib/site';
+import { PRICES_READ } from '../../lib/site';
 
 export interface PriceBar {
   name: string;
@@ -24,8 +24,8 @@ if (OURS === undefined) throw new Error('BARS needs one entry with ours: true');
 const savingPct = (theirs: number): number => Math.floor((1 - OURS / theirs) * 100);
 export const SAVING_PCT = savingPct(BAR_MAX);
 
-// Zendesk Suite Professional + Copilot for five agents, in euros: 5 × (€115 + €50).
-export const ZENDESK_EUR = 825;
+// Zendesk Suite Professional + Copilot for five agents for a year, in euros: 5 × (€115 + €50) × 12.
+export const ZENDESK_EUR = 9900;
 const usdOf = (name: string): number => {
   const bar = BARS.find((b) => b.name.startsWith(name));
   if (!bar) throw new Error(`BARS has no ${name} entry`);
@@ -39,8 +39,9 @@ export const HERO_SAVINGS: readonly { name: string; pct: number }[] = [
   { name: 'Help Scout', pct: savingPct(usdOf('Help Scout')) },
 ];
 // A year of Freshdesk Pro + Copilot for five agents, billed annually, against Cloud Team billed yearly.
-export const FRESHDESK_YEAR = BAR_MAX * 12;
-export const OURS_YEAR = Number(PRICE.yearly.replace('$', ''));
+export const FRESHDESK_YEAR = BAR_MAX;
+export const FRESHDESK_MONTH = BAR_MAX / 12;
+export const OURS_YEAR = OURS;
 
 // Answers "you can't just build a helpdesk over a weekend": the unglamorous parts, each already on
 // main and running on Colliedesk Cloud. Only list what shipped; anything else belongs in the status table.

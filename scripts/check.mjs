@@ -327,14 +327,15 @@ const TRIAL_URL = 'https://app.colliedesk.com/sign-in';
 
 // Home hero: one competitor at a time, each with its own saving, without client JavaScript.
 // The h1 keeps one stable sentence for screen readers; the rotating words are aria-hidden, and
-// reduced motion shows Freshdesk only. Savings worked by hand: 1 - 49/420 = 88% (Freshdesk Pro +
-// Copilot, 5 agents), 1 - 49/825 = 94% (Zendesk Suite Professional + Copilot, euros as dollars),
-// 1 - 49/225 = 78% (Help Scout Plus).
+// reduced motion shows Freshdesk only. Savings worked by hand from yearly bills for five agents,
+// billed annually, against Cloud Team $490 a year: 1 - 490/5,040 = 90% (Freshdesk Pro + Copilot),
+// 1 - 490/9,900 = 95% (Zendesk Suite Professional + Copilot, euros as dollars), 1 - 490/2,700 = 81%
+// (Help Scout Plus).
 {
   const home = read('index.html');
   const h1 = home.match(/<h1[\s\S]*?<\/h1>/)?.[0] ?? '';
   const spoken = h1.match(/<span class="visually-hidden">([^<]*)<\/span>/)?.[1] ?? '';
-  for (const claim of ['88% cheaper than Freshdesk', '94% cheaper than Zendesk', '78% cheaper than Help Scout']) {
+  for (const claim of ['90% cheaper than Freshdesk', '95% cheaper than Zendesk', '81% cheaper than Help Scout']) {
     if (!spoken.includes(claim)) fail(`/: h1 screen-reader text lacks "${claim}"`);
   }
   if (!/<span[^>]*aria-hidden="true"[^>]*class="h1-rotate"|<span[^>]*class="h1-rotate"[^>]*aria-hidden="true"/.test(h1)) fail('/: rotating h1 words must be aria-hidden');

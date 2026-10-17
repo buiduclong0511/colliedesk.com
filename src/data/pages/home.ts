@@ -4,7 +4,7 @@ import { faqPage, organization, softwareApplication } from '../../lib/schema';
 import type { Faq, Page } from '../../lib/page';
 import { faqMarkdown } from '../../lib/twin';
 import { statusTable } from './collie-status';
-import { BAR_MAX, FRESHDESK_YEAR, HERO_SAVINGS, homeSectionsMd, OURS_YEAR, SAVING_PCT } from './home-sections';
+import { FRESHDESK_MONTH, FRESHDESK_YEAR, HERO_SAVINGS, homeSectionsMd, OURS_YEAR, SAVING_PCT } from './home-sections';
 
 // Headline: one number per incumbent, from the five-agent bills in home-sections.ts. The hero shows
 // one competitor at a time; this sentence is what screen readers, the twin and the title get.
@@ -59,7 +59,7 @@ ${statusTable}
 ${faqMarkdown(HOME_FAQ)}
 ## Bring your tickets. Keep the difference.
 
-A year of Freshdesk Pro with Freddy AI Copilot for five agents, billed annually: 12 × $${BAR_MAX} = $${FRESHDESK_YEAR.toLocaleString('en-US')}. Colliedesk Cloud Team for the same team: $${OURS_YEAR} a year. You keep $${(FRESHDESK_YEAR - OURS_YEAR).toLocaleString('en-US')}. [Start the free trial](${TRIAL_HREF}) or [move from Freshdesk](/migrate/freshdesk).`;
+A year of Freshdesk Pro with Freddy AI Copilot for five agents, billed annually: 12 × $${FRESHDESK_MONTH} = $${FRESHDESK_YEAR.toLocaleString('en-US')}. Colliedesk Cloud Team for the same team: $${OURS_YEAR} a year. You keep $${(FRESHDESK_YEAR - OURS_YEAR).toLocaleString('en-US')}. [Start the free trial](${TRIAL_HREF}) or [move from Freshdesk](/migrate/freshdesk).`;
 
 // The HTML is the Home view (src/components/home/*); the twin is the Markdown above.
 const page: Page = {

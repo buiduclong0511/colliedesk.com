@@ -1,6 +1,6 @@
 import { FOUNDING_SLOTS, foundingState } from '../../lib/founding';
 import { FoundingMeter } from '../FoundingMeter';
-import { BAR_MAX, FRESHDESK_YEAR, OURS_YEAR } from '../../data/pages/home-sections';
+import { FRESHDESK_MONTH, FRESHDESK_YEAR, OURS_YEAR } from '../../data/pages/home-sections';
 import { FOUNDING_CHECKOUT, MONEY_BACK, TRIAL_HREF } from '../../lib/site';
 import { usd } from '../../lib/vs-pricing';
 
@@ -117,16 +117,16 @@ export function ClosingCta() {
         <div>
           <p className="eyebrow">A year of Freshdesk for five agents</p>
           <h2 id="closing">Bring your tickets. Keep the difference.</h2>
-          <p className="section-lede">{`Freshdesk Pro with Freddy AI Copilot, billed annually: 12 × ${usd(BAR_MAX)} = ${usd(FRESHDESK_YEAR)} a year. Colliedesk Cloud Team is ${usd(OURS_YEAR)} a year for the same team. You keep ${usd(FRESHDESK_YEAR - OURS_YEAR)}.`}</p>
+          <p className="section-lede">{`Freshdesk Pro with Freddy AI Copilot, billed annually: 12 × ${usd(FRESHDESK_MONTH)} = ${usd(FRESHDESK_YEAR)} a year. Colliedesk Cloud Team is ${usd(OURS_YEAR)} a year for the same team. You keep ${usd(FRESHDESK_YEAR - OURS_YEAR)}.`}</p>
           <div className="cta-row">
             <a className="btn btn-primary btn-lg" href={TRIAL_HREF}>Start free trial <span aria-hidden="true">→</span></a>{' '}
             <a className="btn btn-lg" href="/migrate/freshdesk">Move from Freshdesk</a>
           </div>
         </div>
         <div className="invoices">
-          <ol aria-label={`Twelve months of Freshdesk at ${usd(BAR_MAX)}`}>
+          <ol aria-label={`Twelve months of Freshdesk at ${usd(FRESHDESK_MONTH)}`}>
             {MONTHS.map((m) => (
-              <li key={m} className="invoice"><span>{m}</span><strong>{usd(BAR_MAX)}</strong></li>
+              <li key={m} className="invoice"><span>{m}</span><strong>{usd(FRESHDESK_MONTH)}</strong></li>
             ))}
           </ol>
           <p className="invoice-total"><span>Freshdesk, one year</span><strong>{usd(FRESHDESK_YEAR)}</strong></p>
