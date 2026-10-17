@@ -341,6 +341,12 @@ const TRIAL_URL = 'https://app.colliedesk.com/sign-in';
   if (!/<span[^>]*aria-hidden="true"[^>]*class="h1-rotate"|<span[^>]*class="h1-rotate"[^>]*aria-hidden="true"/.test(h1)) fail('/: rotating h1 words must be aria-hidden');
   const css = read('styles.css');
   if (!/@media \(prefers-reduced-motion: reduce\)\s*\{[^}]*\.h1-rotate/.test(css)) fail('styles.css: rotating h1 has no reduced-motion rule');
+  // WCAG 2.2.2: motion that starts by itself must stop within 5 seconds (duration + delay per item).
+  for (const [, rule] of css.matchAll(/\.h1-item[^{]*\{[^}]*animation:\s*([^;}]+)/g)) {
+    const secs = [...rule.matchAll(/([\d.]+)s\b/g)].map((m) => Number(m[1]));
+    const end = (secs[0] ?? 0) + (secs[1] ?? 0);
+    if (end > 5) fail(`styles.css: rotating h1 animation "${rule.trim()}" runs to ${end}s; WCAG 2.2.2 allows 5s`);
+  }
   // Closing block: a year of Freshdesk bills for five agents against Colliedesk Team billed yearly.
   // 12 x $420 = $5,040; $5,040 - $490 = $4,550.
   if (!home.includes('Keep the difference')) fail('/: closing block "Keep the difference" missing');
