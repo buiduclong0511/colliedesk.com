@@ -241,7 +241,6 @@ const PRICE_MAX_AGE_DAYS = 90;
 {
   const home = read('index.html');
   const homeMd = read('index.md');
-  if (!home.includes('90% cheaper')) fail('/: hero must say 90% cheaper ($490 a year vs Freshdesk $5,040 a year, both billed annually)');
   if (!homeMd.includes('$5,040') || !homeMd.includes('$490') || !/per year, billed annually/.test(homeMd)) fail('/: five-agent bill must compare yearly totals billed annually ($5,040 vs $490)');
   if (!read('pricing.md').includes('$5,040 a year') || read('pricing.md').includes('$420 per month')) fail('/pricing: five-agent comparison must be $5,040 a year billed annually or $505 a month billed monthly');
   if (!read('helpdesk-for-small-teams.md').includes('| 5 | $115 | $505 | $49 |')) fail('/helpdesk-for-small-teams: table must use Freshdesk monthly-billing prices (5 agents: $115, $505) against $49 a month');
@@ -327,17 +326,21 @@ const TRIAL_URL = 'https://app.colliedesk.com/sign-in';
 
 // Home hero: one competitor at a time, each with its own saving, without client JavaScript.
 // The h1 keeps one stable sentence for screen readers; the rotating words are aria-hidden, and
-// reduced motion shows Freshdesk only. Savings worked by hand from yearly bills for five agents,
-// billed annually, against Cloud Team $490 a year: 1 - 490/5,040 = 90% (Freshdesk Pro + Copilot),
-// 1 - 490/9,900 = 95% (Zendesk Suite Professional + Copilot, euros as dollars), 1 - 490/2,700 = 81%
-// (Help Scout Plus).
+// reduced motion shows Freshdesk only. The hero states our yearly price and each competitor's
+// five-agent yearly range from cheapest to dearest plan, worked by hand: Freshdesk Growth
+// 5 x $19 x 12 = $1,140 to Pro + Copilot 5 x ($55 + $29) x 12 = $5,040; Zendesk Support Team
+// 5 x €19 x 12 = €1,140 to Suite Professional + Copilot 5 x (€115 + €50) x 12 = €9,900; Help Scout
+// Standard 5 x $25 x 12 = $1,500 to Plus 5 x $45 x 12 = $2,700. No "% cheaper" headline: the top of
+// each range includes AI that Colliedesk does not ship yet.
 {
   const home = read('index.html');
   const h1 = home.match(/<h1[\s\S]*?<\/h1>/)?.[0] ?? '';
   const spoken = h1.match(/<span class="visually-hidden">([^<]*)<\/span>/)?.[1] ?? '';
-  for (const claim of ['90% cheaper than Freshdesk', '95% cheaper than Zendesk', '81% cheaper than Help Scout']) {
+  for (const claim of ['$490 a year for your whole team', '$1,140–5,040 on Freshdesk', '€1,140–9,900 on Zendesk', '$1,500–2,700 on Help Scout']) {
     if (!spoken.includes(claim)) fail(`/: h1 screen-reader text lacks "${claim}"`);
   }
+  if (/% cheaper/.test(h1) || /% cheaper/.test(read('index.md'))) fail('/: hero must state prices, not a "% cheaper" claim');
+  if (!/locked for life/.test(home.match(/<p class="hero-note">[\s\S]*?<\/p>/)?.[0] ?? '')) fail('/: hero note must say the founding price is locked for life');
   if (!/<span[^>]*aria-hidden="true"[^>]*class="h1-rotate"|<span[^>]*class="h1-rotate"[^>]*aria-hidden="true"/.test(h1)) fail('/: rotating h1 words must be aria-hidden');
   const css = read('styles.css');
   if (!/@media \(prefers-reduced-motion: reduce\)\s*\{[^}]*\.h1-rotate/.test(css)) fail('styles.css: rotating h1 has no reduced-motion rule');

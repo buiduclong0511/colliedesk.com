@@ -4,12 +4,13 @@ import { faqPage, organization, softwareApplication } from '../../lib/schema';
 import type { Faq, Page } from '../../lib/page';
 import { faqMarkdown } from '../../lib/twin';
 import { statusTable } from './collie-status';
-import { FRESHDESK_MONTH, FRESHDESK_YEAR, HERO_SAVINGS, homeSectionsMd, OURS_YEAR, SAVING_PCT } from './home-sections';
+import { FRESHDESK_MONTH, FRESHDESK_RANGE, FRESHDESK_YEAR, HERO_RANGES, homeSectionsMd, OURS_YEAR, rangeLabel } from './home-sections';
 
-// Headline: one number per incumbent, from the five-agent bills in home-sections.ts. The hero shows
-// one competitor at a time; this sentence is what screen readers, the twin and the title get.
-export const HOME_H1_LEAD = 'Run your helpdesk up to';
-export const HOME_H1 = `${HOME_H1_LEAD} ${HERO_SAVINGS.map((s, i) => `${i === HERO_SAVINGS.length - 1 ? 'and ' : ''}${s.pct}% cheaper than ${s.name}`).join(', ')}.`;
+// Headline: our yearly price, then what five agents pay each incumbent in a year (cheapest to dearest
+// plan, from home-sections.ts). The hero shows one competitor at a time; this sentence is what
+// screen readers, the twin and the title get.
+export const HOME_H1_LEAD = `$${OURS_YEAR} a year for your whole team. Five agents pay`;
+export const HOME_H1 = `${HOME_H1_LEAD} ${HERO_RANGES.map((r, i) => `${i === HERO_RANGES.length - 1 ? 'and ' : ''}${rangeLabel(r)} on ${r.name}`).join(', ')}.`;
 export const HOME_LEDE =
   'Pay for the workspace, not for every agent, and bring your Freshdesk tickets with a report that proves nothing was lost.';
 
@@ -66,9 +67,9 @@ const page: Page = {
   name: 'Colliedesk overview',
   path: '/',
   section: 'Product',
-  title: `Colliedesk: run your helpdesk up to ${SAVING_PCT}% cheaper than Freshdesk, Zendesk and Help Scout`,
+  title: `Colliedesk: $${OURS_YEAR} a year for your whole support team, not per agent`,
   description:
-    `Colliedesk is an open-source helpdesk for small support teams, up to ${SAVING_PCT}% cheaper than Freshdesk for five agents. Leave Freshdesk with all your data. $49 per workspace, no per-agent fees.`,
+    `Colliedesk is an open-source helpdesk for small support teams, $${OURS_YEAR} a year for up to 10 agents, where five agents pay Freshdesk ${rangeLabel(FRESHDESK_RANGE)} a year. Leave Freshdesk with all your data. $49 per workspace, no per-agent fees.`,
   summary: `What Colliedesk is, what we sell, status, founding offer; competitor prices read ${PRICES_READ}`,
   h1: HOME_H1,
   lede: HOME_LEDE,
