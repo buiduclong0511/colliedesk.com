@@ -6,6 +6,7 @@ export const statusTable = `| Capability | Colliedesk |
 | Freshdesk importer with reconcile report | **Available now** (alpha) |
 | Saved replies, attachments, live updates and browser notifications | **Available now** (alpha) |
 | Passwordless sign-in, revocable sessions, isolated workspaces, full export | **Available now** (alpha) |
+| MCP server for your AI agent: read, draft, send and admin tokens, risky actions approved by a person | **Available now** (alpha) |
 | One-command install and published container image | **Available now** |
 | Colliedesk Cloud with a 14-day free trial, then Team or Founding | **Available now** (alpha) |
 | New conversation from the inbox, contact history | **Beta** (0.1.0) |

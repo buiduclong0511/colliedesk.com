@@ -2,6 +2,7 @@
 import { HOME_FAQ } from '../../data/pages/home';
 import { html } from '../../lib/render-react';
 import Faq from '../Faq.astro';
+import { AgentSection } from './AgentSection';
 import { ClosingCta, ClosingSections } from './ClosingSections';
 import { HeroCopy, InstallSnippet } from './HomeHero';
 import { ReconcileProof } from './ReconcileProof';
@@ -20,6 +21,7 @@ import { StatusSection } from './StatusSection';
   <Fragment set:html={html(InstallSnippet, {})} />
 </div></section>
 <Fragment set:html={html(SellingSections, {})} />
+<Fragment set:html={html(AgentSection, {})} />
 <Fragment set:html={html(StatusSection, {})} />
 <Fragment set:html={html(ClosingSections, {})} />
 <section class="section section-faq"><div class="wrap"><div class="prose"><Faq faq={HOME_FAQ} /></div></div></section>

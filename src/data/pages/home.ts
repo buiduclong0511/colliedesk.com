@@ -69,7 +69,7 @@ const page: Page = {
   title: `Colliedesk: run your helpdesk up to ${SAVING_PCT}% cheaper than Freshdesk, Zendesk and Help Scout`,
   description:
     `Colliedesk is an open-source helpdesk for small support teams, up to ${SAVING_PCT}% cheaper than Freshdesk for five agents. Leave Freshdesk with all your data. $49 per workspace, no per-agent fees.`,
-  summary: `What Colliedesk is, what we sell, status, founding offer; competitor prices read ${PRICES_READ}`,
+  summary: `What Colliedesk is, what we sell, what AI agents can do through MCP, status, founding offer; competitor prices read ${PRICES_READ}`,
   h1: HOME_H1,
   lede: HOME_LEDE,
   view: 'home',
