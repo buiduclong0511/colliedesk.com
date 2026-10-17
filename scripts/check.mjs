@@ -234,6 +234,20 @@ const PRICE_MAX_AGE_DAYS = 90;
   if (!vsMd.includes('## Who Colliedesk fits') || !vsMd.includes('| 3 agents |')) fail('/vs/freshdesk.md: twin lacks the price-by-team-size table or the fit section');
 }
 
+// Price comparisons outside /vs/freshdesk must also put both sides on one billing period. Expected
+// figures are worked by hand: five agents on Freshdesk Pro + Copilot billed annually are
+// 5 x ($55 + $29) x 12 = $5,040 a year against Colliedesk Team $490 a year, a 90% saving (floor);
+// billed monthly they are 5 x ($66 + $35) = $505 a month against $49.
+{
+  const home = read('index.html');
+  const homeMd = read('index.md');
+  if (!home.includes('90% cheaper')) fail('/: hero must say 90% cheaper ($490 a year vs Freshdesk $5,040 a year, both billed annually)');
+  if (!homeMd.includes('$5,040') || !homeMd.includes('$490') || !/per year, billed annually/.test(homeMd)) fail('/: five-agent bill must compare yearly totals billed annually ($5,040 vs $490)');
+  if (!read('pricing.md').includes('$5,040 a year') || read('pricing.md').includes('$420 per month')) fail('/pricing: five-agent comparison must be $5,040 a year billed annually or $505 a month billed monthly');
+  if (!read('helpdesk-for-small-teams.md').includes('| 5 | $115 | $505 | $49 |')) fail('/helpdesk-for-small-teams: table must use Freshdesk monthly-billing prices (5 agents: $115, $505) against $49 a month');
+  if (!read('freshdesk-alternative.md').includes('$40.83')) fail('/freshdesk-alternative: annual-billed table must show Colliedesk at $40.83 a month ($490 a year)');
+}
+
 // Cloud plan limits. Team: 10 agents, 100 GB. Team 25: 25 agents, 250 GB, $99 a month or $990 a year.
 // Extra storage is not sold self-serve, so no add-on price may appear. Teams above the caps are
 // never sent to "contact us" for 10 agents: Team 25 covers up to 25.

@@ -63,7 +63,7 @@ Self-hosting is free. We sell two things: **Colliedesk Cloud** (we run it for yo
 
 ## How this compares
 
-Most helpdesks charge per agent, then charge again for AI. For five agents, Freshdesk Pro with Freddy AI Copilot lists at $420 per month (billed annually). Colliedesk Cloud Team is $49 per month for the workspace, plus AI usage. Prices and sources: [vs Freshdesk](/vs/freshdesk), [vs Zendesk](/vs/zendesk), [vs Help Scout](/vs/help-scout).
+Most helpdesks charge per agent, then charge again for AI. For five agents, Freshdesk Pro with Freddy AI Copilot lists at $5,040 a year billed annually, or $505 a month billed monthly. Colliedesk Cloud Team is $490 a year or $49 a month for the workspace, plus AI usage. Prices and sources: [vs Freshdesk](/vs/freshdesk), [vs Zendesk](/vs/zendesk), [vs Help Scout](/vs/help-scout).
 
 ## Honest status
 
