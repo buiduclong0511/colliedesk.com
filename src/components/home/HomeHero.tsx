@@ -1,5 +1,5 @@
 import { HOME_H1, HOME_H1_LEAD, HOME_LEDE } from '../../data/pages/home';
-import { HERO_SAVINGS, SAVING_PCT } from '../../data/pages/home-sections';
+import { HERO_RANGES, rangeLabel } from '../../data/pages/home-sections';
 import { TRIAL_HREF } from '../../lib/site';
 
 const INSTALL = `curl -fsSL https://raw.githubusercontent.com/colliedesk/colliedesk/main/install.sh \\
@@ -27,8 +27,8 @@ function RotatingH1() {
       <span aria-hidden="true" className="h1-rotate">
         {`${HOME_H1_LEAD} `}
         <span className="h1-swap">
-          {HERO_SAVINGS.map((s) => (
-            <span key={s.name} className="h1-item"><em>{`${s.pct}% cheaper`}</em>{` than ${s.name}`}</span>
+          {HERO_RANGES.map((r) => (
+            <span key={r.name} className="h1-item"><em>{rangeLabel(r)}</em>{` on ${r.name}`}</span>
           ))}
         </span>
       </span>
@@ -48,7 +48,7 @@ export function HeroCopy() {
         <a className="btn btn-primary btn-lg" href={TRIAL_HREF}>Start free trial <span aria-hidden="true">→</span></a>{' '}
         <a className="btn btn-lg" href="/migrate/freshdesk">Read the migration guide</a>
       </div>
-      <p className="hero-note">14-day free trial, no card · <b>$49</b> per workspace a month · <a href="#bill">{`How we get to ${SAVING_PCT}%`}</a></p>
+      <p className="hero-note">14-day free trial, no card · <b>$49</b> a month or $490 a year per workspace · Founding price locked for life · <a href="#bill">See the five-agent bill</a></p>
     </div>
   );
 }

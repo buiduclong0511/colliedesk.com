@@ -20,9 +20,6 @@ export const BARS: readonly PriceBar[] = [
 export const BAR_MAX = Math.max(...BARS.map((b) => b.usd));
 const OURS = BARS.find((b) => b.ours)?.usd;
 if (OURS === undefined) throw new Error('BARS needs one entry with ours: true');
-// The hero promise: saving against the most expensive bar, rounded down so the claim never overstates.
-const savingPct = (theirs: number): number => Math.floor((1 - OURS / theirs) * 100);
-export const SAVING_PCT = savingPct(BAR_MAX);
 
 // Zendesk Suite Professional + Copilot for five agents for a year, in euros: 5 × (€115 + €50) × 12.
 export const ZENDESK_EUR = 9900;
@@ -31,13 +28,21 @@ const usdOf = (name: string): number => {
   if (!bar) throw new Error(`BARS has no ${name} entry`);
   return bar.usd;
 };
-// The hero names one competitor at a time with its own saving. Zendesk is counted as if €1 = $1;
-// the euro trades above the dollar, so the real saving is larger than the one shown.
-export const HERO_SAVINGS: readonly { name: string; pct: number }[] = [
-  { name: 'Freshdesk', pct: SAVING_PCT },
-  { name: 'Zendesk', pct: savingPct(ZENDESK_EUR) },
-  { name: 'Help Scout', pct: savingPct(usdOf('Help Scout')) },
+// The hero names one competitor at a time with what five agents pay it in a year, from the
+// cheapest plan to the dearest. The top of each range includes AI that Colliedesk does not ship
+// yet, so the hero states prices instead of a "% cheaper" claim.
+export interface HeroRange { name: string; currency: '$' | '€'; low: number; high: number }
+// Freshdesk Growth 5 × $19 × 12 to Pro + Copilot.
+export const FRESHDESK_RANGE: HeroRange = { name: 'Freshdesk', currency: '$', low: 5 * 19 * 12, high: BAR_MAX };
+export const HERO_RANGES: readonly HeroRange[] = [
+  FRESHDESK_RANGE,
+  // Zendesk Support Team 5 × €19 × 12 to Suite Professional + Copilot.
+  { name: 'Zendesk', currency: '€', low: 5 * 19 * 12, high: ZENDESK_EUR },
+  // Help Scout Standard 5 × $25 × 12 to Plus.
+  { name: 'Help Scout', currency: '$', low: 5 * 25 * 12, high: usdOf('Help Scout') },
 ];
+export const rangeLabel = (r: HeroRange): string =>
+  `${r.currency}${r.low.toLocaleString('en-US')}–${r.high.toLocaleString('en-US')}`;
 // A year of Freshdesk Pro + Copilot for five agents, billed annually, against Cloud Team billed yearly.
 export const FRESHDESK_YEAR = BAR_MAX;
 export const FRESHDESK_MONTH = BAR_MAX / 12;
