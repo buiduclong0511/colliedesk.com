@@ -184,8 +184,8 @@ if (existsSync(foundingFile)) {
 
 for (const m of llms.matchAll(/\]\(([^)\s]+)\)/g)) checkLink(m[1], '/', 'llms.txt');
 
-// Web analytics run on every page and never store anything in the visitor's browser, so the site
-// needs no cookie banner. Switching PostHog to cookies or person profiles must fail here first.
+// PostHog counts visits on every page and never stores anything in the visitor's browser.
+// Switching PostHog to cookies or person profiles must fail here first.
 const analytics = join(outDir, 'analytics.js');
 if (!existsSync(analytics)) fail('analytics.js not built');
 else {
@@ -195,6 +195,31 @@ else {
 }
 for (const file of pages) {
   if (!readFileSync(file, 'utf8').includes('<script src="/analytics.js" defer></script>')) fail(`${urlPathOf(file)}: analytics.js not loaded`);
+}
+
+// Google Analytics sets cookies, so it may load only after the visitor accepts in the consent
+// banner, and the visitor must be able to change that choice from every page. No page may load
+// gtag directly, and the privacy page must name Google Analytics and its cookies.
+const GA_MEASUREMENT_ID = 'G-7VBE3TER7E';
+const consent = join(outDir, 'consent.js');
+if (!existsSync(consent)) fail('consent.js not built');
+else {
+  const source = readFileSync(consent, 'utf8');
+  if (!source.includes(GA_MEASUREMENT_ID)) fail(`consent.js: must load Google Analytics ${GA_MEASUREMENT_ID}`);
+  if (!/function loadAnalytics\(\)[\s\S]*googletagmanager\.com\/gtag\/js/.test(source)) fail('consent.js: gtag.js must load only inside loadAnalytics()');
+  if (!/if \(choice === 'granted'\) loadAnalytics\(\)/.test(source)) fail("consent.js: loadAnalytics() must run only when the stored choice is 'granted'");
+}
+for (const file of pages) {
+  const page = readFileSync(file, 'utf8');
+  if (!page.includes('<script src="/consent.js" defer></script>')) fail(`${urlPathOf(file)}: consent.js not loaded`);
+  if (page.includes('googletagmanager.com')) fail(`${urlPathOf(file)}: loads Google Analytics without consent`);
+  if (!page.includes('data-consent-open')) fail(`${urlPathOf(file)}: no way to change the cookie choice`);
+}
+const privacyPage = fileFor('/privacy');
+if (privacyPage) {
+  const text = readFileSync(privacyPage, 'utf8');
+  if (!text.includes('Google Analytics')) fail('/privacy: must name Google Analytics');
+  if (/sets <strong>no cookies<\/strong>|sets no cookies/.test(text)) fail('/privacy: still says the website sets no cookies');
 }
 
 // The Freshdesk page leads with price, so its chart must let a visitor pick a team size, say where
