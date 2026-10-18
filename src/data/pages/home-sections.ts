@@ -61,6 +61,35 @@ export const BORING: readonly (readonly [title: string, text: string])[] = [
   ['Nothing to stitch together', 'Self-hosted, it is one server and PostgreSQL. Bring an SMTP account for outgoing mail and a forwarder, such as Cloudflare Email Routing, for incoming mail. That is the list.'],
 ];
 
+// "Your AI agent can do this too": the MCP server, agent token tiers and agent requests, as shipped in
+// colliedesk (docs/user/mcp.md, docs/user/sessions.md#agent-tokens, docs/user/agent-requests.md). Each
+// tier includes the one above it. Only state what those guides say.
+export const MCP_URL = 'https://app.colliedesk.com/mcp';
+export const AGENT_HEADING = 'Everything you see here, your AI agent can do too';
+export const AGENT_LEDE =
+  'Colliedesk has an MCP server. Give an MCP client, such as Claude Code, Codex, Cursor or Claude Desktop, one URL and an agent token, and it works the same inbox your team does. The risky things wait for your yes.';
+export const AGENT_TIERS: readonly (readonly [tier: string, text: string])[] = [
+  ['read', 'Searches and reads conversations, customers, saved replies and settings. Anything more becomes a request.'],
+  ['draft', 'Also sets status, priority, assignee and tags, and adds private notes. Nothing reaches a customer.'],
+  ['send', 'Also replies to customers, adds customers and conversations, and edits saved replies.'],
+  ['admin', 'Also changes workspace settings, the team and the channels, with the role of the admin who created it.'],
+];
+export const AGENT_POINTS: readonly (readonly [title: string, text: string])[] = [
+  ['Every action, not a subset', 'Each action in the web app has an API route and an MCP tool. A test in the product repository fails the build when one is missing.'],
+  ['Above its tier, it asks', 'A call above the token\'s tier is not refused. It becomes a request, and a person approves or rejects it in one click. A reply from a token below send becomes a draft you edit, send or discard.'],
+  ['Some things always ask', 'New tokens, invites, admin role changes, signing out another person, export, billing, disconnecting the email channel, a new inbound secret and the workspace address wait for a person, admin tokens included. A request expires after seven days.'],
+  ['Saved replies keep their history', 'A send token edits saved replies directly; lower tiers propose a change you see before and after. Every edit is a version you can restore, and a deleted reply stays in the trash for 30 days.'],
+];
+const agentSectionMd = `## ${AGENT_HEADING}
+
+${AGENT_LEDE} MCP endpoint on Colliedesk Cloud: \`${MCP_URL}\`, with the agent token as a bearer token. [Connect an AI agent](/docs/mcp).
+
+${AGENT_TIERS.map(([t, v]) => `- \`${t}\`: ${v}`).join('\n')}
+
+${AGENT_POINTS.map(([k, v]) => `- **${k}.** ${v}`).join('\n')}
+
+How approval works: [Agent requests and reply drafts](/docs/agent-requests).`;
+
 export const homeSectionsMd = `## Wait, what are you selling me?
 
 Self-hosting is free, forever, with every feature. We sell two things:
@@ -86,6 +115,8 @@ ${BARS.map((b) => `- ${b.name}: $${b.usd.toLocaleString('en-US')} (${b.math})`).
 We are not rebuilding every Freshdesk feature. We build what a team of three to ten uses every day, and we label the rest. HC Labs runs its own support on Colliedesk Cloud.
 
 ${BORING.map(([k, v]) => `- **${k}.** ${v}`).join('\n')}
+
+${agentSectionMd}
 
 ## Why a collie?
 

@@ -77,6 +77,24 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 .mini-stop { color: var(--danger); background: var(--danger-soft); }
 .mini-file { font-family: var(--font-mono); }
 
+/* Home "your AI agent can do this too": the MCP command over a request card, the four token tiers as a
+   ladder, then the approval rules as bento cards. */
+.agent-stage { display: grid; gap: var(--space-4); align-self: center; min-width: 0; }
+.agent-stage .code-card { white-space: pre; }
+@media (max-width: 640px) { .agent-stage .code-card { white-space: pre-wrap; overflow-wrap: anywhere; } }
+.agent-request { margin: 0; background: var(--surface-1); box-shadow: var(--shadow-1); }
+.agent-request-actions { display: flex; gap: var(--space-2); margin-top: var(--space-3) !important; }
+.agent-approve, .agent-reject { padding: .2rem var(--space-3); border-radius: var(--radius); border: 1px solid var(--line-control); font-weight: 600; }
+.agent-approve { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.agent-reject { color: var(--text-2); }
+.agent-tiers { list-style: none; margin: var(--space-10) 0 0; padding: 0; display: grid; gap: var(--space-4); }
+@media (min-width: 760px) { .agent-tiers { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .agent-tiers { grid-template-columns: repeat(4, 1fr); } }
+.agent-tiers li { padding: var(--space-5); background: var(--surface-1); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: var(--radius); }
+.agent-tiers h3 { margin: 0 0 var(--space-2); font-size: 1.05rem; }
+.agent-tiers p { margin: 0; color: var(--text-2); }
+.agent-points { margin-top: var(--space-4); }
+
 /* Home closing block: the copy beside twelve static Freshdesk invoices and the two yearly totals. */
 .closing { display: grid; gap: var(--space-10); align-items: center; }
 @media (min-width: 900px) { .closing { grid-template-columns: 1fr 1fr; } }
