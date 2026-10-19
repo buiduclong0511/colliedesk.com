@@ -68,7 +68,7 @@ Light theme: cool grey surfaces (`--surface-0` `#f5f7fa`, cards `#ffffff`), ink 
 Dark theme: near-black surfaces (`--surface-0` `#0b0f15`), light text (`#e8edf4`) and a lighter
 accent `#7aa5e6` with dark text on it. Spacing is a 4 px grid (`--space-*`), radii 4 to 10 px.
 Light is the default; the footer **Dark theme** button sets `data-theme="dark"` and saves it in
-`localStorage` for this site only (`public/theme.js`; the app keeps its own setting). Self-hosted IBM Plex Sans and Mono, IBM Plex Serif for h1 and h2,
+`localStorage` for this site only (`public/theme.js`; the app keeps its own setting). Self-hosted IBM Plex Sans and Mono, Instrument Serif for h1 and h2,
 sentence case everywhere, mono only for code. The hero shows the real light inbox
 (`public/product-inbox.jpg`) with the reconcile report over its corner. Buttons are at least
 44 px tall on touch (`--touch`).

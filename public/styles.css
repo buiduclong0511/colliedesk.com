@@ -6,11 +6,15 @@
   --surface-0: #fafafa; --surface-2: #f5f5f5; --surface-3: #e5e5e5; --line: #e5e5e5;
   --text-1: #171717; --text-2: #525252; --text-3: #666666;
   --ring: 0 0 0 1px rgb(0 0 0 / .06), 0 1px 2px -1px rgb(0 0 0 / .06), 0 2px 4px rgb(0 0 0 / .04);
+  --price: #c2410c;                  /* the price only; 5.2:1 on white */
+  --panel: #f4f3f1;                  /* behind product pictures */
 }
 :root[data-theme="dark"] {
   --surface-0: #0a0a0a; --surface-1: #171717; --surface-2: #262626; --surface-3: #303030; --line: #262626;
   --text-1: #fafafa; --text-2: #d4d4d4; --text-3: #a3a3a3;
   --ring: 0 0 0 1px rgb(255 255 255 / .08);
+  --price: #fb8a4a;                  /* 8.3:1 on #0a0a0a */
+  --panel: #171717;
 }
 :root {
   --wrap: 1360px;
@@ -28,8 +32,8 @@ a { color: var(--text-1); text-underline-offset: 3px; text-decoration-thickness:
 a:hover { color: var(--text-1); text-decoration-color: currentColor; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-sm); }
 h1, h2, h3 { color: var(--text-1); line-height: 1.12; letter-spacing: -0.025em; margin: 0 0 .6em; text-wrap: balance; }
-/* Headlines in IBM Plex Serif: the sans carries the interface, the serif the voice. */
-h1, h2 { font-family: 'IBM Plex Serif', Georgia, serif; font-weight: 500; letter-spacing: -0.02em; }
+/* Headlines in Instrument Serif: the sans carries the interface, the serif the voice. */
+h1, h2 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
 h1 { font-size: var(--step-h1); line-height: 1.04; }
 h2 { font-size: var(--step-h2); }
 /* A full-width section opens with its heading centred over the content. */
@@ -159,9 +163,6 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 
 /* Home "your AI agent can do this too": the MCP command over a request card, the four token tiers as a
    ladder, then the approval rules as bento cards. */
-.agent-stage { display: grid; gap: var(--space-4); align-self: center; min-width: 0; }
-.agent-stage .code-card { white-space: pre; }
-@media (max-width: 640px) { .agent-stage .code-card { white-space: pre-wrap; overflow-wrap: anywhere; } }
 .agent-request { margin: 0; background: var(--surface-1); box-shadow: var(--ring), var(--shadow-1); }
 .agent-request-actions { display: flex; gap: var(--space-2); margin-top: var(--space-3) !important; }
 .agent-approve, .agent-reject { padding: .2rem var(--space-3); border-radius: var(--radius); border: 1px solid var(--line-control); font-weight: 600; }
@@ -211,7 +212,7 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 .invoice-total { display: flex; justify-content: space-between; gap: var(--space-4); margin: var(--space-4) 0 0; padding-top: var(--space-3); border-top: 1px solid var(--line); color: var(--text-2); }
 .invoice-total strong { font-size: 1.25rem; color: var(--text-1); font-variant-numeric: tabular-nums; }
 .invoice-ours { margin-top: var(--space-2); border-top: 0; padding-top: 0; }
-.invoice-ours strong { color: var(--accent-text); }
+.invoice-ours strong { color: var(--price); }
 @media (max-width: 640px) { .invoices ol { grid-template-columns: repeat(3, 1fr); } }
 
 /* Eyebrow and ledes */
@@ -230,7 +231,7 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
    and browsers without animation keep a static headline. One pass under 5 s (WCAG 2.2.2), then it rests on the first. */
 .h1-swap { display: grid; justify-items: center; }
 .h1-item { grid-area: 1 / 1; }
-.h1-item em { font-style: normal; color: var(--accent-text); }
+.h1-item em { font-style: normal; color: var(--price); }
 .h1-item + .h1-item { visibility: hidden; opacity: 0; }
 .h1-item:nth-child(1) { animation: h1-first 4.8s ease-in-out 1 forwards; }
 .h1-item:nth-child(2) { animation: h1-pass 1.6s ease-in-out 1.4s 1 both; }
@@ -277,11 +278,9 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 .proof-foot span { color: var(--text-2); }
 .proof-foot a { margin-left: auto; font: 500 13.5px/1 var(--font-sans); }
 .proof-note { margin: 0; padding: var(--space-3) var(--space-5); border-top: 1px solid var(--line); color: var(--text-3); font-size: 13px; }
-.self { max-width: 44rem; margin: var(--space-8) auto 0; }
 .install { margin: 0; background: var(--surface-1); border-radius: 10px; box-shadow: var(--ring); }
 .install pre { margin: 0; padding: var(--space-4) var(--space-5); white-space: pre-wrap; overflow-wrap: anywhere; font: 13px/1.7 var(--font-mono); color: var(--text-2); }
 .install code, .code-card code, .prose pre code { background: none; border: 0; padding: 0; font-size: inherit; color: inherit; }
-.install-label { margin: var(--space-2) 0 0; font-size: 13px; color: var(--text-3); text-align: center; }
 .t-prompt { color: var(--accent-text); user-select: none; }
 .t-out { color: var(--text-3); }
 .t-link { color: var(--accent-text); }
@@ -289,17 +288,7 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 
 /* Sections */
 .section { padding: var(--space-section) 0; }
-.prose-invert p { color: var(--text-2); font-size: 1.1rem; line-height: 1.7; max-width: 40rem; }
 .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
-.sell-list { list-style: none; counter-reset: sell; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
-.sell-list li { counter-increment: sell; padding: var(--space-4) 0 0 2.75rem; border-top: 1px solid var(--line); position: relative; }
-.sell-list li::before { content: counter(sell); position: absolute; left: 0; top: 1.1rem; font: 600 .85rem var(--font-sans); color: var(--text-2); width: 1.75rem; height: 1.75rem; border-radius: var(--radius); background: var(--surface-2); display: grid; place-items: center; }
-.sell-list h3 { margin-bottom: .3rem; }
-.sell-list p { margin: 0; }
-.pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); }
-.pillar { padding-top: var(--space-4); border-top: 1px solid var(--line); display: flex; flex-direction: column; }
-.pillar p:last-child { margin: auto 0 0; padding-top: .5rem; display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; font-size: .95rem; }
-.pillar-k { font: 600 13px var(--font-sans); color: var(--text-3) !important; }
 
 /* Price bars */
 .bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.4rem; }
@@ -311,8 +300,8 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 .bar-fill { display: block; height: 1.1rem; border-radius: var(--radius-sm); background: var(--line-strong); }
 .bar strong { font-size: 1.1rem; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .bar strong small { font-size: .75rem; color: var(--text-3); font-weight: 400; }
-.bar-ours .bar-fill { background: var(--accent); }
-.bar-ours strong { color: var(--accent-text); }
+.bar-ours .bar-fill { background: var(--price); }
+.bar-ours strong { color: var(--price); }
 
 /* /vs price chart: team-size radios + one bar list per size, shown with :has() */
 .vs-top { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: var(--space-6); padding-top: var(--space-10); align-items: start; }
@@ -351,8 +340,6 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 @media (pointer: coarse) { .vs-sizes label { min-height: var(--touch); } }
 
 /* Quotes slot and founding */
-.quote-slot { border: 1px dashed var(--line-strong); border-radius: 10px; padding: var(--space-6); max-width: 44rem; color: var(--text-2); background: var(--surface-1); }
-.quote-slot p { margin: 0; }
 .founding { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--space-6) var(--space-16); background: var(--surface-1); border-radius: 12px; box-shadow: var(--ring), var(--shadow-2); padding: clamp(1.5rem, 4vw, 3rem); }
 .check-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .7rem; align-content: start; }
 .check-list li { padding-left: 1.9rem; position: relative; color: var(--text-2); }
@@ -508,3 +495,38 @@ td:first-child { font-weight: 500; color: var(--text-1); }
 .consent-actions { display: flex; justify-content: flex-end; gap: var(--space-2); }
 .link-button { padding: 0; border: 0; background: none; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
 .link-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Home after the hero, measured on helpdesk sites (19/10/2026): one idea per section, each with a
+   piece of the real product on a soft panel; three checkable facts under the hero; a dark closing band. */
+.hero-shot .window-bar { display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 14px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+.hero-shot .window-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--surface-3); }
+.hero-shot .window-bar span { margin: 0 auto; font: 12px var(--font-sans); color: var(--text-3); transform: translateX(-24px); }
+.facts { border-block: 1px solid var(--line); }
+.facts-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8); padding-block: var(--space-8); }
+.facts-row a { display: grid; gap: 2px; color: var(--text-2); text-decoration: none; }
+.facts-row b { font: 400 2rem/1.1 'Instrument Serif', Georgia, serif; color: var(--text-1); }
+.facts-row a:hover b { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.feature-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 6vw, 4.5rem); align-items: center; }
+.feature-rev { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.feature-rev .feature-copy { order: 2; }
+.feature-copy .code-card { margin-top: var(--space-6); white-space: pre; }
+.panel { position: relative; display: grid; place-items: center; padding: clamp(1.5rem, 4vw, 3rem); background: var(--panel); border-radius: 24px; overflow: hidden; }
+.crop { background-image: url(/product-inbox.jpg); background-repeat: no-repeat; border-radius: 12px; box-shadow: var(--ring), var(--shadow-3); }
+.agent-panel { place-items: start center; padding-bottom: 9rem; }
+.agent-panel .agent-loop { position: absolute; right: clamp(1rem, 3vw, 1.75rem); bottom: clamp(1rem, 3vw, 1.75rem); width: min(24rem, calc(100% - 2rem)); }
+.agent-panel .flow-pause { color: var(--text-2); }
+@media (max-width: 899px) {
+  .feature-row, .feature-rev { grid-template-columns: 1fr; }
+  .feature-rev .feature-copy { order: 0; }
+  .facts-row { grid-template-columns: 1fr; gap: var(--space-4); }
+  .panel { min-height: 0; }
+  .feature-copy .code-card { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
+.closing-band { background: #0a0a0a; color: #d4d4d4; --price: #fb8a4a; }
+.closing-band h2 { color: #fafafa; }
+.closing-band .eyebrow, .closing-band .section-lede, .closing-band .invoice-total { color: #a3a3a3; }
+.closing-band .invoice-total strong { color: #fafafa; }
+.closing-band .invoice-total { border-top-color: #262626; }
+.closing-band .btn-primary { background: #fafafa; border-color: #fafafa; color: #0a0a0a; }
+.closing-band .btn { background: transparent; color: #fafafa; border-color: #525252; }
+.closing-band .btn-primary { color: #0a0a0a; }

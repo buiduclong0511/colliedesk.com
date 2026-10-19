@@ -4,50 +4,6 @@ import { FRESHDESK_MONTH, FRESHDESK_YEAR, OURS_YEAR } from '../../data/pages/hom
 import { FOUNDING_CHECKOUT, MONEY_BACK, TRIAL_HREF } from '../../lib/site';
 import { usd } from '../../lib/vs-pricing';
 
-function Collie() {
-  return (
-    <section className="section" aria-labelledby="collie">
-      <div className="wrap split">
-        <div>
-          <p className="eyebrow">Why a collie?</p>
-          <h2 id="collie">A sheepdog herds every ticket home. Your team stays in charge.</h2>
-        </div>
-        <div className="prose-invert">
-          <p>A collie brings every sheep home and the shepherd decides. That is the job of AI in Colliedesk (coming after beta): sort, draft and chase every ticket, while a person approves what goes out.</p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Fork() {
-  return (
-    <section className="section" aria-labelledby="fork">
-      <div className="wrap split">
-        <div>
-          <p className="eyebrow">AGPL-3.0</p>
-          <h2 id="fork">If you don't like something, fork it</h2>
-          <p className="section-lede">The code, your data and the export format are yours.</p>
-          <p><a href="/open-source">How the license and the business fit together</a></p>
-        </div>
-        <pre className="code-card"><code><span className="t-prompt">$</span>{' gh repo fork colliedesk/colliedesk --clone\n'}<span className="t-prompt">$</span>{' cd colliedesk && make dev'}</code></pre>
-      </div>
-    </section>
-  );
-}
-
-function Quotes() {
-  return (
-    <section className="section" aria-labelledby="quotes">
-      <div className="wrap">
-        <h2 id="quotes">From founding customers</h2>
-        {/* Real founding-customer quotes go here, verbatim, with name and team. Never invent one. */}
-        <div className="quote-slot"><p><strong>No quotes yet.</strong> Colliedesk is in alpha and we will not make them up. The first founding customers' words will go here, unedited, with their names.</p></div>
-      </div>
-    </section>
-  );
-}
-
 function Founding() {
   const state = foundingState();
   return (
@@ -94,13 +50,10 @@ function Founding() {
   );
 }
 
-// The sections between the home status table and the FAQ.
+// The founding offer, between the status table and the FAQ.
 export function ClosingSections() {
   return (
     <>
-      <Collie />
-      <Fork />
-      <Quotes />
       <Founding />
     </>
   );
@@ -112,7 +65,7 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 // out as twelve static invoices, against one year of Cloud Team. No JavaScript.
 export function ClosingCta() {
   return (
-    <section className="section" aria-labelledby="closing">
+    <section className="section closing-band" aria-labelledby="closing">
       <div className="wrap closing">
         <div>
           <p className="eyebrow">A year of Freshdesk for five agents</p>

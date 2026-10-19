@@ -2,21 +2,6 @@ import { HOME_H1, HOME_H1_LEAD, HOME_LEDE } from '../../data/pages/home';
 import { HERO_RANGES, rangeLabel } from '../../data/pages/home-sections';
 import { TRIAL_HREF } from '../../lib/site';
 
-const INSTALL = `curl -fsSL https://raw.githubusercontent.com/colliedesk/colliedesk/main/install.sh \\
-    | sh -s -- --name "Acme Support" --email "you@acme.com"
-`;
-
-export function InstallSnippet() {
-  return (
-    <div className="self">
-      <figure className="install" aria-label="Self-host Colliedesk with one command">
-        <pre><code><span className="t-prompt">$</span>{` ${INSTALL}`}<span className="t-out"># prints a one-time sign-in link, no passwords</span></code></pre>
-      </figure>
-      <p className="install-label">Or self-host it free with one command.</p>
-    </div>
-  );
-}
-
 // The h1 names one competitor at a time with CSS only (public/styles.css, .h1-rotate): one pass
 // through the list, then it rests on the first. Screen readers read the full sentence once; the
 // moving words are aria-hidden. Reduced motion, or no animation support, shows the first only.

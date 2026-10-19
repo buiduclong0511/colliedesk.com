@@ -1,56 +1,7 @@
 import type { ReactElement } from 'react';
 import { BAR_MAX as MAX, BARS, BORING } from '../../data/pages/home-sections';
 import { PRICES_READ } from '../../lib/site';
-import { Badge } from '../Badge';
 import { FlowPause, FlowTile } from './FlowTile';
-
-function Selling() {
-  return (
-    <section className="section" aria-labelledby="selling">
-      <div className="wrap split">
-        <div>
-          <p className="eyebrow">Wait, what are you selling me?</p>
-          <h2 id="selling">Self-hosting is free. We sell two things.</h2>
-          <p className="section-lede">No enterprise edition with the good parts held back. Every feature is in the open-source code.</p>
-        </div>
-        <ol className="sell-list">
-          <li><h3>Colliedesk Cloud</h3><p>We run it for you. One flat price per workspace, not per agent: <strong>$49 a month</strong> or $490 a year, $99 for up to 25 agents.</p></li>
-          <li><h3>Migration</h3><p>We move your Freshdesk history (tickets, replies, attachments, tags) and give you a reconcile report that proves nothing was lost.</p></li>
-        </ol>
-      </div>
-    </section>
-  );
-}
-
-function Pillars() {
-  return (
-    <section className="section" aria-labelledby="pillars">
-      <div className="wrap">
-        <h2 id="pillars" className="visually-hidden">Why teams switch</h2>
-        <div className="pillars">
-          <article className="pillar">
-            <p className="pillar-k">01 · Your data</p>
-            <h3>Leave Freshdesk with all of it</h3>
-            <p>Freshdesk's export leaves the conversations out. Our importer brings everything and proves the counts match.</p>
-            <p><Badge kind="shipped">Available now</Badge> <a href="/migrate/freshdesk">Read the migration guide</a></p>
-          </article>
-          <article className="pillar">
-            <p className="pillar-k">02 · AI included</p>
-            <h3>AI that answers tickets, not an add-on</h3>
-            <p>Drafts, triage and auto-answer from your own replies, with a person in the loop. Model cost +30%, or your own key.</p>
-            <p><Badge kind="coming">Coming after beta</Badge> <a href="/roadmap">See the roadmap</a></p>
-          </article>
-          <article className="pillar">
-            <p className="pillar-k">03 · Flat price</p>
-            <h3>No per-agent fees</h3>
-            <p>Five agents or ten, the workspace is $49 a month. Self-host and it stays $0.</p>
-            <p><Badge kind="shipped">Price published</Badge> <a href="/pricing">See pricing</a></p>
-          </article>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function Bill() {
   return (
@@ -126,12 +77,10 @@ function Boring() {
   );
 }
 
-// The sections between the home hero and the status table.
+// The five-agent bill and the boring parts, after the product sections.
 export function SellingSections() {
   return (
     <>
-      <Selling />
-      <Pillars />
       <Bill />
       <Boring />
     </>
