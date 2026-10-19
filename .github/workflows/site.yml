@@ -86,7 +86,7 @@ jobs:
       - run: sh scripts/product-docs-version.sh product > _site/product-docs-version.txt
       - run: cp founding-state.json _site/founding-state.txt
       - run: pnpm run check
-      - run: pnpm run check:narrow
+      - run: pnpm run check:render
       - uses: actions/upload-pages-artifact@v4
         if: github.event_name != 'pull_request'
         with:

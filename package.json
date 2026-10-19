@@ -8,7 +8,7 @@
     "build": "astro build",
     "typecheck": "astro check",
     "check": "node scripts/check.mjs",
-    "check:narrow": "node scripts/check-narrow.mjs",
+    "check:render": "node scripts/check-render.mjs",
     "compare": "node scripts/compare-site.mjs",
     "serve": "node scripts/serve.mjs"
   },

@@ -1,7 +1,11 @@
-// Renders every built page at a 375px phone width in headless Chrome and fails when a page scrolls
-// sideways. Static checks cannot see this: a nowrap button label or a wide table only overflows once
-// the browser lays it out. No dependencies: Chrome DevTools Protocol over Node's built-in WebSocket.
-//   node scripts/check-narrow.mjs            (needs _site/ and a Chrome binary; CHROME_BIN overrides)
+// Renders every built page in headless Chrome and fails when what a person sees is broken, which static
+// checks cannot catch:
+//   - at a 375px phone width a page scrolls sideways (a nowrap label or a wide table only overflows once
+//     the browser lays it out);
+//   - in the light or the dark theme a button or link's text is below 4.5:1 against what is behind it
+//     (19/10/2026 the closing band's "Start free trial" was dark text on a transparent button on ink).
+// No dependencies: Chrome DevTools Protocol over Node's built-in WebSocket.
+//   node scripts/check-render.mjs            (needs _site/ and a Chrome binary; CHROME_BIN overrides)
 import { spawn } from 'node:child_process';
 import { existsSync, mkdtempSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -9,6 +13,7 @@ import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const WIDTH = 375;
+const MIN_CONTRAST = 4.5;
 const site = fileURLToPath(new URL('../_site/', import.meta.url));
 const chromeBin = process.env.CHROME_BIN
   || ['google-chrome', '/usr/bin/google-chrome', '/usr/bin/chromium'].find((b) => !b.startsWith('/') || existsSync(b));
@@ -55,11 +60,34 @@ function cdp(url) {
   return new Promise((resolve, reject) => { ws.onopen = () => resolve({ send, once, close: () => ws.close() }); ws.onerror = reject; });
 }
 
-if (!existsSync(join(site, 'index.html'))) { console.error('check-narrow: _site/ is missing; build the site first'); process.exit(1); }
+// Page-side check: switches the theme with transitions off, then measures each visible control's text
+// colour against the first opaque background behind it (alpha-blended colours are skipped).
+function lowContrast(theme) {
+  return `(() => {
+    document.documentElement.setAttribute('data-theme', '${theme}');
+    const style = document.createElement('style'); style.textContent = '*,*::before,*::after{transition:none!important;animation:none!important}';
+    document.head.append(style);
+    const rgb = (c) => { const m = c.match(/[\\d.]+/g); return m ? m.map(Number) : null; };
+    const lum = ([r, g, b]) => [r, g, b].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }).reduce((s, v, i) => s + v * [0.2126, 0.7152, 0.0722][i], 0);
+    const bgOf = (el) => { for (; el; el = el.parentElement) { const c = rgb(getComputedStyle(el).backgroundColor); if (c && (c[3] ?? 1) >= 0.95) return c; } return [255, 255, 255]; };
+    const out = [];
+    for (const e of document.querySelectorAll('a, button, summary, .btn')) {
+      const b = e.getBoundingClientRect(); const s = getComputedStyle(e);
+      if (!b.width || !b.height || !e.textContent.trim() || s.visibility === 'hidden' || +s.opacity === 0) continue;
+      const fg = rgb(s.color); if (!fg || (fg[3] ?? 1) < 0.95) continue;
+      const bg = bgOf(e); const [hi, lo] = [lum(fg), lum(bg)].sort((x, y) => y - x); const ratio = (hi + 0.05) / (lo + 0.05);
+      if (ratio < ${MIN_CONTRAST}) out.push({ text: e.textContent.trim().replace(/\\s+/g, ' ').slice(0, 40), ratio: ratio.toFixed(2), fg: s.color, bg: 'rgb(' + bg.slice(0, 3).join(', ') + ')' });
+    }
+    style.remove(); document.documentElement.removeAttribute('data-theme');
+    return out;
+  })()`;
+}
+
+if (!existsSync(join(site, 'index.html'))) { console.error('check-render: _site/ is missing; build the site first'); process.exit(1); }
 
 const port = 4400 + Math.floor(Math.random() * 500);
 const server = spawn(process.execPath, [fileURLToPath(new URL('./serve.mjs', import.meta.url))], { env: { ...process.env, PORT: String(port) } });
-const profile = mkdtempSync(join(tmpdir(), 'check-narrow-'));
+const profile = mkdtempSync(join(tmpdir(), 'check-render-'));
 const chrome = spawn(chromeBin, ['--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars', `--user-data-dir=${profile}`, '--remote-debugging-port=0', 'about:blank']);
 const failures = [];
 let list = [];
@@ -88,6 +116,10 @@ try {
       })()`,
     }, sessionId);
     if (result.value) failures.push(`${path}: scrolls sideways at ${WIDTH}px, ${result.value}`);
+    for (const theme of ['light', 'dark']) {
+      const { result: low } = await c.send('Runtime.evaluate', { returnByValue: true, expression: lowContrast(theme) }, sessionId);
+      for (const l of low.value) failures.push(`${path}: ${theme} theme, "${l.text}" ${l.ratio}:1 (${l.fg} on ${l.bg}), needs ${MIN_CONTRAST}:1`);
+    }
   }
   await c.send('Browser.close').catch(() => {});
   c.close();
@@ -101,4 +133,4 @@ try {
 }
 
 if (failures.length) { failures.forEach((f) => console.error('FAIL ' + f)); process.exit(1); }
-console.log(`OK ${list.length} pages fit ${WIDTH}px without sideways scroll`);
+console.log(`OK ${list.length} pages fit ${WIDTH}px without sideways scroll; every control reads at ${MIN_CONTRAST}:1 in both themes`);
