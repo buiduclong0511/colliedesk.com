@@ -55,6 +55,12 @@ References: t3.codes (honest "what are you selling me", fork-it, terminal snippe
 ("X alternative" positioning, transparent pricing, vs pages), cal.com (pricing answered in the FAQ,
 footer comparison links).
 
+Colour rule (from how mailcheap.ai is built, 19/10/2026): the page is neutral grey and colour belongs to
+the product pictures and the one action on the screen. Blue Merle is for the primary button, links, focus and
+inside the pictures, never for eyebrows, card borders or section bands; `pnpm check` fails when `styles.css`
+uses `var(--accent…)` more than its budget. Cards sit on a 1px shadow ring (`--ring`), not a border. The greys
+are the site's own, at the top of `public/styles.css` (all text pairs at least 4.5:1); the rest comes from the app.
+
 Brand: Blue Merle, shared with the app. `public/tokens.css` is a copy of the app's
 `web/src/styles/tokens.css` (change it there first; the app repo checks contrast for every pair).
 Light theme: cool grey surfaces (`--surface-0` `#f5f7fa`, cards `#ffffff`), ink text (`--text-1`
