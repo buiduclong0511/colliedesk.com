@@ -1,8 +1,10 @@
 // Web analytics for colliedesk.com through PostHog, the same project as the Colliedesk app.
-// Cookieless: nothing is stored in the visitor's browser (no cookie, no local or session
-// storage), visitors are counted with a hash PostHog computes on its servers, and no person
-// profile is created, so the site needs no cookie banner. The project discards client IP
-// addresses after deriving the country. scripts/check.mjs fails if these settings change.
+// Every visit is counted. Until the visitor clicks Accept in the cookie banner (consent.js),
+// PostHog runs cookieless: nothing is stored in the browser and visitors are counted with a
+// daily hash PostHog computes on its servers. After Accept it sets its ph_ cookie, so a returning
+// visitor is recognised and a trial can be traced to the page that brought it. No person profile
+// is ever created and the project discards client IP addresses after deriving the country.
+// scripts/check.mjs fails if these settings change.
 // Runs on colliedesk.com only, never on localhost or a preview, and never in a browser driven by
 // automation (navigator.webdriver: Playwright, Puppeteer, Selenium, an agent checking the site),
 // so the visitor count is people.
@@ -12,8 +14,15 @@
   posthog.init('phc_zDJPtLCpaVyUQg2BbFoLMrzmfQBsfLg6vEJfsTtjyQ3N', {
     api_host: 'https://us.i.posthog.com',
     defaults: '2026-05-30',
-    cookieless_mode: 'always',
+    cookieless_mode: 'on_reject',
+    persistence: 'cookie',
+    opt_out_capturing_by_default: true,
     person_profiles: 'never',
     disable_session_recording: true,
   });
+  // An Accept from an earlier visit (the banner keeps it under colliedesk-consent) turns the
+  // cookie on before the first page view is sent; consent.js reports later choices.
+  var choice = null;
+  try { choice = localStorage.getItem('colliedesk-consent'); } catch (e) { /* storage blocked: stay cookieless */ }
+  if (choice === 'granted') posthog.opt_in_capturing({ captureEventName: false });
 })();

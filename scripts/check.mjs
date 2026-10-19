@@ -185,24 +185,34 @@ if (existsSync(foundingFile)) {
 
 for (const m of llms.matchAll(/\]\(([^)\s]+)\)/g)) checkLink(m[1], '/', 'llms.txt');
 
-// PostHog counts visits on every page and never stores anything in the visitor's browser.
-// Switching PostHog to cookies or person profiles must fail here first.
+// PostHog counts every visit: without cookies until the visitor accepts cookies in the consent
+// banner, with its cookie after. It never creates a person profile. A browser driven by
+// automation (Playwright, Puppeteer, Selenium, an agent's DevTools session) is not a visitor.
 const analytics = join(outDir, 'analytics.js');
 if (!existsSync(analytics)) fail('analytics.js not built');
 else {
   const source = readFileSync(analytics, 'utf8');
-  if (!/cookieless_mode:\s*'always'/.test(source)) fail("analytics.js: PostHog must run with cookieless_mode: 'always'");
-  if (!/person_profiles:\s*'never'/.test(source)) fail("analytics.js: PostHog must run with person_profiles: 'never'");
-  // A browser driven by automation (Playwright, Puppeteer, Selenium, an agent's DevTools session)
-  // is not a visitor: it must not be counted, while a normal browser on colliedesk.com still is.
-  const initCalls = (webdriver) => {
-    let calls = 0;
-    const posthog = { __SV: 1, init: () => { calls++; } };
-    runInNewContext(source, { posthog, window: { posthog }, document: {}, location: { hostname: 'colliedesk.com' }, navigator: { webdriver } });
+  const run = ({ webdriver = false, choice = null } = {}) => {
+    const calls = { init: [], optIn: 0, optOut: 0 };
+    const posthog = {
+      __SV: 1,
+      init: (key, config) => { calls.init.push(config); },
+      opt_in_capturing: () => { calls.optIn++; },
+      opt_out_capturing: () => { calls.optOut++; },
+    };
+    const localStorage = { getItem: (key) => (key === 'colliedesk-consent' ? choice : null) };
+    runInNewContext(source, { posthog, window: { posthog }, document: {}, localStorage, location: { hostname: 'colliedesk.com' }, navigator: { webdriver } });
     return calls;
   };
-  if (initCalls(false) !== 1) fail('analytics.js: PostHog must start in a normal browser on colliedesk.com');
-  if (initCalls(true) !== 0) fail('analytics.js: PostHog must not start in an automated browser (navigator.webdriver)');
+  const fresh = run();
+  const config = fresh.init[0] ?? {};
+  if (fresh.init.length !== 1) fail('analytics.js: PostHog must start in a normal browser on colliedesk.com');
+  if (config.cookieless_mode !== 'on_reject' || config.opt_out_capturing_by_default !== true) fail("analytics.js: PostHog must count visitors without cookies until they accept (cookieless_mode: 'on_reject', opt_out_capturing_by_default: true)");
+  if (config.person_profiles !== 'never') fail("analytics.js: PostHog must run with person_profiles: 'never'");
+  if (fresh.optIn !== 0) fail('analytics.js: PostHog must not use cookies before the visitor accepts');
+  if (run({ choice: 'granted' }).optIn !== 1) fail('analytics.js: an earlier Accept must turn on PostHog cookies');
+  if (run({ choice: 'denied' }).optIn !== 0) fail('analytics.js: a Decline must keep PostHog without cookies');
+  if (run({ webdriver: true }).init.length !== 0) fail('analytics.js: PostHog must not start in an automated browser (navigator.webdriver)');
 }
 for (const file of pages) {
   if (!readFileSync(file, 'utf8').includes('<script src="/analytics.js" defer></script>')) fail(`${urlPathOf(file)}: analytics.js not loaded`);
@@ -219,6 +229,9 @@ else {
   if (!source.includes(GA_MEASUREMENT_ID)) fail(`consent.js: must load Google Analytics ${GA_MEASUREMENT_ID}`);
   if (!/function loadAnalytics\(\)[\s\S]*googletagmanager\.com\/gtag\/js/.test(source)) fail('consent.js: gtag.js must load only inside loadAnalytics()');
   if (!/if \(choice === 'granted'\) loadAnalytics\(\)/.test(source)) fail("consent.js: loadAnalytics() must run only when the stored choice is 'granted'");
+  if (!/function choose\(value\)[\s\S]*?setPostHogConsent\(value\)/.test(source)) fail('consent.js: a choice in the banner must reach PostHog');
+  if (!/posthog\.opt_in_capturing\(/.test(source) || !/posthog\.opt_out_capturing\(/.test(source)) fail('consent.js: setPostHogConsent must opt PostHog in on Accept and out on Decline');
+  if (!/indexOf\('ph_'\) === 0/.test(source)) fail('consent.js: declining must delete the PostHog cookies');
 }
 for (const file of pages) {
   const page = readFileSync(file, 'utf8');
@@ -230,6 +243,8 @@ const privacyPage = fileFor('/privacy');
 if (privacyPage) {
   const text = readFileSync(privacyPage, 'utf8');
   if (!text.includes('Google Analytics')) fail('/privacy: must name Google Analytics');
+  if (!text.includes('ph_')) fail('/privacy: must name the PostHog cookie set after Accept');
+  if (/PostHog without cookies and without a profile|Cookieless website statistics/.test(text)) fail('/privacy: still says PostHog never sets cookies');
   if (/sets <strong>no cookies<\/strong>|sets no cookies/.test(text)) fail('/privacy: still says the website sets no cookies');
 }
 
