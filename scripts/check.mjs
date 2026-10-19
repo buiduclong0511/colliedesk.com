@@ -4,6 +4,7 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { runInNewContext } from 'node:vm';
 
 const ORIGIN = 'https://colliedesk.com';
 const UPDATES_FORM_URL = 'https://app.colliedesk.com/api/v1/public/forms/hclabs';
@@ -192,6 +193,16 @@ else {
   const source = readFileSync(analytics, 'utf8');
   if (!/cookieless_mode:\s*'always'/.test(source)) fail("analytics.js: PostHog must run with cookieless_mode: 'always'");
   if (!/person_profiles:\s*'never'/.test(source)) fail("analytics.js: PostHog must run with person_profiles: 'never'");
+  // A browser driven by automation (Playwright, Puppeteer, Selenium, an agent's DevTools session)
+  // is not a visitor: it must not be counted, while a normal browser on colliedesk.com still is.
+  const initCalls = (webdriver) => {
+    let calls = 0;
+    const posthog = { __SV: 1, init: () => { calls++; } };
+    runInNewContext(source, { posthog, window: { posthog }, document: {}, location: { hostname: 'colliedesk.com' }, navigator: { webdriver } });
+    return calls;
+  };
+  if (initCalls(false) !== 1) fail('analytics.js: PostHog must start in a normal browser on colliedesk.com');
+  if (initCalls(true) !== 0) fail('analytics.js: PostHog must not start in an automated browser (navigator.webdriver)');
 }
 for (const file of pages) {
   if (!readFileSync(file, 'utf8').includes('<script src="/analytics.js" defer></script>')) fail(`${urlPathOf(file)}: analytics.js not loaded`);
