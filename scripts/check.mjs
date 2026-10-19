@@ -9,7 +9,7 @@ import { runInNewContext } from 'node:vm';
 const ORIGIN = 'https://colliedesk.com';
 const UPDATES_FORM_URL = 'https://app.colliedesk.com/api/v1/public/forms/hclabs';
 const JS_BUDGET_BYTES = 100 * 1024;
-// The page is neutral grey and ink; the price has its own token (--price); Blue Merle is for focus and the product pictures
+// The page is neutral grey and ink (app brand guideline); the price has its own token (--price)
 // (README, Design). Every var(--accent…) in styles.css counts. Raise this only with a reason in the commit.
 const ACCENT_BUDGET = 26;
 const REQUIRED_PAGES = [
@@ -444,7 +444,7 @@ const TRIAL_URL = 'https://app.colliedesk.com/sign-in';
 }
 
 const accentUses = (readFileSync(join(outDir, 'styles.css'), 'utf8').match(/var\(--accent/g) ?? []).length;
-if (accentUses > ACCENT_BUDGET) fail(`styles.css uses var(--accent…) ${accentUses} times > ${ACCENT_BUDGET}: colour is for focus, the hero's price and product pictures (README, Design)`);
+if (accentUses > ACCENT_BUDGET) fail(`styles.css uses var(--accent…) ${accentUses} times > ${ACCENT_BUDGET}: the accent is for the primary action, focus and selection (README, Design)`);
 
 if (jsBytes > JS_BUDGET_BYTES) fail(`JavaScript budget exceeded: ${jsBytes} bytes > ${JS_BUDGET_BYTES}`);
 

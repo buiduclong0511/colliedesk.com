@@ -1,17 +1,15 @@
 /* Colliedesk site: light by default (dark via data-theme, see theme.js). Tokens come from tokens.css,
    fonts from fonts.css (both self-hosted). Sentence case everywhere; mono only for code.
-   The page is neutral grey and ink: the primary button and links are ink, and Blue Merle stays for focus, the
-   hero's price and inside the product pictures (README, Design; scripts/check.mjs counts it). Only the greys below differ from the app's tokens. Cards sit on a 1px shadow ring, not a border. */
+   Ink and paper, the same brand as the app (its docs/internals/design.md): neutral greys, ink buttons and
+   links, colour only for the price (--price), status and inside the product pictures. The greys and ink
+   come from the app's tokens; only --ring, --price and --panel are the site's own. Cards sit on a 1px
+   shadow ring, not a border. scripts/check.mjs caps how often the accent token is used. */
 :root, :root[data-theme="light"] {
-  --surface-0: #fafafa; --surface-2: #f5f5f5; --surface-3: #e5e5e5; --line: #e5e5e5;
-  --text-1: #171717; --text-2: #525252; --text-3: #666666;
   --ring: 0 0 0 1px rgb(0 0 0 / .06), 0 1px 2px -1px rgb(0 0 0 / .06), 0 2px 4px rgb(0 0 0 / .04);
   --price: #c2410c;                  /* the price only; 5.2:1 on white */
   --panel: #f4f3f1;                  /* behind product pictures */
 }
 :root[data-theme="dark"] {
-  --surface-0: #0a0a0a; --surface-1: #171717; --surface-2: #262626; --surface-3: #303030; --line: #262626;
-  --text-1: #fafafa; --text-2: #d4d4d4; --text-3: #a3a3a3;
   --ring: 0 0 0 1px rgb(255 255 255 / .08);
   --price: #fb8a4a;                  /* 8.3:1 on #0a0a0a */
   --panel: #171717;
