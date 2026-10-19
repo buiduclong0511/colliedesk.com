@@ -50,15 +50,16 @@ export const OURS_YEAR = OURS;
 
 // Answers "you can't just build a helpdesk over a weekend": the unglamorous parts, each already on
 // main and running on Colliedesk Cloud. Only list what shipped; anything else belongs in the status table.
-export const BORING: readonly (readonly [title: string, text: string])[] = [
-  ['Mail that lands', 'Replies leave signed with DKIM and pass SPF and DMARC. Tested against real Gmail inboxes, in the customer\'s thread.'],
-  ['Mail you can trust', 'Inbound mail is checked on arrival. Spoofed senders and auto-reply loops are stopped before they become tickets.'],
-  ['Threading', 'A customer\'s reply joins its conversation, so one problem stays one ticket.'],
-  ['Nothing lost on import', 'The reconcile report counts tickets, replies, notes, tags and contacts on both sides, and checks every attachment by SHA-256.'],
-  ['Your data out, any time', 'Export the whole workspace as a ZIP, even after a trial ends or a plan lapses.'],
-  ['Workspaces kept apart', 'PostgreSQL row-level security keeps each workspace\'s rows apart. Passwordless sign-in, revocable sessions.'],
-  ['A supply chain you can check', 'Signed container images with provenance and SBOM. CodeQL and an OSV gate on every pull request, the email parser fuzzed.'],
-  ['Nothing to stitch together', 'Self-hosted, it is one server and PostgreSQL. Bring an SMTP account for outgoing mail and a forwarder, such as Cloudflare Email Routing, for incoming mail. That is the list.'],
+// `short` is the line on the home page; the Markdown twin keeps the full text.
+export const BORING: readonly (readonly [title: string, text: string, short: string])[] = [
+  ['Mail that lands', 'Replies leave signed with DKIM and pass SPF and DMARC. Tested against real Gmail inboxes, in the customer\'s thread.', 'Signed with DKIM, passing SPF and DMARC.'],
+  ['Mail you can trust', 'Inbound mail is checked on arrival. Spoofed senders and auto-reply loops are stopped before they become tickets.', 'Spoofed senders and auto-reply loops never become tickets.'],
+  ['Threading', 'A customer\'s reply joins its conversation, so one problem stays one ticket.', 'A reply joins its conversation. One problem, one ticket.'],
+  ['Nothing lost on import', 'The reconcile report counts tickets, replies, notes, tags and contacts on both sides, and checks every attachment by SHA-256.', 'Every count compared, every attachment checked by SHA-256.'],
+  ['Your data out, any time', 'Export the whole workspace as a ZIP, even after a trial ends or a plan lapses.', 'The whole workspace as a ZIP, even after a plan lapses.'],
+  ['Workspaces kept apart', 'PostgreSQL row-level security keeps each workspace\'s rows apart. Passwordless sign-in, revocable sessions.', 'Row-level security in PostgreSQL. Passwordless sign-in.'],
+  ['A supply chain you can check', 'Signed container images with provenance and SBOM. CodeQL and an OSV gate on every pull request, the email parser fuzzed.', 'Signed images with provenance and SBOM, checked on every pull request.'],
+  ['Nothing to stitch together', 'Self-hosted, it is one server and PostgreSQL. Bring an SMTP account for outgoing mail and a forwarder, such as Cloudflare Email Routing, for incoming mail. That is the list.', 'Self-hosted, it is one server and PostgreSQL.'],
 ];
 
 // "Your AI agent can do this too": the MCP server, agent token tiers and agent requests, as shipped in
@@ -66,19 +67,22 @@ export const BORING: readonly (readonly [title: string, text: string])[] = [
 // tier includes the one above it. Only state what those guides say.
 export const MCP_URL = 'https://app.colliedesk.com/mcp';
 export const AGENT_HEADING = 'Everything you see here, your AI agent can do too';
+// The home page's shorter lede; the Markdown twin keeps AGENT_LEDE.
+export const AGENT_LEDE_SHORT =
+  'Give Claude Code, Codex or Cursor one URL and an agent token. The risky things wait for your yes.';
 export const AGENT_LEDE =
   'Colliedesk has an MCP server. Give an MCP client, such as Claude Code, Codex, Cursor or Claude Desktop, one URL and an agent token, and it works the same inbox your team does. The risky things wait for your yes.';
-export const AGENT_TIERS: readonly (readonly [tier: string, text: string])[] = [
-  ['read', 'Searches and reads conversations, customers, saved replies and settings. Anything more becomes a request.'],
-  ['draft', 'Also sets status, priority, assignee and tags, and adds private notes. Nothing reaches a customer.'],
-  ['send', 'Also replies to customers, adds customers and conversations, and edits saved replies.'],
-  ['admin', 'Also changes workspace settings, the team and the channels, with the role of the admin who created it.'],
+export const AGENT_TIERS: readonly (readonly [tier: string, text: string, short: string])[] = [
+  ['read', 'Searches and reads conversations, customers, saved replies and settings. Anything more becomes a request.', 'Reads everything. Anything more becomes a request.'],
+  ['draft', 'Also sets status, priority, assignee and tags, and adds private notes. Nothing reaches a customer.', 'Also triages and adds notes. Nothing reaches a customer.'],
+  ['send', 'Also replies to customers, adds customers and conversations, and edits saved replies.', 'Also replies to customers.'],
+  ['admin', 'Also changes workspace settings, the team and the channels, with the role of the admin who created it.', 'Also changes settings, the team and the channels.'],
 ];
-export const AGENT_POINTS: readonly (readonly [title: string, text: string])[] = [
-  ['Every action, not a subset', 'Each action in the web app has an API route and an MCP tool. A test in the product repository fails the build when one is missing.'],
-  ['Above its tier, it asks', 'A call above the token\'s tier is not refused. It becomes a request, and a person approves or rejects it in one click. A reply from a token below send becomes a draft you edit, send or discard.'],
-  ['Some things always ask', 'New tokens, invites, admin role changes, signing out another person, export, billing, disconnecting the email channel, a new inbound secret and the workspace address wait for a person, admin tokens included. A request expires after seven days.'],
-  ['Saved replies keep their history', 'A send token edits saved replies directly; lower tiers propose a change you see before and after. Every edit is a version you can restore, and a deleted reply stays in the trash for 30 days.'],
+export const AGENT_POINTS: readonly (readonly [title: string, text: string, short: string])[] = [
+  ['Every action, not a subset', 'Each action in the web app has an API route and an MCP tool. A test in the product repository fails the build when one is missing.', "Every action in the web app has an MCP tool. A test keeps it that way."],
+  ['Above its tier, it asks', 'A call above the token\'s tier is not refused. It becomes a request, and a person approves or rejects it in one click. A reply from a token below send becomes a draft you edit, send or discard.', "A call above the token's tier becomes a request. A person approves or rejects it in one click."],
+  ['Some things always ask', 'New tokens, invites, admin role changes, signing out another person, export, billing, disconnecting the email channel, a new inbound secret and the workspace address wait for a person, admin tokens included. A request expires after seven days.', "Tokens, invites, export and billing always wait for a person. A request expires after seven days."],
+  ['Saved replies keep their history', 'A send token edits saved replies directly; lower tiers propose a change you see before and after. Every edit is a version you can restore, and a deleted reply stays in the trash for 30 days.', "Every edit is a version you can restore."],
 ];
 const agentSectionMd = `## ${AGENT_HEADING}
 

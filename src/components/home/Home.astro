@@ -4,24 +4,28 @@ import { html } from '../../lib/render-react';
 import Faq from '../Faq.astro';
 import { AgentSection } from './AgentSection';
 import { ClosingCta, ClosingSections } from './ClosingSections';
-import { HeroCopy, InstallSnippet } from './HomeHero';
+import { Facts, InboxFeature, MigrationFeature } from './FeatureSections';
+import { HeroCopy } from './HomeHero';
 import { ReconcileProof } from './ReconcileProof';
 import { SellingSections } from './SellingSections';
 import { StatusSection } from './StatusSection';
 
-// Hero: the promise, then the real product with the migration proof laid over its corner, so the
-// first screen shows both the inbox and the "nothing lost" check.
+// Hero: the promise, then the real product in a window with the migration proof over its corner, so
+// the first screen shows both the inbox and the "nothing lost" check. Then one idea per section, each
+// with a piece of the real product.
 ---
 <section class="home-hero"><div class="wrap">
   <Fragment set:html={html(HeroCopy, {})} />
   <div class="hero-stage">
-    <figure class="hero-shot"><img src="/product-inbox.jpg" width="1440" height="900" alt="The Colliedesk inbox: a list of customer conversations with status, priority and tags, an open conversation with the customer's email, a private note written by an AI agent and the team's reply, and the conversation properties." fetchpriority="high"></figure>
+    <figure class="hero-shot"><div class="window-bar" aria-hidden="true"><i></i><i></i><i></i><span>app.colliedesk.com</span></div><img src="/product-inbox.jpg" width="1440" height="900" alt="The Colliedesk inbox: a list of customer conversations with status, priority and tags, an open conversation with the customer's email, a private note written by an AI agent and the team's reply, and the conversation properties." fetchpriority="high"></figure>
     <Fragment set:html={html(ReconcileProof, {})} />
   </div>
-  <Fragment set:html={html(InstallSnippet, {})} />
 </div></section>
-<Fragment set:html={html(SellingSections, {})} />
+<Fragment set:html={html(Facts, {})} />
+<Fragment set:html={html(InboxFeature, {})} />
 <Fragment set:html={html(AgentSection, {})} />
+<Fragment set:html={html(MigrationFeature, {})} />
+<Fragment set:html={html(SellingSections, {})} />
 <Fragment set:html={html(StatusSection, {})} />
 <Fragment set:html={html(ClosingSections, {})} />
 <section class="section section-faq"><div class="wrap"><div class="prose"><Faq faq={HOME_FAQ} /></div></div></section>

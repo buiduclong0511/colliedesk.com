@@ -55,6 +55,12 @@ References: t3.codes (honest "what are you selling me", fork-it, terminal snippe
 ("X alternative" positioning, transparent pricing, vs pages), cal.com (pricing answered in the FAQ,
 footer comparison links).
 
+Colour rule (from how mailcheap.ai is built, 19/10/2026): the page is neutral grey and colour belongs to
+the product pictures. The primary button and links are ink; Blue Merle is for focus, the hero's price and inside
+the pictures, never for eyebrows, card borders or section bands; `pnpm check` fails when `styles.css`
+uses `var(--accent…)` more than its budget. One page background, no tinted bands. Only pictures of the product, code and tables get a box: a picture lies on white over a soft grey panel, code and tables on a 1px shadow ring (`--ring`); text sits in plain columns under a hairline. The greys
+are the site's own, at the top of `public/styles.css` (all text pairs at least 4.5:1); the rest comes from the app.
+
 Brand: Blue Merle, shared with the app. `public/tokens.css` is a copy of the app's
 `web/src/styles/tokens.css` (change it there first; the app repo checks contrast for every pair).
 Light theme: cool grey surfaces (`--surface-0` `#f5f7fa`, cards `#ffffff`), ink text (`--text-1`
@@ -62,7 +68,7 @@ Light theme: cool grey surfaces (`--surface-0` `#f5f7fa`, cards `#ffffff`), ink 
 Dark theme: near-black surfaces (`--surface-0` `#0b0f15`), light text (`#e8edf4`) and a lighter
 accent `#7aa5e6` with dark text on it. Spacing is a 4 px grid (`--space-*`), radii 4 to 10 px.
 Light is the default; the footer **Dark theme** button sets `data-theme="dark"` and saves it in
-`localStorage` for this site only (`public/theme.js`; the app keeps its own setting). Self-hosted IBM Plex Sans and Mono,
+`localStorage` for this site only (`public/theme.js`; the app keeps its own setting). Self-hosted IBM Plex Sans and Mono, Instrument Serif for h1 and h2,
 sentence case everywhere, mono only for code. The hero shows the real light inbox
 (`public/product-inbox.jpg`) with the reconcile report over its corner. Buttons are at least
 44 px tall on touch (`--touch`).
