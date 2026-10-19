@@ -58,7 +58,7 @@ footer comparison links).
 Colour rule (from how mailcheap.ai is built, 19/10/2026): the page is neutral grey and colour belongs to
 the product pictures and the one action on the screen. Blue Merle is for the primary button, links, focus and
 inside the pictures, never for eyebrows, card borders or section bands; `pnpm check` fails when `styles.css`
-uses `var(--accent…)` more than its budget. Cards sit on a 1px shadow ring (`--ring`), not a border. The greys
+uses `var(--accent…)` more than its budget. One page background, no tinted bands. Only pictures of the product, code and tables get a box (a 1px shadow ring, `--ring`); text sits in plain columns under a hairline. The greys
 are the site's own, at the top of `public/styles.css` (all text pairs at least 4.5:1); the rest comes from the app.
 
 Brand: Blue Merle, shared with the app. `public/tokens.css` is a copy of the app's

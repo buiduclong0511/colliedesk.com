@@ -6,7 +6,7 @@ import { usd } from '../../lib/vs-pricing';
 
 function Collie() {
   return (
-    <section className="section section-ink" aria-labelledby="collie">
+    <section className="section" aria-labelledby="collie">
       <div className="wrap split">
         <div>
           <p className="eyebrow">Why a collie?</p>
@@ -38,7 +38,7 @@ function Fork() {
 
 function Quotes() {
   return (
-    <section className="section section-alt" aria-labelledby="quotes">
+    <section className="section" aria-labelledby="quotes">
       <div className="wrap">
         <h2 id="quotes">From founding customers</h2>
         {/* Real founding-customer quotes go here, verbatim, with name and team. Never invent one. */}
@@ -112,7 +112,7 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 // out as twelve static invoices, against one year of Cloud Team. No JavaScript.
 export function ClosingCta() {
   return (
-    <section className="section section-alt" aria-labelledby="closing">
+    <section className="section" aria-labelledby="closing">
       <div className="wrap closing">
         <div>
           <p className="eyebrow">A year of Freshdesk for five agents</p>

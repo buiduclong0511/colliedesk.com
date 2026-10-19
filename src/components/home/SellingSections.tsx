@@ -24,7 +24,7 @@ function Selling() {
 
 function Pillars() {
   return (
-    <section className="section section-alt" aria-labelledby="pillars">
+    <section className="section" aria-labelledby="pillars">
       <div className="wrap">
         <h2 id="pillars" className="visually-hidden">Why teams switch</h2>
         <div className="pillars">
@@ -104,7 +104,7 @@ const MINI: Readonly<Record<string, ReactElement>> = {
 
 function Boring() {
   return (
-    <section className="section section-alt" aria-labelledby="boring">
+    <section className="section" aria-labelledby="boring">
       <div className="wrap">
         <p className="eyebrow">The boring parts</p>
         <h2 id="boring">A helpdesk is more than an inbox. These parts already work.</h2>
