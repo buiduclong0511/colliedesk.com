@@ -87,7 +87,7 @@ If you accepted cookies and then start a Colliedesk Cloud trial, the app reads t
 
 The Colliedesk app uses only the cookies and storage that sign-in needs (set by us and by Clerk). There are no advertising or tracking cookies.
 
-The Colliedesk app reports to PostHog which screens agents open and which buttons they click, so we can see what is used and what is confusing. It names an agent by a random id and their role, never by email address or name. Every piece of text on screen is masked, so no conversation, message, contact or form content is sent; addresses are sent without search terms, and nothing is recorded or stored in the browser for it. The Cloud also counts, per workspace, when a support address is saved, a reply is sent and a teammate is invited, without the addresses or the text. A self-hosted Colliedesk sends the same screen and button counts unless its operator sets `DISABLE_TELEMETRY=true`; the per-workspace counts are sent by Colliedesk Cloud only.
+The Colliedesk app reports to PostHog which screens agents open and which buttons they click, so we can see what is used and what is confusing. It names an agent by a random id and their role, never by email address or name. Every piece of text on screen is masked, so no conversation, message, contact or form content is sent; addresses are sent without search terms, and nothing is recorded or stored in the browser for it. The Cloud also counts, per workspace, when a support address is saved, a reply is sent and a teammate is invited, without the addresses or the text. A self-hosted Colliedesk sends the same screen and button counts unless its operator sets \`DISABLE_TELEMETRY=true\`; the per-workspace counts are sent by Colliedesk Cloud only.
 
 ## How long we keep data
 
