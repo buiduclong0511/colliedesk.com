@@ -209,6 +209,9 @@ else {
   if (fresh.init.length !== 1) fail('analytics.js: PostHog must start in a normal browser on colliedesk.com');
   if (config.cookieless_mode !== 'on_reject' || config.opt_out_capturing_by_default !== true) fail("analytics.js: PostHog must count visitors without cookies until they accept (cookieless_mode: 'on_reject', opt_out_capturing_by_default: true)");
   if (config.person_profiles !== 'never') fail("analytics.js: PostHog must run with person_profiles: 'never'");
+  // Replay is allowed only with every form field masked; PostHog starts it only after Accept.
+  if (config.disable_session_recording === true || config.session_recording?.maskAllInputs !== true) fail('analytics.js: session replay must run with session_recording.maskAllInputs: true');
+  if (config.capture_exceptions !== true) fail('analytics.js: PostHog must capture JavaScript errors (capture_exceptions: true)');
   if (fresh.optIn !== 0) fail('analytics.js: PostHog must not use cookies before the visitor accepts');
   if (run({ choice: 'granted' }).optIn !== 1) fail('analytics.js: an earlier Accept must turn on PostHog cookies');
   if (run({ choice: 'denied' }).optIn !== 0) fail('analytics.js: a Decline must keep PostHog without cookies');
@@ -245,6 +248,7 @@ if (privacyPage) {
   if (!text.includes('Google Analytics')) fail('/privacy: must name Google Analytics');
   if (!text.includes('ph_')) fail('/privacy: must name the PostHog cookie set after Accept');
   if (/PostHog without cookies and without a profile|Cookieless website statistics/.test(text)) fail('/privacy: still says PostHog never sets cookies');
+  if (!/record/i.test(text) || !/masked/i.test(text)) fail('/privacy: must say PostHog records visits after Accept, with form fields masked');
   if (/sets <strong>no cookies<\/strong>|sets no cookies/.test(text)) fail('/privacy: still says the website sets no cookies');
 }
 

@@ -2,7 +2,9 @@
 // Every visit is counted. Until the visitor clicks Accept in the cookie banner (consent.js),
 // PostHog runs cookieless: nothing is stored in the browser and visitors are counted with a
 // daily hash PostHog computes on its servers. After Accept it sets its ph_ cookie, so a returning
-// visitor is recognised and a trial can be traced to the page that brought it. No person profile
+// visitor is recognised, a trial can be traced to the page that brought it, and PostHog records
+// the visit (clicks, scrolls, page changes; form fields masked) to show where a page is unclear.
+// JavaScript errors are reported either way. No person profile
 // is ever created and the project discards client IP addresses after deriving the country.
 // scripts/check.mjs fails if these settings change.
 // Runs on colliedesk.com only, never on localhost or a preview, and never in a browser driven by
@@ -18,7 +20,10 @@
     persistence: 'cookie',
     opt_out_capturing_by_default: true,
     person_profiles: 'never',
-    disable_session_recording: true,
+    // Replay runs only after Accept (PostHog never records a cookieless visit), with every form
+    // field masked; the project allows recordings on colliedesk.com only.
+    session_recording: { maskAllInputs: true },
+    capture_exceptions: true,
   });
   // An Accept from an earlier visit (the banner keeps it under colliedesk-consent) turns the
   // cookie on before the first page view is sent; consent.js reports later choices.

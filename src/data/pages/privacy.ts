@@ -81,6 +81,8 @@ Until you choose, or if you decline, this website counts visits with PostHog wit
 
 If you click **Accept** in the cookie banner, PostHog sets a \`ph_\` cookie so a later visit is recognised as yours, and the website loads Google Analytics, which sets the \`_ga\` cookies to tell visits apart. Both cookies last up to 1 year (\`_ga\` up to 14 months). Google Analytics is not loaded and sets nothing until you accept. We do not use either for advertising. Your choice is kept in your browser's local storage as \`colliedesk-consent\`, and PostHog keeps a copy of it in local storage too. You can change it at any time with **Cookie settings** at the bottom of every page; declining deletes the Google Analytics and PostHog cookies.
 
+After you accept, PostHog also records how you move through this website (clicks, scrolling and page changes) so we can see where a page is unclear. Every form field is masked, so nothing you type is recorded, and recordings are deleted after 30 days. If a page shows a JavaScript error, PostHog receives the error message and the page address, with or without cookies.
+
 If you accepted cookies and then start a Colliedesk Cloud trial, the app reads the random ID in that PostHog cookie and adds it to our record of the new trial, so we can see which page led you to us. It is never sent with your email address or workspace name.
 
 The Colliedesk app uses only the cookies and storage that sign-in needs (set by us and by Clerk). There are no advertising or tracking cookies.
