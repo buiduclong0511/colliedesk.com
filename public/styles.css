@@ -78,6 +78,49 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 .mini-pass::before { content: "✓ "; }
 .mini-stop { color: var(--danger); background: var(--danger-soft); }
 .mini-file { font-family: var(--font-mono); }
+/* Threading card: one conversation from arrival to Resolved in a 9 s CSS loop (FlowTile). The
+   markup is the final state; each step's keyframes hide it until its moment, and everything fades out
+   at the end before the loop restarts. Only opacity, transform and clip-path animate. */
+.flow { --flow: 9s; display: grid; gap: var(--space-2); }
+.flow > *, .flow-open, .flow-done, .flow-text, .flow-sent { animation: var(--flow) var(--ease) infinite both; }
+.flow-status { display: inline-grid; align-self: start; }
+.flow-status > span { grid-area: 1 / 1; justify-self: end; padding: 0 var(--space-2); border-radius: var(--radius-full); font-weight: 600; white-space: nowrap; }
+.flow-open { color: var(--open); background: var(--surface-2); opacity: 0; }
+.flow-done { color: var(--ok); background: var(--ok-soft); }
+.flow-done::before { content: "✓ "; }
+.flow-msg { padding: var(--space-2) var(--space-3); background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--radius); }
+.flow-reply { margin-left: var(--space-8); border-color: var(--accent-soft); }
+.flow-cust { margin-right: var(--space-8); }
+.bento-card .flow-msg p { color: var(--text-1); }
+.bento-card .flow-msg .mini-sub { color: var(--text-3); }
+.flow-msg b { margin-right: var(--space-1); font-weight: 600; }
+.flow-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.flow-mail { animation-name: flow-mail; }
+.flow-from { animation-name: flow-from; }
+.flow-open { animation-name: flow-open; }
+.flow-done { animation-name: flow-done; }
+.flow-reply { animation-name: flow-reply; }
+.flow-text { animation-name: flow-type; animation-timing-function: steps(24, end); }
+.flow-sent { animation-name: flow-sent; }
+.flow-cust { animation-name: flow-cust; }
+@keyframes flow-mail { 0% { opacity: 0; transform: translateY(-6px); } 5%, 94% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes flow-from { 0%, 10% { opacity: 0; } 14%, 94% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes flow-open { 0%, 6% { opacity: 0; } 9%, 73% { opacity: 1; } 76%, 100% { opacity: 0; } }
+@keyframes flow-done { 0%, 73% { opacity: 0; transform: scale(.85); } 77% { opacity: 1; transform: scale(1.06); } 80%, 94% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes flow-reply { 0%, 19% { opacity: 0; transform: translateY(6px); } 23%, 94% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes flow-type { 0%, 23% { clip-path: inset(0 100% 0 0); } 45%, 100% { clip-path: inset(0 0 0 0); } }
+@keyframes flow-sent { 0%, 47% { opacity: 0; } 50%, 94% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes flow-cust { 0%, 57% { opacity: 0; transform: translateY(6px); } 62%, 94% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+.bento-card:has(.flow) { position: relative; min-width: 0; }
+.flow, .flow-msg { min-width: 0; }
+.flow-pause { position: absolute; top: var(--space-2); right: var(--space-3); display: inline-flex; align-items: center; gap: var(--space-1); color: var(--text-3); font-size: 12px; cursor: pointer; }
+.flow-pause input { margin: 0; accent-color: var(--accent); }
+.bento-card:has(.flow) .flow { margin-top: var(--space-5); }
+.flow:hover *, .bento-card:has(.flow-pause input:checked) .flow * { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .flow *, .flow > * { animation: none; }
+  .flow-pause { display: none; }
+}
 
 /* Home "your AI agent can do this too": the MCP command over a request card, the four token tiers as a
    ladder, then the approval rules as bento cards. */

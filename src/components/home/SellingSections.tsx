@@ -2,6 +2,7 @@ import type { ReactElement } from 'react';
 import { BAR_MAX as MAX, BARS, BORING } from '../../data/pages/home-sections';
 import { PRICES_READ } from '../../lib/site';
 import { Badge } from '../Badge';
+import { FlowPause, FlowTile } from './FlowTile';
 
 function Selling() {
   return (
@@ -79,7 +80,7 @@ function Bill() {
   );
 }
 
-// Small static pictures of shipped behaviour for four of the boring parts. Decorative: the card
+// Small static pictures of shipped behaviour for three of the boring parts (Threading plays FlowTile). Decorative: the card
 // text says the same thing, so screen readers skip them.
 const MINI: Readonly<Record<string, ReactElement>> = {
   'Mail that lands': (
@@ -91,12 +92,6 @@ const MINI: Readonly<Record<string, ReactElement>> = {
     <div className="mini">
       <p className="mini-row"><span>billing@yourbank.example</span><span className="mini-stop">Stopped</span></p>
       <p className="mini-sub">Sender failed DMARC. No ticket created.</p>
-    </div>
-  ),
-  'Threading': (
-    <div className="mini">
-      <p className="mini-row"><span>Re: Invoice #2291 charged twice</span></p>
-      <p className="mini-sub">Joined the open conversation</p>
     </div>
   ),
   'Your data out, any time': (
@@ -115,8 +110,9 @@ function Boring() {
         <p className="section-lede">We are not rebuilding every Freshdesk feature. We build what a team of three to ten uses every day, and we label the rest below. HC Labs runs its own support on Colliedesk Cloud.</p>
         <ul className="bento">
           {BORING.map(([k, v]) => (
-            <li key={k} className={MINI[k] ? 'bento-card bento-wide' : 'bento-card'}>
+            <li key={k} className={MINI[k] || k === 'Threading' ? 'bento-card bento-wide' : 'bento-card'}>
               {MINI[k] && <div aria-hidden="true">{MINI[k]}</div>}
+              {k === 'Threading' && <><FlowTile /><FlowPause /></>}
               <h3>{k}</h3>
               <p>{v}</p>
             </li>
