@@ -2,9 +2,9 @@
 
 Static marketing and docs site, built with [Astro](https://astro.build), React and TypeScript.
 React renders at build time only: the browser gets HTML, CSS and two small vanilla scripts
-(`public/theme.js`, `public/updates.js`) plus cookieless PostHog web analytics
-(`public/analytics.js`: no cookies or browser storage, no person profiles, IP discarded;
-`pnpm check` fails if that changes), no framework runtime.
+(`public/theme.js`, `public/updates.js`) plus PostHog web analytics (`public/analytics.js`:
+cookieless until the visitor accepts cookies in the banner of `public/consent.js`, no person
+profiles, IP discarded; `pnpm check` fails if that changes), no framework runtime.
 
 ```sh
 git clone --depth 1 https://github.com/colliedesk/colliedesk product   # docs source, gitignored

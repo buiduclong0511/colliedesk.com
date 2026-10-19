@@ -13,7 +13,7 @@ const body = `## The short version
 - You can export your whole workspace as a ZIP file at any time, even after your trial ends.
 - A locked workspace is deleted 12 months after it locks. We email the admins 30 days before.
 - To stop repeated free trials, we keep a one-way, keyed fingerprint of your email address. We cannot turn it back into your address.
-- This website sets Google Analytics cookies only if you accept them in the cookie banner.
+- This website sets analytics cookies (Google Analytics and PostHog) only if you accept them in the cookie banner. Without them it counts visits without cookies.
 - If you self-host Colliedesk, your data never reaches us.
 
 The rest of this page says the same thing in more detail.
@@ -69,7 +69,7 @@ Some of the providers below are outside the European Union (for example in the U
 | Polar | Payments, invoices and tax, as merchant of record | United States |
 | Resend | Sends the replies your team writes, and our service emails | United States |
 | Cloudflare | DNS and network protection | Global |
-| PostHog | Cookieless website statistics and anonymous usage counts. It does not store your IP address | United States |
+| PostHog | Website statistics (with a cookie only after you accept cookies) and anonymous usage counts. It does not store your IP address | United States |
 | Google | Google Analytics website statistics, only after you accept cookies | United States |
 | GitHub | Hosts this website and the Colliedesk source code | United States |
 
@@ -77,9 +77,9 @@ We will list a new provider on this page before it receives personal data.
 
 ## Cookies
 
-This website counts visits with PostHog without cookies and without a profile of you.
+Until you choose, or if you decline, this website counts visits with PostHog without cookies: nothing is stored in your browser and PostHog never builds a profile of you.
 
-If you click **Accept** in the cookie banner, the website also loads Google Analytics, which sets the \`_ga\` cookies to tell visits apart for up to 14 months. Google Analytics is not loaded and sets nothing until you accept. We do not use it for advertising. Your choice is kept in your browser's local storage as \`colliedesk-consent\`. You can change it at any time with **Cookie settings** at the bottom of every page; declining deletes the Google Analytics cookies.
+If you click **Accept** in the cookie banner, PostHog sets a \`ph_\` cookie so a later visit is recognised as yours, and the website loads Google Analytics, which sets the \`_ga\` cookies to tell visits apart. Both cookies last up to 1 year (\`_ga\` up to 14 months). Google Analytics is not loaded and sets nothing until you accept. We do not use either for advertising. Your choice is kept in your browser's local storage as \`colliedesk-consent\`, and PostHog keeps a copy of it in local storage too. You can change it at any time with **Cookie settings** at the bottom of every page; declining deletes the Google Analytics and PostHog cookies.
 
 The Colliedesk app uses only the cookies and storage that sign-in needs (set by us and by Clerk). There are no advertising or tracking cookies.
 

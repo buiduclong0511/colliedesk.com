@@ -1,9 +1,9 @@
-// Cookie consent for Google Analytics on colliedesk.com. Google Analytics sets cookies, so it
-// loads only after the visitor clicks Accept; nothing from Google loads before that. The choice
-// is kept in localStorage under "colliedesk-consent" ("granted" or "denied"). Any element with
-// data-consent-open (the footer "Cookie settings" button) reopens the banner, and declining after
-// an earlier accept deletes the Google Analytics cookies. PostHog (analytics.js) is cookieless and
-// does not depend on this choice. scripts/check.mjs fails if Google Analytics can load another way.
+// Cookie consent on colliedesk.com. Accept loads Google Analytics, which sets the _ga cookies,
+// and lets PostHog (analytics.js) set its ph_ cookie; nothing from Google loads before that and
+// PostHog stays cookieless. The choice is kept in localStorage under "colliedesk-consent"
+// ("granted" or "denied"). Any element with data-consent-open (the footer "Cookie settings"
+// button) reopens the banner, and declining after an earlier accept deletes the Google Analytics
+// and PostHog cookies. scripts/check.mjs fails if Google Analytics can load another way.
 (function () {
   var KEY = 'colliedesk-consent';
   var GA_ID = 'G-7VBE3TER7E';
@@ -29,11 +29,18 @@
     document.head.appendChild(s);
   }
 
+  // PostHog (analytics.js) uses its cookie only while the choice is "granted".
+  function setPostHogConsent(value) {
+    if (!window.posthog) return;
+    if (value === 'granted') posthog.opt_in_capturing({ captureEventName: false });
+    else posthog.opt_out_capturing();
+  }
+
   function clearAnalyticsCookies() {
     var domain = location.hostname.replace(/^www\./, '');
     document.cookie.split(';').forEach(function (c) {
       var name = c.split('=')[0].trim();
-      if (name === '_ga' || name.indexOf('_ga_') === 0) {
+      if (name === '_ga' || name.indexOf('_ga_') === 0 || name.indexOf('ph_') === 0) {
         document.cookie = name + '=; Max-Age=0; path=/; domain=.' + domain;
         document.cookie = name + '=; Max-Age=0; path=/';
       }
@@ -46,6 +53,7 @@
     var before = read();
     store(value);
     hide();
+    setPostHogConsent(value);
     if (value === 'granted') loadAnalytics();
     else if (before === 'granted') { clearAnalyticsCookies(); location.reload(); }
   }
@@ -56,8 +64,8 @@
       banner.setAttribute('role', 'region');
       banner.setAttribute('aria-label', 'Cookie choice');
       banner.innerHTML =
-        '<p>We would like to use Google Analytics cookies to see which pages help people. ' +
-        'Nothing loads unless you accept. <a href="/privacy#cookies">Privacy</a></p>' +
+        '<p>We would like to use analytics cookies (Google Analytics and PostHog) to see which pages help people. ' +
+        'Until you accept, we only count visits without cookies. <a href="/privacy#cookies">Privacy</a></p>' +
         '<div class="consent-actions">' +
         '<button type="button" class="btn btn-sm" data-consent="denied">Decline</button>' +
         '<button type="button" class="btn btn-sm btn-primary" data-consent="granted">Accept</button>' +
