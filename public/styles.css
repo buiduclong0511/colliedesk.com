@@ -20,7 +20,7 @@ h2 { font-size: var(--step-h2); font-weight: 600; }
 h3 { font-size: 1.2rem; font-weight: 600; letter-spacing: -0.01em; }
 p { margin: 0 0 1em; }
 strong { color: var(--text-1); font-weight: 600; }
-code { font-family: var(--font-mono); font-size: .88em; background: var(--surface-2); border: 1px solid var(--line); padding: .1em .35em; border-radius: var(--radius-sm); color: var(--text-1); }
+code { font-family: var(--font-mono); font-size: .88em; background: var(--surface-2); border: 1px solid var(--line); padding: .1em .35em; border-radius: var(--radius-sm); color: var(--text-1); overflow-wrap: anywhere; }
 .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--space-10); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip { position: absolute; left: 1rem; top: -4rem; background: var(--accent); color: var(--on-accent); padding: .6rem 1rem; border-radius: var(--radius); z-index: 10; }
