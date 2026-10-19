@@ -1,4 +1,4 @@
-import { AGENT_HEADING, AGENT_LEDE, AGENT_POINTS, AGENT_TIERS, MCP_URL } from '../../data/pages/home-sections';
+import { AGENT_HEADING, AGENT_LEDE_SHORT, AGENT_POINTS, AGENT_TIERS, MCP_URL } from '../../data/pages/home-sections';
 import { Badge } from '../Badge';
 import { RequestTile } from './RequestTile';
 
@@ -12,7 +12,7 @@ export function AgentSection() {
           <div>
             <p className="eyebrow">For your AI agent</p>
             <h2 id="agents">{AGENT_HEADING}</h2>
-            <p className="section-lede">{AGENT_LEDE}</p>
+            <p className="section-lede">{AGENT_LEDE_SHORT}</p>
             <p><Badge kind="shipped">Available now</Badge> <a href="/docs/mcp">Connect an AI agent</a> · <a href="/docs/agent-requests">How approval works</a></p>
           </div>
           <div className="agent-stage">
@@ -21,12 +21,12 @@ export function AgentSection() {
           </div>
         </div>
         <ol className="agent-tiers" aria-label="Agent token tiers, each with everything of the one before">
-          {AGENT_TIERS.map(([tier, text]) => (
+          {AGENT_TIERS.map(([tier, , text]) => (
             <li key={tier}><h3><code>{tier}</code></h3><p>{text}</p></li>
           ))}
         </ol>
         <ul className="bento agent-points">
-          {AGENT_POINTS.map(([k, v]) => (
+          {AGENT_POINTS.map(([k, , v]) => (
             <li key={k} className="bento-card"><h3>{k}</h3><p>{v}</p></li>
           ))}
         </ul>

@@ -13,7 +13,7 @@ function Collie() {
           <h2 id="collie">A sheepdog herds every ticket home. Your team stays in charge.</h2>
         </div>
         <div className="prose-invert">
-          <p>A collie does not own the flock. It brings every sheep back to the pen and the shepherd decides what happens next. That is the job we give AI in Colliedesk (coming after beta): sort, draft and chase every ticket so none is lost, while a person on your team approves what goes out.</p>
+          <p>A collie brings every sheep home and the shepherd decides. That is the job of AI in Colliedesk (coming after beta): sort, draft and chase every ticket, while a person approves what goes out.</p>
         </div>
       </div>
     </section>
@@ -27,7 +27,7 @@ function Fork() {
         <div>
           <p className="eyebrow">AGPL-3.0</p>
           <h2 id="fork">If you don't like something, fork it</h2>
-          <p className="section-lede">You were held hostage at renewal once. That should not happen again. The code, your data and the export format are yours.</p>
+          <p className="section-lede">The code, your data and the export format are yours.</p>
           <p><a href="/open-source">How the license and the business fit together</a></p>
         </div>
         <pre className="code-card"><code><span className="t-prompt">$</span>{' gh repo fork colliedesk/colliedesk --clone\n'}<span className="t-prompt">$</span>{' cd colliedesk && make dev'}</code></pre>

@@ -31,19 +31,19 @@ function Pillars() {
           <article className="pillar">
             <p className="pillar-k">01 · Your data</p>
             <h3>Leave Freshdesk with all of it</h3>
-            <p>Freshdesk's ticket export has fields only, no conversation. Our importer brings tickets, replies, notes, checksummed attachments, tags and contacts, then proves the counts match.</p>
+            <p>Freshdesk's export leaves the conversations out. Our importer brings everything and proves the counts match.</p>
             <p><Badge kind="shipped">Available now</Badge> <a href="/migrate/freshdesk">Read the migration guide</a></p>
           </article>
           <article className="pillar">
             <p className="pillar-k">02 · AI included</p>
             <h3>AI that answers tickets, not an add-on</h3>
-            <p>Drafts and triage from your own past replies and knowledge base, auto-answer for repetitive tickets with a human in the loop. Pay model cost +30%, or bring your own key.</p>
+            <p>Drafts, triage and auto-answer from your own replies, with a person in the loop. Model cost +30%, or your own key.</p>
             <p><Badge kind="coming">Coming after beta</Badge> <a href="/roadmap">See the roadmap</a></p>
           </article>
           <article className="pillar">
             <p className="pillar-k">03 · Flat price</p>
             <h3>No per-agent fees</h3>
-            <p>Hire a fifth agent, or a tenth, and the bill stays $49 a month for the workspace. Up to 25 agents is a flat $99. Self-host and it stays $0.</p>
+            <p>Five agents or ten, the workspace is $49 a month. Self-host and it stays $0.</p>
             <p><Badge kind="shipped">Price published</Badge> <a href="/pricing">See pricing</a></p>
           </article>
         </div>
@@ -106,16 +106,18 @@ function Boring() {
   return (
     <section className="section" aria-labelledby="boring">
       <div className="wrap">
-        <p className="eyebrow">The boring parts</p>
-        <h2 id="boring">A helpdesk is more than an inbox. These parts already work.</h2>
-        <p className="section-lede">We are not rebuilding every Freshdesk feature. We build what a team of three to ten uses every day, and we label the rest below. HC Labs runs its own support on Colliedesk Cloud.</p>
+        <div className="section-head">
+          <p className="eyebrow">The boring parts</p>
+          <h2 id="boring">A helpdesk is more than an inbox. These parts already work.</h2>
+          <p className="section-lede">What a team of three to ten uses every day. HC Labs runs its own support on it.</p>
+        </div>
         <ul className="bento">
-          {BORING.map(([k, v]) => (
+          {BORING.map(([k, , short]) => (
             <li key={k} className={k === 'Threading' ? 'bento-card bento-wide loop' : MINI[k] ? 'bento-card bento-wide' : 'bento-card'}>
               {MINI[k] && <div aria-hidden="true">{MINI[k]}</div>}
               {k === 'Threading' && <><FlowTile /><FlowPause /></>}
               <h3>{k}</h3>
-              <p>{v}</p>
+              <p>{short}</p>
             </li>
           ))}
         </ul>

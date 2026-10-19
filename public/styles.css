@@ -28,8 +28,13 @@ a { color: var(--text-1); text-underline-offset: 3px; text-decoration-thickness:
 a:hover { color: var(--text-1); text-decoration-color: currentColor; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-sm); }
 h1, h2, h3 { color: var(--text-1); line-height: 1.12; letter-spacing: -0.025em; margin: 0 0 .6em; text-wrap: balance; }
-h1 { font-size: var(--step-h1); font-weight: 600; line-height: 1.04; }
-h2 { font-size: var(--step-h2); font-weight: 600; }
+/* Headlines in IBM Plex Serif: the sans carries the interface, the serif the voice. */
+h1, h2 { font-family: 'IBM Plex Serif', Georgia, serif; font-weight: 500; letter-spacing: -0.02em; }
+h1 { font-size: var(--step-h1); line-height: 1.04; }
+h2 { font-size: var(--step-h2); }
+/* A full-width section opens with its heading centred over the content. */
+.section-head { max-width: 46rem; margin: 0 auto var(--space-10); text-align: center; }
+.section-head .section-lede { margin-inline: auto; }
 h3 { font-size: 1.2rem; font-weight: 600; letter-spacing: -0.01em; }
 p { margin: 0 0 1em; }
 strong { color: var(--text-1); font-weight: 600; }
@@ -220,7 +225,7 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 .hero-copy .cta-row { justify-content: center; }
 .hero-copy .lede { margin-inline: auto; }
 .hero-eyebrow { display: inline-block; border: 1px solid var(--line); border-radius: var(--radius-full); background: var(--surface-1); padding: .35rem .9rem; color: var(--text-2); font-weight: 500; font-size: 13px; }
-.home-hero h1 { font-size: clamp(2.75rem, 1.6rem + 4vw, 4.5rem); letter-spacing: -0.035em; margin-bottom: .35em; }
+.home-hero h1 { font-size: clamp(2.75rem, 1.6rem + 4vw, 4.5rem); letter-spacing: -0.025em; margin-bottom: .35em; }
 /* Rotating h1: the three items share one grid cell; the first shows by default, so reduced motion
    and browsers without animation keep a static headline. One pass under 5 s (WCAG 2.2.2), then it rests on the first. */
 .h1-swap { display: grid; justify-items: center; }
