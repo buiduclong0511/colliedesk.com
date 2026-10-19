@@ -9,9 +9,9 @@ import { runInNewContext } from 'node:vm';
 const ORIGIN = 'https://colliedesk.com';
 const UPDATES_FORM_URL = 'https://app.colliedesk.com/api/v1/public/forms/hclabs';
 const JS_BUDGET_BYTES = 100 * 1024;
-// The page is neutral grey; Blue Merle is for the primary button, links, focus and the product pictures
+// The page is neutral grey and ink; Blue Merle is for focus, the hero's price and the product pictures
 // (README, Design). Every var(--accent…) in styles.css counts. Raise this only with a reason in the commit.
-const ACCENT_BUDGET = 36;
+const ACCENT_BUDGET = 30;
 const REQUIRED_PAGES = [
   '/', '/pricing', '/migrate/freshdesk', '/vs/freshdesk', '/vs/zendesk', '/vs/help-scout',
   '/open-source', '/roadmap', '/docs', '/changelog', '/privacy', '/terms',
@@ -444,7 +444,7 @@ const TRIAL_URL = 'https://app.colliedesk.com/sign-in';
 }
 
 const accentUses = (readFileSync(join(outDir, 'styles.css'), 'utf8').match(/var\(--accent/g) ?? []).length;
-if (accentUses > ACCENT_BUDGET) fail(`styles.css uses var(--accent…) ${accentUses} times > ${ACCENT_BUDGET}: colour is for the primary button, links, focus and product pictures (README, Design)`);
+if (accentUses > ACCENT_BUDGET) fail(`styles.css uses var(--accent…) ${accentUses} times > ${ACCENT_BUDGET}: colour is for focus, the hero's price and product pictures (README, Design)`);
 
 if (jsBytes > JS_BUDGET_BYTES) fail(`JavaScript budget exceeded: ${jsBytes} bytes > ${JS_BUDGET_BYTES}`);
 
