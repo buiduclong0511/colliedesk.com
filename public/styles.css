@@ -111,16 +111,29 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 @keyframes flow-type { 0%, 23% { clip-path: inset(0 100% 0 0); } 45%, 100% { clip-path: inset(0 0 0 0); } }
 @keyframes flow-sent { 0%, 47% { opacity: 0; } 50%, 94% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes flow-cust { 0%, 57% { opacity: 0; transform: translateY(6px); } 62%, 94% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-.bento-card:has(.flow) { position: relative; min-width: 0; }
+.loop { position: relative; }
+.bento-card:has(.flow) { min-width: 0; }
 .flow, .flow-msg { min-width: 0; }
 .flow-pause { position: absolute; top: var(--space-2); right: var(--space-3); display: inline-flex; align-items: center; gap: var(--space-1); color: var(--text-3); font-size: 12px; cursor: pointer; }
 .flow-pause input { margin: 0; accent-color: var(--accent); }
 .bento-card:has(.flow) .flow { margin-top: var(--space-5); }
-.flow:hover *, .bento-card:has(.flow-pause input:checked) .flow * { animation-play-state: paused; }
+.loop:hover *, .loop:has(.flow-pause input:checked) * { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) {
-  .flow *, .flow > * { animation: none; }
+  .loop * { animation: none; }
   .flow-pause { display: none; }
 }
+/* The other boring-part pictures: chips stamp in once as the card scrolls into view. Scroll-linked, so the
+   reader controls it; browsers without view timelines show the final state. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .bento .mini-pass, .bento .mini-stop { animation: chip-in linear both; animation-timeline: view(); animation-range: cover 12% cover 20%; }
+    .bento .mini-chips .mini-pass:nth-child(2) { animation-range: cover 18% cover 26%; }
+    .bento .mini-chips .mini-pass:nth-child(3) { animation-range: cover 24% cover 32%; }
+    .bento .mini-stop { animation-name: stamp-in; }
+  }
+}
+@keyframes chip-in { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: none; } }
+@keyframes stamp-in { from { opacity: 0; transform: scale(1.5) rotate(-8deg); } 70% { opacity: 1; transform: scale(.95) rotate(0); } to { opacity: 1; transform: none; } }
 
 /* Home "your AI agent can do this too": the MCP command over a request card, the four token tiers as a
    ladder, then the approval rules as bento cards. */
@@ -132,6 +145,31 @@ code { font-family: var(--font-mono); font-size: .88em; background: var(--surfac
 .agent-approve, .agent-reject { padding: .2rem var(--space-3); border-radius: var(--radius); border: 1px solid var(--line-control); font-weight: 600; }
 .agent-approve { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .agent-reject { color: var(--text-2); }
+/* The request card plays one request: it waits, Approve is pressed, it runs once. Same 9 s clock and Pause as .flow. */
+.agent-loop { display: grid; gap: var(--space-2); }
+.agent-loop .flow-pause { position: static; justify-self: end; }
+.req { --flow: 9s; }
+.req, .req-from, .req-wait, .req-done, .req-actions, .req-approve, .req-ran { animation: var(--flow) var(--ease) infinite both; }
+.req-wait { color: var(--warn); background: var(--warn-soft); opacity: 0; }
+.req-done { color: var(--ok); background: var(--ok-soft); }
+.req-done::before { content: "✓ "; }
+.req-foot { display: grid; margin-top: var(--space-3); }
+.req-foot > * { grid-area: 1 / 1; align-self: center; }
+.req-foot .agent-request-actions { margin-top: 0 !important; opacity: 0; }
+.req { animation-name: req-card; }
+.req-from { animation-name: req-from; }
+.req-wait { animation-name: req-wait; }
+.req-done { animation-name: req-done; }
+.req-actions { animation-name: req-actions; }
+.req-approve { animation-name: req-press; }
+.req-ran { animation-name: req-ran; }
+@keyframes req-card { 0% { opacity: 0; transform: translateY(-6px); } 5%, 94% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes req-from { 0%, 6% { opacity: 0; } 10%, 100% { opacity: 1; } }
+@keyframes req-wait { 0%, 8% { opacity: 0; } 11%, 50% { opacity: 1; } 53%, 100% { opacity: 0; } }
+@keyframes req-actions { 0%, 12% { opacity: 0; transform: translateY(4px); } 16%, 47% { opacity: 1; transform: none; } 50%, 100% { opacity: 0; } }
+@keyframes req-press { 0%, 40% { transform: none; box-shadow: none; } 42% { transform: scale(.92); box-shadow: 0 0 0 4px var(--accent-soft); } 45%, 100% { transform: none; box-shadow: none; } }
+@keyframes req-done { 0%, 50% { opacity: 0; transform: scale(.85); } 54% { opacity: 1; transform: scale(1.06); } 57%, 100% { opacity: 1; transform: none; } }
+@keyframes req-ran { 0%, 51% { opacity: 0; transform: translateY(4px); } 55%, 100% { opacity: 1; transform: none; } }
 .agent-tiers { list-style: none; margin: var(--space-10) 0 0; padding: 0; display: grid; gap: var(--space-4); }
 @media (min-width: 760px) { .agent-tiers { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1100px) { .agent-tiers { grid-template-columns: repeat(4, 1fr); } }

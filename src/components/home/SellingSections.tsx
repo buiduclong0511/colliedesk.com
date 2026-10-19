@@ -80,8 +80,9 @@ function Bill() {
   );
 }
 
-// Small static pictures of shipped behaviour for three of the boring parts (Threading plays FlowTile). Decorative: the card
-// text says the same thing, so screen readers skip them.
+// Small pictures of shipped behaviour for three of the boring parts (Threading plays FlowTile). Their chips stamp in as
+// the card scrolls into view, where the browser supports it. Decorative: the card text says the same thing, so screen
+// readers skip them.
 const MINI: Readonly<Record<string, ReactElement>> = {
   'Mail that lands': (
     <div className="mini mini-chips">
@@ -110,7 +111,7 @@ function Boring() {
         <p className="section-lede">We are not rebuilding every Freshdesk feature. We build what a team of three to ten uses every day, and we label the rest below. HC Labs runs its own support on Colliedesk Cloud.</p>
         <ul className="bento">
           {BORING.map(([k, v]) => (
-            <li key={k} className={MINI[k] || k === 'Threading' ? 'bento-card bento-wide' : 'bento-card'}>
+            <li key={k} className={k === 'Threading' ? 'bento-card bento-wide loop' : MINI[k] ? 'bento-card bento-wide' : 'bento-card'}>
               {MINI[k] && <div aria-hidden="true">{MINI[k]}</div>}
               {k === 'Threading' && <><FlowTile /><FlowPause /></>}
               <h3>{k}</h3>
