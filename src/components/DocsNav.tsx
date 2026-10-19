@@ -1,4 +1,14 @@
-import type { DocsNavGroup } from '../lib/page';
+import type { DocsNavGroup, DocsNavItem } from '../lib/page';
+
+function Links({ items, current }: { items: readonly DocsNavItem[]; current: string }) {
+  return (
+    <ul>
+      {items.map(({ href, label }) => (
+        <li key={href}><a href={href} aria-current={href === current ? 'page' : undefined}>{label}</a></li>
+      ))}
+    </ul>
+  );
+}
 
 export function DocsNav({ groups, current }: { groups: readonly DocsNavGroup[]; current: string }) {
   return (
@@ -7,9 +17,16 @@ export function DocsNav({ groups, current }: { groups: readonly DocsNavGroup[]; 
         <div key={title} className="docs-nav-group">
           <p className="docs-nav-title">{title}</p>
           <ul>
-            {items.map(({ href, label }) => (
-              <li key={href}><a href={href} aria-current={href === current ? 'page' : undefined}>{label}</a></li>
-            ))}
+            {items.map((item) =>
+              'items' in item ? (
+                <li key={item.title} className="docs-nav-subgroup">
+                  <p className="docs-nav-subtitle">{item.title}</p>
+                  <Links items={item.items} current={current} />
+                </li>
+              ) : (
+                <li key={item.href}><a href={item.href} aria-current={item.href === current ? 'page' : undefined}>{item.label}</a></li>
+              ),
+            )}
           </ul>
         </div>
       ))}

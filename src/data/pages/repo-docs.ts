@@ -26,9 +26,39 @@ const SECTIONS = [
 ] as const;
 type DocsSection = (typeof SECTIONS)[number];
 
-// Order and slugs follow the links in each directory's README.md, so a new guide only needs a line there.
-const docFiles = (section: DocsSection): string[] =>
-  [...readRepo(`${section.dir}/README.md`).matchAll(/\]\(([a-z-]+)\.md\)/g)].map((m) => m[1] ?? '');
+// Order and slugs follow the list links in each directory's README.md, so a new guide only needs a
+// line there. A list under a "## Heading" becomes a nested group of that name in the sidebar, the way
+// PostHog nests "Configure" under its self-host overview. Links inside prose are not pages of the nav.
+interface DocEntry {
+  file: string;
+  group?: string;
+}
+
+function docEntries(section: DocsSection): DocEntry[] {
+  const entries: DocEntry[] = [];
+  let group: string | undefined;
+  for (const line of readRepo(`${section.dir}/README.md`).split('\n')) {
+    const heading = line.match(/^## (.+)$/);
+    if (heading) group = heading[1];
+    const link = line.match(/^- \[[^\]]+\]\(([a-z-]+)\.md\)/);
+    if (link?.[1]) entries.push(group ? { file: link[1], group } : { file: link[1] });
+  }
+  return entries;
+}
+
+const docFiles = (section: DocsSection): string[] => docEntries(section).map((e) => e.file);
+
+function sectionNav(section: DocsSection): DocsNavGroup['items'] {
+  const items: DocsNavGroup['items'] = [{ href: section.path, label: 'Overview' }];
+  for (const { file, group } of docEntries(section)) {
+    const item = { href: `${section.path}/${file}`, label: titleOf(section, file) };
+    const last = items.at(-1);
+    if (!group) items.push(item);
+    else if (last && 'items' in last && last.title === group) last.items.push(item);
+    else items.push({ title: group, items: [item] });
+  }
+  return items;
+}
 
 function rewriteLink(href: string, fromDir: string): string {
   if (/^(https?:|mailto:|#)/.test(href)) return href;
@@ -71,10 +101,7 @@ const docsNav = (current: DocsSection): DocsNavGroup[] =>
     title: section.title,
     items:
       section === current
-        ? [
-            { href: section.path, label: 'Overview' },
-            ...docFiles(section).map((f) => ({ href: `${section.path}/${f}`, label: titleOf(section, f) })),
-          ]
+        ? sectionNav(section)
         : [{ href: section.path, label: section === SECTIONS[0] ? 'All user guides' : 'Run Colliedesk on your own server' }],
   }));
 
@@ -105,7 +132,7 @@ export function docsPages(): Page[] {
   index.h1 = 'Colliedesk docs';
   index.title = 'Colliedesk docs: sign in, invite your team, work the inbox';
   const selfHostIndex = docPage(selfHost.path, `${selfHost.dir}/README.md`, 'Install, configure and back up Colliedesk on your own server.');
-  selfHostIndex.title = 'Self-host Colliedesk: install, email, configuration, backups';
+  selfHostIndex.title = 'Self-host Colliedesk: install, upgrade, configure, troubleshoot';
   const guides = SECTIONS.flatMap((section) =>
     docFiles(section).map((f) =>
       docPage(`${section.path}/${f}`, `${section.dir}/${f}.md`, `How ${titleOf(section, f).toLowerCase()} works in Colliedesk.`),

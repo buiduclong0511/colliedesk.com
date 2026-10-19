@@ -15,9 +15,14 @@ export interface DocsNavItem {
   label: string;
 }
 
-export interface DocsNavGroup {
+export interface DocsNavSubgroup {
   title: string;
   items: DocsNavItem[];
+}
+
+export interface DocsNavGroup {
+  title: string;
+  items: (DocsNavItem | DocsNavSubgroup)[];
 }
 
 export interface Page {
