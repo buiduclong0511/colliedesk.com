@@ -524,7 +524,8 @@ td:first-child { font-weight: 500; color: var(--text-1); }
 .closing-band h2 { color: #fafafa; }
 .closing-band .eyebrow, .closing-band .section-lede, .closing-band .invoice-total { color: #a3a3a3; }
 .closing-band .invoice-total strong { color: #fafafa; }
+.closing-band .invoice-ours strong { color: var(--price); }
 .closing-band .invoice-total { border-top-color: #262626; }
-.closing-band .btn-primary { background: #fafafa; border-color: #fafafa; color: #0a0a0a; }
-.closing-band .btn { background: transparent; color: #fafafa; border-color: #525252; }
-.closing-band .btn-primary { color: #0a0a0a; }
+/* On the ink band the primary button turns paper and the secondary one is an outline. */
+.closing-band .btn-primary, .closing-band .btn-primary:hover { background: #fafafa; border-color: #fafafa; color: #0a0a0a; }
+.closing-band .btn:not(.btn-primary) { background: transparent; color: #fafafa; border-color: #525252; }
