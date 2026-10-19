@@ -55,20 +55,24 @@ References: t3.codes (honest "what are you selling me", fork-it, terminal snippe
 ("X alternative" positioning, transparent pricing, vs pages), cal.com (pricing answered in the FAQ,
 footer comparison links).
 
-Colour rule (from how mailcheap.ai is built, 19/10/2026): the page is neutral grey and colour belongs to
-the product pictures. The primary button and links are ink; Blue Merle is for focus, the hero's price and inside
-the pictures, never for eyebrows, card borders or section bands; `pnpm check` fails when `styles.css`
-uses `var(--accent…)` more than its budget. One page background, no tinted bands. Only pictures of the product, code and tables get a box: a picture lies on white over a soft grey panel, code and tables on a 1px shadow ring (`--ring`); text sits in plain columns under a hairline. The greys
-are the site's own, at the top of `public/styles.css` (all text pairs at least 4.5:1); the rest comes from the app.
+Brand: **ink and paper**, shared with the app; the brand guideline is in the app repo,
+`docs/internals/design.md` (owner decision 19/10/2026; research on https://design.hclabs.co, owner only).
+`public/tokens.css` is a copy of the app's `web/src/styles/tokens.css` (change it there first; the app
+repo checks contrast for every pair and fails when a grey, a text token or the primary action has a hue).
 
-Brand: Blue Merle, shared with the app. `public/tokens.css` is a copy of the app's
-`web/src/styles/tokens.css` (change it there first; the app repo checks contrast for every pair).
-Light theme: cool grey surfaces (`--surface-0` `#f5f7fa`, cards `#ffffff`), ink text (`--text-1`
-`#151c27`) and merle blue accent `--accent` `#2d62b3`, darkened so white text and links reach 4.5:1.
-Dark theme: near-black surfaces (`--surface-0` `#0b0f15`), light text (`#e8edf4`) and a lighter
-accent `#7aa5e6` with dark text on it. Spacing is a 4 px grid (`--space-*`), radii 4 to 10 px.
-Light is the default; the footer **Dark theme** button sets `data-theme="dark"` and saves it in
-`localStorage` for this site only (`public/theme.js`; the app keeps its own setting). Self-hosted IBM Plex Sans and Mono, Instrument Serif for h1 and h2,
-sentence case everywhere, mono only for code. The hero shows the real light inbox
-(`public/product-inbox.jpg`) with the reconcile report over its corner. Buttons are at least
-44 px tall on touch (`--touch`).
+- Colour: neutral grey surfaces (`--surface-0` `#fafafa`, cards `#ffffff`), ink text and ink buttons and
+  links (`#171717`; dark theme `#0a0a0a` page, `#fafafa` ink). The price has its own colour (`--price`,
+  `#c2410c`, dark `#fb8a4a`); status colours appear only inside product pictures. `pnpm check` fails
+  when `styles.css` uses the accent token more than its budget.
+- Layout (from a full-page teardown of nine helpdesk sites): one page background, no tinted bands; one
+  idea per section with a crop of the real product on a soft panel (`--panel`); three checkable facts
+  under the hero; a dark closing band. Text sits in plain columns under a hairline; code and tables sit
+  on a 1px shadow ring (`--ring`).
+- Type: self-hosted IBM Plex Sans and Mono; Instrument Serif for h1 and h2. Sentence case everywhere,
+  mono only for code.
+- Product pictures: `public/product-inbox.jpg` (and `@2x`) is a screenshot of the app with demo data
+  (Northwind Help). Retake it when the app's look changes; `src/components/home/ProductCrop.tsx` holds
+  the crop regions.
+- Light is the default; the footer **Dark theme** button sets `data-theme="dark"` and saves it in
+  `localStorage` for this site only (`public/theme.js`). Spacing is a 4 px grid (`--space-*`); buttons
+  are at least 44 px tall on touch (`--touch`).

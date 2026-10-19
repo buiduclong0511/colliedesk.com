@@ -19,7 +19,7 @@ export function AgentSection() {
             <pre className="code-card"><code><span className="t-prompt">$</span>{` claude mcp add --transport http colliedesk \\\n    ${MCP_URL} \\\n    --header "Authorization: Bearer $COLLIEDESK_TOKEN"`}</code></pre>
           </div>
           <div className="panel agent-panel">
-            <ProductCrop region={THREAD} maxWidth={600} label="A Colliedesk conversation: the customer's email, a private note by Tom Okoye via Claude Code, and the team's sent reply." />
+            <ProductCrop region={THREAD} maxWidth={600} label="A Colliedesk conversation: the customer's email, a private note by Tom Okoye via Claude Code, and the reply Claude Code drafted and Tom approved, marked Sent." />
             <RequestTile />
           </div>
         </div>
