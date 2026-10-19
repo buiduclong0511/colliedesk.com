@@ -30,7 +30,7 @@ Colliedesk is made by **HC Labs Co., Ltd.** (CÔNG TY TNHH HC LABS), Hanoi, Viet
 - Colliedesk Cloud at \`app.colliedesk.com\`.
 - This website, \`colliedesk.com\`.
 
-It does **not** cover a Colliedesk server that you run yourself. A self-hosted server sends us nothing except, if you leave it on, one anonymous usage report a day: a random install id, the version and counts (workspaces, active agents, replies sent). Never names, email addresses or message content. Turn it off with \`DISABLE_TELEMETRY=true\` or \`DO_NOT_TRACK=1\`.
+It does **not** cover a Colliedesk server that you run yourself. A self-hosted server sends us nothing except, if you leave it on, one anonymous usage report a day (a random install id, the version and counts: workspaces, active agents, replies sent) and which screens and buttons its agents use in the web app, with every piece of text masked. Never names, email addresses or message content. Turn both off with \`DISABLE_TELEMETRY=true\` or \`DO_NOT_TRACK=1\`.
 
 ## What we collect and why
 
@@ -86,6 +86,8 @@ After you accept, PostHog also records how you move through this website (clicks
 If you accepted cookies and then start a Colliedesk Cloud trial, the app reads the random ID in that PostHog cookie and adds it to our record of the new trial, so we can see which page led you to us. It is never sent with your email address or workspace name.
 
 The Colliedesk app uses only the cookies and storage that sign-in needs (set by us and by Clerk). There are no advertising or tracking cookies.
+
+The Colliedesk app reports to PostHog which screens agents open and which buttons they click, so we can see what is used and what is confusing. It names an agent by a random id and their role, never by email address or name. Every piece of text on screen is masked, so no conversation, message, contact or form content is sent; addresses are sent without search terms, and nothing is recorded or stored in the browser for it. The Cloud also counts, per workspace, when a support address is saved, a reply is sent and a teammate is invited, without the addresses or the text. A self-hosted Colliedesk sends the same screen and button counts unless its operator sets \`DISABLE_TELEMETRY=true\`; the per-workspace counts are sent by Colliedesk Cloud only.
 
 ## How long we keep data
 
