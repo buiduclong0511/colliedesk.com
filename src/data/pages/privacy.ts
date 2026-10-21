@@ -2,7 +2,7 @@ import { techArticle } from '../../lib/schema';
 import type { Page } from '../../lib/page';
 import { CONTACT_EMAIL } from '../../lib/site';
 
-export const LEGAL_UPDATED = '2026-10-20';
+export const LEGAL_UPDATED = '2026-10-21';
 export { CONTACT_EMAIL };
 
 const body = `## The short version
@@ -58,7 +58,7 @@ It does **not** cover a Colliedesk server that you run yourself. A self-hosted s
 
 Colliedesk's use and transfer of information received from Google APIs adheres to the [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy), including the Limited Use requirements.
 
-When an admin connects Gmail, Colliedesk asks Google only for permission to send email and to see the account's address. It cannot read the mailbox. We use this access only to send the replies your team writes. The access token is encrypted and stored on our servers in Germany. We do not sell or transfer it, use it for advertising, or use it to train AI models, and people at Colliedesk do not read it except to keep the service secure, to follow the law, or when you ask us to.
+When an admin connects Gmail, Colliedesk asks Google only for permission to send email and to see the account's address. It cannot read the mailbox. We use this access only to send the replies your team writes. The access Google gives us is encrypted and stored on our servers in Germany. We do not sell or transfer data received from Google, use it for advertising, or use it to train AI models, and people at Colliedesk do not read it except to keep the service secure, to follow the law, or when you ask us to.
 
 ## Where your data is stored
 
@@ -104,7 +104,7 @@ When you use **Report a problem** in Colliedesk Cloud, we receive what you write
 - **Active workspace:** as long as your subscription or trial runs.
 - **Ended trial or subscription:** the workspace is locked. You can still sign in and export everything.
 - **Locked for 12 months:** we delete the workspace with all its content and attachments. We email the admins 30 days before.
-- **Gmail access:** until an admin disconnects Gmail or the workspace is deleted. Disconnecting removes the access at Google too.
+- **Gmail access:** until an admin disconnects Gmail or the workspace is deleted. Disconnecting deletes it from our servers and asks Google to revoke it. You can also remove it at any time in your Google Account, under [Third-party connections](https://myaccount.google.com/connections).
 - **Backups:** an encrypted copy can stay in backups for up to 30 days after a deletion, then it expires.
 - **Sign-up fingerprints:** as long as Colliedesk Cloud runs (see above).
 - **Billing records:** as long as tax and accounting law requires.
